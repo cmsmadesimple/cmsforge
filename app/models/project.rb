@@ -11,6 +11,7 @@ class Project < ActiveRecord::Base
   belongs_to :license
   
   acts_as_activated
+  acts_as_commentable
   
   acts_as_state_machine :initial => :pending
   state :pending
