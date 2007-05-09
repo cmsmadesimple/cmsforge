@@ -1,0 +1,40 @@
+<%= error_messages_for 'project' -%>
+
+<% form_tag do -%>
+
+  <p>
+    Full Name:<br />
+    <%= text_field "project", "name", "size" => 40, "maxlength" => 40 -%>
+  </p>
+  
+  <p>
+    "Unix" Name:<br />
+    <%= text_field "project", "unix_name", "size" => 15, "maxlength" => 15 -%>
+  </p>
+  
+  <p>
+    Project Purpose:<br />
+    <%= text_area "project", "registration_reason", "cols" => 70, "rows" => 10 -%>
+  </p>
+  
+  <p>
+    Description:<br />
+    <%= text_area "project", "description", "cols" => 70, "rows" => 10 -%>
+  </p>
+  
+  <p>
+    Project Type:<br />
+    <%= select "project", "project_type", [ ['Other', 'other'],   ['Module', 'module'], ['Translation', 'translation'], ['Plugin', 'plugin'], ['Core', 'core'] ] -%>
+  </p>
+  
+  <p>
+    License:<br />
+    <%= select("project", "license_id", License.find(:all, :order => 'id ASC').collect {|p| [ p.name, p.id ] }) -%>
+  </p>
+  
+  <p>
+    <%= submit_tag "Register", :name => "submit" -%>
+    <%= submit_tag "Cancel", :name => "cancel" -%>
+  </p>
+  
+<% end -%>

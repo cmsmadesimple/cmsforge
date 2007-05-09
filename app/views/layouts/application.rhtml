@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>CMS Made Simple Developer Forge</title>
+  </head>
+  <body>
+    <div id="pagewrapper">
+      <div id="container">
+
+        <div id="flash">
+          <% for name in [:notice, :warning, :message] %>
+            <% if flash[name] %>
+              <%= "<div id=\"#{name}\">#{flash[name]}</div>" %>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <div id="login">
+          <% if !logged_in? -%>
+              <%= link_to 'Login', :controller => 'account', :action => 'login' -%>
+          <% else -%>
+            Logged in as: <%= current_user.login -%> -- <a href="/account/logout">Logout</a>
+          <% end -%>
+        </div>
+
+        <div id="content">
+          <%= yield -%>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

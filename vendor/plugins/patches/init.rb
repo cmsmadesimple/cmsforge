@@ -1,0 +1,5 @@
+require 'hash_patches'
+require 'array_patches'
+require 'action_pack_patches'
+require 'date_patches'
+require 'time_patches'

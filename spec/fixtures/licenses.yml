@@ -1,0 +1,81 @@
+001:
+  id: 100
+  name: None
+002:
+  id: 101
+  name: GNU General Public License (GPL)
+003:
+  id: 102
+  name: GNU Library Public License (LGPL)
+004:
+  id: 103
+  name: BSD License
+005:
+  id: 104
+  name: MIT License
+006:
+  id: 105
+  name: Artistic License
+007:
+  id: 106
+  name: Mozilla Public License 1.0 (MPL)
+008:
+  id: 107
+  name: Qt Public License (QPL)
+009:
+  id: 108
+  name: IBM Public License
+010:
+  id: 109
+  name: MITRE Collaborative Virtual Workspace License (CVW License)
+011:
+  id: 110
+  name: Ricoh Source Code Public License
+012:
+  id: 111
+  name: Python License
+013:
+  id: 112
+  name: zlib/libpng License
+014:
+  id: 113
+  name: Apache Software License
+015:
+  id: 114
+  name: Vovida Software License 1.0
+016:
+  id: 115
+  name: Sun Internet Standards Source License (SISSL)
+017:
+  id: 116
+  name: Intel Open Source License
+018:
+  id: 117
+  name: Mozilla Public License 1.1 (MPL 1.1)
+019:
+  id: 118
+  name: Jabber Open Source License
+020:
+  id: 119
+  name: Nokia Open Source License
+021:
+  id: 120
+  name: Sleepycat License
+022:
+  id: 121
+  name: Nethack General Public License
+023:
+  id: 122
+  name: IBM Common Public License
+024:
+  id: 123
+  name: Apple Public Source License
+025:
+  id: 124
+  name: Public Domain
+026:
+  id: 125
+  name: Website Only
+027:
+  id: 126
+  name: Other/Proprietary License

@@ -1,0 +1,20 @@
+<h3>Home Page</h3>
+
+<h4>Assigned Projects</h4>
+<% current_user.assignments.each do |assignment| -%>
+  <a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a>
+<% end -%>
+
+<% if current_user.superuser -%>
+  <% projects = find_projects_not_approved -%>
+  <% unless projects.empty? -%>
+    <h4>Pending Projects</h4>
+    <% projects.each do |project| -%>
+      <%= link_to project.name, { :action => 'approve', :id => project.id, :controller => 'project' }%>
+    <% end -%>
+  <% end -%>
+<% end -%>
+
+<p>
+  <a href="/project/register">Register New Project</a>
+</p>

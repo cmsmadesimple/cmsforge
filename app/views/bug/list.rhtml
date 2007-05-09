@@ -1,0 +1,35 @@
+<div class="small_nav">
+  <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
+</div>
+
+<table class="data_table">
+
+  <tr>
+    <th>ID</th>
+    <th>Summary</th>
+    <th>Open Date</th>
+    <th>Assigned To</th>
+    <th>Submitted By</th>
+  </tr>
+
+  <% unless @bugs.nil? or @bugs.empty? -%>
+
+    <% @bugs.each do |bug| -%>
+  
+      <tr>
+        <td><%= bug.id -%></td>
+        <td><%= link_to bug.summary, :controller => :bug, :action => :view, :id => bug.id -%></td>
+        <td><%= bug.created_at -%></td>
+        <td><%= bug.assigned_to_id > 0 ? bug.assigned_to.login : 'None' -%></td>
+        <td><%= bug.created_by_id > 0 ? bug.created_by.login : 'None' -%></td>
+      </tr>
+  
+    <% end -%>
+
+  <% else -%>
+
+    <tr><td colspan="5">No Bugs Found!</td></tr>
+
+  <% end -%>
+
+</table>

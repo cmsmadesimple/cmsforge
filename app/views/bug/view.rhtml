@@ -1,0 +1,98 @@
+<div class="small_nav">
+  <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
+</div>
+
+<%= error_messages_for 'bug' -%>
+
+<h2>[#<%= @bug.id -%>] <%= @bug.summary -%></h2>
+
+<h3>Details</h3>
+
+<% form_tag :action => 'update' do -%>
+
+  <div class="entry">
+    <span class="label">Created By:</span>
+    <span class="value"><%= @bug.created_by.login -%></span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Date Submitted:</span>
+    <span class="value"><%= @bug.created_at -%></span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Assigned To:</span>
+    <span class="value">
+      <%= !current_user.nil? and current_user.member_of(@bug.project) ? 
+        select('bug', 'assigned_to_id', ['None' => ''] + @bug.project.users.collect{ |a| [a.login, a.id] }) : 
+        @bug.assigned_to.login -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Version:</span>
+    <span class="value">
+      <%= !current_user.nil? and current_user.member_of(@bug.project) ? 
+        select('bug', 'version_id', @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) :
+        @bug.version.name -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Severity:</span>
+    <span class="value">
+      <%= select 'bug', 'severity_id', BugSeverity.all.collect { |c| [c.name, c.id] } -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Resolution:</span>
+    <span class="value">
+      <%= select 'bug', 'resolution_id', BugResolution.all.collect { |c| [c.name, c.id] } -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Summary:</span>
+    <span class="value">
+      <%= !current_user.nil? and current_user.member_of(@bug.project) ?
+        text_field('bug', 'summary', :size => '50', :maxlength => '255') :
+        @bug.summary -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <div class="label">Detailed Description:</div>
+    <div class="entry"><%= @bug.description -%></div>
+  </div>
+
+  <%= hidden_field 'bug', 'id' -%>
+  <%= submit_tag 'Update Details' -%>
+
+<% end -%>
+
+<h3>History</h3>
+
+<div class="commentsbox">
+  <div class="header">Comments</div>
+  <% @bug.comments.each do |comment| -%>
+    <div class="entry">
+      Date: <%= comment.created_at -%><br />
+      Posted By: <%= comment.user.login -%><br />
+      <%= comment.comment -%>
+    </div>
+  <% end -%>
+</div>
+
+<% unless current_user.nil? -%>
+  <% form_tag :action => 'add_comment' do -%>
+    <div class="entry">
+      <span class="label">Add Comment:</span>
+      <span class="value">
+        <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
+        <%= submit_tag 'Add Comment' -%>
+        <%= hidden_field_tag 'bug_id', @bug.id -%>
+      </span>
+    </div>
+  <% end -%>
+<% end -%>

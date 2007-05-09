@@ -1,0 +1,60 @@
+001:
+  id: 1
+  name: Critical
+  type: BugSeverity
+  position: 2
+002:
+  id: 2
+  name: Major
+  type: BugSeverity
+  position: 3
+003:
+  id: 3
+  name: Minor
+  type: BugSeverity
+  position: 4
+004:
+  id: 4
+  name: Trivial
+  type: BugSeverity
+  position: 5
+005:
+  id: 5
+  name: None
+  type: BugResolution
+  position: 1
+006:
+  id: 6
+  name: Accepted As Bug
+  type: BugResolution
+  position: 2
+007:
+  id: 7
+  name: Fixed
+  type: BugResolution
+  position: 3
+008:
+  id: 8
+  name: Won't Fix
+  type: BugResolution
+  position: 4
+009:
+  id: 9
+  name: Invalid
+  type: BugResolution
+  position: 5
+010:
+  id: 10
+  name: Awaiting Resonse
+  type: BugResolution
+  position: 6
+011:
+  id: 11
+  name: Works For Me
+  type: BugResolution
+  position: 7
+012:
+  id: 12
+  name: None
+  type: BugSeverity
+  position: 1

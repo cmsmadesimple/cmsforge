@@ -1,0 +1,49 @@
+<%= error_messages_for 'bug' -%>
+
+<% form_tag :action => 'add', :controller => 'bug' do -%>
+
+  <div class="entry">
+    <span class="label">Assigned To:</span>
+    <span class="value">
+      <%= select('bug', 'assigned_to_id', ['None' => ''] + @bug.project.users.collect{ |a| [a.login, a.id] }) -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Version:</span>
+    <span class="value">
+      <%= select('bug', 'version_id', @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Severity:</span>
+    <span class="value">
+      <%= select 'bug', 'severity_id', BugSeverity.all.collect { |c| [c.name, c.id] } -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Summary:</span>
+    <span class="value">
+      <%= text_field('bug', 'summary', :size => '50', :maxlength => '255') -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <div class="label">Detailed Description:</div>
+    <div class="entry">
+      <%= text_area 'bug', 'description', { :cols => 50, :rows => 10 } -%>
+    </div>
+  </div>
+  
+  <div class="entry">
+    <div class="label"></div>
+    <div class="entry">
+      <%= hidden_field 'bug', 'project_id' -%>
+      <%= submit_tag 'Submit New Bug' -%>
+      <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
+    </div>
+  </div>
+
+<% end -%>

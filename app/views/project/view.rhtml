@@ -1,0 +1,24 @@
+<h3><%= @project.name %></h3>
+
+<p class="project_description"><%= @project.description -%></p>
+
+Type: <%= @project.project_type.humanize -%><br />
+Created: <%= @project.created_at.strftime('%c') -%>
+
+<h4>Latest Releases</h4>
+<% if @project.releases.count > 0 -%>
+  <% @project.packages.each do |package| %>
+    <% latest = package.latest_release -%>
+    <% unless latest.nil? %>
+      <h5><%= package.name %></h5>
+      <%= latest.name %><br />
+      <%= latest.created_at.strftime('%x')%>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h4>News</h4>
+<% @project.articles.each do |article| %>
+  <h5 class="project_news_header"><%= article.title -%></h5>
+  <%= article.author.login %> - <%= article.created_at.strftime('%c') -%>
+<% end %>
