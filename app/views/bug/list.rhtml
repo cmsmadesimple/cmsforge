@@ -1,3 +1,16 @@
+<h3><%= @project.name %></h3>
+
+<div id="project_nav">
+  <ul>
+    <li><a href="<%= @project.home_page -%>">Home</a></li>
+    <li><%= link_to 'Files', :controller => 'project', :id => @project.id, :action => 'files' -%></li>
+    <li><%= link_to 'Bug Tracker', :controller => 'bug', :id => @project.id, :action => 'view' -%></li>
+    <% if current_user != :false and current_user.admin_of?(@project) -%>
+      <li><%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%></li>
+    <% end -%>
+  </ul>
+</div>
+
 <div class="small_nav">
   <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
 </div>

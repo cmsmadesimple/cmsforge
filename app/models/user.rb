@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many :projects, :through => :assignments
   
-  def member_of(project)
+  def member_of?(project)
     if self.superuser
       return true
     end
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
     return false
   end
   
-  def admin_of(project)
+  def admin_of?(project)
     if self.superuser
       return true
     end

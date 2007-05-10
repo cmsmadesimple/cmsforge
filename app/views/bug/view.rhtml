@@ -1,3 +1,16 @@
+<h3><%= @project.name %></h3>
+
+<div id="project_nav">
+  <ul>
+    <li><a href="<%= @project.home_page -%>">Home</a></li>
+    <li><%= link_to 'Files', :controller => 'project', :id => @project.id, :action => 'files' -%></li>
+    <li><%= link_to 'Bug Tracker', :controller => 'bug', :id => @project.id, :action => 'view' -%></li>
+    <% if current_user != :false and current_user.admin_of?(@project) -%>
+      <li><%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%></li>
+    <% end -%>
+  </ul>
+</div>
+
 <div class="small_nav">
   <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
 </div>
@@ -23,7 +36,7 @@
   <div class="entry">
     <span class="label">Assigned To:</span>
     <span class="value">
-      <%= !current_user.nil? and current_user.member_of(@bug.project) ? 
+      <%= current_user != :false and current_user.member_of?(@bug.project) ? 
         select('bug', 'assigned_to_id', ['None' => ''] + @bug.project.users.collect{ |a| [a.login, a.id] }) : 
         @bug.assigned_to.login -%>
     </span>
@@ -32,7 +45,7 @@
   <div class="entry">
     <span class="label">Version:</span>
     <span class="value">
-      <%= !current_user.nil? and current_user.member_of(@bug.project) ? 
+      <%= current_user != :false and current_user.member_of?(@bug.project) ? 
         select('bug', 'version_id', @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) :
         @bug.version.name -%>
     </span>
@@ -55,7 +68,7 @@
   <div class="entry">
     <span class="label">Summary:</span>
     <span class="value">
-      <%= !current_user.nil? and current_user.member_of(@bug.project) ?
+      <%= current_user != :false and current_user.member_of?(@bug.project) ?
         text_field('bug', 'summary', :size => '50', :maxlength => '255') :
         @bug.summary -%>
     </span>
@@ -67,7 +80,9 @@
   </div>
 
   <%= hidden_field 'bug', 'id' -%>
-  <%= submit_tag 'Update Details' -%>
+  <% if current_user != :false -%>
+    <%= submit_tag 'Update Details' -%>
+  <% end -%>
 
 <% end -%>
 
@@ -84,7 +99,7 @@
   <% end -%>
 </div>
 
-<% unless current_user.nil? -%>
+<% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
     <div class="entry">
       <span class="label">Add Comment:</span>

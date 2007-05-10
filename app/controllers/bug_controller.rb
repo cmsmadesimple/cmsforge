@@ -4,15 +4,18 @@ class BugController < ApplicationController
   
   def list
     @bugs = Bug.find_all_by_project_id(params[:id])
+    @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
   end
   
   def view
     @bug = Bug.find_by_id(params[:id])
+    @project = @bug.project
   end
   
   def update
     @bug = Bug.find_by_id(params[:bug][:id])
+    @project = @bug.project
     @bug.update_attributes(params[:bug])
     if @bug.valid?
       @bug.save
