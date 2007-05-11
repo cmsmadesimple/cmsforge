@@ -31,6 +31,6 @@ test:
 production:
   adapter: mysql
   database: cmsforge_production
-  username: root
-  password: 
-  socket: /opt/local/var/run/mysqld/mysqld.sock
+  username: cmsforgeuser
+  password: usercmsforge
+  socket: /var/run/mysqld/mysqld.sock
