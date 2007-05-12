@@ -7,18 +7,26 @@ role :db,  "lt10.cmsmadesimple.org", :primary => true
 
 set :user, "rails"
 set :deploy_to, "/var/www/cmsmadesimple.org/dev"
-
-ssh_options[:paranoid] = false 
+set :mongrel_conf, "#{current_path}/config/mongrel_cluster.yml"
 
 set :scm_command, "/usr/bin/svn"
 #set :local_scm_command, "/opt/local/bin/svn"
 
-desc "The spinner task is used by :cold_deploy to start the application up"
-task :spinner, :roles => :app do
-  run "cd #{deploy_to}/#{current_dir} && mongrel_rails cluster::start -C #{mongrel_conf}"
-end
+ssh_options[:paranoid] = false 
 
-desc "Restart the mongrel cluster"
-task :restart, :roles => :app do
-  run "cd #{deploy_to}/#{current_dir} && mongrel_rails cluster::restart -C #{mongrel_conf}"
+namespace :deploy do
+  desc "Starts the mongrel cluster"
+  task :start, :roles => :app do
+    run "cd #{current_path} && mongrel_rails cluster::start -C #{mongrel_conf}"
+  end
+
+  desc "Restart the mongrel cluster"
+  task :restart, :roles => :app do
+    run "cd #{current_path} && mongrel_rails cluster::restart -C #{mongrel_conf}"
+  end
+
+  desc "Stops the mongrel cluster"
+  task :stop, :roles => :app do
+    run "cd #{current_path} && mongrel_rails cluster::stop -C #{mongrel_conf}"
+  end
 end
