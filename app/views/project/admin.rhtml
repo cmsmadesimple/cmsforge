@@ -1,0 +1,93 @@
+<h3><%= @project.name %></h3>
+
+<%= render :partial => 'project_nav', :project => @project -%>
+
+<h4>Project Admin</h4>
+
+<%= error_messages_for 'project' -%>
+
+<% form_tag do -%>
+
+<fieldset>
+  <legend>Public Info</legend>
+
+  <div class="entry">
+    <span class="label">Group Name:</span>
+    <span class="value">
+      <%= text_field 'project', 'name', :maxlenth => 255 -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Group Description (255 max chars):</span>
+    <span class="value">
+      <%= text_area 'project', 'description', :cols => 30, :rows => 3 -%>
+    </span>
+  </div>
+  
+  <%= submit_tag 'Submit', :name => 'submit_public_info' -%>
+
+</fieldset>
+
+<% end -%>
+
+<fieldset>
+  <legend>Project Members</legend>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @project.assignments.each do |assignment| -%>
+        <tr>
+          <td><%= assignment.user.login -%></td>
+          <td><%= assignment.role -%></td>
+          <td><%= assignment.role == 'Administrator' ? button_to('Demote', {:action => 'demote', :id => assignment.id}, {:method => 'post'}) : button_to('Promote', {:action => 'promote', :id => assignment.id}, {:method => 'post'}) -%></td>
+          <td><%= button_to('Remove', {:action => 'remove_from_project', :id => @project.id, :assignment_id => assignment.id}, :confirm => 'Are you sure you want to remove this user from the project?') -%></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+  
+  <% form_tag :action => 'add_to_project', :id => @project.id do -%>
+    <p>Add User: <%= text_field_tag 'login', '', {:maxlength => 15} -%><%= submit_tag 'Add User' -%></p>
+  <% end -%>
+  
+</fieldset>
+
+<fieldset>
+  <legend>File Packages</legend>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Active</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Package.find_with_inactive(:all, :conditions => ['project_id = ?', @project.id]).each do |package| -%>
+        <% form_tag :action => 'update_package', :id => package.id do -%>
+          <tr>
+            <td>
+              <%= text_field_tag 'package[name]', package.name, {:maxlength => 255, :id => ''} -%>
+            </td>
+            <td>
+              <select name='package[is_active]'>
+                <%= options_for_select [ [ 'True', true ], [ 'False', false ] ], package.is_active -%>
+              </select>
+            </td>
+            <td><%= hidden_field_tag 'project_id', @project.id -%><%= submit_tag 'Update' -%></td>
+          </tr>
+        <% end -%>
+      <% end -%>
+    </tbody>
+  </table>
+</fieldset>
