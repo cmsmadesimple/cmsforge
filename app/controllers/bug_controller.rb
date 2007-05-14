@@ -3,7 +3,7 @@ class BugController < ApplicationController
   before_filter :login_required, :only => [ :add_comment, :add, :update ]
   
   def list
-    @bugs = Bug.find_all_by_project_id(params[:id])
+    @bugs = Bug.find_all_by_project_id(params[:id], :order => 'id ASC')
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
   end

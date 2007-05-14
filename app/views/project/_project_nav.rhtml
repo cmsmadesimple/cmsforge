@@ -2,7 +2,7 @@
   <ul>
     <li><a href="<%= @project.home_page -%>">Home</a></li>
     <li><%= link_to 'Files', :controller => 'project', :id => @project.id, :action => 'files' -%></li>
-    <li><%= link_to 'Bug Tracker', :controller => 'bug', :id => @project.id, :action => 'view' -%></li>
+    <li><%= link_to 'Bug Tracker', :controller => 'bug', :id => @project.id, :action => 'list' -%></li>
     <% if current_user != :false and current_user.admin_of?(@project) -%>
       <li><%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%></li>
     <% end -%>
