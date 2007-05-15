@@ -1,15 +1,6 @@
 <h3><%= @project.name %></h3>
 
-<div id="project_nav">
-  <ul>
-    <li><a href="<%= @project.home_page -%>">Home</a></li>
-    <li><%= link_to 'Files', :controller => 'project', :id => @project.id, :action => 'files' -%></li>
-    <li><%= link_to 'Bug Tracker', :controller => 'bug', :id => @project.id, :action => 'view' -%></li>
-    <% if current_user != :false and current_user.admin_of?(@project) -%>
-      <li><%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%></li>
-    <% end -%>
-  </ul>
-</div>
+<%= render :partial => 'project/project_nav', :project => @project -%>
 
 <div class="small_nav">
   <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
@@ -25,7 +16,7 @@
 
   <div class="entry">
     <span class="label">Created By:</span>
-    <span class="value"><%= @bug.created_by.login -%></span>
+    <span class="value"><%= @bug.created_by.name_and_link -%></span>
   </div>
 
   <div class="entry">
@@ -37,8 +28,8 @@
     <span class="label">Assigned To:</span>
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@bug.project) ? 
-        select('bug', 'assigned_to_id', ['None' => ''] + @bug.project.users.collect{ |a| [a.login, a.id] }) : 
-        @bug.assigned_to.login -%>
+        select('bug', 'assigned_to_id', [['None' , '100']] + @bug.project.users.collect{ |a| [a.login, a.id] }) : 
+        @bug.assigned_to.name_and_link -%>
     </span>
   </div>
 
@@ -46,7 +37,7 @@
     <span class="label">Version:</span>
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@bug.project) ? 
-        select('bug', 'version_id', @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) :
+        select('bug', 'version_id', [['None' , '-1']] + @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) :
         @bug.version.name -%>
     </span>
   </div>
@@ -76,7 +67,7 @@
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
-    <div class="entry"><%= @bug.description -%></div>
+    <div class="entry"><pre><%= @bug.description -%></pre></div>
   </div>
 
   <%= hidden_field 'bug', 'id' -%>
@@ -92,9 +83,12 @@
   <div class="header">Comments</div>
   <% @bug.comments.each do |comment| -%>
     <div class="entry">
-      Date: <%= comment.created_at -%><br />
-      Posted By: <%= comment.user.login -%><br />
-      <%= comment.comment -%>
+      <pre>
+Date: <%= comment.created_at %>
+Posted By: <%= comment.user.name_and_link %>
+
+<%= comment.comment %>
+      </pre>
     </div>
   <% end -%>
 </div>

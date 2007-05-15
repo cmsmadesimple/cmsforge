@@ -1,15 +1,6 @@
 <h3><%= @project.name %></h3>
 
-<div id="project_nav">
-  <ul>
-    <li><a href="<%= @project.home_page -%>">Home</a></li>
-    <li><%= link_to 'Files', :controller => 'project', :id => @project.id, :action => 'files' -%></li>
-    <li><%= link_to 'Bug Tracker', :controller => 'bug', :id => @project.id, :action => 'view' -%></li>
-    <% if current_user != :false and current_user.admin_of?(@project) -%>
-      <li><%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%></li>
-    <% end -%>
-  </ul>
-</div>
+<%= render :partial => 'project/project_nav', :project => @project -%>
 
 <div class="small_nav">
   <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
@@ -32,9 +23,9 @@
       <tr>
         <td><%= bug.id -%></td>
         <td><%= link_to bug.summary, :controller => :bug, :action => :view, :id => bug.id -%></td>
-        <td><%= bug.created_at -%></td>
-        <td><%= bug.assigned_to_id > 0 ? bug.assigned_to.login : 'None' -%></td>
-        <td><%= bug.created_by_id > 0 ? bug.created_by.login : 'None' -%></td>
+        <td><%= bug.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
+        <td><%= bug.assigned_to_id > 0 ? bug.assigned_to.full_name : 'None' -%></td>
+        <td><%= bug.created_by_id > 0 ? bug.created_by.full_name : 'None' -%></td>
       </tr>
   
     <% end -%>

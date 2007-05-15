@@ -5,14 +5,14 @@
   <div class="entry">
     <span class="label">Assigned To:</span>
     <span class="value">
-      <%= select('bug', 'assigned_to_id', ['None' => ''] + @bug.project.users.collect{ |a| [a.login, a.id] }) -%>
+      <%= select('bug', 'assigned_to_id', [['None', '100']] + @bug.project.users.collect{ |a| [a.login, a.id] }) -%>
     </span>
   </div>
 
   <div class="entry">
     <span class="label">Version:</span>
     <span class="value">
-      <%= select('bug', 'version_id', @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) -%>
+      <%= select('bug', 'version_id', [['None' , '-1']] + @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) -%>
     </span>
   </div>
 
