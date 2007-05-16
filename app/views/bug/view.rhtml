@@ -67,7 +67,7 @@
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
-    <div class="entry"><pre><%= @bug.description -%></pre></div>
+    <div class="entry"><pre><%= word_wrap(@bug.description, 120) %></pre></div>
   </div>
 
   <%= hidden_field 'bug', 'id' -%>
@@ -87,7 +87,7 @@
 Date: <%= comment.created_at %>
 Posted By: <%= comment.user.name_and_link %>
 
-<%= comment.comment %>
+<%= word_wrap(comment.comment) %>
       </pre>
     </div>
   <% end -%>
