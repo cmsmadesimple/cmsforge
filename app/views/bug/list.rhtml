@@ -6,34 +6,13 @@
   <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
 </div>
 
-<table class="data_table">
+<div class="filter">
+  <p>Show Closed: <%= check_box_tag('show_closed', '1', @show_closed == '1', {:onchange => remote_function(:url => { :action => 'list', :id => @project.id }, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner')", :with => "'show_closed='+this.checked")}) -%></p>
+  <p><% form_tag ({:action => 'view'}, {:method => 'get'}) do -%>Jump to Bug # <%= text_field_tag 'id', '', :size => 4 -%> <%= submit_tag 'Submit' -%><% end -%></p>
+</div>
 
-  <tr>
-    <th>ID</th>
-    <th>Summary</th>
-    <th>Open Date</th>
-    <th>Assigned To</th>
-    <th>Submitted By</th>
-  </tr>
+<div id="data">
 
-  <% unless @bugs.nil? or @bugs.empty? -%>
+  <%= render :partial => 'bug/bug_list' -%>
 
-    <% @bugs.each do |bug| -%>
-  
-      <tr>
-        <td><%= bug.id -%></td>
-        <td><%= link_to bug.summary, :controller => :bug, :action => :view, :id => bug.id -%></td>
-        <td><%= bug.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
-        <td><%= bug.assigned_to_id > 0 ? bug.assigned_to.full_name : 'None' -%></td>
-        <td><%= bug.created_by_id > 0 ? bug.created_by.full_name : 'None' -%></td>
-      </tr>
-  
-    <% end -%>
-
-  <% else -%>
-
-    <tr><td colspan="5">No Bugs Found!</td></tr>
-
-  <% end -%>
-
-</table>
+</div>

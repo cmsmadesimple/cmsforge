@@ -5,3 +5,9 @@ body
 	color:#000;
 	margin:.5em 2em;
 }
+
+#spinner {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}

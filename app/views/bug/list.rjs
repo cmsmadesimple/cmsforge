@@ -1,0 +1,1 @@
+page[:data].replace_html :partial => 'bug/bug_list'
