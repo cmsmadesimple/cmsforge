@@ -1,0 +1,11 @@
+<h3><%= @project.name %></h3>
+
+<%= render :partial => 'project/project_nav', :project => @project -%>
+
+<h4>File Releases in Package: <%= @package.id %></h4>
+
+<div id="data">
+
+  <%= render :partial => 'releases/release_list' -%>
+
+</div>

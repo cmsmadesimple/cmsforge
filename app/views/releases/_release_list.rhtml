@@ -1,0 +1,25 @@
+<table class="data_table">
+
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+
+  <% unless @releases.nil? or @releases.empty? -%>
+
+    <% @releases.each do |release| -%>
+
+      <tr>
+        <td><%= release.id -%></td>
+        <td><%= link_to release.name, :controller => :releases, :action => :edit, :id => release.id -%></td>
+      </tr>
+
+    <% end -%>
+
+  <% else -%>
+
+    <tr><td colspan="5">No Files Released!</td></tr>
+
+  <% end -%>
+
+</table>

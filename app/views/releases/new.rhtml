@@ -1,0 +1,27 @@
+<h3><%= @project.name %></h3>
+
+<%= render :partial => 'project/project_nav', :project => @project -%>
+
+<h4>Create New Release</h4>
+
+<%= error_messages_for 'release' -%>
+
+<% form_tag :action => 'create', :controller => 'releases' do -%>
+
+  <div class="entry">
+    <span class="label">Release Name:</span>
+    <span class="value">
+      <%= text_field 'release', 'name' %>
+    </span>
+  </div>
+  
+  <div class="entry">
+    <div class="label"></div>
+    <div class="entry">
+      <%= hidden_field 'release', 'package_id' -%>
+      <%= submit_tag 'Create New Release' -%>
+      <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
+    </div>
+  </div>
+
+<% end -%>

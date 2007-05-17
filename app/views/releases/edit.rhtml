@@ -1,0 +1,41 @@
+<h3><%= @project.name %></h3>
+
+<%= render :partial => 'project/project_nav', :project => @project -%>
+
+<h4>Edit File Release</h4>
+
+<%= error_messages_for 'release' -%>
+
+<% form_tag :action => 'update', :controller => 'releases' do -%>
+
+  <div class="entry">
+    <span class="label">Release Name:</span>
+    <span class="value">
+      <%= @release[:name] %>
+    </span>
+  </div>
+  
+  <div class="entry">
+    <span class="label">Change Log:</span>
+    <span class="value">
+      <%= text_area 'release', 'changelog', :rows => 4, :cols => 50 %>
+    </span>
+  </div>
+  
+  <div class="entry">
+    <span class="label">Release Notes:</span>
+    <span class="value">
+      <%= text_area 'release', 'release_notes', :rows => 4, :cols => 50 %>
+    </span>
+  </div>
+  
+  <div class="entry">
+    <div class="label"></div>
+    <div class="entry">
+      <%= hidden_field 'release', 'id' -%>
+      <%= submit_tag 'Update Release' -%>
+      <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
+    </div>
+  </div>
+
+<% end -%>

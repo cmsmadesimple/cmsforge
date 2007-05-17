@@ -67,6 +67,7 @@
   <table>
     <thead>
       <tr>
+        <th></th>
         <th>Name</th>
         <th>Active</th>
         <th></th>
@@ -76,6 +77,10 @@
       <% Package.find_with_inactive(:all, :conditions => ['project_id = ?', @project.id]).each do |package| -%>
         <% form_tag :action => 'update_package', :id => package.id do -%>
           <tr>
+            <td>
+              <%= link_to('[Add Release]', :controller => 'releases', :action => 'new', :package_id => package.id) -%>
+              <%= link_to('[Edit Releases]', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
+            </td>
             <td>
               <%= text_field_tag 'package[name]', package.name, {:maxlength => 255, :id => ''} -%>
             </td>
