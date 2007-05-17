@@ -2,7 +2,7 @@ class BugController < ApplicationController
   
   before_filter :login_required, :only => [ :add_comment, :add, :update ]
   
-  def index
+  def list
     @show_closed = params[:show_closed] || false
     conditions = @show_closed == '1' || @show_closed == 'true' || @show_closed == true ? ['1 = 1'] : ['state = ?', 'Open']
     @bugs = Bug.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
@@ -11,17 +11,9 @@ class BugController < ApplicationController
     render :action => 'list.rjs' if request.xhr?
   end
   
-  def list
-    return index
-  end
-  
-  def show
+  def view
     @bug = Bug.find_by_id(params[:id])
     @project = @bug.project
-  end
-  
-  def view
-    return show
   end
   
   def update
