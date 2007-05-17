@@ -18,6 +18,10 @@ class BugController < ApplicationController
   def view
     @bug = Bug.find_by_id(params[:id])
     @project = @bug.project
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @bug.to_xml }
+    end
   end
   
   def update
