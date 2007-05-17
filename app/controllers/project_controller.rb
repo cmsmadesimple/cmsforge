@@ -4,6 +4,18 @@ class ProjectController < ApplicationController
   
   def view
     @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @project.to_xml }
+    end
+  end
+  
+  def files
+    @project = Project.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @project.to_xml }
+    end
   end
   
   def register

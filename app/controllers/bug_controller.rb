@@ -8,7 +8,11 @@ class BugController < ApplicationController
     @bugs = Bug.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
-    render :action => 'list.rjs' if request.xhr?
+    respond_to do |format|
+      format.html
+      format.js
+      format.xml { render :xml => @bugs.to_xml }
+    end
   end
   
   def view
