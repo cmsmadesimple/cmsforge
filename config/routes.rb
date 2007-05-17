@@ -8,13 +8,12 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of named route:
   # map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
+  map.resources :bug
 
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
   # map.connect '', :controller => "welcome"
-  map.connect 'project/register', :controller => 'project', :action => 'register'
-  map.connect 'project/complete', :controller => 'project', :action => 'complete'
-  map.connect 'project/:unix_name', :controller => 'project', :action => 'view'
+  map.connect 'projects/:unix_name', :controller => 'project', :action => 'view'
   map.connect 'home', :controller => 'account', :action => 'view'
 
   # Allow downloading Web Service WSDL as a file with an extension

@@ -34,7 +34,7 @@ class Project < ActiveRecord::Base
   validates_format_of       :unix_name, :with => /^[a-z][a-z_]+$/, :allow_nil => true
   
   def home_page
-    "/project/#{self.unix_name}"
+    "/projects/#{self.unix_name}"
   end
   
   def after_accepted
