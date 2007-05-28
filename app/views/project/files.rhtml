@@ -3,12 +3,13 @@
 <%= render :partial => 'project_nav', :project => @project -%>
 
 <% for package in @project.packages -%>
-  <%= package.name %>
+  <h4><%= package.name %></h4>
   <% releases = Release.find(:all, :conditions => ['package_id = ?', package.id], :order => 'created_at DESC') -%>
   <% for release in releases %>
-    <%= release.name -%> <%= release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%><br />
+    <h5><%= release.name -%></h5>
+    Released On: <%= release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%><br />
     <% for released_file in release.released_files %>
-      <%= released_file.filename %> <%= released_file.filesize -%> <%= released_file.downloads -%><br />
+      <%= link_to(released_file.filename, released_file.download_path) %> <%= released_file.filesize -%> <%= released_file.downloads -%><br />
     <% end %>
   <% end %>
 <% end -%>

@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   has_many :releases, :through => :packages
   has_many :articles
   has_many :bugs
+  has_many :feature_requests
   has_many :bug_versions
   
   belongs_to :license

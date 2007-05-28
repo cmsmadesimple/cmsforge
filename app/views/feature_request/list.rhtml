@@ -3,7 +3,7 @@
 <%= render :partial => 'project/project_nav', :project => @project -%>
 
 <div class="small_nav">
-  <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
+  <%= link_to "Submit New FR", :action => :add, :id => @project_id -%>
 </div>
 
 <div class="filter">
@@ -13,6 +13,6 @@
 
 <div id="data">
 
-  <%= render :partial => 'bug/bug_list' -%>
+  <%= render :partial => 'feature_request/fr_list' -%>
 
 </div>

@@ -1,0 +1,31 @@
+<table class="data_table">
+
+  <tr>
+    <th>ID</th>
+    <th>Summary</th>
+    <th>Open Date</th>
+    <th>Assigned To</th>
+    <th>Submitted By</th>
+  </tr>
+
+  <% unless @bugs.nil? or @bugs.empty? -%>
+
+    <% @bugs.each do |bug| -%>
+
+      <tr class="<%= bug.state -%>">
+        <td><%= bug.id -%></td>
+        <td><%= link_to bug.summary, :controller => :feature_request, :action => :view, :id => bug.id -%></td>
+        <td><%= bug.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
+        <td><%= bug.assigned_to_id > 0 ? bug.assigned_to.full_name : 'None' -%></td>
+        <td><%= bug.created_by_id > 0 ? bug.created_by.full_name : 'None' -%></td>
+      </tr>
+
+    <% end -%>
+
+  <% else -%>
+
+    <tr><td colspan="5">No Bugs Found!</td></tr>
+
+  <% end -%>
+
+</table>

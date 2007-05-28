@@ -8,9 +8,9 @@
 
 <%= error_messages_for 'bug' -%>
 
-<h2>[#<%= @bug.id -%>] <%= @bug.summary -%></h2>
+<h3>[#<%= @bug.id -%>] <%= @bug.summary -%></h3>
 
-<h3>Details</h3>
+<h4>Feature Request Details</h4>
 
 <% form_tag :action => 'update' do -%>
 
@@ -28,31 +28,8 @@
     <span class="label">Assigned To:</span>
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@bug.project) ? 
-        select('bug', 'assigned_to_id', [['None' , '100']] + @bug.project.users.collect{ |a| [a.login, a.id] }) : 
+        select('bug', 'assigned_to_id', [['None' , '100']] + @bug.project.users.collect{ |a| ["#{a.full_name} (#{a.login})", a.id] }) : 
         @bug.assigned_to.name_and_link -%>
-    </span>
-  </div>
-
-  <div class="entry">
-    <span class="label">Version:</span>
-    <span class="value">
-      <%= current_user != :false and current_user.member_of?(@bug.project) ? 
-        select('bug', 'version_id', [['None' , '-1']] + @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) :
-        @bug.version.name -%>
-    </span>
-  </div>
-
-  <div class="entry">
-    <span class="label">Severity:</span>
-    <span class="value">
-      <%= select 'bug', 'severity_id', BugSeverity.all.collect { |c| [c.name, c.id] } -%>
-    </span>
-  </div>
-
-  <div class="entry">
-    <span class="label">Resolution:</span>
-    <span class="value">
-      <%= select 'bug', 'resolution_id', BugResolution.all.collect { |c| [c.name, c.id] } -%>
     </span>
   </div>
   

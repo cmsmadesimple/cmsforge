@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 19) do
+ActiveRecord::Schema.define(:version => 21) do
 
   create_table "articles", :force => true do |t|
     t.column "project_id",       :integer
@@ -28,20 +28,6 @@ ActiveRecord::Schema.define(:version => 19) do
     t.column "name",       :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
-  end
-
-  create_table "bugs", :force => true do |t|
-    t.column "project_id",     :integer
-    t.column "assigned_to_id", :integer
-    t.column "version_id",     :integer
-    t.column "created_by_id",  :integer
-    t.column "severity_id",    :integer
-    t.column "state",          :string
-    t.column "summary",        :string
-    t.column "description",    :text
-    t.column "created_at",     :datetime
-    t.column "updated_at",     :datetime
-    t.column "resolution_id",  :integer
   end
 
   create_table "comments", :force => true do |t|
@@ -98,7 +84,7 @@ ActiveRecord::Schema.define(:version => 19) do
     t.column "deleted_at", :datetime
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
-    t.column "downloads",  :integer,  :default => 0
+    t.column "downloads",  :integer
   end
 
   create_table "releases", :force => true do |t|
@@ -113,6 +99,21 @@ ActiveRecord::Schema.define(:version => 19) do
   end
 
   create_table "tasks", :force => true do |t|
+  end
+
+  create_table "tracker_items", :force => true do |t|
+    t.column "project_id",     :integer
+    t.column "assigned_to_id", :integer
+    t.column "version_id",     :integer
+    t.column "created_by_id",  :integer
+    t.column "severity_id",    :integer
+    t.column "state",          :string
+    t.column "summary",        :string
+    t.column "description",    :text
+    t.column "created_at",     :datetime
+    t.column "updated_at",     :datetime
+    t.column "resolution_id",  :integer
+    t.column "type",           :string
   end
 
   create_table "users", :force => true do |t|
