@@ -1,0 +1,7 @@
+<h3><%= @project.name %></h3>
+
+<%= render :partial => 'project_nav', :project => @project -%>
+
+<h4>Changelog</h4>
+
+<p><pre><%= @project.changelog -%></pre></p>

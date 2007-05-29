@@ -10,6 +10,20 @@ class ProjectController < ApplicationController
     end
   end
   
+  def changelog
+    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def roadmap
+    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
+    end
+  end
+  
   def files
     @project = Project.find_by_id(params[:id])
     respond_to do |format|

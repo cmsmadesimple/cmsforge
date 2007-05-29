@@ -27,7 +27,8 @@ class Project < ActiveRecord::Base
     transitions :to => :rejected, :from => :pending
   end
   
-  validates_presence_of     :name, :unix_name, :description, :registration_reason, :project_type
+  #validates_presence_of     :name, :unix_name, :description, :registration_reason, :project_type
+  validates_presence_of     :name, :unix_name, :description, :registration_reason
   validates_length_of       :name, :within => 3..40, :allow_nil => true
   validates_length_of       :unix_name, :within => 3..15, :allow_nil => true
   validates_uniqueness_of   :name, :case_sensitive => false, :allow_nil => true

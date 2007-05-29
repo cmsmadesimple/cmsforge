@@ -16,8 +16,8 @@ defaults:
   fastest_hash: false
 
 development:
-  #sessions: false
-  #fragments: false
+  sessions: false
+  fragments: false
   disabled: true
   #servers: localhost:11211
 
