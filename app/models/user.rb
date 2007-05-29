@@ -1,5 +1,8 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
+  
+  acts_as_cached :version => 1
+  
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
@@ -13,6 +16,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
   before_create :make_activation_code
+  
+  after_save :expire_cache
   
   has_many :assignments
   has_many :projects, :through => :assignments

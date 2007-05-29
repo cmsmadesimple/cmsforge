@@ -1,0 +1,36 @@
+defaults:
+  ttl: 1800
+  readonly: false
+  urlencode: false
+  c_threshold: 10000
+  compression: false
+  debug: true
+  namespace: cmsforge
+  sessions: true
+  fragments: true
+  memory: 64
+  servers: localhost:11211
+  benchmarking: true
+  raise_errors: true
+  fast_hash: false
+  fastest_hash: false
+
+development:
+  #sessions: false
+  #fragments: false
+  disabled: true
+  #servers: localhost:11211
+
+# turn off caching
+test: 
+  disabled: true
+
+production:
+  memory: 128
+  benchmarking: false
+  sessions: false
+  fragments: false
+  #servers:
+  #  - 192.185.254.121:11211
+  #  - 192.185.254.138:11211
+  #  - 192.185.254.160:11211

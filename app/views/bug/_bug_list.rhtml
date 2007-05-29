@@ -16,8 +16,8 @@
         <td><%= bug.id -%></td>
         <td><%= link_to bug.summary, :controller => :bug, :action => :view, :id => bug.id -%></td>
         <td><%= bug.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
-        <td><%= bug.assigned_to_id > 0 ? bug.assigned_to.full_name : 'None' -%></td>
-        <td><%= bug.created_by_id > 0 ? bug.created_by.full_name : 'None' -%></td>
+        <td><%= bug.assigned_to_string -%></td>
+        <td><%= bug.created_by_string -%></td>
       </tr>
 
     <% end -%>

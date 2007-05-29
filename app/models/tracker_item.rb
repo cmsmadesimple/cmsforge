@@ -10,6 +10,15 @@ class TrackerItem < ActiveRecord::Base
   has_enumerated :severity, :class_name => 'BugSeverity', :foreign_key => 'severity_id'
   has_enumerated :resolution, :class_name => 'BugResolution', :foreign_key => 'resolution_id'
   
+  acts_as_cached
   acts_as_commentable
+  
+  def assigned_to_string
+    self.assigned_to_id > 0 ? User.get_cache(self.assigned_to_id).full_name : 'None'
+  end
+  
+  def created_by_string
+    self.created_by_id > 0 ? User.get_cache(self.created_by_id).full_name : 'None'
+  end
 
 end
