@@ -4,7 +4,7 @@
 <p>User Id: <%= @user.id -%><br />
 Login Name: <%= @user.login -%><br />
 Real Name: <%= @user.full_name -%><br />
-Email Address: <%= @user.email.gsub(/@/, ' @nospam@ ') -%><br />
+Email Address: <%= @user.email_replaced -%><br />
 Member Since: <%= @user.created_at.strftime('%Y-%m-%d %H:%M') -%></p>
 
 <h4>Assigned Projects</h4>

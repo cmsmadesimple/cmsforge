@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     return false
   end
   
+  def email_replaced
+    self.email.gsub(/\./, [' (dot) ', ' (period) ', ' (daht) '].randomly_pick[0]).gsub(/@/, [' @no.spam@ ', ' @spam.sucks@ ', ' @spam.me.not@ ', ' (aht) '].randomly_pick[0]);
+  end
+  
   def name_and_link
     str = self.full_name
     if self.login != 'None'
