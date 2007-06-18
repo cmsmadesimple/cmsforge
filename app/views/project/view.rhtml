@@ -1,5 +1,26 @@
 <p class="project_description"><%= @project.description -%></p>
+<div class="hr_forge"></div>
 <% @curloc = 'summary' -%>
+
+<div class="devlist">
+  <% admintxt = '' -%>
+  <% devtxt = '' -%>
+  <% @project.assignments.each do |assignment| -%>
+    <% if assignment.role == 'Administrator' -%>
+      <% admintxt << assignment.user.name_and_link_no_nick + '<br />' -%>
+    <% else -%>
+      <% devtxt << assignment.user.name_and_link_no_nick + '<br />' -%>
+    <% end -%>
+  <% end -%>
+  <% unless devtxt.blank? -%>
+    <span class="develtitle">Project Admins:</span><br />
+    <%= admintxt -%>
+  <% end -%>
+  <% unless devtxt.blank? -%>
+    <span class="develtitle">Developers:</span><br />
+    <%= devtxt -%>
+  <% end -%>
+</div>
 
 Type: <%= @project.project_type.humanize -%><br />
 Created: <%= @project.created_at.strftime('%c') -%>

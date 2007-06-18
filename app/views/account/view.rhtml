@@ -1,12 +1,21 @@
 <h3>Home Page</h3>
 
-<h4>Assigned Projects</h4>
-<% current_user.assignments.each do |assignment| -%>
-  <a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a>
-<% end -%>
+<h4>Personal Information</h4>
+<p>User Id: <%= @user.id -%><br />
+Login Name: <%= @user.login -%><br />
+Real Name: <%= @user.full_name -%><br />
+Email Address: <%= @user.email.gsub(/@/, ' @nospam@ ') -%><br />
+Member Since: <%= @user.created_at.strftime('%Y-%m-%d %H:%M') -%></p>
 
-<% if current_user.superuser -%>
-  <% projects = find_projects_not_approved -%>
+<h4>Assigned Projects</h4>
+<p>
+<% @user.assignments.each do |assignment| -%>
+  <a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a><br />
+<% end -%>
+</p>
+
+<% if @user.superuser -%>
+  <% projects = find_projects_not_approved(@user) -%>
   <% unless projects.empty? -%>
     <h4>Pending Projects</h4>
     <% projects.each do |project| -%>
@@ -15,6 +24,8 @@
   <% end -%>
 <% end -%>
 
+<% if current_user and current_user.id == @user.id -%>
 <p>
   <a href="/project/register">Register New Project</a>
 </p>
+<% end -%>

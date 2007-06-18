@@ -4,11 +4,16 @@ class AccountController < ApplicationController
   # If you want "remember me" functionality, add this before_filter to Application Controller
   #before_filter :login_from_cookie
   
-  before_filter :login_required, :only => [ :view ]
+  #before_filter :login_required, :only => [ :view ]
 
   # say something nice, you goof!  something sweet.
   def index
     redirect_to(:action => 'signup') unless logged_in? || User.count > 0
+  end
+  
+  def view
+    login = params[:login]
+    @user = User.find_by_login(login)
   end
 
   def login
