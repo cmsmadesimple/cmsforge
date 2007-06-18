@@ -1,3 +1,11 @@
+<% @curloc = 'bug' -%>
+
+<div class="small_nav">
+  <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
+</div>
+
+<h4>Add Bug Report</h4>
+
 <%= error_messages_for 'bug' -%>
 
 <% form_tag :action => 'add', :controller => 'bug' do -%>

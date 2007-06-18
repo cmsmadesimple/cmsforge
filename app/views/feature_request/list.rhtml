@@ -1,6 +1,4 @@
-<h3><%= @project.name %></h3>
-
-<%= render :partial => 'project/project_nav', :project => @project -%>
+<% @curloc = 'feature_request' -%>
 
 <div class="small_nav">
   <%= link_to "Submit New FR", :action => :add, :id => @project_id -%>

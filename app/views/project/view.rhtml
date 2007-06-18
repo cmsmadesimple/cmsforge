@@ -1,8 +1,5 @@
-<h3><%= @project.name %></h3>
-
-<%= render :partial => 'project_nav', :project => @project -%>
-
 <p class="project_description"><%= @project.description -%></p>
+<% @curloc = 'summary' -%>
 
 Type: <%= @project.project_type.humanize -%><br />
 Created: <%= @project.created_at.strftime('%c') -%>

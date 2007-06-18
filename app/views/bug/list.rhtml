@@ -1,6 +1,4 @@
-<h3><%= @project.name %></h3>
-
-<%= render :partial => 'project/project_nav', :project => @project -%>
+<% @curloc = 'bug' -%>
 
 <div class="small_nav">
   <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
@@ -8,7 +6,7 @@
 
 <div class="filter">
   <p>Show Closed: <%= check_box_tag('show_closed', '1', @show_closed == '1', {:onchange => remote_function(:url => { :id => @project.id }, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner')", :with => "'show_closed='+this.checked")}) -%></p>
-  <p><% form_tag ({:action => 'view'}, {:method => 'get'}) do -%>Jump to Bug # <%= text_field_tag 'id', '', :size => 4 -%> <%= submit_tag 'Submit' -%><% end -%></p>
+  <p><% form_tag({:action => 'view'}, {:method => 'get'}) do -%>Jump to Bug # <%= text_field_tag 'id', '', :size => 4 -%> <%= submit_tag 'Submit' -%><% end -%></p>
 </div>
 
 <div id="data">

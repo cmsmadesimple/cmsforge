@@ -1,6 +1,4 @@
-<h3><%= @project.name %></h3>
-
-<%= render :partial => 'project/project_nav', :project => @project -%>
+<% @curloc = 'bug' -%>
 
 <div class="small_nav">
   <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>

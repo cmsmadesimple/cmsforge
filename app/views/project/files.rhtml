@@ -1,6 +1,4 @@
-<h3><%= @project.name %></h3>
-
-<%= render :partial => 'project_nav', :project => @project -%>
+<% @curloc = 'files' -%>
 
 <% for package in @project.packages -%>
   <h4><%= package.name %></h4>
