@@ -39,6 +39,18 @@ class Project < ActiveRecord::Base
     "/projects/#{self.unix_name}"
   end
   
+  def name_and_home_page
+    "<a href=\"#{self.home_page}\">#{self.name}</a>"
+  end
+  
+  def approved_date
+    #Projects coming over from gforge don't have an approved_on.  So we fake it.
+    unless self.approved_on.nil?
+      self.approved_on
+    end
+    return self.created_at
+  end
+  
   def after_accepted
     self.is_active = true
     self.approved_on = Datetime.now
