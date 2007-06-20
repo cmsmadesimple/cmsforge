@@ -15,6 +15,13 @@
       <%= text_field 'project', 'name', :maxlenth => 255 -%>
     </span>
   </div>
+  
+  <div class="entry">
+    <span class="label">Project Type:</span>
+    <span class="value">
+      <%= select 'project', 'project_type', [['(Select One)', ''], ['Module', 'module'], ['Plugin', 'plugin'], ['Documentation', 'documentation'], ['Translation', 'translation'], ['Core', 'core'], ['Other', 'other']] -%>
+    </span>
+  </div>
 
   <div class="entry">
     <span class="label">Group Description (255 max chars):</span>

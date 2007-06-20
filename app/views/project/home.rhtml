@@ -150,7 +150,7 @@ To register a project you must first register as a user. Then click "Register a 
 				<tr align="left">
 					<td colspan="2">
 
-		<!-- Box Top End -->Hosted Projects: <strong><%= Project.count_in_state(:accepted) -%></strong><br />Registered Users: <strong><%= User.count -%></strong>
+		<!-- Box Top End -->Hosted Projects: <strong><%= number_with_delimiter(Project.count_in_state(:accepted)) -%></strong><br />Registered Users: <strong><%= number_with_delimiter(User.count) -%></strong>
 
 		<!-- Box Middle Start -->
 					</td>
@@ -167,7 +167,7 @@ To register a project you must first register as a user. Then click "Register a 
               <% Project.find_all_by_state('accepted', :limit => 10, :order => 'downloads DESC').each do |one_project| -%>
 		          <tr>
 		            <td style="padding-right: 6px;" align="right">
-		              <strong><%= one_project.downloads -%></strong>
+		              <strong><%= number_with_delimiter(one_project.downloads) -%></strong>
 		            </td>
 		            <td>
 		              <%= one_project.name_and_home_page -%>
@@ -201,11 +201,11 @@ To register a project you must first register as a user. Then click "Register a 
               </tr>
               <tr>
                 <td style="padding-right: 6px; margin-bottom: 5px;" align="right"></td>
-                <td>Package: <%= one_release.package.name -%></td>
+                <td>Package: <a href="/project/files/<%= one_release.package.project.id -%>"><%= one_release.package.name -%></a></td>
               </tr>
               <tr>
                 <td style="padding-right: 6px; margin-bottom: 5px;" align="right"></td>
-                <td>Version: <%= one_release.name -%></td>
+                <td>Version: <a href="/project/files/<%= one_release.package.project.id -%>"><%= one_release.name -%></a></td>
               </tr>
               <% end -%>
             </table>

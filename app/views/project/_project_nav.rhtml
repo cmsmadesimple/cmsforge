@@ -22,7 +22,7 @@
         <%= link_to 'Roadmap', :controller => 'project', :id => @project.id, :action => 'roadmap' -%>
       </li>
     <% end -%>
-    <% if current_user != :false and current_user.admin_of?(@project) -%>
+    <% if current_user != :false and (current_user.admin_of?(@project) or current_user.superuser) -%>
       <li<%= ' class="active"' if @curloc == 'admin' -%>>
         <%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%>
       </li>

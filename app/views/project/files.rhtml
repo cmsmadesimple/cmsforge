@@ -5,9 +5,11 @@
   <% releases = Release.find(:all, :conditions => ['package_id = ?', package.id], :order => 'created_at DESC') -%>
   <% for release in releases %>
     <h5><%= release.name -%></h5>
+    <p>
     Released On: <%= release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%><br />
     <% for released_file in release.released_files %>
       <%= link_to(released_file.filename, released_file.download_path) %> <%= released_file.filesize -%> <%= released_file.downloads -%><br />
     <% end %>
+    </p>
   <% end %>
 <% end -%>
