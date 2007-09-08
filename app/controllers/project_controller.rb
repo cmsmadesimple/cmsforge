@@ -153,4 +153,16 @@ class ProjectController < ApplicationController
     redirect_to :action => 'admin', :id => params[:project_id]
   end
   
+  def add_comment
+    @project = Project.find_by_id(params[:project_id])
+  
+    comment = Comment.new
+    comment.comment = params[:add_comment]
+    comment.user = current_user
+    @project.comments << comment
+    
+    redirect_to :action => 'view', :id => @project.id
+  end
+  
+  
 end

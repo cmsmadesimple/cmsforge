@@ -42,3 +42,30 @@ Created: <%= @project.created_at.strftime('%c') -%>
   <h5 class="project_news_header"><%= article.title -%></h5>
   <%= article.author.login %> - <%= article.created_at.strftime('%c') -%>
 <% end %>
+
+<div class="commentsbox">
+  <div class="header">Comments</div>
+  <% @project.comments.each do |comment| -%>
+    <div class="entry">
+      <pre>
+Date: <%= comment.created_at %>
+Posted By: <%= comment.user.name_and_link %>
+
+<%= word_wrap(comment.comment) %>
+      </pre>
+    </div>
+  <% end -%>
+</div>
+
+<% unless current_user == :false -%>
+  <% form_tag :action => 'add_comment' do -%>
+    <div class="entry">
+      <span class="label">Add Comment:</span>
+      <span class="value">
+        <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
+        <%= submit_tag 'Add Comment' -%>
+        <%= hidden_field_tag 'project_id', @project.id -%>
+      </span>
+    </div>
+  <% end -%>
+<% end -%>
