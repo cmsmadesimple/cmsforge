@@ -42,7 +42,8 @@ class ProjectController < ApplicationController
       unless @project.valid?
         render :action => 'register'
       else
-        @project.save
+       @project.tag_list = (params[:tag_list])
+       @project.save
         redirect_to :action => 'complete'
       end
     end
@@ -57,6 +58,7 @@ class ProjectController < ApplicationController
     unless params[:project].nil?
       @project.update_attributes(params[:project])
       if @project.valid?
+        @project.tag_list = (params[:tag_list])
         @project.save
         flash[:message] = 'Project Updated'
       end

@@ -5,7 +5,10 @@ class BugController < ApplicationController
   def list
     @show_closed = params[:show_closed] || false
     conditions = @show_closed == '1' || @show_closed == 'true' || @show_closed == true ? ['1 = 1'] : ['state = ?', 'Open']
-    @bugs = Bug.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
+#    @bugs = Bug.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
+    @so = 'id ASC'
+    @so = params[:sort_by] unless (params[:sort_by].nil?)
+    @bugs = Bug.find_all_by_project_id(params[:id], :order => @so, :conditions => conditions)
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
     respond_to do |format|
@@ -58,6 +61,7 @@ class BugController < ApplicationController
   
     unless params[:bug].nil?
       if @bug.valid?
+        @bug.state = 'Open'
         @bug.save
         redirect_to :action => 'list', :id => @bug.project_id
         return

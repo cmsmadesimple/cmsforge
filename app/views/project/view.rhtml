@@ -23,7 +23,8 @@
 </div>
 
 Type: <%= @project.project_type.humanize -%><br />
-Created: <%= @project.created_at.strftime('%c') -%>
+Created: <%= @project.created_at.strftime('%c') -%><br />
+Tags: <%= @project.tag_list -%> 
 
 <h4>Latest Releases</h4>
 <% if @project.releases.count > 0 -%>

@@ -13,6 +13,7 @@ class Project < ActiveRecord::Base
   
   acts_as_activated
   acts_as_commentable
+  acts_as_taggable
   
   acts_as_state_machine :initial => :pending
   state :pending

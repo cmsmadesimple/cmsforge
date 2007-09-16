@@ -1,31 +1,26 @@
 <table class="data_table">
-
   <tr>
-    <th>ID</th>
+    <th><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC') -%></th>
     <th>Summary</th>
-    <th>Open Date</th>
+    <th><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC') -%></th>
+    <th><%= link_to 'Severity', :sort_by=>(params[:sort_by]=='severity_id ASC'?'severity_id DESC':'severity_id ASC') -%></th>
+    <th>Version</th>
     <th>Assigned To</th>
     <th>Submitted By</th>
   </tr>
-
   <% unless @bugs.nil? or @bugs.empty? -%>
-
     <% @bugs.each do |bug| -%>
-
-      <tr class="<%= bug.state -%>">
+      <tr class="<%= bug.state -%><% unless (bug.severity.nil?) -%> <%= BugSeverity.find(bug.severity).name -%><% end -%>">
         <td><%= bug.id -%></td>
         <td><%= link_to bug.summary, :controller => :bug, :action => :view, :id => bug.id -%></td>
-        <td><%= bug.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
+        <td><%= bug.created_at.getgm.strftime('%Y-%m-%d') -%></td>
+        <td><% unless (bug.severity.nil?) -%><%= BugSeverity.find(bug.severity).name -%><% end -%></td>
+		<td><% unless (bug.version.nil?) -%><%= BugVersion.find(bug.version).name -%><% end -%></td>
         <td><%= bug.assigned_to_string -%></td>
         <td><%= bug.created_by_string -%></td>
       </tr>
-
     <% end -%>
-
   <% else -%>
-
-    <tr><td colspan="5">No Bugs Found!</td></tr>
-
+    <tr><td colspan="5">No bugs reported for this most excellent code!</td></tr>
   <% end -%>
-
 </table>
