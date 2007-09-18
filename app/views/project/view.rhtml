@@ -26,7 +26,7 @@ Type: <%= @project.project_type.humanize -%><br />
 Created: <%= @project.created_at.strftime('%c') -%><br />
 Tags: <%= @project.tag_list -%> 
 
-<h4>Latest Releases</h4>
+<h4>Latest Release</h4>
 <% if @project.releases.count > 0 -%>
   <% @project.packages.each do |package| %>
     <% latest = package.latest_release -%>
@@ -34,9 +34,12 @@ Tags: <%= @project.tag_list -%>
       <h5><%= package.name %></h5>
       <%= latest.name %><br />
       <%= latest.created_at.strftime('%x')%>
+	  <%= link_to "Release History", :controller=>"releases", :id=> package.id -%>
     <% end %>
   <% end %>
+<p></p>
 <% end %>
+
 
 <h4>News</h4>
 <% @project.articles.each do |article| %>
