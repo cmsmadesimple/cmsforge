@@ -24,6 +24,9 @@
 
 Type: <%= @project.project_type.humanize -%><br />
 Created: <%= @project.created_at.strftime('%c') -%><br />
+<% unless @project.next_planned_release.nil? %>
+Next Planned Release: <%= @project.next_planned_release -%> (as of <%= @project.updated_at -%>)<br />
+<% end -%>
 Tags: <%= @project.tag_list -%> 
 
 <h4>Latest Release</h4>

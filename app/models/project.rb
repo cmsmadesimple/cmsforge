@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
   has_many :assignments
   has_many :users, :through => :assignments
   has_many :packages
-  has_many :releases, :through => :packages
+  has_many :releases, :through => :packages, :order => 'id DESC'
   has_many :articles
   has_many :bugs
   has_many :feature_requests

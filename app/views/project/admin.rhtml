@@ -1,4 +1,5 @@
 <% @curloc = 'admin' -%>
+<%= calendar_date_select_includes nil %>
 
 <h4>Project Admin</h4>
 
@@ -41,6 +42,13 @@
     <span class="label">Project Description (255 max chars):</span>
     <span class="value">
       <%= text_area 'project', 'description', :cols => 80, :rows => 3 -%>
+    </span>
+  </div>
+
+  <div class="entry">
+    <span class="label">Next planned release:</span>
+    <span class="value">
+      <%= calendar_date_select :project, :next_planned_release, :time=>false -%>
     </span>
   </div>
   

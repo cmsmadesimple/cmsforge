@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 23) do
+ActiveRecord::Schema.define(:version => 25) do
 
   create_table "articles", :force => true do |t|
     t.column "project_id",       :integer
@@ -61,23 +61,24 @@ ActiveRecord::Schema.define(:version => 23) do
   end
 
   create_table "projects", :force => true do |t|
-    t.column "name",                :string
-    t.column "unix_name",           :string
-    t.column "description",         :text
-    t.column "registration_reason", :text
-    t.column "project_type",        :string
-    t.column "project_category",    :string
-    t.column "created_at",          :datetime
-    t.column "updated_at",          :datetime
-    t.column "is_active",           :boolean,  :default => false
-    t.column "state",               :string,   :default => "pending"
-    t.column "approved_on",         :datetime
-    t.column "approved_by",         :integer
-    t.column "reject_reason",       :text
-    t.column "license_id",          :integer
-    t.column "changelog",           :text
-    t.column "roadmap",             :text
-    t.column "downloads",           :integer
+    t.column "name",                 :string
+    t.column "unix_name",            :string
+    t.column "description",          :text
+    t.column "registration_reason",  :text
+    t.column "project_type",         :string
+    t.column "project_category",     :string
+    t.column "created_at",           :datetime
+    t.column "updated_at",           :datetime
+    t.column "is_active",            :boolean,  :default => false
+    t.column "state",                :string,   :default => "pending"
+    t.column "approved_on",          :datetime
+    t.column "approved_by",          :integer
+    t.column "reject_reason",        :text
+    t.column "license_id",           :integer
+    t.column "changelog",            :text
+    t.column "roadmap",              :text
+    t.column "downloads",            :integer
+    t.column "next_planned_release", :datetime
   end
 
   create_table "released_files", :force => true do |t|
@@ -99,6 +100,20 @@ ActiveRecord::Schema.define(:version => 23) do
     t.column "is_active",     :boolean,  :default => true
     t.column "created_at",    :datetime
     t.column "updated_at",    :datetime
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.column "tag_id",        :integer
+    t.column "taggable_id",   :integer
+    t.column "taggable_type", :string
+    t.column "created_at",    :datetime
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
+
+  create_table "tags", :force => true do |t|
+    t.column "name", :string
   end
 
   create_table "tasks", :force => true do |t|
