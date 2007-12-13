@@ -1,13 +1,363 @@
-body
-{
-	font:86% verdana,arial,sans-serif;
-	background:#fff;
-	color:#000;
-	margin:.5em 2em;
+/* Start of CMSMS style sheet 'Global - Horizontal Navigation' */
+body #nav-footer ul li a.menuparent {
+	background-image:none;
+
 }
+
+/* Fix for Opera 8 */
+.clearb { clear: both; }
+.menuwrapper { 
+   /* Fix for Opera 8 */ 
+   /*   overflow: hidden;  */ 
+   /* background-color: #ECECEC;
+   border-bottom: 1px solid #C0C0C0;*/
+   width: 100%;
+}
+#primary-nav dfn {
+	display:none;
+}
+/* Set the width of the menu elements at second level. Leaving first level flexible. */
+#primary-nav li li { 
+   /*width: 200px; */
+}
+
+
+/* Unless you know what you do, do not touch this */ 
+#primary-nav, #primary-nav ul { 
+   list-style: none; 
+   margin: 0px; 
+   padding: 0px; 
+}
+#primary-nav ul { 
+   position: absolute; 
+   top: auto; 
+   display: none; 
+}
+#primary-nav ul ul { 
+   margin-top: 1px;
+   margin-left: -1px;
+   left: 100%; 
+   top: 0px; 
+}
+	
+#primary-nav li { 
+   margin-left: -1px;
+   float: left; 
+}
+#primary-nav li li { 
+   margin-left: 0px;
+   margin-top: -1px;
+   float: none; 
+   position: relative; 
+}
+
+/* Styling the basic apperance of the menu elements */
+#primary-nav a { 
+   display: block; 
+   /*margin: 0px; 
+   padding: 5px 10px; 
+   text-decoration: none; 
+   color: #006699;*/
+}
+#primary-nav li a { 
+   /*border-right: 1px solid #C0C0C0;
+   border-left: 1px solid #C0C0C0;*/
+}
+#primary-nav li li a { 
+   /*border: 1px solid #C0C0C0;*/
+}	
+#primary-nav li, #primary-nav li.menuparent { 
+   /*background-color: #ececec; */
+}
+
+/* Styling the basic apperance of the active page elements (shows what page in the menu is being displayed) */
+
+#primary-nav li.menuactive { 
+   /*background-color: #C7C7C7;*/
+}
+
+
+/* Styling the basic apperance of the menuparents - here styled the same on hover (fixes IE bug) */
+#primary-nav ul li.menuparent, 
+#primary-nav ul li.menuparent:hover, 
+#primary-nav ul li.menuparenth { 
+/* arrow for menuparents 
+   background-image: url(images/cms/arrow.gif); 
+   background-position: center right; 
+   background-repeat: no-repeat; */
+}
+
+
+/* Styling the apperance of menu items on hover */
+
+#primary-nav li:hover, 
+#primary-nav li.menuh, 
+#primary-nav li.menuparenth, 
+#primary-nav li.menuactiveh { 
+   /*background-color: #E7AB0B; */
+}
+
+
+/* The magic - set to work for up to a 3 level menu, but can be increased unlimited */
+
+/* 
+just add 
+#primary-nav li:hover ul ul, 
+#primary-nav li.menuparenth ul ul ul,
+for fourth level 
+*/
+#primary-nav ul, 
+#primary-nav li:hover ul, 
+#primary-nav li:hover ul ul, 
+#primary-nav li.menuparenth ul, 
+#primary-nav li.menuparenth ul ul { 
+   display: none; 
+}
+
+/* add 
+#primary-nav ul ul ul li:hover ul, 
+#primary-nav ul ul ul li.menuparenth ul,
+for fourth level
+*/
+#primary-nav li:hover ul, 
+#primary-nav ul li:hover ul, 
+#primary-nav ul ul li:hover ul, 
+#primary-nav li.menuparenth ul, 
+#primary-nav ul li.menuparenth ul, 
+#primary-nav ul ul li.menuparenth ul { 
+   display: block; 
+}
+
+
+/* IE Hacks */
+#primary-nav li li { 
+   float: left; 
+   clear: both; 
+}
+#primary-nav li li a { 
+   height: 1%; 
+}
+/* End of 'Global - Horizontal Navigation' */
+
+/* Start of CMSMS style sheet 'Global - Layout' */
+/* Reset Styles */
+* {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;background: transparent;}
+:focus {outline: 0;}
+body {line-height:1;color:#000000;background:#ffffff;}
+ol, ul {list-style: none}
+table {border-collapse:collapse;border-spacing:0;}
+caption, th, td {text-align:left;font-weight:normal;}
+.hidden {display:none;}
+/* End Reset */
+
+
+/*------------------------------------------------------------------------------------ */
+/* Common                                                                              */
+/*------------------------------------------------------------------------------------ */	
+body{background: #2e71b8 url(/images/bg.jpg) top left repeat-x;font-size: 75.01%;}
+.clear:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;} 
+.clear {display: inline-block;} /* Hides from IE-mac \*/ 
+* html .clear {height: 1%;} 
+.clear {display: block;} /* End hide from IE-mac */ 
+#wrapper{width:80em;margin:0 auto;position:relative;}
+	
+	h1#cmsmslogo a{font-size:2em;display:block;background: url(/images/cmsmslogo.gif) top left no-repeat;width:174px;height:78px;text-indent:-1000em;text-decoration:none}
+	p#languageselect{float:right;margin:1em 0 0 0;font-size:.85em;}
+		p#languageselect img{margin:0 0 0 .5em;vertical-align:middle}
+	div#search_wrap{position:absolute;top:22px;width:50%;left:50%;}
+	p#search{float:right;margin:1.5em 0 0 0;clear:both}
+		#search input{vertical-align:middle;}
+		#search #cntnt01searchinput{border:1px solid #abadb3;width:12em;margin:0 .5em 0 0;background:#ffffff;height:1.2em;}
+			
+	#wrapper-contentarea{background:#ffffff;padding:1em}
+	
+		#nav-header{background: #2e72b8 url(/images/nav-bg.gif) left repeat-x;position:relative;clear:both}
+			#nav-header ul{padding:0;margin:0;list-style:none;list-style-image:none;line-height:1;}
+				#nav-header ul li{float:left;list-style:none;list-style-image:none;margin:0;background: url(/images/nav-divider.gif) right repeat-y;}
+					#nav-header ul li a{display:block;color:#ffffff;font-size:1.5em;font-family:Arial, Helvetica, sans-serif;padding:.5em 1.25em;text-decoration:none}
+					#nav-header ul li a.menuparent{background: url(/images/nav-menuparent-arrow.gif) right no-repeat;padding-right:2.5em}
+						#nav-header ul li ul{margin:0 0 0 0em;position: absolute;background: #2e72b8;border-top:1px solid #215893;border-left:1px solid #215893;border-right:1px solid #215893;left: -999em;}
+						@media all and (min-width:0px) {head~body #nav-header ul li ul {width:14.2em} /* Target Opera Only */ }
+
+							#nav-header ul li ul li{background:none;padding:0;display:block;clear:both}
+								#nav-header ul li ul li a{padding:0;color:#ffffff;font-size:.8em;padding:.5em 1em;width:15em;text-indent:0;border-bottom:1px solid #215893}
+									#nav-header ul li ul li a:hover{background:#ffffff;color:#000000;}
+									#nav-header li:hover ul ul, #nav-header li:hover ul ul ul, #nav-header li.sfhover ul ul, #nav-header li.sfhover ul ul ul {left: -999em;}
+									#nav-header li:hover ul, #nav-header li li:hover ul, #nav-header li li li:hover ul, #nav-header li.sfhover ul, #nav-header li li.sfhover ul, #nav-header li li li.sfhover ul {left: auto;}
+									#nav-header li:hover, #nav-header li.hover {position: static;}
+
+		#adsense{clear:both;border-top:1px solid #88b3de;padding:1.5em 0;text-align:center;}
+		
+		#nav-footer{background: #2e72b8 url(/images/nav-bg.gif) left repeat-x;position:relative;clear:both}
+			#nav-footer ul{padding:0;margin:0;list-style:none;list-style-image:none;line-height:1;}
+
+				#nav-footer ul li{float:left;list-style:none;list-style-image:none;margin:0;background: url(/images/nav-divider.gif) right repeat-y;}
+					#nav-footer ul li a{display:block;color:#ffffff;font-size:1.5em;font-family:Arial, Helvetica, sans-serif;padding:.5em 1.25em;text-decoration:none}
+					#nav-footer ul li a.menuparent{background: url(/images/nav-menuparent-arrow.gif) right no-repeat;padding-right:2.5em}
+						#nav-footer ul li ul{display:none;margin:0 0 0 0em;position: absolute;background: #2e72b8;border-top:1px solid #215893;border-left:1px solid #215893;border-right:1px solid #215893;left: -999em;}
+						#nav-footer ul li dfn{display:none;}								
+						
+		#footer{padding:2em 0 0 0;text-align:center;font-size:.85em;clear:both}
+		
+		#column-cap-top{background: url(/images/column-cap.gif) top left no-repeat;height: 1%;padding:0 0 0 1em}
+			#column-cap-top span{display:block;background: url(/images/column-cap.gif) top right no-repeat;padding:2.25em 0 0 0}
+/* End of 'Global - Layout' */
+
+/* Start of CMSMS style sheet 'Layout - Home Page' */
+#focusarea{background: #c0d546 url(/images/focusarea-bg.jpg) top left no-repeat;padding:2.25em 2.5em 3.5em 2.5em;border-top:1px solid #ffffff}
+	#focusarea h2{color:#000000;font-size:1.7em;line-height:1.3em;width:30em;}
+
+	#focusarea #downloadbutton{background: url(/images/button-download-bg.gif) top left no-repeat;width:192px;color:#ffffff;float:right;padding:.75em 0 0 0;text-align:right;}
+		#focusarea #downloadbutton p{background: url(/images/button-download-bg.gif) bottom left no-repeat;padding:0 1.25em 1em 1.25em;margin:0}
+			#focusarea #downloadbutton p a{color:#ffffff;text-decoration:none;}
+			#focusarea #downloadbutton p b{color:#ecbb3a}					
+			#focusarea #downloadbutton p #downloadbutton-text{display:block;font-size:1.75em;color:#ffffff;margin:0 0 .5em 0}
+			#focusarea #downloadbutton p #downloadbutton-details{display:block;font-size:.85em;color:#ffffff;font-weight:bold}
+		
+			
+#contentarea{clear:both;background: url(/images/contentarea-homepage-bg.gif) repeat-y;border-right:1px solid #88b3de;background-position:60% 100%;}
+html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack to prevent resize bug */
+
+#content{float:left;width:58%;padding:1.5em 0 1em 1%;line-height:1.6em;display:inline}
+#content h2{color:#000000;font-size:2.5em;background: url(/images/divider-blue-bg.gif) bottom left repeat-x;padding:0 0 .15em 0;margin:0 0 .5em 0}
+
+	
+		
+		#content .cms-module-news{}
+			#content .cms-module-news .cms-news-title{font-weight:bold;}
+			#content .cms-module-news .cms-news-date{font-size:.75em;color:#737373}
+	
+	#column{float:right;width:40%;line-height:1.7em;font-size:1em;color:#666666;font-size:.8em;position:relative;margin:0 -1px 0 0;padding-left:1px;}
+				
+		#featuresarea{position:relative;z-index:100;margin:-4.25em 0 0em 0}
+			#featuresarea ul#featuresarea-tabs{}
+				#featuresarea ul#featuresarea-tabs li{background: url(/images/featuresarea-tab-bg.gif) 100% -200px no-repeat;float:left;line-height:1;margin:0 .25em 0 0;padding:0 1em 0 0;font-weight:bold;font-size:.9em}
+				#featuresarea ul#featuresarea-tabs li.selected{background: url(/images/featuresarea-tab-bg.gif) 100% 0 no-repeat;}
+					#featuresarea ul#featuresarea-tabs li a{background: url(/images/featuresarea-tab-bg.gif) 0 -200px no-repeat;display:block;color:#30529c;text-decoration:none;text-align:center;padding:1.25em .35em 1.25em 1.35em}
+					#featuresarea ul#featuresarea-tabs li.selected a{background-position: 0 0;color:#000000}
+			.featuresarea-content{display:none;background: url(/images/featuresarea-bg.jpg) bottom left no-repeat;clear:both;position:relative;color:#000000;padding:1px 0 0 2em}
+				.featuresarea-content div{background: url(images/featuresarea-bg.jpg) bottom right no-repeat;padding:1em 0 3em 0;}
+				.featuresarea-content ul li{list-style:none;background: url(/images/featuresarea-bullet.gif) left no-repeat;padding:.25em 0 .25em 2.5em;margin:0}
+				.featuresarea-content p.features-more{position:absolute;right:1em;bottom:1em;margin:0}
+				*html p.features-more { display:none; }
+		
+		#column .block{padding:0 2em;margin:0 0 3em 0}
+			#column .block a{}
+			#column .block h2{color:#30529c;font-size:2em;background: url(/images/divider-blue-bg.gif) bottom left repeat-x;padding:0 0 .2em 0;margin:0 0 .5em 0}
+				#column .block h2 .more{float:right;font-size:.5em;color:#000000;}
+					#column .block h2 .more a{color:#000000;font-weight:bold;}
+			#column .block ul li{margin:0 0 1em 0;}
+		
+		#column .block blockquote{background: url(/images/quote-top.gif) top left no-repeat;padding:1em 0 0 0}
+			#column .block blockquote p{background: url(/images/quote-bottom.gif) bottom right no-repeat;padding:0 0 1em 0}
+				#column .block blockquote p em{font-style:normal;color:#000000;}
+			
+		#column .block .cms-news-date{color:#737373}
+/* End of 'Layout - Home Page' */
+
+/* Start of CMSMS style sheet 'Global - Typography' */
+body,td,th,input,select,textarea,input {font-family: Verdana, Arial, Helvetica, sans-serif;color:#000000}
+p{margin:0 0 1.5em 0;}
+h1,h2,h3,h4,h5{line-height:1.1em;font-family:Arial, Helvetica, sans-serif;font-weight:normal}
+a{color:#000000;}
+#content a:hover{color:#30529C;}
+#content ul{margin:1.5em 0;padding:0;}
+	#content ul li{background: url(/images/bullet.gif) left 4px no-repeat;padding:0 0 0 1.75em;margin:0 0 .5em 2em}
+	
+
+a.tooltip:hover {
+	position:relative;
+	z-index:100;
+	cursor:help;
+}
+a.tooltip span {
+	display:none;
+}
+a.tooltip:hover span {
+	display:block;
+	position:absolute;
+	top:20px;
+	left:125px;
+	width:250px;
+	background:#F1F7FB;
+	border:1px dotted #88B3DE;
+	padding:8px;
+	z-index:150;
+	text-decoration:none;
+}
+/* End of 'Global - Typography' */
+
 
 #spinner {
 	position: absolute;
 	right: 10px;
 	top: 10px;
+}
+
+.block ul {
+padding: 0;
+margin: 0;
+}
+.block ul li {
+padding: 0px;
+margin: 0px;
+display: block;
+clear: both;
+}
+
+.block ul li span.label {
+display: block;
+float: left;
+width: 40%;
+text-align: right;
+}
+
+.block ul li span.val {
+font-weight: bold;
+float: right;
+display: block;
+text-align: left;
+width: 55%
+}
+
+.block ul li span.vallight {
+float: right;
+display: block;
+text-align: left;
+width: 65%
+}
+
+
+.block table {
+width: 100%;
+}
+
+.block table td {
+padding: 5px;
+text-align: left;
+}
+
+#focusarea ul {
+border: 1px solid black;
+}
+#focusarea ul li {
+  list-style: none;
+display: block;
+float: left;
+padding: 8px;
+}
+
+#focusarea h1 {
+clear: both;
+text-align: center;
+font-size: 14px;
+font-weight: bold;
+}
+
+#project_nav ul {
+border-collapse: collapse;
+}
+#project_nav li {
+border: 1px solid black;
+margin: 0 2px 0 0;
 }
