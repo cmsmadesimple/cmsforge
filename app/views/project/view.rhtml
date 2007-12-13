@@ -1,69 +1,48 @@
+<div id="content">
 <p class="project_description"><%= @project.description -%></p>
-<div class="hr_forge"></div>
 <% @curloc = 'summary' -%>
 
-<div class="devlist">
-  <% admintxt = '' -%>
-  <% devtxt = '' -%>
-  <% @project.assignments.each do |assignment| -%>
-    <% if assignment.role == 'Administrator' -%>
-      <% admintxt << assignment.user.name_and_link_no_nick + '<br />' -%>
-    <% else -%>
-      <% devtxt << assignment.user.name_and_link_no_nick + '<br />' -%>
-    <% end -%>
-  <% end -%>
-  <% unless admintxt.blank? -%>
-    <span class="develtitle">Project Admins:</span><br />
-    <%= admintxt -%>
-  <% end -%>
-  <% unless devtxt.blank? -%>
-    <span class="develtitle">Developers:</span><br />
-    <%= devtxt -%>
-  <% end -%>
-</div>
-
-Type: <%= @project.project_type.humanize -%><br />
-Created: <%= @project.created_at.strftime('%c') -%><br />
-<% unless @project.next_planned_release.nil? %>
-Next Planned Release: <%= @project.next_planned_release -%> (as of <%= @project.updated_at -%>)<br />
-<% end -%>
-Tags: <%= @project.tag_list -%> 
-
-<h4>Latest Release</h4>
+<div class="leftbox">
+<h2>Latest Release</h2>
 <% if @project.releases.count > 0 -%>
   <% @project.packages.each do |package| %>
     <% latest = package.latest_release -%>
     <% unless latest.nil? %>
-      <h5><%= package.name %></h5>
+      <h3><%= package.name %></h3>
       <%= latest.name %><br />
       <%= latest.created_at.strftime('%x')%>
 	  <%= link_to "Release History", :controller=>"releases", :id=> package.id -%>
     <% end %>
   <% end %>
-<p></p>
 <% end %>
-
-
-<h4>News</h4>
-<% @project.articles.each do |article| %>
-  <h5 class="project_news_header"><%= article.title -%></h5>
-  <%= article.author.login %> - <%= article.created_at.strftime('%c') -%>
-<% end %>
-
-<div class="commentsbox">
-  <div class="header">Comments</div>
-  <% @project.comments.each do |comment| -%>
-    <div class="entry">
-      <pre>
-Date: <%= comment.created_at %>
-Posted By: <%= comment.user.name_and_link %>
-
-<%= word_wrap(comment.comment) %>
-      </pre>
-    </div>
-  <% end -%>
 </div>
 
+<% if @project.articles.size > 0 -%>
+<div class="leftbox">
+<h2>News</h2>
+<% @project.articles.each do |article| %>
+  <h3 class="project_news_header"><%= article.title -%></h3>
+  <%= article.author.login %> - <%= article.created_at.strftime('%c') -%>
+<% end %>
+</div>
+<% end %>
+
+<div class="leftbox">
+<h2>Comments</h2>
+  <% if @project.comments.size == 0 -%>
+    No Comments
+  <% else -%>
+    <% @project.comments.each do |comment| -%>
+      <div class="entry">
+        <pre>
+  Date: <%= comment.created_at %>
+  Posted By: <%= comment.user.name_and_link %>
+
+  <%= word_wrap(comment.comment) %>
+        </pre>
+      </div>
+    <% end -%>
+  <% end %>
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
     <div class="entry">
@@ -76,3 +55,41 @@ Posted By: <%= comment.user.name_and_link %>
     </div>
   <% end -%>
 <% end -%>
+</div>
+
+</div>
+
+<div id="column">
+  <div id="column-cap-top"><span>&nbsp;</span></div>
+    <div class="block"> 
+      <h2>Project Summary</h2>
+        <ul>
+          <li><span class="label">Type:</span><span class="val"><%= @project.project_type.humanize -%></span></li>
+          <li><span class="label">Created:</span><span class="val"><%= @project.created_at.strftime('%c') -%></span></li>
+<% unless @project.next_planned_release.nil? %>
+          <li><span class="label">Next Planned Release:</span><span class="val"><%= @project.next_planned_release -%> (as of <%= @project.updated_at -%>)</span></li>
+<% end -%>
+          <li><span class="label">Tags:</span><span class="val"><%= @project.tag_list -%></span></li>
+        </ul>
+    </div>
+
+    <div class="block">
+      <% admintxt = '' -%>
+      <% devtxt = '' -%>
+      <% @project.assignments.each do |assignment| -%>
+          <% if assignment.role == 'Administrator' -%>
+            <% admintxt << '<li><span class="vallight">'+assignment.user.name_and_link_no_nick+'</span></li>' -%>
+              <% else -%>
+            <% devtxt << '<li><span class="vallight">'+assignment.user.name_and_link_no_nick + '</span></li>' -%>
+          <% end -%>
+      <% end -%>
+      <% unless admintxt.blank? -%>
+        <h2>Project Admins</h2>
+        <ul><%= admintxt -%></ul>
+      <% end -%>
+      <% unless devtxt.blank? -%>
+          <h2>Developers</h2>
+          <ul><%= devtxt -%></ul>
+      <% end -%>
+    </div>
+</div>

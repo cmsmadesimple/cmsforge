@@ -1,174 +1,190 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>CMSMS Forge: Welcome</title>
-  <link rel="alternate" title="CMSMS Forge - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
-  <link rel="alternate" title="CMSMS Forge - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
-
-  <script type="text/javascript">
-  <!--
-  //pass min and max -measured against window width
-  function P7_MinMaxW(a,b){
-    var nw="auto",w=document.documentElement.clientWidth;
-    if(w>=b){nw=b+"px";}if(w<=a){nw=a+"px";}return nw;
-  }
-  //-->
-  </script>
-
-  <!--[if lte IE 6]>
-    <style type="text/css">
-      #pagewrapper {width:expression(P7_MinMaxW(775,950));}
-      #container {height: 1%;}
-    </style>
-    <![endif]-->
-
-    <!-- <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://cmsmadesimple.org/News/rss/" /> -->
-
-    <script type="text/javascript">
-    <!--
-
-    function admin_window(adminurl) {
-      AdminWin = window.open( adminurl, 'AdminWindow','scrollbars=yes,resizable=yes, toolbar=yes, height=400, width=400, top=2, left=2');
-      AdminWin.focus();
-    }
-    function help_window(helpurl) {
-      HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
-    }
-
-    // -->
-    </script>
-
-    <!--link rel="stylesheet" type="text/css" href="/stylesheets/cmsforge.css" /-->
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="alternate" type="application/rss+xml" title="CMS Made Simple RSS Feed" href="http://blog.cmsmadesimple.org/feed/" />
+<title>CMS Made Simple - Forge<% unless @project.nil? -%>
+: <%= @project.name -%>
+<% end -%></title>
+<!--[if IE]>
+	<script type="text/javascript" src="http://www.cmsmadesimple.org/modules/MenuManager/CSSMenu.js"></script>
+<![endif]-->
     <%= javascript_include_tag :defaults %>
     <%= stylesheet_link_tag 'cmsforge.css' %>
+</head>
+<body>
+<div id="wrapper">
 
-  </head>
-  <body>
-    <div id="pagewrapper">
-      <div id="container">
+	<div id="header" class="clear">
+	<a name="top" id="top"></a>
+	<p id="languageselect">
+		Language:
+		<a href="http://www.cmsmadesimple.de" onclick="javascript:urchinTracker('/outgoing/German_site');" title="Zur deutschsprachigen Supportseite" target="_blank"><img src="/images/flags/de.gif" alt="Zur deutschsprachigen Supportseite" title="Zur deutschsprachigen Supportseite" /></a>
+		<a href="http://www.cmsmadesimple.fr" onclick="javascript:urchinTracker('/outgoing/French_site');" title="Site francophone" target="_blank"><img src="/images/flags/fr.gif" alt="Site francophone" title="Site francophone" border="0" height="12" width="18" /></a>		
+	</p>
+	<div id="search_wrap">
+<form id="cntnt01moduleform_1" method="get" action="index.php"><div class="hidden"><input type="hidden" name="mact" value="Search,cntnt01,dosearch,0" /><input type="hidden" name="cntnt01returnid" value="58" /></div>
+<p id="search"><input type="text" name="cntnt01searchinput" id="cntnt01searchinput" value="" size="20" maxlength="50" onfocus="if(this.value==this.defaultValue) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" />
+<input type="image" src="images/button-search.gif"/></p><input type="hidden" name="cntnt01origreturnid" value="81" />
 
-        <!-- start accessibility skip links -->
-        <ul class="accessibility">
+</form>
+</div>
+	<h1 id="cmsmslogo"><a href="http://www.cmsmadesimple.org/">CMSMS | CMS Made Simple</a></h1>
+</div>
+	<div id="wrapper-contentarea">
+		<div id="nav-header" class="clear">
+			<div class="menuwrapper">
+<ul id="primary-nav">
+	<li><a 
+href="http://www.cmsmadesimple.org/" accesskey="1" title="Home Page, shortcut key=1"><dfn>1: </dfn>Home</a>
 
-          <li><a href="#menu_vert" accesskey="s" title="Skip to navigation">Skip to navigation</a></li>
-          <li><a href="/News/57/8#main">Skip to content</a></li>
-        </ul>
-
-        <!-- end accessibility skip links -->
-
-        <hr />
-
-
-        <!-- Start Header, with logo image that links to the default start page -->
-
-        <div id="page_top" class="clearfix">
-          <div id="header">
-            <div id="header_left">
-              <h1><a href="http://cmsmadesimple.org/main/home" title="Welcome to CMS Made Simple">Welcome to CMS Made Simple</a></h1>
-
-            </div>
-
-
-            <!-- Start Horizontal Menu -->
-
-            <div id="header-right">
-              <div id="menu_horiz">
-                <h2 class="accessibility">Main Navigation</h2>
-                <div id="top-nav">
+</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://www.cmsmadesimple.org/download.html" ><dfn>2: </dfn>Download</a>
 
 
-                  <ul>
-                    <li><a href="http://cmsmadesimple.org" ><dfn>1: </dfn>Main</a></li>
-                    <li><a href="http://blog.cmsmadesimple.org/" ><dfn>2: </dfn>Blog</a></li>
-                    <li><a href="http://cmsmadesimple.org/downloads" ><dfn>3: </dfn>Downloads</a></li>
-                    <li><a href="http://wiki.cmsmadesimple.org/" ><dfn>4: </dfn>Documentation</a></li>
+	<ul>
+	<li><a 
+href="http://dev.cmsmadesimple.org/frs/?group_id=6" ><dfn>2.1: </dfn>File Releases</a>
 
-                    <li><a href="http://forum.cmsmadesimple.org" ><dfn>5: </dfn>Forum</a></li>
-                    <li class="active01"><dfn>6: </dfn><h3>Development</h3>
-                    </li>
-                  </ul>
-
-                </div>
-
-              </div>
-
-            </div>
-
-            <!-- End Horizontal Menu -->
-
-            <hr />
-          </div>
-        </div>
-
-        <!-- End Header -->
+</li>
+	<li><a 
+href="http://opensourcecms.com/index.php?option=content&amp;task=view&amp;id=452"  target="_blank"><dfn>2.2: </dfn>Demo</a>
 
 
-        <!-- Start Search-->
-        <div id="search">
-          <div style="float: right; margin: 0 0 0 1.5em;">
-
-            <form action="/search/" method="get"><select name="type_of_search"><option value="soft">Software/Group</option>
-              <option value="people">People</option>
-              <option value="skill">Skill</option>
-            </select><input type="text" size="12" name="words" value="" /><input type="submit" name="Search" value="Search" /></form>   
-          </div>	
-          <div style="margin-top: 0.5em;">
-            <% session[:return_to] = request.request_uri unless @current_controller == 'account' -%>
-            <% if !logged_in? -%>
-            <%= link_to 'Login', :controller => 'account', :action => 'login' -%>
-            <% else -%>
-            Logged in as: <%= current_user.login -%> -- <a href="/account/logout">Logout</a>
-            <% end -%>
-          </div>
-
-        </div>
+	</li></ul>
+	</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://www.cmsmadesimple.org/support.html" ><dfn>4: </dfn>Support</a>
 
 
-        <!-- End Search -->
+	<ul>
+	<li><a 
+href="http://wiki.cmsmadesimple.org/" ><dfn>4.1: </dfn>Documentation</a>
 
-        <!-- Start Breadcrumbs -->
-        <div class="breadcrumbs">
-          You are here: <strong>Development Forge</strong>
-          <hr />
-        </div>
-        <!-- End Breadcrumbs -->
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/support/faq.html" ><dfn>4.2: </dfn>FAQ</a>
 
-        <!-- Start Content (Navigation and Content columns) -->
-        <div id="content" class="clearfix">
-          <h2 style="margin-bottom: 0; background-color: #30529C;">CMSMS Forge</h2>
-          <div id="mainnav" class="clearfix">
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/support/irc.html" ><dfn>4.3: </dfn>IRC</a>
 
-            <!-- start tabs -->
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/support/participate.html" ><dfn>4.4: </dfn>Participate</a>
 
+</li>
+	<li><a 
+href="http://dev.cmsmadesimple.org/" ><dfn>4.5: </dfn>Report Bug or Feature Request</a>
+
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/support/mailing-lists.html" ><dfn>4.6: </dfn>Mailing Lists</a>
+
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/support/cms-made-simple-hosting.html" ><dfn>4.7: </dfn>CMS Made Simple Hosting</a>
+
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/support/services.html" ><dfn>4.8: </dfn>Services</a>
+
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/support/commercial-license.html" ><dfn>4.9: </dfn>Commercial License</a>
+
+
+	</li></ul>
+	</li>
+
+	<li class="menuparent"><a class="menuparent" 
+href="http://forum.cmsmadesimple.org/" ><dfn>5: </dfn>Forum</a>
+
+
+	<ul>
+	<li><a 
+href="http://forum.cmsmadesimple.org/index.php/board,1.0.html" ><dfn>5.1: </dfn>Announcements</a>
+
+</li>
+	<li><a 
+href="http://forum.cmsmadesimple.org/index.php/board,2.0.html" ><dfn>5.2: </dfn>General Discussion</a>
+
+
+	</li></ul>
+	</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://dev.cmsmadesimple.org/" ><dfn>6: </dfn>Development</a>
+
+
+	<ul>
+	<li><a 
+href="http://www.cmsmadesimple.org/development/roadmap.html" ><dfn>6.1: </dfn>Roadmap</a>
+
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/development/changelog.html" ><dfn>6.2: </dfn>Changelog</a>
+
+</li>
+	<li><a 
+href="http://dev.cmsmadesimple.org/" ><dfn>6.3: </dfn>CMSMS Forge</a>
+
+
+	</li></ul>
+	</li>
+
+	<li class="menuparent"><a class="menuparent" 
+href="http://www.cmsmadesimple.org/about-us.html" ><dfn>7: </dfn>About Us</a>
+
+
+	<ul>
+	<li><a 
+href="http://www.cmsmadesimple.org/about-us/testimonials.html" ><dfn>7.2: </dfn>Testimonials</a>
+
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/about-us/donations.html" ><dfn>7.3: </dfn>Donations</a>
+
+</li>
+	<li><a 
+href="http://www.cafepress.com/cmsmadesimple" ><dfn>7.4: </dfn>Merchandise</a>
+
+</li>
+	<li><a 
+href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitemap</a>
+
+
+	</li></ul>		</li>
+
+	</ul>
+<div class="clearb"></div>
+</div>
+
+		</div>
+		<div id="focusarea" class="clear">
+			            <% session[:return_to] = request.request_uri unless @current_controller == 'account' -%>
             <ul>
-              <li ><a class="tablink" href="/">Home</a></li>
+            <% if !logged_in? -%>
+            <li><%= link_to 'Login', :controller => 'account', :action => 'login' -%></li>
+            <% else -%>
+            <li>Logged in as: <%= current_user.login -%> -- <a href="/account/logout">Logout</a></li>
+            <% end -%>
+              <li ><a class="tablink" href="/">Forge Home</a></li>
+            <% if logged_in? -%>
               <li ><a class="tablink" href="/my/">My&nbsp;Page</a></li>
-              <!-- <li ><a class="tablink" href="/softwaremap/">Project&nbsp;Tree</a></li> -->
+            <% end -%>
               <% unless @project.nil? -%>
                 <li class="active"><a class="tabsellink" href="<%= @project.home_page -%>"><%= @project.name -%></a></li>
               <% end -%>
             </ul>
 
-
-            <!-- end tabs -->
-          </div>
-
-          <div id="main_content" class="clearfix" style="padding-top: 1.5em;">
-
-            <!-- Inner Tabs / Shell -->
             <% unless @project.nil? -%>
-              <div align="center"><h3 style="margin-top: 0;"><%= @project.name -%></h3></div>
-
-              <div id="projectnav">
-               
+              <h1><%= @project.name -%></h1>               
                 <%= render :partial => '/project/project_nav', :project => @project -%>
-
-              </div>
             <% end -%>
+
+ 		</div>
+		<div id="contentarea" class="clear shell">
 
             <div id="flash">
               <% for name in [:notice, :warning, :message] %>
@@ -177,43 +193,70 @@
                 <% end %>
               <% end %>
             </div>
-
-            <!-- <div id="content"> -->
+<!-- Main Content Area -->
               <%= yield -%>
-            <!-- </div> -->
+<!-- End Main Content Area -->
+</div>        
 
-          </div>
-        </div>
-  </div>
-  <div id="adsense" class="clearfix">
+<div id="adsense">
+	<script type="text/javascript"><!--
+	google_ad_client = "pub-7958561174011032";
+	google_ad_width = "728";
+	google_ad_height = "90";
+	google_ad_format = "728x90_as";
+	google_ad_type = "";
+	google_ad_channel = "";
+	google_color_border = "";
+	google_color_bg = "";
+	google_color_link = "";
+	google_color_url = "";
+	google_color_text = "";
+	//--></script>
+
+	<!--script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script-->
+</div>
+<div id="nav-footer" class="clear">
+	<ul>
+	<li><a 
+href="http://www.cmsmadesimple.org/" accesskey="1" title="Home Page, shortcut key=1"><dfn>1: </dfn>Home</a>
+
+</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://www.cmsmadesimple.org/download.html" ><dfn>2: </dfn>Download</a>
+
+</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://www.cmsmadesimple.org/support.html" ><dfn>4: </dfn>Support</a>
+
+</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://forum.cmsmadesimple.org/" ><dfn>5: </dfn>Forum</a>
+
+</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://dev.cmsmadesimple.org/" ><dfn>6: </dfn>Development</a>
+
+</li>
+	<li class="menuparent"><a class="menuparent" 
+href="http://www.cmsmadesimple.org/about-us.html" ><dfn>7: </dfn>About Us</a>
 
 
-    <!-- Begin Google AdSense Ad -->
+			</li>
+	</ul>
+<div class="clearb"></div>
 
-    <script type="text/javascript"><!--
-    google_ad_client = "pub-7958561174011032";
-    google_ad_width = "728";
-    google_ad_height = "90";
-    google_ad_format = "728x90_as";
-    google_ad_channel = "";
-    //--></script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div id="footer">
+	<p>
 
-    <!-- End Google AdSense Ad -->
-
-
-  </div>
-
-  <!-- Start Footer -->
-
-  <div id="footer" class="clearfix">
-    <p>CMS Made Simple and the CMS Made Simple Forge are Free software under the GNU/GPL licence. Copyright &copy; <!--%= Now.strftime('%Y') -%--> 2007 Ted Kulp.<br />
-	Other modules and plug-ins are Copyright by their authors, and licensed as specified.
-    </p>
-  </div>
-  <!-- End Footer -->
+		CMS made simple is Free software under the GNU/GPL licence. This site is currently running CMS Made Simple 1.2.2.
+		<br /><br />Website designed by <a href="http://stevesicherman.com/" target="_blank">Steve Sicherman</a>
+	</p>
+</div>
+	</div>
   <div id="spinner" style="display: none;">
     <img alt="Spinner" src="/images/spinner.gif?1174174309" />
   </div>
+</div>
 </body>
 </html>
