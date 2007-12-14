@@ -344,13 +344,16 @@ border: 1px solid black;
   list-style: none;
 display: block;
 float: left;
+background-color: #DEE8A1;
 padding: 8px;
+border: 1px solid black;
+margin: 0 2px 0 0;
 }
 
 #focusarea h1 {
 clear: both;
 text-align: center;
-font-size: 14px;
+font-size: 16px;
 font-weight: bold;
 }
 
@@ -358,6 +361,5 @@ font-weight: bold;
 border-collapse: collapse;
 }
 #project_nav li {
-border: 1px solid black;
-margin: 0 2px 0 0;
+
 }

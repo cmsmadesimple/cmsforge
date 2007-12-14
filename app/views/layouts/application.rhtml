@@ -173,9 +173,6 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
             <% if logged_in? -%>
               <li ><a class="tablink" href="/my/">My&nbsp;Page</a></li>
             <% end -%>
-              <% unless @project.nil? -%>
-                <li class="active"><a class="tabsellink" href="<%= @project.home_page -%>"><%= @project.name -%></a></li>
-              <% end -%>
             </ul>
 
             <% unless @project.nil? -%>
