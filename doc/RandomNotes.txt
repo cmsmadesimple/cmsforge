@@ -1,0 +1,6 @@
+General Notes
+
+- generate Controllers and Model diagrams using Railroad
+  using rake doc:diagrams
+  
+  
