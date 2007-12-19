@@ -162,7 +162,7 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
 
 		</div>
 		<div id="focusarea" class="clear">
-			            <% session[:return_to] = request.request_uri unless @current_controller == 'account' -%>
+			<% session[:return_to] = request.request_uri unless @current_controller == 'account' -%>
             <ul>
             <% if !logged_in? -%>
             <li><%= link_to 'Login', :controller => 'account', :action => 'login' -%></li>
@@ -171,7 +171,7 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
             <% end -%>
               <li ><a class="tablink" href="/">Forge Home</a></li>
             <% if logged_in? -%>
-              <li ><a class="tablink" href="/my/">My&nbsp;Page</a></li>
+              <li ><a class="tablink" href="/users/<%= current_user.login -%>">My&nbsp;Page</a></li>
             <% end -%>
             </ul>
 

@@ -1,31 +1,43 @@
-<h3>Home Page</h3>
+<div id="content">
+<h3>Home Page for <%= @user.login -%></h3>
 
 <h4>Personal Information</h4>
 <p>User Id: <%= @user.id -%><br />
 Login Name: <%= @user.login -%><br />
 Real Name: <%= @user.full_name -%><br />
+<% if logged_in? -%>
 Email Address: <%= @user.email_replaced -%><br />
+<% end -%>
 Member Since: <%= @user.created_at.strftime('%Y-%m-%d %H:%M') -%></p>
 
-<h4>Assigned Projects</h4>
-<p>
-<% @user.assignments.each do |assignment| -%>
-  <a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a><br />
-<% end -%>
-</p>
 
-<% if @user.superuser -%>
-  <% projects = find_projects_not_approved(@user) -%>
-  <% unless projects.empty? -%>
-    <h4>Pending Projects</h4>
-    <% projects.each do |project| -%>
-      <%= link_to project.name, { :action => 'approve', :id => project.id, :controller => 'project' }%>
-    <% end -%>
-  <% end -%>
-<% end -%>
+</div>
+<div id="column">
+  <div id="column-cap-top"><span>&nbsp;</span></div>
+  	<div class="block"> 
+		<% if current_user and current_user.id == @user.id -%>
+		<h2>Participate</h2>
+		<p>
+  			<a href="/project/register">Register New Project</a>
+		</p>
+		<% end -%>
 
-<% if current_user and current_user.id == @user.id -%>
-<p>
-  <a href="/project/register">Register New Project</a>
-</p>
-<% end -%>
+      <h2>Assigned Projects</h2>
+		<p>
+		<% @user.assignments.each do |assignment| -%>
+  			<a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a><br />
+		<% end -%>
+		</p>
+
+		<% if @user.superuser -%>
+  			<% projects = find_projects_not_approved(@user) -%>
+  			<% unless projects.empty? -%>
+    			<h2>Pending Projects</h2>
+    			<% projects.each do |project| -%>
+      				<%= link_to project.name, { :action => 'approve', :id => project.id, :controller => 'project' }%>
+    			<% end -%>
+  			<% end -%>
+		<% end -%>
+	</div>
+  </div>
+</div>

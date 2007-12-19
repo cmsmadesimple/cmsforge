@@ -1,11 +1,13 @@
+<div id="content">
 <% @curloc = 'changelog' -%>
 
 <h4>Changelog</h4>
 
 <p><pre><%= @project.changelog -%></pre></p>
 
-<h5>Previous Releases</h5>
+<h3>Previous Releases</h3>
 <% for release in @project.releases %>
   <dt><%= release.name -%></dt>
   <dd><pre><%= release.changelog -%></pre></dd>
 <% end %>
+</div>

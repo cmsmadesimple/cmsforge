@@ -361,5 +361,9 @@ font-weight: bold;
 border-collapse: collapse;
 }
 #project_nav li {
-
+}
+input {
+	color: #000;
+	border: 1px solid #2E71B8;
+	background-color: #CFF6FF;
 }
