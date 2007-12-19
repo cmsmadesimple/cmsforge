@@ -367,3 +367,28 @@ input {
 	border: 1px solid #2E71B8;
 	background-color: #CFF6FF;
 }
+#content h2 {
+font-weight: bold;
+font-size: 18px;
+margin: 10px 0 10px 0;
+}
+
+#content h3 {
+font-weight: bold;
+font-size: 16px;
+margin: 7px 0 7px 0;
+}
+#content h4 {
+font-weight: bold;
+font-size: 12px;
+margin: 7px 0 7px 0;
+}
+
+#leftbox {
+background-color: #F8F8FF;
+border: 1px dashed #CFF6FF;
+}
+#leftbox {
+background-color: #F8F8FF;
+border: 1px dashed #CFF6FF;
+}
