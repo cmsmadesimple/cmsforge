@@ -25,7 +25,7 @@
 	<div id="search_wrap">
 <form id="cntnt01moduleform_1" method="get" action="index.php"><div class="hidden"><input type="hidden" name="mact" value="Search,cntnt01,dosearch,0" /><input type="hidden" name="cntnt01returnid" value="58" /></div>
 <p id="search"><input type="text" name="cntnt01searchinput" id="cntnt01searchinput" value="" size="20" maxlength="50" onfocus="if(this.value==this.defaultValue) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" />
-<input type="image" src="images/button-search.gif"/></p><input type="hidden" name="cntnt01origreturnid" value="81" />
+<input type="image" src="/images/button-search.gif"/></p><input type="hidden" name="cntnt01origreturnid" value="81" />
 
 </form>
 </div>
@@ -179,6 +179,15 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
               <h1><%= h @project.name -%></h1>               
                 <%= render :partial => '/project/project_nav', :project => @project -%>
             <% end -%>
+
+			<div id="cloud">
+			<% 
+			@tags = Project.tag_counts #Tag.find(:all)
+			
+			%>
+			<%= render(:partial => "layouts/tag_cloud", :locals => {:tags => @tags}) %>
+
+			</div>
 
  		</div>
 		<div id="contentarea" class="clear shell">

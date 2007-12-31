@@ -34,7 +34,7 @@
   <div class="entry">
     <span class="label">Tags (comma separated):</span>
     <span class="value">
-      <%= text_field_tag('tag_list', @project.tag_list) -%>
+      <%= text_field_tag('tag_list', @project.tags.join(", ")) -%>
     </span>
   </div>
 

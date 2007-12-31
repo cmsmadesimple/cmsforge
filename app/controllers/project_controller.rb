@@ -1,6 +1,12 @@
 class ProjectController < ApplicationController
   
   before_filter :login_required, :only => [ :register, :admin, :demote, :promote, :remove_from_project, :update_package ]
+ 
+ def list_tagged
+   @projects = Project.find_tagged_with(params[:id])
+   render :template => "project/list" 
+ end
+ 
   
   def view
     @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
@@ -22,6 +28,14 @@ class ProjectController < ApplicationController
     respond_to do |format|
       format.html
     end
+  end
+  
+  def add_tag
+    @project = Project.find_by_id(params[:project_id])
+  
+    @project.tag_list.add(params[:tag_list].split(","))
+    @project.save
+    redirect_to :action => 'view', :id => @project.id
   end
   
   def files
@@ -57,8 +71,8 @@ class ProjectController < ApplicationController
     
     unless params[:project].nil?
       @project.update_attributes(params[:project])
+      @project.tag_list = params[:tag_list]
       if @project.valid?
-        @project.tag_list = (params[:tag_list])
         @project.save
         flash[:message] = 'Project Updated'
       end
@@ -165,6 +179,5 @@ class ProjectController < ApplicationController
     
     redirect_to :action => 'view', :id => @project.id
   end
-  
-  
+    
 end

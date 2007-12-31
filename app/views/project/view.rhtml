@@ -2,6 +2,22 @@
 <p class="project_description"><%= @project.description -%></p>
 <% @curloc = 'summary' -%>
 
+<ul class="tags">
+<% @project.tags.each do |t| -%>
+<li><%= h(t) -%></li>
+<% end %>
+</ul>
+<% unless current_user == :false -%>
+	<% form_tag :action => 'add_tag' do -%>
+    <span class="label">Tags (comma separated):</span>
+    <span class="value">
+      <%= text_field_tag('tag_list', '(your tag here)') -%>
+    <%= hidden_field_tag 'project_id', @project.id -%>
+	</span>
+	<%= submit_tag 'Add Tag' -%>
+	<% end %>
+<% end%>
+
 <div class="leftbox">
 <h2>Latest Release</h2>
 <% if @project.releases.count > 0 -%>

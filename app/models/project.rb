@@ -62,6 +62,6 @@ class Project < ActiveRecord::Base
   
   def after_rejected
     self.is_active = false
-  end
+  end  
   
 end
