@@ -53,8 +53,8 @@ To register a project you must first register as a user. Then click "Register a 
               <table>
               <% Release.find(:all, :limit => 10, :order => 'created_at DESC').each do |this_release| -%>
                   <tr><td><strong><%= this_release.created_at.strftime('%d %b') -%></strong></td><td><%= this_release.package.project.name_and_home_page -%>
-                  <br />Package: <a href="/project/files/<%= this_release.package.project.id -%>"><%= this_release.package.name -%></a>
-                <br />Version: <a href="/project/files/<%= this_release.package.project.id -%>"><%= this_release.name -%></a></td></tr>
+                  <br />Package: <a href="/project/files/<%= this_release.package.project.id -%>"><%= h this_release.package.name -%></a>
+                <br />Version: <a href="/project/files/<%= this_release.package.project.id -%>"><%= h this_release.name -%></a></td></tr>
               <% end -%>
             </table>
         </div>
@@ -62,7 +62,7 @@ To register a project you must first register as a user. Then click "Register a 
           <h2>Recently Registered Projects</h2>
               <table>
                 <% Project.find_all_by_state('accepted', :limit => 15, :order => 'approved_on, created_at DESC').each do |this_project| -%>
-                <tr><td><strong><%= this_project.approved_date.strftime('%d %b') -%></strong></td><td><%= this_project.name_and_home_page -%></td></tr>
+                <tr><td><strong><%= h this_project.approved_date.strftime('%d %b') -%></strong></td><td><%= this_project.name_and_home_page -%></td></tr>
                 <% end -%>
               </table>
         </div>

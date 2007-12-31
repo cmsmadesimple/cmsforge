@@ -1,9 +1,7 @@
 <div id="content">
-<h3><%= @project.name %></h3>
+<h3><%= h @project.name %></h3>
 
-<%= render :partial => 'project/project_nav', :project => @project -%>
-
-<h4>File Releases in Package: <%= @package.id %></h4>
+<h4>File Releases in Package: <%= h @package.id %></h4>
 
 <div id="data">
 

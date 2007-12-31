@@ -12,12 +12,12 @@
 
     <% @feature_requests.each do |feature_request| -%>
 
-      <tr class="<%= feature_request.state -%>">
-        <td><%= feature_request.id -%></td>
+      <tr class="<%= h feature_request.state -%>">
+        <td><%= h feature_request.id -%></td>
         <td><%= link_to h(feature_request.summary), :controller => :feature_request, :action => :view, :id => feature_request.id -%></td>
-        <td><%= feature_request.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
-        <td><%= feature_request.assigned_to_string -%></td>
-        <td><%= feature_request.created_by_string -%></td>
+        <td><%= h feature_request.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
+        <td><%= h feature_request.assigned_to_string -%></td>
+        <td><%= h feature_request.created_by_string -%></td>
       </tr>
 
     <% end -%>

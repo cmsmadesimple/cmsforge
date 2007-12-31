@@ -6,7 +6,7 @@
 
 <%= error_messages_for 'feature_request' -%>
 
-<h3>[#<%= @feature_request.id -%>] <%= @feature_request.summary -%></h3>
+<h3>[#<%= h @feature_request.id -%>] <%= h @feature_request.summary -%></h3>
 
 <h4>Feature Request Details</h4>
 
@@ -19,7 +19,7 @@
 
   <div class="entry">
     <span class="label">Date Submitted:</span>
-    <span class="value"><%= @feature_request.created_at -%></span>
+    <span class="value"><%= h @feature_request.created_at -%></span>
   </div>
 
   <div class="entry">
@@ -36,7 +36,7 @@
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@feature_request.project) ? 
         select('feature_request', 'state', [['Open'], ['Closed']]) : 
-        @feature_request.state -%>
+        h(@feature_request.state) -%>
     </span>
   </div>
 
@@ -45,13 +45,13 @@
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@feature_request.project) ?
         text_field('feature_request', 'summary', :size => '50', :maxlength => '255') :
-        @feature_request.summary -%>
+        h(@feature_request.summary) -%>
     </span>
   </div>
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
-    <div class="entry"><pre><%= word_wrap(@feature_request.description, 120) %></pre></div>
+    <div class="entry"><pre><%= h(word_wrap(@feature_request.description, 80)) %></pre></div>
   </div>
 
   <%= hidden_field 'feature_request', 'id' -%>
@@ -68,10 +68,10 @@
   <% @feature_request.comments.each do |comment| -%>
     <div class="entry">
       <pre>
-Date: <%= comment.created_at %>
+Date: <%= h comment.created_at %>
 Posted By: <%= comment.user.name_and_link %>
 
-<%= word_wrap(comment.comment) %>
+<%= h(word_wrap(comment.comment)) %>
       </pre>
     </div>
   <% end -%>

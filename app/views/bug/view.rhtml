@@ -19,7 +19,7 @@
 
   <div class="entry">
     <span class="label">Date Submitted:</span>
-    <span class="value"><%= @bug.created_at -%></span>
+    <span class="value"><%= h @bug.created_at -%></span>
   </div>
 
   <div class="entry">
@@ -36,7 +36,7 @@
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@bug.project) ? 
         select('bug', 'version_id', [['None' , '-1']] + @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) :
-        @bug.version.name -%>
+        h(@bug.version.name) -%>
     </span>
   </div>
 
@@ -59,7 +59,7 @@
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@bug.project) ? 
         select('bug', 'state', [['Open'], ['Closed']]) : 
-        @bug.state -%>
+        h(@bug.state) -%>
     </span>
   </div>
 
@@ -68,13 +68,13 @@
     <span class="value">
       <%= current_user != :false and current_user.member_of?(@bug.project) ?
         text_field('bug', 'summary', :size => '50', :maxlength => '255') :
-        @bug.summary -%>
+        h (@bug.summary) -%>
     </span>
   </div>
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
-    <div class="entry"><pre><%= word_wrap(@bug.description, 120) %></pre></div>
+    <div class="entry"><pre><%= h word_wrap(@bug.description, 80) %></pre></div>
   </div>
 
   <%= hidden_field 'bug', 'id' -%>
@@ -91,10 +91,10 @@
   <% @bug.comments.each do |comment| -%>
     <div class="entry">
       <pre>
-Date: <%= comment.created_at %>
+Date: <%= h comment.created_at %>
 Posted By: <%= comment.user.name_and_link %>
 
-<%= word_wrap(comment.comment) %>
+<%= h(word_wrap(comment.comment)) %>
       </pre>
     </div>
   <% end -%>

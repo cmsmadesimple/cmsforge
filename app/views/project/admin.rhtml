@@ -87,8 +87,8 @@
     <tbody>
       <% @project.assignments.each do |assignment| -%>
         <tr>
-          <td><%= assignment.user.login -%></td>
-          <td><%= assignment.role -%></td>
+          <td><%= h assignment.user.login -%></td>
+          <td><%= h assignment.role -%></td>
           <td><%= assignment.role == 'Administrator' ? button_to('Demote', {:action => 'demote', :id => assignment.id}, {:method => 'post'}) : button_to('Promote', {:action => 'promote', :id => assignment.id}, {:method => 'post'}) -%></td>
           <td><%= button_to('Remove', {:action => 'remove_from_project', :id => @project.id, :assignment_id => assignment.id}, :confirm => 'Are you sure you want to remove this user from the project?') -%></td>
         </tr>

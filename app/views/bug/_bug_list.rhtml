@@ -10,14 +10,14 @@
   </tr>
   <% unless @bugs.nil? or @bugs.empty? -%>
     <% @bugs.each do |bug| -%>
-      <tr class="<%= bug.state -%><% unless (bug.severity.nil?) -%> <%= BugSeverity.find(bug.severity).name -%><% end -%>">
-        <td><%= bug.id -%></td>
+      <tr class="<%= h bug.state -%><% unless (bug.severity.nil?) -%> <%= h BugSeverity.find(bug.severity).name -%><% end -%>">
+        <td><%= h bug.id -%></td>
         <td><%= link_to h(bug.summary), :controller => :bug, :action => :view, :id => bug.id -%></td>
-        <td><%= bug.created_at.getgm.strftime('%Y-%m-%d') -%></td>
-        <td><% unless (bug.severity.nil?) -%><%= BugSeverity.find(bug.severity).name -%><% end -%></td>
-		<td><% unless (bug.version.nil?) -%><%= BugVersion.find(bug.version).name -%><% end -%></td>
-        <td><%= bug.assigned_to_string -%></td>
-        <td><%= bug.created_by_string -%></td>
+        <td><%= h bug.created_at.getgm.strftime('%Y-%m-%d') -%></td>
+        <td><% unless (bug.severity.nil?) -%><%= h BugSeverity.find(bug.severity).name -%><% end -%></td>
+		<td><% unless (bug.version.nil?) -%><%= h BugVersion.find(bug.version).name -%><% end -%></td>
+        <td><%= h bug.assigned_to_string -%></td>
+        <td><%= h bug.created_by_string -%></td>
       </tr>
     <% end -%>
   <% else -%>

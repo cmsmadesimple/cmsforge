@@ -1,6 +1,4 @@
-<h3><%= @project.name %></h3>
-
-<%= render :partial => 'project/project_nav', :project => @project -%>
+<h3><%= h @project.name %></h3>
 
 <h4>Edit File Release</h4>
 
@@ -11,7 +9,7 @@
   <div class="entry">
     <span class="label">Release Name:</span>
     <span class="value">
-      <%= @release[:name] %>
+      <%= h @release[:name] %>
     </span>
   </div>
   

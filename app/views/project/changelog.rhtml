@@ -3,11 +3,11 @@
 
 <h4>Changelog</h4>
 
-<p><pre><%= @project.changelog -%></pre></p>
+<p><pre><%= h @project.changelog -%></pre></p>
 
 <h3>Previous Releases</h3>
 <% for release in @project.releases %>
-  <dt><%= release.name -%></dt>
-  <dd><pre><%= release.changelog -%></pre></dd>
+  <dt><%= h release.name -%></dt>
+  <dd><pre><%= h release.changelog -%></pre></dd>
 <% end %>
 </div>

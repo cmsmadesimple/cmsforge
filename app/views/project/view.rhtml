@@ -8,10 +8,10 @@
   <% @project.packages.each do |package| %>
     <% latest = package.latest_release -%>
     <% unless latest.nil? %>
-      <h3><%= package.name %></h3>
-      <%= latest.name %><br />
-      <%= latest.created_at.strftime('%x')%>
-	  <%= link_to "Release History", :controller=>"releases", :id=> package.id -%>
+      <h3><%= h package.name %></h3>
+      <%= h latest.name %><br />
+      <%= h latest.created_at.strftime('%x')%>
+	  <%= link_to "Release History", :controller=>"releases", :package_id=> package.id -%>
     <% end %>
   <% end %>
 <% end %>
@@ -21,8 +21,8 @@
 <div class="leftbox">
 <h2>News</h2>
 <% @project.articles.each do |article| %>
-  <h3 class="project_news_header"><%= article.title -%></h3>
-  <!--%= article.author.login %--><%= article.author %> - <%= article.created_at.strftime('%c') -%>
+  <h3 class="project_news_header"><%= h article.title -%></h3>
+  <%= h article.author.login %> - <%= h article.created_at.strftime('%c') -%>
 <% end %>
 </div>
 <% end %>
@@ -35,10 +35,10 @@
     <% @project.comments.each do |comment| -%>
       <div class="entry">
         <pre>
-  Date: <%= comment.created_at %>
+  Date: <%= h comment.created_at %>
   Posted By: <%= comment.user.name_and_link %>
 
-  <%= word_wrap(comment.comment) %>
+  <%= h(word_wrap(comment.comment)) %>
         </pre>
       </div>
     <% end -%>
@@ -65,11 +65,11 @@
       <h2>Project Summary</h2>
         <ul>
           <li><span class="label">Type:</span><span class="val"><%= @project.project_type.humanize -%></span></li>
-          <li><span class="label">Created:</span><span class="val"><%= @project.created_at.strftime('%c') -%></span></li>
+          <li><span class="label">Created:</span><span class="val"><%= h @project.created_at.strftime('%c') -%></span></li>
 <% unless @project.next_planned_release.nil? %>
-          <li><span class="label">Next Planned Release:</span><span class="val"><%= @project.next_planned_release -%> (as of <%= @project.updated_at -%>)</span></li>
+          <li><span class="label">Next Planned Release:</span><span class="val"><%= h @project.next_planned_release -%> (as of <%= @project.updated_at -%>)</span></li>
 <% end -%>
-          <li><span class="label">Tags:</span><span class="val"><%= @project.tag_list -%></span></li>
+          <li><span class="label">Tags:</span><span class="val"><%= h @project.tag_list -%></span></li>
         </ul>
     </div>
 

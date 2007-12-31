@@ -1,14 +1,14 @@
 <div id="content">
-<h3>Home Page for <%= @user.login -%></h3>
+<h3>Home Page for <%= h @user.login -%></h3>
 
 <h4>Personal Information</h4>
-<p>User Id: <%= @user.id -%><br />
-Login Name: <%= @user.login -%><br />
-Real Name: <%= @user.full_name -%><br />
+<p>User Id: <%= h @user.id -%><br />
+Login Name: <%= h @user.login -%><br />
+Real Name: <%= h @user.full_name -%><br />
 <% if logged_in? -%>
-Email Address: <%= @user.email_replaced -%><br />
+Email Address: <%= h @user.email_replaced -%><br />
 <% end -%>
-Member Since: <%= @user.created_at.strftime('%Y-%m-%d %H:%M') -%></p>
+Member Since: <%= h @user.created_at.strftime('%Y-%m-%d %H:%M') -%></p>
 
 
 </div>

@@ -10,7 +10,7 @@
     <% @releases.each do |release| -%>
 
       <tr>
-        <td><%= release.id -%></td>
+        <td><%= h release.id -%></td>
         <td><%= link_to release.name, :controller => :releases, :action => :edit, :id => release.id -%></td>
       </tr>
 
