@@ -1,12 +1,12 @@
 <% @curloc = 'feature_request' -%>
 
 <div class="small_nav">
-  <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
+  <%= link_to "Back to List", :action => :list, :id => @feature_request.project_id -%>
 </div>
 
-<%= error_messages_for 'bug' -%>
+<%= error_messages_for 'feature_request' -%>
 
-<h3>[#<%= @bug.id -%>] <%= @bug.summary -%></h3>
+<h3>[#<%= @feature_request.id -%>] <%= @feature_request.summary -%></h3>
 
 <h4>Feature Request Details</h4>
 
@@ -14,47 +14,47 @@
 
   <div class="entry">
     <span class="label">Created By:</span>
-    <span class="value"><%= @bug.created_by.name_and_link -%></span>
+    <span class="value"><%= @feature_request.created_by.name_and_link -%></span>
   </div>
 
   <div class="entry">
     <span class="label">Date Submitted:</span>
-    <span class="value"><%= @bug.created_at -%></span>
+    <span class="value"><%= @feature_request.created_at -%></span>
   </div>
 
   <div class="entry">
     <span class="label">Assigned To:</span>
     <span class="value">
-      <%= current_user != :false and current_user.member_of?(@bug.project) ? 
-        select('bug', 'assigned_to_id', [['None' , '100']] + @bug.project.users.collect{ |a| ["#{a.full_name} (#{a.login})", a.id] }) : 
-        @bug.assigned_to.name_and_link -%>
+      <%= current_user != :false and current_user.member_of?(@feature_request.project) ? 
+        select('feature_request', 'assigned_to_id', [['None' , '100']] + @feature_request.project.users.collect{ |a| ["#{a.full_name} (#{a.login})", a.id] }) : 
+        @feature_request.assigned_to.name_and_link -%>
     </span>
   </div>
   
   <div class="entry">
     <span class="label">State:</span>
     <span class="value">
-      <%= current_user != :false and current_user.member_of?(@bug.project) ? 
-        select('bug', 'state', [['Open'], ['Closed']]) : 
-        @bug.state -%>
+      <%= current_user != :false and current_user.member_of?(@feature_request.project) ? 
+        select('feature_request', 'state', [['Open'], ['Closed']]) : 
+        @feature_request.state -%>
     </span>
   </div>
 
   <div class="entry">
     <span class="label">Summary:</span>
     <span class="value">
-      <%= current_user != :false and current_user.member_of?(@bug.project) ?
-        text_field('bug', 'summary', :size => '50', :maxlength => '255') :
-        @bug.summary -%>
+      <%= current_user != :false and current_user.member_of?(@feature_request.project) ?
+        text_field('feature_request', 'summary', :size => '50', :maxlength => '255') :
+        @feature_request.summary -%>
     </span>
   </div>
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
-    <div class="entry"><pre><%= word_wrap(@bug.description, 120) %></pre></div>
+    <div class="entry"><pre><%= word_wrap(@feature_request.description, 120) %></pre></div>
   </div>
 
-  <%= hidden_field 'bug', 'id' -%>
+  <%= hidden_field 'feature_request', 'id' -%>
   <% if current_user != :false -%>
     <%= submit_tag 'Update Details' -%>
   <% end -%>
@@ -65,7 +65,7 @@
 
 <div class="commentsbox">
   <div class="header">Comments</div>
-  <% @bug.comments.each do |comment| -%>
+  <% @feature_request.comments.each do |comment| -%>
     <div class="entry">
       <pre>
 Date: <%= comment.created_at %>
@@ -84,7 +84,7 @@ Posted By: <%= comment.user.name_and_link %>
       <span class="value">
         <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
         <%= submit_tag 'Add Comment' -%>
-        <%= hidden_field_tag 'bug_id', @bug.id -%>
+        <%= hidden_field_tag 'feature_request_id', @feature_request.id -%>
       </span>
     </div>
   <% end -%>

@@ -22,7 +22,7 @@
 <h2>News</h2>
 <% @project.articles.each do |article| %>
   <h3 class="project_news_header"><%= article.title -%></h3>
-  <%= article.author.login %> - <%= article.created_at.strftime('%c') -%>
+  <!--%= article.author.login %--><%= article.author %> - <%= article.created_at.strftime('%c') -%>
 <% end %>
 </div>
 <% end %>

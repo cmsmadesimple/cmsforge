@@ -1,41 +1,41 @@
 <% @curloc = 'feature_request' -%>
 
 <div class="small_nav">
-  <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
+  <%= link_to "Back to List", :action => :list, :id => @feature_request.project_id -%>
 </div>
 
 <h4>Add Feature Request</h4>
 
-<%= error_messages_for 'bug' -%>
+<%= error_messages_for 'feature_request' -%>
 
-<% form_tag :action => 'add', :controller => 'bug' do -%>
+<% form_tag :action => 'add', :controller => 'feature_request' do -%>
 
   <div class="entry">
     <span class="label">Assigned To:</span>
     <span class="value">
-      <%= select('bug', 'assigned_to_id', [['None', '100']] + @bug.project.users.collect{ |a| [a.login, a.id] }) -%>
+      <%= select('feature_request', 'assigned_to_id', [['None', '100']] + @feature_request.project.users.collect{ |a| [a.login, a.id] }) -%>
     </span>
   </div>
 
   <div class="entry">
     <span class="label">Summary:</span>
     <span class="value">
-      <%= text_field('bug', 'summary', :size => '50', :maxlength => '255') -%>
+      <%= text_field('feature_request', 'summary', :size => '50', :maxlength => '255') -%>
     </span>
   </div>
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
     <div class="entry">
-      <%= text_area 'bug', 'description', { :cols => 50, :rows => 10 } -%>
+      <%= text_area 'feature_request', 'description', { :cols => 50, :rows => 10 } -%>
     </div>
   </div>
   
   <div class="entry">
     <div class="label"></div>
     <div class="entry">
-      <%= hidden_field 'bug', 'project_id' -%>
-      <%= submit_tag 'Submit New Bug' -%>
+      <%= hidden_field 'feature_request', 'project_id' -%>
+      <%= submit_tag 'Submit New Feature Request' -%>
       <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
     </div>
   </div>

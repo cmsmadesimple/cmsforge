@@ -5,61 +5,61 @@ class FeatureRequestController < ApplicationController
   def list
     @show_closed = params[:show_closed] || false
     conditions = @show_closed == '1' || @show_closed == 'true' || @show_closed == true ? ['1 = 1'] : ['state = ?', 'Open']
-    @bugs = FeatureRequest.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
+    @feature_requests = FeatureRequest.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
     respond_to do |format|
       format.html
       format.js
-      format.xml { render :xml => @bugs.to_xml }
+      format.xml { render :xml => @feature_requests.to_xml }
     end
   end
   
   def view
-    @bug = FeatureRequest.find_by_id(params[:id])
-    @project = @bug.project
+    @feature_request = FeatureRequest.find_by_id(params[:id])
+    @project = @feature_request.project
     respond_to do |format|
       format.html
-      format.xml { render :xml => @bug.to_xml }
+      format.xml { render :xml => @feature_request.to_xml }
     end
   end
   
   def update
-    @bug = FeatureRequest.find_by_id(params[:bug][:id])
-    @project = @bug.project
-    @bug.update_attributes(params[:bug])
-    if @bug.valid?
-      @bug.save
+    @feature_request = FeatureRequest.find_by_id(params[:feature_request][:id])
+    @project = @feature_request.project
+    @feature_request.update_attributes(params[:feature_request])
+    if @feature_request.valid?
+      @feature_request.save
     end
 
     render :action => 'view' 
   end
   
   def add_comment
-    bug = FeatureRequest.find_by_id(params[:bug_id])
+    feature_request = FeatureRequest.find_by_id(params[:feature_request_id])
   
     comment = Comment.new
     comment.comment = params[:add_comment]
     comment.user = current_user
-    bug.comments << comment
+    feature_request.comments << comment
     
-    redirect_to :action => 'view', :id => bug.id
+    redirect_to :action => 'view', :id => feature_request.id
   end
   
   def add
-    @bug = FeatureRequest.new(params[:bug])
-    @bug.created_by = current_user
-    @bug.project_id = params[:id] unless params[:id].nil?
+    @feature_request = FeatureRequest.new(params[:feature_request])
+    @feature_request.created_by = current_user
+    @feature_request.project_id = params[:id] unless params[:id].nil?
   
     unless params[:cancel].nil?
-      redirect_to :action => 'list', :id => @bug.project_id
+      redirect_to :action => 'list', :id => @feature_request.project_id
       return
     end
   
-    unless params[:bug].nil?
-      if @bug.valid?
-        @bug.save
-        redirect_to :action => 'list', :id => @bug.project_id
+    unless params[:feature_request].nil?
+      if @feature_request.valid?
+        @feature_request.save
+        redirect_to :action => 'list', :id => @feature_request.project_id
         return
       end
     end
