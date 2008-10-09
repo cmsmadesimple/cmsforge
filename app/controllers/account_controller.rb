@@ -14,6 +14,9 @@ class AccountController < ApplicationController
   def view
     login = params[:login]
     @user = User.find_by_login(login)
+    if @user.nil?
+      redirect_to('/')
+    end
   end
 
   def login
@@ -26,6 +29,8 @@ class AccountController < ApplicationController
       end
       redirect_back_or_default(:controller => '/account', :action => 'view')
       flash[:notice] = "Logged in successfully"
+    else
+      flash[:notice] = "Login Incorrect"
     end
   end
 
@@ -46,7 +51,7 @@ class AccountController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(:controller => '/account', :action => 'index')
+    redirect_to('/')
   end
   
   def activate

@@ -1,70 +1,79 @@
 <!-- start Home -->
 <div id="content">
-<h3>Welcome to the CMSMS Forge</h3>
-<p>
-This is the hub for development of  all things CMS Made Simple: modules, tags, translations, themes and templates, you name it!</p>
+	<h3>Welcome to the CMSMS Forge</h3>
+	<p>
+		This is the hub for development of  all things CMS Made Simple: modules, tags, translations, themes and templates, you name it!
+	</p>
 
-<h4>For the user</h4>
-<p>As a user you can:</p>
+	<h4>For the user</h4>
+	<p>As a user you can:</p>
 
-<ul>
-<li>download modules and tags (see download links to the right or browse the project tree)</li>
-<li>report bugs and add feature requests in the tracker for each project</li>
-<li>browse the latest source code for a project (see SCM tab in a project)</li>
-<li>download translations that have not yet been included in a release</li>
-</ul>
+	<ul>
+		<li>download modules and tags (see download links to the right or browse the project tree)</li>
+		<li>report bugs and add feature requests in the tracker for each project</li>
+		<li>browse the latest source code for a project (see SCM tab in a project)</li>
+		<li>download translations that have not yet been included in a release</li>
+	</ul>
 
-<h4>For the developer</h4>
-<p>We encourage all developers and collaborators of modules and tags, as well as translators of the CMS Made Simple admin and modules, to register a project. That way you can upload file releases to share with the rest of the community and use SVN for the latest source code. When you have registered a project, don't forget to categorize it (Trove categorization in the project admin), so that others can find your project!
-</p>
-<p>
-To register a project you must first register as a user. Then click "Register a project" in the "My Page" tab.
+	<h4>For the developer</h4>
+	<p>
+		We encourage all developers and collaborators of modules and tags, as well as translators of the CMS Made Simple admin and modules, to register a project. That way you can upload file releases to share with the rest of the community and use SVN for the latest source code. When you have registered a project, don't forget to categorize it (Trove categorization in the project admin), so that others can find your project!
+	</p>
+	<p>
+		To register a project you must first register as a user. Then click "Register a project" in the "My Page" tab.
+	</p>
 
-</p>
-
-					<h2>Latest News</h2>
-          <ul>
-            <li> Posting 1 </li>
-            <li> Posting 2 </li>
-          </ul>
+	<h2>Latest News</h2>
+	<ul>
+		<li> Posting 1 </li>
+		<li> Posting 2 </li>
+	</ul>
 </div>
-			<div id="column">
-				<div id="column-cap-top"><span>&nbsp;</span></div>
-				<div class="block">
-          <h2>CMSMS Forge Statistics</h2>
-          <ul>
-              <li><span class="label">Hosted Projects:</span><span class="val"><%= number_with_delimiter(Project.count_in_state(:accepted)) -%></span></li>
-              <li><span class="label">Registered Users:</span><span class="val"><%= number_with_delimiter(User.count) -%></span></li>
-          </ul>
-        </div>
-        <div class="block">
-           <h2>Top Project Downloads</h2>
-              <ul>
-              <% Project.find_all_by_state('accepted',:limit => 10, :order => 'downloads DESC').each do |loop_project| -%>
-              <% unless loop_project.nil? %>
-		              <li><span class="label"><%= number_with_delimiter(loop_project.downloads) -%></span>
-                    <span class="val"><%= loop_project.name_and_home_page -%></span></li>
-		          <% end -%>
-		          <% end -%>
-            </ul>
-        </div>
-        <div class="block">
-          <h2>Latest File Releases</h2>
-              <table>
-              <% Release.find(:all, :limit => 10, :order => 'created_at DESC').each do |this_release| -%>
-                  <tr><td><strong><%= this_release.created_at.strftime('%d %b') -%></strong></td><td><%= this_release.package.project.name_and_home_page -%>
-                  <br />Package: <a href="/project/files/<%= this_release.package.project.id -%>"><%= h this_release.package.name -%></a>
-                <br />Version: <a href="/project/files/<%= this_release.package.project.id -%>"><%= h this_release.name -%></a></td></tr>
-              <% end -%>
-            </table>
-        </div>
-        <div class="block">
-          <h2>Recently Registered Projects</h2>
-              <table>
-                <% Project.find_all_by_state('accepted', :limit => 15, :order => 'approved_on, created_at DESC').each do |this_project| -%>
-                <tr><td><strong><%= h this_project.approved_date.strftime('%d %b') -%></strong></td><td><%= this_project.name_and_home_page -%></td></tr>
-                <% end -%>
-              </table>
-        </div>
-     </div>
+<div id="column">
+	<div id="column-cap-top"><span>&nbsp;</span></div>
+	<div class="block">
+		<h2>CMSMS Forge Statistics</h2>
+		<ul>
+			<li><span class="label">Hosted Projects:</span><span class="val"><%= number_with_delimiter(Project.count_in_state(:accepted)) -%></span></li>
+			<li><span class="label">Registered Users:</span><span class="val"><%= number_with_delimiter(User.count) -%></span></li>
+		</ul>
+	</div>
+	<div class="block">
+		<h2>Top Project Downloads</h2>
+		<ul>
+			<% Project.find_all_by_state('accepted', :limit => 10, :order => 'downloads DESC').each do |loop_project| -%>
+			<% unless loop_project.nil? %>
+			<li>
+				<span class="label"><%= number_with_delimiter(loop_project.downloads) -%></span>
+				<span class="val"><%= loop_project.name_and_home_page -%></span>
+			</li>
+			<% end -%>
+			<% end -%>
+		</ul>
+	</div>
+	<div class="block">
+		<h2>Latest File Releases</h2>
+		<table>
+			<% Release.find(:all, :limit => 10, :order => 'created_at DESC').each do |this_release| -%>
+			<tr>
+				<td><strong><%= this_release.created_at.strftime('%d %b') -%></strong></td>
+				<td><%= this_release.package.project.name_and_home_page -%>
+					<br />Package: <a href="/project/files/<%= this_release.package.project.id -%>"><%= h this_release.package.name -%></a>
+					<br />Version: <a href="/project/files/<%= this_release.package.project.id -%>"><%= h this_release.name -%></a>
+				</td>
+			</tr>
+			<% end -%>
+		</table>
+	</div>
+	<div class="block">
+		<h2>Recently Registered Projects</h2>
+		<table>
+			<% Project.find_all_by_state('accepted', :limit => 15, :order => 'approved_on, created_at DESC').each do |this_project| -%>
+			<tr>
+				<td><strong><%= h this_project.approved_date.strftime('%d %b') -%></strong></td><td><%= this_project.name_and_home_page -%></td>
+			</tr>
+			<% end -%>
+		</table>
+	</div>
+</div>
 <!-- end home -->
