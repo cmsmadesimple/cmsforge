@@ -44,6 +44,30 @@ class Project < ActiveRecord::Base
     "<a href=\"#{self.home_page}\">#{self.name}</a>"
   end
   
+  def repository_checkout_url(public = true)
+    if public
+      if self.repository_type == 'git'
+        ''
+      else
+        "svn checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
+      end
+    else
+      if self.repository_type == 'git'
+        ''
+      else
+        "svn --username developername checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
+      end
+    end
+  end
+  
+  def repository_browser_url
+    if self.repository_type == 'git'
+      ''
+    else
+      "http://viewsvn.cmsmadesimple.org/listing.php?repname=#{self.unix_name}&path=%2F&sc=0"
+    end
+  end
+  
   def approved_date
     #Projects coming over from gforge don't have an approved_on.  So we fake it.
     unless self.approved_on.nil?

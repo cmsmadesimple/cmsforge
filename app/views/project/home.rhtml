@@ -54,7 +54,7 @@
 	<div class="block">
 		<h2>Latest File Releases</h2>
 		<table>
-			<% Release.find(:all, :limit => 10, :order => 'created_at DESC').each do |this_release| -%>
+			<% Release.find(:all, :limit => 5, :order => 'created_at DESC').each do |this_release| -%>
 			<tr>
 				<td><strong><%= this_release.created_at.strftime('%d %b') -%></strong></td>
 				<td><%= this_release.package.project.name_and_home_page -%>
@@ -68,12 +68,18 @@
 	<div class="block">
 		<h2>Recently Registered Projects</h2>
 		<table>
-			<% Project.find_all_by_state('accepted', :limit => 15, :order => 'approved_on, created_at DESC').each do |this_project| -%>
+			<% Project.find_all_by_state('accepted', :limit => 5, :order => 'approved_on, created_at DESC').each do |this_project| -%>
 			<tr>
 				<td><strong><%= h this_project.approved_date.strftime('%d %b') -%></strong></td><td><%= this_project.name_and_home_page -%></td>
 			</tr>
 			<% end -%>
 		</table>
+	</div>
+	<div class="block">
+		<h2>Project Tags</h2>
+		<div id="cloud">
+			<%= render(:partial => "layouts/tag_cloud", :locals => {:tags => Project.tag_counts}) %>
+		</div>
 	</div>
 </div>
 <!-- end home -->

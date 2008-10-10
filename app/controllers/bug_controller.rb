@@ -3,8 +3,8 @@ class BugController < ApplicationController
   before_filter :login_required, :only => [ :add_comment, :add, :update ]
   
   def list
-    @show_closed = params[:show_closed] || false
-    conditions = @show_closed == '1' || @show_closed == 'true' || @show_closed == true ? ['1 = 1'] : ['state = ?', 'Open']
+    @show_closed = (params[:show_closed] == 'true')
+    conditions = @show_closed ? ['1 = 1'] : ['state = ?', 'Open']
 #    @bugs = Bug.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
     @so = 'id ASC'
     @so = params[:sort_by] unless (params[:sort_by].nil?)
@@ -13,7 +13,7 @@ class BugController < ApplicationController
     @project_id = params[:id]
     respond_to do |format|
       format.html
-      format.js
+      format.js { render :template => "bug/list.rjs" }
       format.xml { render :xml => @bugs.to_xml }
     end
   end

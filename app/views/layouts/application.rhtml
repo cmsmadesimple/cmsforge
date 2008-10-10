@@ -180,15 +180,6 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
                 <%= render :partial => '/project/project_nav', :project => @project -%>
             <% end -%>
 
-			<div id="cloud">
-			<% 
-			@tags = Project.tag_counts #Tag.find(:all)
-			
-			%>
-			<%= render(:partial => "layouts/tag_cloud", :locals => {:tags => @tags}) %>
-
-			</div>
-
  		</div>
 		<div id="contentarea" class="clear shell">
 

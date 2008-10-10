@@ -30,14 +30,6 @@ class ProjectController < ApplicationController
     end
   end
   
-  def add_tag
-    @project = Project.find_by_id(params[:project_id])
-  
-    @project.tag_list.add(params[:tag_list].split(","))
-    @project.save
-    redirect_to :action => 'view', :id => @project.id
-  end
-  
   def files
     @project = Project.find_by_id(params[:id])
     respond_to do |format|
@@ -80,21 +72,23 @@ class ProjectController < ApplicationController
   end
   
   def demote
-    @project = Project.find_by_id(params[:id])
-    unless logged_in? and current_user.admin_of?(@project)
-      redirect_to :action => 'view', :id => params[:id] and return
-    end
-    
-    assign = Assignment.find_by_id(params[:assignment_id])
-    unless assign.nil? or assign.project_id != @project.id
+    assign = Assignment.find_by_id(params[:id])
+    unless assign.nil?
+      
+      @project = assign.project
+      
+      unless logged_in? and current_user.admin_of?(@project)
+        redirect_to :action => 'view', :id => @project.id and return
+      end
+      
       assign.role = 'Member'
       assign.save
       flash[:message] = 'User Demoted to Member'
+      
+      redirect_to :action => 'admin', :id => @project.id
     else
       flash[:notice] = 'There was an error demoting the user'
     end
-
-    redirect_to :action => 'admin', :id => params[:id]
     
   end
   
@@ -103,7 +97,8 @@ class ProjectController < ApplicationController
     unless assign.nil?
 
       @project = assign.project
-      unless current_user.admin_of?(@project)
+      
+      unless logged_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => @project.id and return
       end
 

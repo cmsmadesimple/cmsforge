@@ -3,14 +3,14 @@ class FeatureRequestController < ApplicationController
   before_filter :login_required, :only => [ :add_comment, :add, :update ]
   
   def list
-    @show_closed = params[:show_closed] || false
+    @show_closed = (params[:show_closed] == 'true')
     conditions = @show_closed == '1' || @show_closed == 'true' || @show_closed == true ? ['1 = 1'] : ['state = ?', 'Open']
     @feature_requests = FeatureRequest.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
     respond_to do |format|
       format.html
-      format.js
+      format.js { render :template => "feature_request/list.rjs" }
       format.xml { render :xml => @feature_requests.to_xml }
     end
   end
