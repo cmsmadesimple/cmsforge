@@ -47,13 +47,13 @@ class Project < ActiveRecord::Base
   def repository_checkout_url(public = true)
     if public
       if self.repository_type == 'git'
-        ''
+        "git clone git://git.cmsmadesimple.org/#{self.unix_name}.git"
       else
         "svn checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
       end
     else
       if self.repository_type == 'git'
-        ''
+        "git clone git@git.cmsmadesimple.org:#{self.unix_name}.git"
       else
         "svn --username developername checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
       end
@@ -78,14 +78,16 @@ class Project < ActiveRecord::Base
   
   def after_accepted
     self.is_active = true
-    self.approved_on = Datetime.now
-    unless current_user.nil?
-      self.approved_by = current_user.id
-    end
+    self.approved_on = Time.now
+    #unless current_user.nil?
+    #  self.approved_by = current_user.id
+    #end
+    self.save
   end
   
   def after_rejected
     self.is_active = false
+    self.save
   end  
   
 end

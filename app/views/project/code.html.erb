@@ -1,0 +1,42 @@
+<div id="content">
+
+	<% if @project.repository_type == 'svn' -%>
+
+	<p>
+		This project uses subversion for it's source code management.  Blah blah blah about subversion, some links, general good cheer.
+	</p
+
+	<% elsif @project.repository_type == 'git -'%>
+	
+	<p>
+		This project uses git for it's source code management.  Blah blah blah about git, some links, GPL and Linux rule, etc.
+	</p
+	
+	<% end -%>
+
+	<h3>Anonymous Repository Accesss</h3>
+
+	<p>
+		To check out the code for this project anonymously, you can use the following command: <br />
+		<code>
+			<%= @project.repository_checkout_url -%>
+		</code>
+	</p>
+
+	<h3>Developer Repository Access</h3>
+	<p>
+		To checkout the code for the purpose of later committing changes back to the repository, you can
+		use the following command: <br />
+		<code>
+			<%= @project.repository_checkout_url(false) -%>
+		</code>
+	</p>
+
+</div>
+
+<div id="column">
+	<div id="column-cap-top"><span>&nbsp;</span></div>
+	<div class="block">
+		What goes here?  Stats maybe?  Or links to svn/git resources?
+	</div>
+</div>

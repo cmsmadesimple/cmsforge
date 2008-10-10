@@ -54,17 +54,21 @@ class User < ActiveRecord::Base
     self.email.gsub(/\./, [' (dot) ', ' (period) ', ' (daht) '].randomly_pick[0]).gsub(/@/, [' @no.spam@ ', ' @spam.sucks@ ', ' @spam.me.not@ ', ' (aht) '].randomly_pick[0]);
   end
   
+  def home_url
+    "/users/#{self.login}"
+  end
+  
   def name_and_link
     str = self.full_name
     if self.login != 'None'
-      str = str + " (<a href=\"/users/#{self.login}\">#{self.login}</a>)"
+      str = str + " (<a href=\"#{self.home_url}\">#{self.login}</a>)"
     end
   end
   
   def name_and_link_no_nick
     str = self.full_name
     if self.login != 'None'
-      str = "<a href=\"/users/#{self.login}\">#{self.full_name}</a>"
+      str = "<a href=\"#{self.home_url}\">#{self.full_name}</a>"
     end
   end
 

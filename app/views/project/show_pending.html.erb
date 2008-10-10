@@ -1,0 +1,23 @@
+<h3><%= h @project.name -%></h3>
+
+<p>
+	<strong>Unix Name</strong>: <%= h @project.unix_name -%><br />
+	<strong>Registered</strong>: <%= h @project.created_at.strftime("%m/%d/%Y %H:%M") -%><br />
+	<strong>Type</strong>: <%= h @project.project_type -%><br />
+	<strong>Category</strong>: <%= h @project.project_category -%><br />
+	<strong>License</strong>: <%= h @project.license.name -%><br />
+	<strong>Registration Reason</strong>:<br />
+	<%= h @project.registration_reason -%><br />
+	<strong>Description</strong>:<br />
+	<%= h @project.description -%><br />
+</p>
+
+<p>
+	<% form_tag url_for(:action => :approve) do -%>
+		<%= radio_button_tag 'status', 'true', true -%> Approve<br />
+		<%= radio_button_tag 'status', 'false' -%> Reject<br />
+		<%= text_area_tag 'reject_reason' -%><br />
+		<%= hidden_field_tag 'project_id', @project.id -%>
+		<%= submit_tag -%>
+	<% end -%>
+</p>
