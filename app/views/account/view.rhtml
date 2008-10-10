@@ -34,7 +34,7 @@ Member Since: <%= h @user.created_at.strftime('%Y-%m-%d %H:%M') -%></p>
   			<% unless projects.empty? -%>
     			<h2>Pending Projects</h2>
     			<% projects.each do |project| -%>
-      				<%= link_to project.name, { :action => 'approve', :id => project.id, :controller => 'project' }%>
+      				<%= link_to project.name, { :action => 'show_pending', :id => project.id, :controller => 'project' } -%> - <%= project.created_at.strftime('%m/%d/%Y %H:%M') -%><br />
     			<% end -%>
   			<% end -%>
 		<% end -%>

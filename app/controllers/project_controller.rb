@@ -38,6 +38,13 @@ class ProjectController < ApplicationController
     end
   end
   
+  def show_pending
+    @project = Project.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
+    end
+  end
+  
   def register
     unless params[:cancel].nil?
       redirect_to :action => 'view', :controller => 'account'
