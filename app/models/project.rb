@@ -36,6 +36,17 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of   :unix_name, :case_sensitive => false, :allow_nil => true
   validates_format_of       :unix_name, :with => /^[a-z][a-z_]+$/, :allow_nil => true
   
+  def calculate_total_downloads
+    count = 0
+    self.releases.each do |release|
+      release.released_files.each do |file|
+        count = count + file.downloads
+      end
+    end
+    self.downloads = count
+    self.save
+  end
+  
   def home_page
     "/projects/#{self.unix_name}"
   end

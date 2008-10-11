@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/users', :controller => 'account', :action => 'login'
   map.connect '/signup', :controller => 'account', :action => 'signup'
   map.connect '/frs?group_id=:id', :controller => 'project', :action => 'files'
+  map.connect 'projects/:unix_name.:format', :controller => 'project', :action => 'view'
   map.connect 'projects/:unix_name', :controller => 'project', :action => 'view'
   map.connect 'home', :controller => 'account', :action => 'view'
   map.connect '', :controller => "project", :action => 'home'

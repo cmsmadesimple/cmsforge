@@ -6,12 +6,18 @@ class ProjectController < ApplicationController
     @projects = Project.find_tagged_with(params[:id])
     render :template => "project/list" 
   end
+  
+  def list
+    respond_to do |format|
+      format.xml { render :xml => Project.find(:all, :order => 'id ASC').to_xml }
+    end
+  end
 
   def view
     @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
     respond_to do |format|
       format.html
-      format.xml { render :xml => @project.to_xml }
+      format.xml { render :xml => @project.to_xml(:include => {:packages => {:include => [:releases]}}) }
     end
   end
   

@@ -31,6 +31,14 @@
 			<%= @project.repository_checkout_url(false) -%>
 		</code>
 	</p>
+	
+	<h3>Source Code Browser</h3>
+	<p>
+		To browse the code via the web, use the following site: <br />
+		<code>
+			<a href="<%= @project.repository_browser_url %>"><%= @project.repository_browser_url %></a>
+		</code>
+	</p>
 
 </div>
 

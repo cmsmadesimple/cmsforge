@@ -22,7 +22,7 @@
 			$rs->fields['unix_group_name'], 
 			$rs->fields['short_description'], 
 			$rs->fields['register_purpose'], 
-			$rs->fields['status'], 
+			($rs->fields['status'] == 'A' ? 'approved' : 'rejected'), 
 			'', 
 			$rs->fields['license']
 		));
