@@ -9,7 +9,7 @@
     <p>
     Released On: <%= h release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%><br />
     <% for released_file in release.released_files %>
-      <%= link_to (h(released_file.filename), released_file.download_path) %> <%= h released_file.size -%> <%= h released_file.downloads -%><br />
+      <%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.download_path : released_file.public_filename ) %> <%= h released_file.size -%> <%= h released_file.downloads -%><br />
     <% end %>
     </p>
   <% end %>

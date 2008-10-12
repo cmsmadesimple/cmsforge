@@ -4,8 +4,6 @@ class ReleasedFile < ActiveRecord::Base
   
   validates_presence_of :filename, :release_id
   
-  acts_as_paranoid
-  
   has_attachment :storage => :file_system, 
                  :max_size => 10.megabytes
 
