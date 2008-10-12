@@ -6,6 +6,11 @@ class ReleasedFile < ActiveRecord::Base
   
   acts_as_paranoid
   
+  has_attachment :storage => :file_system, 
+                 :max_size => 10.megabytes
+
+  validates_as_attachment
+  
   def download_path
     "http://dev.cmsmadesimple.org/frs/download.php/#{self.id}/#{self.filename}"
   end

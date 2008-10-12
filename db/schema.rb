@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081009191917) do
+ActiveRecord::Schema.define(:version => 20081012201502) do
 
   create_table "articles", :force => true do |t|
     t.integer  "project_id"
@@ -92,11 +92,12 @@ ActiveRecord::Schema.define(:version => 20081009191917) do
   create_table "released_files", :force => true do |t|
     t.integer  "release_id"
     t.string   "filename"
-    t.integer  "filesize"
+    t.integer  "size"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "downloads"
+    t.string   "content_type"
   end
 
   create_table "releases", :force => true do |t|
