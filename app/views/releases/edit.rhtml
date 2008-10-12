@@ -1,39 +1,83 @@
 <h3><%= h @project.name %></h3>
 
-<h4>Edit File Release</h4>
-
 <%= error_messages_for 'release' -%>
 
-<% form_tag :action => 'update', :controller => 'releases' do -%>
+<fieldset>
 
-  <div class="entry">
-    <span class="label">Release Name:</span>
-    <span class="value">
-      <%= h @release[:name] %>
-    </span>
-  </div>
-  
-  <div class="entry">
-    <span class="label">Change Log:</span>
-    <span class="value">
-      <%= text_area 'release', 'changelog', :rows => 4, :cols => 50 %>
-    </span>
-  </div>
-  
-  <div class="entry">
-    <span class="label">Release Notes:</span>
-    <span class="value">
-      <%= text_area 'release', 'release_notes', :rows => 4, :cols => 50 %>
-    </span>
-  </div>
-  
-  <div class="entry">
-    <div class="label"></div>
-    <div class="entry">
-      <%= hidden_field 'release', 'id' -%>
-      <%= submit_tag 'Update Release' -%>
-      <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
-    </div>
-  </div>
+	<legend>Edit Release Information</legend>
 
-<% end -%>
+	<% form_tag :action => 'update', :controller => 'releases' do -%>
+
+		<div class="entry">
+			<span class="label">Release Name:</span>
+			<span class="value">
+				<%= h @release[:name] %>
+			</span>
+		</div>
+
+		<div class="entry">
+			<span class="label">Change Log:</span>
+			<span class="value">
+				<%= text_area 'release', 'changelog', :rows => 4, :cols => 50 %>
+			</span>
+		</div>
+
+		<div class="entry">
+			<span class="label">Release Notes:</span>
+			<span class="value">
+				<%= text_area 'release', 'release_notes', :rows => 4, :cols => 50 %>
+			</span>
+		</div>
+
+		<div class="entry">
+			<div class="label"></div>
+			<div class="entry">
+				<%= hidden_field_tag 'release_id', @release.id -%>
+				<%= submit_tag 'Update Release' -%>
+				<%= submit_tag 'Cancel', { :name => 'cancel' } -%>
+			</div>
+		</div>
+
+	<% end -%>
+	
+</fieldset>
+
+<fieldset>
+
+	<legend>Add Files to Release</legend>
+	
+	<% form_tag(url_for(:action => 'add_file', :controller => 'releases'), :multipart => true ) do -%>
+	
+	<p>
+		<label for="mugshot">File:</label>
+		<%= file_field_tag :uploaded_data %>
+	</p>
+	<p>
+		<%= hidden_field_tag 'release_id', @release.id -%>
+		<%= submit_tag 'Upload' %>
+	</p>
+	
+	<% end -%>
+	
+</fieldset>
+
+<fieldset>
+
+	<legend>Existing Files</legend>
+	
+	<table>
+		<tr>
+			<th>Filename</th>
+			<th>Release Date</th>
+			<th>&nbsp;</th>
+		</tr>
+		<% @release.released_files.each do |file| -%>
+			<tr>
+				<td><%= h file.filename -%></td>
+				<td><%= h file.created_at.strftime('%Y-%m-%d') -%></td>
+				<td><%= button_to "Delete", { :action => "delete_file", :id => file.id }, :confirm => "Are you sure?" -%></td>
+			</tr>
+		<% end -%>
+	</table>
+	
+</fieldset>

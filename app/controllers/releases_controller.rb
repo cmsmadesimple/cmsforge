@@ -30,7 +30,7 @@ class ReleasesController < ApplicationController
   end
   
   def update 
-    @release = Release.find(params[:release][:id]) 
+    @release = Release.find(params[:release][:id])
     @project = @release.package.project
     if @release.update_attributes(params[:release]) 
       flash[:notice] = 'Release was successfully updated.' 
@@ -38,7 +38,26 @@ class ReleasesController < ApplicationController
     else 
       render :action => 'edit' 
     end 
-  end 
-
+  end
+  
+  def add_file
+    @release = Release.find(params[:release_id])
+    unless @release.nil? or !current_user.member_of?(@release.package.project)
+      file = ReleasedFile.new
+      file.release_id = @release.id
+      file.uploaded_data = params[:uploaded_data]
+      file.downloads = 0
+      file.save
+    end
+    redirect_to :action => 'edit', :id => @release.id
+  end
+  
+  def delete_file
+    @release_file = ReleasedFile.find(params[:id])
+    unless @release_file.nil? or !current_user.member_of?(@release_file.release.package.project)
+      ReleasedFile.destroy(@release_file.id)
+    end
+    redirect_to :action => 'edit', :id => @release_file.release.id
+  end
   
 end
