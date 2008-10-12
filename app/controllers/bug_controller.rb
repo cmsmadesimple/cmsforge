@@ -12,7 +12,7 @@ class BugController < ApplicationController
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
     respond_to do |format|
-      format.html
+      format.html { render }
       format.js { render :template => "bug/list.rjs" }
       format.xml { render :xml => @bugs.to_xml }
     end
@@ -22,7 +22,7 @@ class BugController < ApplicationController
     @bug = Bug.find_by_id(params[:id])
     @project = @bug.project
     respond_to do |format|
-      format.html
+      format.html { render }
       format.xml { render :xml => @bug.to_xml }
     end
   end

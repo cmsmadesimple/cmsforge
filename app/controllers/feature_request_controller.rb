@@ -9,7 +9,7 @@ class FeatureRequestController < ApplicationController
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
     respond_to do |format|
-      format.html
+      format.html { render }
       format.js { render :template => "feature_request/list.rjs" }
       format.xml { render :xml => @feature_requests.to_xml }
     end
@@ -19,7 +19,7 @@ class FeatureRequestController < ApplicationController
     @feature_request = FeatureRequest.find_by_id(params[:id])
     @project = @feature_request.project
     respond_to do |format|
-      format.html
+      format.html { render }
       format.xml { render :xml => @feature_request.to_xml }
     end
   end
