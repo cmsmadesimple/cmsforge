@@ -10,7 +10,7 @@ class FeatureRequestController < ApplicationController
     @project_id = params[:id]
     respond_to do |format|
       format.html { render }
-      format.js { render :template => "feature_request/list.rjs" }
+      format.js { render :template => "feature_request/list.js.rjs" }
       format.xml { render :xml => @feature_requests.to_xml }
     end
   end
