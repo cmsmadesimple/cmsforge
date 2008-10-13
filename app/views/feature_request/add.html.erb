@@ -1,3 +1,4 @@
+<div class="content clear">
 <% @curloc = 'feature_request' -%>
 
 <div class="small_nav">
@@ -11,33 +12,36 @@
 <% form_tag :action => 'add', :controller => 'feature_request' do -%>
 
   <div class="entry">
-    <span class="label">Assigned To:</span>
-    <span class="value">
+    <div  class="label">Assigned To:</div >
+    <div  class="value">
       <%= select('feature_request', 'assigned_to_id', [['None', '100']] + @feature_request.project.users.collect{ |a| [a.login, a.id] }) -%>
-    </span>
+    </div >
   </div>
 
   <div class="entry">
-    <span class="label">Summary:</span>
-    <span class="value">
+    <div  class="label">Summary:</div >
+    <div  class="value">
       <%= text_field('feature_request', 'summary', :size => '50', :maxlength => '255') -%>
-    </span>
+    </div >
   </div>
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
-    <div class="entry">
+    
       <%= text_area 'feature_request', 'description', { :cols => 50, :rows => 10 } -%>
-    </div>
+    
   </div>
   
   <div class="entry">
     <div class="label"></div>
     <div class="entry">
+	 <div class="bt-forms">
       <%= hidden_field 'feature_request', 'project_id' -%>
       <%= submit_tag 'Submit New Feature Request' -%>
       <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
+	  </div><!--bt-forms-->
     </div>
   </div>
 
 <% end -%>
+</div><!--content-->
