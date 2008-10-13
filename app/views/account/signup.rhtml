@@ -1,19 +1,36 @@
+<div class="content clear">
 <%= error_messages_for :user %>
 <% form_for :user do |f| -%>
-<p><label for="login">Login</label><br/>
-<%= f.text_field :login %></p>
 
-<p><label for="full_name">Full Name</label><br/>
-<%= f.text_field :full_name %></p>
 
-<p><label for="email">Email</label><br/>
-<%= f.text_field :email %></p>
+<div class="entry">
+<label for="user_login">Login</label><br/>
+<%= f.text_field :login %>
+ </div >
 
-<p><label for="password">Password</label><br/>
-<%= f.password_field :password %></p>
+<div class="entry">
+<label for="user_full_name">Full Name</label><br/>
+<%= f.text_field :full_name %>
+</div>
 
-<p><label for="password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %></p>
+<div class="entry">
+<label for="user_email">Email</label><br/>
+<%= f.text_field :email %>
+</div>
 
+<div class="entry">
+<label for="user_password">Password</label><br/>
+<%= f.password_field :password %>
+</div>
+
+<div class="entry">
+<label for="user_password_confirmation">Confirm Password</label><br/>
+<%= f.password_field :password_confirmation %>
+</div>
+<div class="entry">
+<div class="bt-forms">
 <p><%= submit_tag 'Sign up' %></p>
+</div><!--bt-forms-->
+</div>
 <% end -%>
+</div><!--content-->

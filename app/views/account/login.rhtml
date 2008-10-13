@@ -1,3 +1,4 @@
+<div class="content clear">
 <div class="login">
 <% form_tag do -%>
   <p><label for="login">Login</label><br/>
@@ -9,7 +10,11 @@
   <p><label for="remember_me">Remember me:</label>
   <%= check_box_tag 'remember_me' %></p>
 
-  <p><a href="/signup">Sign Up</a>
+  <p><a href="/signup">Sign Up</a> 
+   <div class="bt-forms">
   <p><%= submit_tag 'Log in' %></p>
+  </div><!--bt-forms-->
+
 <% end -%>
 </div>
+</div><!--content-->
