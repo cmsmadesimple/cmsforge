@@ -1,3 +1,11 @@
+<% if @project.nil? -%>
+
+<div id="content">
+	<h3>Project Not Found!</h3>
+</div>
+
+<% else -%>
+
 <div id="content">
 <p class="project_description"><%= @project.description -%></p>
 <% @curloc = 'summary' -%>
@@ -22,7 +30,7 @@
 <h2>News</h2>
 <% @project.articles.each do |article| %>
   <h3 class="project_news_header"><%= h article.title -%></h3>
-  <%= h article.author.login %> - <%= h article.created_at.strftime('%c') -%>
+  <%= h article.author.login + ' - ' unless article.author.nil? %><%= h article.created_at.strftime('%c') -%>
 <% end %>
 </div>
 <% end %>
@@ -68,7 +76,7 @@
       <h2>Project Summary</h2>
         <ul>
           <li><span class="label">Type:</span><span class="val"><%= @project.project_type.humanize -%></span></li>
-          <li><span class="label">Created:</span><span class="val"><%= h @project.created_at.strftime('%c') -%></span></li>
+          <li><span class="label">Created:</span><span class="val"><%= h @project.created_at.strftime('%c') unless @project.created_at.nil? -%></span></li>
 <% unless @project.next_planned_release.nil? %>
           <li><span class="label">Next Planned Release:</span><span class="val"><%= h @project.next_planned_release -%> (as of <%= @project.updated_at -%>)</span></li>
 <% end -%>
@@ -105,3 +113,5 @@
       <% end -%>
     </div>
 </div>
+
+<% end -%>

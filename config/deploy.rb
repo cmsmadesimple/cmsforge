@@ -37,6 +37,7 @@ namespace :deploy do
     run <<-CMD
       mkdir -p -m 775 #{releases_path} #{shared_path}/system &&
       mkdir -p -m 777 #{shared_path}/log &&
+      mkdir -p -m 775 #{release_path}/config/initializers &&
       cp #{releases_path}/../database.yml #{release_path}/config/database.yml &&
       cp #{releases_path}/../amazon_s3.yml #{release_path}/config/amazon_s3.yml &&
       cp #{releases_path}/../hoptoad.rb #{release_path}/config/initializers/hoptoad.rb
