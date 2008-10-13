@@ -1,3 +1,4 @@
+<div class="content">
 <h3><%= h @project.name %></h3>
 
 <%= error_messages_for 'release' -%>
@@ -16,25 +17,27 @@
 		</div>
 
 		<div class="entry">
-			<span class="label">Change Log:</span>
-			<span class="value">
+			<div class="label">Change Log:</div>
+			<div class="value">
 				<%= text_area 'release', 'changelog', :rows => 4, :cols => 50 %>
-			</span>
+			</div>
 		</div>
 
 		<div class="entry">
-			<span class="label">Release Notes:</span>
-			<span class="value">
+			<div class="label">Release Notes:</div>
+			<div class="value">
 				<%= text_area 'release', 'release_notes', :rows => 4, :cols => 50 %>
-			</span>
+			</div>
 		</div>
 
 		<div class="entry">
 			<div class="label"></div>
 			<div class="entry">
-				<%= hidden_field_tag 'release_id', @release.id -%>
+			 <div class="bt-forms">
+               <%= hidden_field_tag 'release_id', @release.id -%>
 				<%= submit_tag 'Update Release' -%>
 				<%= submit_tag 'Cancel', { :name => 'cancel' } -%>
+			</div><!--bt-forms-->
 			</div>
 		</div>
 
@@ -75,9 +78,10 @@
 			<tr>
 				<td><%= h file.filename -%></td>
 				<td><%= h file.created_at.strftime('%Y-%m-%d') -%></td>
-				<td><%= button_to "Delete", { :action => "delete_file", :id => file.id }, :confirm => "Are you sure?" -%></td>
+				<td class="bt-forms"><%= button_to "Delete", { :action => "delete_file", :id => file.id }, :confirm => "Are you sure?" -%></td>
 			</tr>
 		<% end -%>
 	</table>
 	
 </fieldset>
+</div><!-- content -->
