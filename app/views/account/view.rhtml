@@ -1,17 +1,25 @@
 <div id="content">
 <h3>Home Page for <%= h @user.login -%></h3>
 
-<h4>Personal Information</h4>
-<p>User Id: <%= h @user.id -%><br />
-Login Name: <%= h @user.login -%><br />
-Real Name: <%= h @user.full_name -%><br />
-<% if logged_in? -%>
-Email Address: <%= h @user.email_replaced -%><br />
-<% end -%>
-Member Since: <%= h @user.created_at.strftime('%Y-%m-%d %H:%M') -%></p>
+<div style="float: right;">
+	<h4>Personal Information</h4>
+	<p>
+		User Id: <%= h @user.id -%><br />
+		Login Name: <%= h @user.login -%><br />
+		Real Name: <%= h @user.full_name -%><br />
+		<% if logged_in? -%>
+			Email Address: <%= h @user.email_replaced -%><br />
+		<% end -%>
+		Member Since: <%= h @user.created_at.strftime('%Y-%m-%d %H:%M') -%>
+	</p>
+</div>	
 
+<div>
+	<%= gravatar_for @user -%>
+</div>
 
 </div>
+
 <div id="column">
   <div id="column-cap-top"><span>&nbsp;</span></div>
   	<div class="block"> 
