@@ -208,8 +208,17 @@ background:transparent;
 						
 		#footer{padding:2em 0 0 0;text-align:center;font-size:.85em;clear:both}
 		
-		#column-cap-top{background: url(/images/column-cap.gif) top left no-repeat;height: 1%;padding:0 0 0 1em}
-			#column-cap-top span{display:block;background: url(/images/column-cap.gif) top right no-repeat;padding:2.25em 0 0 0}
+#column-cap-top{
+	background: url(/images/column-cap.gif) top left no-repeat;
+	height: 1%;
+	padding:0 0 0 1em;
+}
+
+#column-cap-top span{
+			display:block;
+			background: url(/images/column-cap.gif) top right no-repeat;
+			padding:2.25em 0 0 0;
+			}
 /* End of 'Global - Layout' */
 
 /* Start of CMSMS style sheet 'Layout - Home Page' */
@@ -219,9 +228,9 @@ background:transparent;
 	#focusarea #downloadbutton{background: url(/images/button-download-bg.gif) top left no-repeat;width:192px;color:#ffffff;float:right;padding:.75em 0 0 0;text-align:right;}
 		#focusarea #downloadbutton p{background: url(/images/button-download-bg.gif) bottom left no-repeat;padding:0 1.25em 1em 1.25em;margin:0}
 			#focusarea #downloadbutton p a{color:#ffffff;text-decoration:none;}
-			#focusarea #downloadbutton p b{color:#ecbb3a}					
-			#focusarea #downloadbutton p #downloadbutton-text{display:block;font-size:1.75em;color:#ffffff;margin:0 0 .5em 0}
-			#focusarea #downloadbutton p #downloadbutton-details{display:block;font-size:.85em;color:#ffffff;font-weight:bold}
+			#focusarea #downloadbutton p b{color:#ecbb3a;}					
+			#focusarea #downloadbutton p #downloadbutton-text{display:block;font-size:1.75em;color:#ffffff;margin:0 0 .5em 0;}
+			#focusarea #downloadbutton p #downloadbutton-details{display:block;font-size:.85em;color:#ffffff;font-weight:bold;}
 		
 			
 #contentarea{
@@ -239,7 +248,7 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 	width:55em;
 	padding:1.5em 1em 1em 1em;
 	line-height:1.6em;
-	display:inline
+	display:inline;
 }
 
 
@@ -258,7 +267,7 @@ color:#000000;
 font-size:2.5em;
 background: url(/images/divider-blue-bg.gif) bottom left repeat-x;
 padding:0 0 .15em 0;
-margin:0 0 .5em 0
+margin:0 0 .5em 0;
 }
 		
 #content .cms-module-news{}
@@ -267,7 +276,7 @@ font-weight:bold;
 }
 #content .cms-module-news .cms-news-date{
 font-size:.75em;
-color:#737373
+color:#737373;
 }
 
 
@@ -286,9 +295,8 @@ border-right:1px solid #88b3de;
 /*float:right;*/
 width:auto;
 line-height:1.7em;
-font-size:1em;
 color:#666666;
-font-size:.8em;
+font-size:0.8em;
 position:relative;
 margin:0;
 padding-bottom:5px;
