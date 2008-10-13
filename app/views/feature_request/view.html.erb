@@ -80,12 +80,14 @@ Posted By: <%= comment.user.name_and_link %>
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
     <div class="entry">
-      <span class="label">Add Comment:</span>
-      <span class="value">
+	     <div class="label">Add Comment:</div>
+      <div class="value">
         <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
+		<div class="bt-forms">
         <%= submit_tag 'Add Comment' -%>
+		 </div><!--bt-forms-->
         <%= hidden_field_tag 'feature_request_id', @feature_request.id -%>
-      </span>
+      </div>
     </div>
   <% end -%>
 <% end -%>
