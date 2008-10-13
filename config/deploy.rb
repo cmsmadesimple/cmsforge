@@ -38,7 +38,8 @@ namespace :deploy do
       mkdir -p -m 775 #{releases_path} #{shared_path}/system &&
       mkdir -p -m 777 #{shared_path}/log &&
       cp #{releases_path}/../database.yml #{release_path}/config/database.yml &&
-      cp #{releases_path}/../amazon_s3.yml #{release_path}/config/amazon_s3.yml
+      cp #{releases_path}/../amazon_s3.yml #{release_path}/config/amazon_s3.yml &&
+      cp #{releases_path}/../hoptoad.rb #{release_path}/config/initializers/hoptoad.rb
     CMD
   end
 
