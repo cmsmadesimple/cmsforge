@@ -29,9 +29,10 @@
 		<li> Posting 2 </li>
 	</ul>
 </div>
+<div id="wrap-column">
+<div id="column-cap-top"><span>&nbsp;</span></div>
 <div id="column">
-	<div id="column-cap-top"><span>&nbsp;</span></div>
-	<div class="block">
+<div class="block">
 		<h2>CMSMS Forge Statistics</h2>
 		<ul>
 			<li><span class="label">Hosted Projects:</span><span class="val"><%= number_with_delimiter(Project.count_in_state(:accepted)) -%></span></li>
@@ -82,4 +83,5 @@
 		</div>
 	</div>
 </div>
+</div><!--wrap-column-->
 <!-- end home -->
