@@ -166,8 +166,17 @@ body{background: #2e71b8 url(/images/bg.jpg) top left repeat-x;font-size: 75.01%
 		p#languageselect img{margin:0 0 0 .5em;vertical-align:middle}
 	div#search_wrap{position:absolute;top:22px;width:50%;left:50%;}
 	p#search{float:right;margin:1.5em 0 0 0;clear:both}
-		#search input{vertical-align:middle;}
+		#search input{
+		vertical-align:middle;
+		padding:0;
+		}
 		#search #cntnt01searchinput{border:1px solid #abadb3;width:12em;margin:0 .5em 0 0;background:#ffffff;height:1.2em;}
+		
+#search .bt-search{
+border:none ;
+padding:0;
+background:transparent;
+}
 			
 	#wrapper-contentarea{background:#ffffff;padding:1em}
 	
@@ -215,19 +224,78 @@ body{background: #2e71b8 url(/images/bg.jpg) top left repeat-x;font-size: 75.01%
 			#focusarea #downloadbutton p #downloadbutton-details{display:block;font-size:.85em;color:#ffffff;font-weight:bold}
 		
 			
-#contentarea{clear:both;background: url(/images/contentarea-homepage-bg.gif) repeat-y;border-right:1px solid #88b3de;background-position:60% 100%;}
+#contentarea{
+clear:both;
+/*background:#F1F7FB;*/
+/*background: url(/images/contentarea-homepage-bg.gif) repeat-y;
+border-right:1px solid #88b3de;
+background-position:60% 100%;*/
+}
 html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack to prevent resize bug */
 
-#content{float:left;width:58%;padding:1.5em 0 1em 1%;line-height:1.6em;display:inline}
-#content h2{color:#000000;font-size:2.5em;background: url(/images/divider-blue-bg.gif) bottom left repeat-x;padding:0 0 .15em 0;margin:0 0 .5em 0}
+#content{
+	background:#fff;
+	float:left;
+	width:56em;
+	padding:1.5em 0 1em 1em;
+	line-height:1.6em;
+	display:inline
+}
 
+
+.content{
+	background:#fff;
+	width:auto;
+	padding:1.5em 0 1em 1em;
+	line-height:1.6em;
 	
+}
+
+
+
+#content h2, .content h2{
+color:#000000;
+font-size:2.5em;
+background: url(/images/divider-blue-bg.gif) bottom left repeat-x;
+padding:0 0 .15em 0;
+margin:0 0 .5em 0
+}
 		
-		#content .cms-module-news{}
-			#content .cms-module-news .cms-news-title{font-weight:bold;}
-			#content .cms-module-news .cms-news-date{font-size:.75em;color:#737373}
-	
-	#column{float:right;width:40%;line-height:1.7em;font-size:1em;color:#666666;font-size:.8em;position:relative;margin:0 -1px 0 0;padding-left:1px;}
+#content .cms-module-news{}
+#content .cms-module-news .cms-news-title{
+font-weight:bold;
+}
+#content .cms-module-news .cms-news-date{
+font-size:.75em;
+color:#737373
+}
+
+
+#wrap-column{
+/*background:red;*/
+float:right;
+width:21em;
+position:relative;
+margin:0 ;
+padding:0;
+}
+#column{
+background:  url(/images/contentarea-homepage-bg.gif) repeat-y;
+background-position:-1201px 100%;
+border-right:1px solid #88b3de;
+/*float:right;*/
+width:auto;
+line-height:1.7em;
+font-size:1em;
+color:#666666;
+font-size:.8em;
+position:relative;
+margin:0;
+padding-bottom:5px;
+min-height:400px;
+height:auto !important;
+height:400px;
+}
 				
 		#featuresarea{position:relative;z-index:100;margin:-4.25em 0 0em 0}
 			#featuresarea ul#featuresarea-tabs{}
@@ -241,11 +309,23 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 				.featuresarea-content p.features-more{position:absolute;right:1em;bottom:1em;margin:0}
 				*html p.features-more { display:none; }
 		
-		#column .block{padding:0 2em;margin:0 0 3em 0}
-			#column .block a{}
-			#column .block h2{color:#30529c;font-size:2em;background: url(/images/divider-blue-bg.gif) bottom left repeat-x;padding:0 0 .2em 0;margin:0 0 .5em 0}
+#column .block{
+padding:0 2em;
+margin:0 0 3em 0
+}
+#column .block a{}
+#column .block h2{
+	color:#30529c;
+	font-size:1.4em;
+	background: url(/images/divider-blue-bg.gif) bottom left repeat-x;
+	padding:1em 0 .2em 0;
+	margin:0 0 .5em 0;
+	font-weight: bold;
+	
+}
 				#column .block h2 .more{float:right;font-size:.5em;color:#000000;}
 					#column .block h2 .more a{color:#000000;font-weight:bold;}
+					#column .block ul {margin:0 0 2em 0;}
 			#column .block ul li{margin:0 0 1em 0;}
 		
 		#column .block blockquote{background: url(/images/quote-top.gif) top left no-repeat;padding:1em 0 0 0}
@@ -308,16 +388,17 @@ clear: both;
 .block ul li span.label {
 display: block;
 float: left;
-width: 40%;
+width: 35%;
 text-align: right;
 }
 
 .block ul li span.val {
-font-weight: bold;
-float: right;
-display: block;
-text-align: left;
-width: 55%
+	font-weight: bold;
+	float: right;
+	display: block;
+	text-align: left;
+	width: 60%;
+	
 }
 
 .block ul li span.vallight {
@@ -362,23 +443,81 @@ border-collapse: collapse;
 }
 #project_nav li {
 }
-input {
+input, textarea, select {
 	color: #000;
-	border: 1px solid #2E71B8;
-	background-color: #CFF6FF;
+	background: #FFFFFF;
+	border-top: 1px solid #666666;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-left: 1px solid #666666;
+	padding:2px;
 }
-#content h2 {
+.bt-forms input {
+	margin-top:10px;
+	color: #333333;
+	background:  url(/images/column-cap.gif) no-repeat -10px -19px;
+	padding:10px;
+	border-top: 1px solid #EAEFF4;
+	border-right: 1px solid #C5D3E2;
+	border-bottom: 1px solid #C5D3E2;
+	border-left: 1px solid #C5D3E2;
+	cursor:pointer;
+	font-size: 0.8px;
+	font-weight: bold;
+}
+
+.entry{
+margin:10px;
+
+}
+
+.small_nav{
+margin: 10px 10px 20px 10px;
+
+}
+.label{
+
+}
+#flash{
+width:auto;
+background:#fff;
+padding:1em;
+margin:0;
+height:1%;
+}
+
+#notice, .errorExplanation {
+	width:auto;
+	background:#FFF1C1;
+	padding:1em;
+	height:1%;
+	border: 1px solid #E1AE00;
+	font-weight: bold;
+}
+
+.errorExplanation p{
+	/*font-weight: bold;*/
+
+}
+.errorExplanation ul li{
+
+}
+
+
+
+
+#content h2, .content h2 {
 font-weight: bold;
 font-size: 18px;
 margin: 10px 0 10px 0;
 }
 
-#content h3 {
+#content h3, .content h3 {
 font-weight: bold;
 font-size: 16px;
 margin: 7px 0 7px 0;
 }
-#content h4 {
+#content h4, .content h4{
 font-weight: bold;
 font-size: 12px;
 margin: 7px 0 7px 0;
