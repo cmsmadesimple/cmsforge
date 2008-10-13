@@ -236,8 +236,8 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 #content{
 	background:#fff;
 	float:left;
-	width:56em;
-	padding:1.5em 0 1em 1em;
+	width:55em;
+	padding:1.5em 1em 1em 1em;
 	line-height:1.6em;
 	display:inline
 }
@@ -246,7 +246,7 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 .content{
 	background:#fff;
 	width:auto;
-	padding:1.5em 0 1em 1em;
+	padding:1.5em 1em 1em 1em;
 	line-height:1.6em;
 	
 }
@@ -409,11 +409,11 @@ width: 65%
 }
 
 
-.block table {
+table  {
 width: 100%;
 }
 
-.block table td {
+table td {
 padding: 5px;
 text-align: left;
 }
