@@ -523,16 +523,14 @@ padding:1em;
 	border: 1px solid #E1AE00;
 	font-weight: bold;
 }
-
 #warning {
-	width:auto;
-	background:#FF5C5C;
-	padding:1em;
-	height:1%;
-	border: 1px solid #E00000;
-	font-weight: bold;
+width:auto;
+background:#FF5C5C;
+padding:1em;
+height:1%;
+border: 1px solid #E00000;
+font-weight: bold;
 }
-
 .errorExplanation p{
 	/*font-weight: bold;*/
 
@@ -584,82 +582,74 @@ border: 1px dashed #CFF6FF;
 .size4 { font-size: 1.6em; }
 
 
-
 /*########## TABLES ################*/
-div.content  table  {
+#data table  {
 	width:100%;
 	text-align: center;
 	border-collapse:collapse;
-	font-family: Arial, Helvetica, sans-serif;	
-	font-size: 0.8em;
+	font: 0.8em Arial, Helvetica, sans-serif;
 	}
-
-
-/*#column-cap-top{background: url(images/column-cap.gif) top left no-repeat;height: 1%;padding:0 0 0 1em}
-			#column-cap-top span{display:block;background: url(images/column-cap.gif) top right no-repeat;padding:2.25em 0 0 0}*/
-
-
-
-
 	
-div.content table thead th{
-	height: 1%;
-	padding:0 0 0 0.5em;
+.content #data table thead th{
 	color: #1B2734;
-	background:   url(../images/column-cap2.gif) no-repeat left top;
-	margin:0 0px 0 0;
+	background:  url(/images/bg.jpg) repeat-x 0px 0px;
 	font-weight: bold;
-	
+	padding: 10px 5px;
+	border: 1px solid #AFC1D8;
 }
-
-div.content table thead th span{
-	display:block;
-	padding:1em 0 0 0;
-	color: #1B2734;
-	background:   url(../images/column-cap2.gif) no-repeat right top;
-	margin:0 -1px 0 0;
-}
-
-div.content table thead th span.lastCol{
-	display:block;
-	color: #1B2734;
-	padding:1em 0 0 1em;
-	background:   url(../images/column-cap2.gif) no-repeat right top;	
-}
-
-
-
-
-div.content table thead tr {
+#data  table thead tr {
 	/*TODO*/
 }
 
-div.content table thead td, 
-/*div.content table thead th, */
-div.content table td,
-div.content table tbody td
+#data  table thead td, 
+/*#data  table thead th, */
+#data  table td,
+#data  table tbody td
  {
-	padding: 4px;
-	border: 1px solid #CCD8E6;
+	padding: 5px 2px;
+	border: 1px solid #AFC1D8;
  }
-div.content table tbody {
+#data  table tbody {
 	background-color: #fff;
 }
-div.content table tbody tr:hover {
+/*div#data  table tbody tr:hover {
 	background: #F7F9FB;
-}
+}*/
+
+
+
+
 
 /*########## traker ################*/
 
 .Open{
-	
-	
+	background: #FFFFFF;
+}
+.Open:hover{
+	background: #E6EDF7;
 }
 
 .Major{
-
+	background: #FEDBBC;
 }
-
+.Major:hover{
+	background: #FDC693;
+}
 .Minor{
-	
+	background: #FCFEBC;
+}
+.Minor:hover{
+	background: #FBFD93;
+}
+.Critical{
+	background: #FEBFBC;
+}
+.Critical:hover{
+	background: #FD928C;
+}
+.Trivial{
+	background: #F5FFE8;
+}
+.Trivial:hover{
+	background: #EAFFCC;
 }

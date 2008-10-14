@@ -1,6 +1,7 @@
 <% paginated_section(@bugs, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
 
 	<table class="data_table">
+		<thead>
 		<tr>
 			<th><span>&nbsp;</span><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
 			<th><span>&nbsp;</span>Summary</th>
