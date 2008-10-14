@@ -40,7 +40,7 @@
     No Comments
   <% else -%>
     <% @project.comments.each do |comment| -%>
-	<div style="float: left;">
+	<div class="gravatar_user">
 		<%= gravatar_for comment.user -%>
 	</div>
       <div class="entry">
@@ -56,7 +56,7 @@
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
     <div class="entry">
-      <div class="label"><strong>Add Comment:</strong></div>
+      <div class="label strong">Add Comment:</div>
       <div class="value">
         <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
 		<div class="bt-forms">
