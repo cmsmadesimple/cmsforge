@@ -141,7 +141,7 @@ for fourth level
 
 /* Start of CMSMS style sheet 'Global - Layout' */
 /* Reset Styles */
-* {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;background: transparent;}
+* {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-family: inherit;vertical-align: baseline;background: transparent;}
 :focus {outline: 0;}
 body {line-height:1;color:#000000;background:#ffffff;}
 ol, ul {list-style: none}
@@ -159,7 +159,12 @@ body{background: #2e71b8 url(/images/bg.jpg) top left repeat-x;font-size: 75.01%
 .clear {display: inline-block;} /* Hides from IE-mac \*/ 
 * html .clear {height: 1%;} 
 .clear {display: block;} /* End hide from IE-mac */ 
-#wrapper{width:80em;margin:0 auto;position:relative;}
+
+#wrapper{
+width:960px;
+margin:0 auto;
+position:relative;
+}
 	
 	h1#cmsmslogo a{font-size:2em;display:block;background: url(/images/cmsmslogo.gif) top left no-repeat;width:174px;height:78px;text-indent:-1000em;text-decoration:none}
 	p#languageselect{float:right;margin:1em 0 0 0;font-size:.85em;}
@@ -178,7 +183,9 @@ padding:0;
 background:transparent;
 }
 			
-	#wrapper-contentarea{background:#ffffff;padding:1em}
+	#wrapper-contentarea{
+	background:#ffffff;
+	padding:1em;}
 	
 		#nav-header{background: #2e72b8 url(/images/nav-bg.gif) left repeat-x;position:relative;clear:both}
 			#nav-header ul{padding:0;margin:0;list-style:none;list-style-image:none;line-height:1;}
@@ -233,19 +240,24 @@ background:transparent;
 			#focusarea #downloadbutton p #downloadbutton-details{display:block;font-size:.85em;color:#ffffff;font-weight:bold;}
 		
 			
-#contentarea{
+div#contentarea{
 clear:both;
-/*background:#F1F7FB;*/
-/*background: url(/images/contentarea-homepage-bg.gif) repeat-y;
+background-color:#FFFFFF;
+background-image: url(/images/contentarea-homepage-bg.gif) ;
+background-repeat:repeat-y;
 border-right:1px solid #88b3de;
-background-position:60% 100%;*/
+background-position:-566px 100%;
+margin:0;
+padding:0;
+
+
 }
 html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack to prevent resize bug */
 
 #content{
-	background:#fff;
+	/*background-color:red;*/
 	float:left;
-	width:55em;
+	width:600px;
 	padding:1.5em 1em 1em 1em;
 	line-height:1.6em;
 	display:inline;
@@ -266,8 +278,8 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 color:#000000;
 font-size:2.5em;
 background: url(/images/divider-blue-bg.gif) bottom left repeat-x;
-padding:0 0 .15em 0;
-margin:0 0 .5em 0;
+padding:0 0 1em 0;
+margin:0 0 1em 0;
 }
 		
 #content .cms-module-news{}
@@ -281,24 +293,25 @@ color:#737373;
 
 
 #wrap-column{
-/*background:red;*/
+/*line-height:-1.7em;*/
+background:transparent;
 float:right;
-width:21em;
+width:300px;
 position:relative;
-margin:0 ;
-padding:0;
+padding:0px;
 }
 #column{
-background:  url(/images/contentarea-homepage-bg.gif) repeat-y;
+background:transparent;
+/*background:  url(/images/contentarea-homepage-bg.gif) repeat-y;
 background-position:-1201px 100%;
-border-right:1px solid #88b3de;
+border-right:1px solid #88b3de;*/
 /*float:right;*/
 width:auto;
 line-height:1.7em;
 color:#666666;
 font-size:0.8em;
 position:relative;
-margin:0;
+margin:-2.3em -1px 0 0;
 padding-bottom:5px;
 min-height:400px;
 height:auto !important;
@@ -326,10 +339,10 @@ margin:0 0 3em 0
 	color:#30529c;
 	font-size:1.4em;
 	background: url(/images/divider-blue-bg.gif) bottom left repeat-x;
-	padding:1em 0 .2em 0;
-	margin:0 0 .5em 0;
+	padding:1em 0 0.2em 0;
+	margin:0 0 0.5em 0;
 	font-weight: bold;
-	
+	line-height: 1.6em;	
 }
 				#column .block h2 .more{float:right;font-size:.5em;color:#000000;}
 					#column .block h2 .more a{color:#000000;font-weight:bold;}
@@ -487,11 +500,10 @@ margin: 10px 10px 20px 10px;
 
 }
 #flash{
-width:auto;
+width:98%;
 background:#fff;
 padding:1em;
-margin:0;
-height:1%;
+
 }
 
 #notice, .errorExplanation {
