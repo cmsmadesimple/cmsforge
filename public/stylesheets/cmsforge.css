@@ -463,7 +463,17 @@ border-collapse: collapse;
 }
 #project_nav li {
 }
-input, textarea, select {
+input, textarea {
+	color: #000;
+	background: #FFFFFF;
+	border-top: 1px solid #666666;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-left: 1px solid #666666;
+	padding:5px;
+	font: bold 0.8em Arial, Helvetica, sans-serif;
+}
+select, menu {
 	color: #000;
 	background: #FFFFFF;
 	border-top: 1px solid #666666;
@@ -471,12 +481,13 @@ input, textarea, select {
 	border-bottom: 1px solid #CCCCCC;
 	border-left: 1px solid #666666;
 	padding:2px;
+	font: bold 0.8em Arial, Helvetica, sans-serif;
 }
 .bt-forms input {
 	margin-top:10px;
 	color: #333333;
 	background:  url(/images/column-cap.gif) no-repeat -10px -50px;
-	padding:10px;
+	
 	border-top: 1px solid #EAEFF4;
 	border-right: 1px solid #C5D3E2;
 	border-bottom: 1px solid #C5D3E2;
@@ -549,7 +560,9 @@ border: 1px dashed #CFF6FF;
 background-color: #F8F8FF;
 border: 1px dashed #CFF6FF;
 }
-
+.strong{
+		font-weight: bold;
+}
 .size1 { font-size: 1.0em; }
 .size2 { font-size: 1.2em; }
 .size3 { font-size: 1.4em; }

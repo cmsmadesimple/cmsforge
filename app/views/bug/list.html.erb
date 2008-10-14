@@ -7,7 +7,12 @@
 
 <div class="filter">
   <p>Show Closed: <%= check_box_tag('show_closed', '1', @show_closed == '1', {:onchange => remote_function(:url => { :id => @project.id }, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner')", :with => "'show_closed='+this.checked+'&amp;page=" + params[:page].to_s + "'")}) -%></p>
-  <p><% form_tag({:action => 'view'}, {:method => 'get'}) do -%>Jump to Bug # <%= text_field_tag 'id', '', :size => 4 -%> <%= submit_tag 'Submit' -%><% end -%></p>
+  <% form_tag({:action => 'view'}, {:method => 'get'}) do -%>
+  <div class="entry">
+  <span class="label">  Jump to Bug # </span><%= text_field_tag 'id', '', :size => 4 -%> 
+  <span class="bt-forms">
+  <%= submit_tag 'Submit' -%><% end -%>
+  </span><!--bt-forms-->
 </div>
 
 <div id="data">

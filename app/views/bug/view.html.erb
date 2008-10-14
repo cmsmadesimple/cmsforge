@@ -1,3 +1,4 @@
+<div class="content">
 <% @curloc = 'bug' -%>
 
 <div class="small_nav">
@@ -41,17 +42,17 @@
   </div>
 
   <div class="entry">
-    <span class="label">Severity:</span>
-    <span class="value">
+    <div class="label">Severity:</div>
+    <div class="value">
       <%= select 'bug', 'severity_id', BugSeverity.all.collect { |c| [c.name, c.id] } -%>
-    </span>
+    </div>
   </div>
 
   <div class="entry">
-    <span class="label">Resolution:</span>
-    <span class="value">
+    <div class="label">Resolution:</div>
+    <div class="value">
       <%= select 'bug', 'resolution_id', BugResolution.all.collect { |c| [c.name, c.id] } -%>
-    </span>
+    </div>
   </div>
   
   <div class="entry">
@@ -73,13 +74,15 @@
   </div>
 
   <div class="entry">
-    <div class="label">Detailed Description:</div>
+    <div class="label strong">Detailed Description:</div>
     <div class="entry"><pre><%= word_wrap(@bug.description, 80) %></pre></div>
   </div>
 
   <%= hidden_field 'bug', 'id' -%>
   <% if current_user != :false -%>
+  <div class="bt-forms">
     <%= submit_tag 'Update Details' -%>
+	</div><!--bt-forms-->
   <% end -%>
 
 <% end -%>
@@ -87,7 +90,7 @@
 <h3>History</h3>
 
 <div class="commentsbox">
-  <div class="header">Comments</div>
+  <div class="header strong">Comments</div>
   <% @bug.comments.each do |comment| -%>
     <div class="entry">
       <pre>
@@ -103,12 +106,16 @@ Posted By: <%= comment.user.name_and_link %>
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
     <div class="entry">
-      <span class="label">Add Comment:</span>
-      <span class="value">
+      <div class="label strong"><strong>Add Comment:</strong></div>
+      <div class="value">
         <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
-        <%= submit_tag 'Add Comment' -%>
+       
+      </div>
+	  <div class="bt-forms">
+		<%= submit_tag 'Add Comment' -%>
+		</div><!--bt-forms-->
         <%= hidden_field_tag 'bug_id', @bug.id -%>
-      </span>
     </div>
   <% end -%>
 <% end -%>
+</div><!--content-->

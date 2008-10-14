@@ -56,7 +56,7 @@
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
     <div class="entry">
-      <div class="label">Add Comment:</div>
+      <div class="label"><strong>Add Comment:</strong></div>
       <div class="value">
         <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
 		<div class="bt-forms">
