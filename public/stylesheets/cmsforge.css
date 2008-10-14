@@ -173,7 +173,7 @@ position:relative;
 	p#search{float:right;margin:1.5em 0 0 0;clear:both}
 		#search input{
 		vertical-align:middle;
-		padding:0;
+		padding:2px;
 		}
 		#search #cntnt01searchinput{border:1px solid #abadb3;width:12em;margin:0 .5em 0 0;background:#ffffff;height:1.2em;}
 		
@@ -532,7 +532,13 @@ padding:1em;
 
 }
 
-
+.gravatar_user{
+	float:left;
+	border:1px solid #333;
+	padding:5px;
+	background: #FFFFFF;
+	margin:5px 10px 5px 0px;
+}
 
 
 #content h2, .content h2 {

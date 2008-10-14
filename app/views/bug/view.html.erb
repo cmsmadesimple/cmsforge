@@ -92,7 +92,7 @@
 <div class="commentsbox">
   <div class="header strong">Comments</div>
   <% @bug.comments.each do |comment| -%>
-	<div style="float: left;">
+	<div class="gravatar_user">
 		<%= gravatar_for comment.user -%>
 	</div>
     <div class="entry">

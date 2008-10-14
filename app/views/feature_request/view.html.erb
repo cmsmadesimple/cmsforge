@@ -1,3 +1,4 @@
+<div class="content">
 <% @curloc = 'feature_request' -%>
 
 <div class="small_nav">
@@ -56,7 +57,9 @@
 
   <%= hidden_field 'feature_request', 'id' -%>
   <% if current_user != :false -%>
+  <div class="bt-forms">
     <%= submit_tag 'Update Details' -%>
+	</div><!--bt-forms-->
   <% end -%>
 
 <% end -%>
@@ -66,7 +69,7 @@
 <div class="commentsbox">
   <div class="header">Comments</div>
   <% @feature_request.comments.each do |comment| -%>
-	<div style="float: left;">
+	<div class="gravatar_user">
 		<%= gravatar_for comment.user -%>
 	</div>
     <div class="entry">
@@ -94,3 +97,4 @@ Posted By: <%= comment.user.name_and_link %>
     </div>
   <% end -%>
 <% end -%>
+</div><!--content-->
