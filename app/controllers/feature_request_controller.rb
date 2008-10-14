@@ -3,9 +3,12 @@ class FeatureRequestController < ApplicationController
   before_filter :login_required, :only => [ :add_comment, :add, :update ]
   
   def list
-    @show_closed = (params[:show_closed] == 'true')
-    conditions = @show_closed == '1' || @show_closed == 'true' || @show_closed == true ? ['1 = 1'] : ['state = ?', 'Open']
-    @feature_requests = FeatureRequest.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
+    @show_closed = (params[:show_closed] == 'true' || params[:show_closed] == '1')
+    conditions = @show_closed ? ['1 = 1'] : ['state = ?', 'Open']
+    @so = 'id ASC'
+    @so = params[:sort_by] unless (params[:sort_by].nil?)
+    params[:page] ||= 1
+    @feature_requests = FeatureRequest.paginate_by_project_id(params[:id], :order => @so, :conditions => conditions, :page => params[:page])
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
     respond_to do |format|

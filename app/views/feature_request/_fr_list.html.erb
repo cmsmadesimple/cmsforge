@@ -1,31 +1,35 @@
-<table class="data_table">
+<% paginated_section(@feature_requests, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
 
-  <tr>
-    <th>ID</th>
-    <th>Summary</th>
-    <th>Open Date</th>
-    <th>Assigned To</th>
-    <th>Submitted By</th>
-  </tr>
+	<table class="data_table">
 
-  <% unless @feature_requests.nil? or @feature_requests.empty? -%>
+		<tr>
+			<th><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th>Summary</th>
+			<th><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th>Assigned To</th>
+			<th>Submitted By</th>
+		</tr>
 
-    <% @feature_requests.each do |feature_request| -%>
+		<% unless @feature_requests.nil? or @feature_requests.empty? -%>
 
-      <tr class="<%= h feature_request.state -%>">
-        <td><%= h feature_request.id -%></td>
-        <td><%= link_to h(feature_request.summary), :controller => :feature_request, :action => :view, :id => feature_request.id -%></td>
-        <td><%= h feature_request.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
-        <td><%= h feature_request.assigned_to_string -%></td>
-        <td><%= h feature_request.created_by_string -%></td>
-      </tr>
+			<% @feature_requests.each do |feature_request| -%>
 
-    <% end -%>
+				<tr class="<%= h feature_request.state -%>">
+				<td><%= h feature_request.id -%></td>
+				<td><%= link_to h(feature_request.summary), :controller => :feature_request, :action => :view, :id => feature_request.id -%></td>
+				<td><%= h feature_request.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
+				<td><%= h feature_request.assigned_to_string -%></td>
+				<td><%= h feature_request.created_by_string -%></td>
+				</tr>
 
-  <% else -%>
+			<% end -%>
 
-    <tr><td colspan="5">No Feature Requests Found!</td></tr>
+		<% else -%>
 
-  <% end -%>
+			<tr><td colspan="5">No Feature Requests Found!</td></tr>
 
-</table>
+		<% end -%>
+
+	</table>
+
+<% end -%>

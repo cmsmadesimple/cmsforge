@@ -13,6 +13,10 @@ class TrackerItem < ActiveRecord::Base
   acts_as_cached
   acts_as_commentable
   
+  def self.per_page
+    25
+  end
+  
   def assigned_to_string
     self.assigned_to_id > 0 ? User.get_cache(self.assigned_to_id).full_name : 'None'
   end

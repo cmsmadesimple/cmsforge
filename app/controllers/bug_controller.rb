@@ -3,12 +3,12 @@ class BugController < ApplicationController
   before_filter :login_required, :only => [ :add_comment, :add, :update ]
   
   def list
-    @show_closed = (params[:show_closed] == 'true')
+    @show_closed = (params[:show_closed] == 'true' || params[:show_closed] == '1')
     conditions = @show_closed ? ['1 = 1'] : ['state = ?', 'Open']
-#    @bugs = Bug.find_all_by_project_id(params[:id], :order => 'id ASC', :conditions => conditions)
     @so = 'id ASC'
     @so = params[:sort_by] unless (params[:sort_by].nil?)
-    @bugs = Bug.find_all_by_project_id(params[:id], :order => @so, :conditions => conditions)
+    params[:page] ||= 1
+    @bugs = Bug.paginate_by_project_id(params[:id], :order => @so, :conditions => conditions, :page => params[:page])
     @project = Project.find_by_id(params[:id])
     @project_id = params[:id]
     respond_to do |format|

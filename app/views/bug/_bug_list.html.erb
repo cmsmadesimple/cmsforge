@@ -1,26 +1,32 @@
-<table class="data_table">
-  <tr>
-    <th><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC') -%></th>
-    <th>Summary</th>
-    <th><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC') -%></th>
-    <th><%= link_to 'Severity', :sort_by=>(params[:sort_by]=='severity_id ASC'?'severity_id DESC':'severity_id ASC') -%></th>
-    <th>Version</th>
-    <th>Assigned To</th>
-    <th>Submitted By</th>
-  </tr>
-  <% unless @bugs.nil? or @bugs.empty? -%>
-    <% @bugs.each do |bug| -%>
-      <tr class="<%= h bug.state -%><% unless (bug.severity.nil?) -%> <%= h BugSeverity.find(bug.severity).name -%><% end -%>">
-        <td><%= h bug.id -%></td>
-        <td><%= link_to h(bug.summary), :controller => :bug, :action => :view, :id => bug.id -%></td>
-        <td><%= h bug.created_at.getgm.strftime('%Y-%m-%d') -%></td>
-        <td><% unless (bug.severity.nil?) -%><%= h BugSeverity.find(bug.severity).name -%><% end -%></td>
-		<td><% unless (bug.version.nil?) -%><%= h BugVersion.find(bug.version).name -%><% end -%></td>
-        <td><%= h bug.assigned_to_string -%></td>
-        <td><%= h bug.created_by_string -%></td>
-      </tr>
-    <% end -%>
-  <% else -%>
-    <tr><td colspan="5">No bugs reported for this most excellent code!</td></tr>
-  <% end -%>
-</table>
+<% paginated_section(@bugs, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
+
+	<table class="data_table">
+		<tr>
+			<th><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th>Summary</th>
+			<th><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th><%= link_to 'Severity', :sort_by=>(params[:sort_by]=='severity_id ASC'?'severity_id DESC':'severity_id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th>Version</th>
+			<th>Assigned To</th>
+			<th>Submitted By</th>
+		</tr>
+		<% unless @bugs.nil? or @bugs.empty? -%>
+			<% @bugs.each do |bug| -%>
+				<tr class="<%= h bug.state -%><% unless (bug.severity.nil?) -%> <%= h BugSeverity.find(bug.severity).name -%><% end -%>">
+					<td><%= h bug.id -%></td>
+					<td><%= link_to h(bug.summary), :controller => :bug, :action => :view, :id => bug.id -%></td>
+					<td><%= h bug.created_at.getgm.strftime('%Y-%m-%d') -%></td>
+					<td><% unless (bug.severity.nil?) -%><%= h BugSeverity.find(bug.severity).name -%><% end -%></td>
+					<td><% unless (bug.version.nil?) -%><%= h BugVersion.find(bug.version).name -%><% end -%></td>
+					<td><%= h bug.assigned_to_string -%></td>
+					<td><%= h bug.created_by_string -%></td>
+				</tr>
+			<% end -%>
+		<% else -%>
+			<tr>
+				<td colspan="5">No bugs reported for this most excellent code!</td>
+			</tr>
+		<% end -%>
+	</table>
+
+<% end -%>
