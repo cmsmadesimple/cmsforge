@@ -20,7 +20,7 @@
 			$rs->fields['group_id'], 
 			$rs->fields['group_name'], 
 			$rs->fields['unix_group_name'], 
-			$rs->fields['short_description'], 
+			html_entity_decode($rs->fields['short_description']), 
 			$rs->fields['register_purpose'], 
 			($rs->fields['status'] == 'A' ? 'approved' : 'rejected'), 
 			'', 
@@ -86,7 +86,7 @@
 		$mysql->Execute($query, array(
 			$rs->fields['package_id'],
 			$rs->fields['group_id'],
-			$rs->fields['name'],
+			html_entity_decode($rs->fields['name']),
 			$rs->fields['is_public'],
 			$rs->fields['status_id']
 		));
@@ -106,9 +106,9 @@
 		$mysql->Execute($query, array(
 			$rs->fields['release_id'],
 			$rs->fields['package_id'],
-			$rs->fields['name'],
-			$rs->fields['notes'],
-			$rs->fields['changes'],
+			html_entity_decode($rs->fields['name']),
+			html_entity_decode($rs->fields['notes']),
+			html_entity_decode($rs->fields['changes']),
 			$rs->fields['released_by'],
 			($rs->fields['status_id'] == '3' ? 0 : 1)
 		));
@@ -155,8 +155,8 @@
 			-1,
 			$rs->fields['submitted_by'],
 			$rs->fields['status_name'],
-			$rs->fields['summary'],
-			$rs->fields['details'],
+			html_entity_decode($rs->fields['summary']),
+			html_entity_decode($rs->fields['details']),
 			$type
 		));
 		$rs->MoveNext();
@@ -211,9 +211,9 @@
 		$query = "INSERT INTO comments (title, comment, commentable_id, commentable_type, user_id, created_at) VALUES (?, ?, ?, ?, ?, ".$mysql->DBTimeStamp($created).")";
 		$mysql->Execute($query, array(
 			'',
-			$rs->fields['body'],
+			html_entity_decode($rs->fields['body']),
 			$rs->fields['artifact_id'],
-			'Bug',
+			'TrackerItem',
 			$rs->fields['submitted_by']
 		));
 		$rs->MoveNext();

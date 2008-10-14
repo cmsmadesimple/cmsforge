@@ -7,11 +7,15 @@
 
 <%= error_messages_for 'feature_request' -%>
 
-<h3>[#<%= h @feature_request.id -%>] <%= h @feature_request.summary -%></h3>
+<h3>[#<%= @feature_request.id -%>] <%= @feature_request.summary -%></h3>
 
 <h4>Feature Request Details</h4>
 
 <% form_tag :action => 'update' do -%>
+
+<div class="gravatar_user">
+	<%= gravatar_for @feature_request.created_by -%>
+</div>
 
   <div class="entry">
     <span class="label">Created By:</span>
@@ -20,13 +24,15 @@
 
   <div class="entry">
     <span class="label">Date Submitted:</span>
-    <span class="value"><%= h @feature_request.created_at -%></span>
+    <span class="value"><%= h @feature_request.created_at.strftime('%Y-%m-%d %H:%M') -%></span>
   </div>
+
+<br clear="both" />
 
   <div class="entry">
     <span class="label">Assigned To:</span>
     <span class="value">
-      <%= current_user != :false and current_user.member_of?(@feature_request.project) ? 
+      <%= (current_user != :false and current_user.member_of?(@feature_request.project)) ? 
         select('feature_request', 'assigned_to_id', [['None' , '100']] + @feature_request.project.users.collect{ |a| ["#{a.full_name} (#{a.login})", a.id] }) : 
         @feature_request.assigned_to.name_and_link -%>
     </span>
@@ -35,24 +41,24 @@
   <div class="entry">
     <span class="label">State:</span>
     <span class="value">
-      <%= current_user != :false and current_user.member_of?(@feature_request.project) ? 
+      <%= (current_user != :false and current_user.member_of?(@feature_request.project)) ? 
         select('feature_request', 'state', [['Open'], ['Closed']]) : 
-        h(@feature_request.state) -%>
+        @feature_request.state -%>
     </span>
   </div>
 
   <div class="entry">
-    <span class="label">Summary:</span>
-    <span class="value">
-      <%= current_user != :false and current_user.member_of?(@feature_request.project) ?
-        text_field('feature_request', 'summary', :size => '50', :maxlength => '255') :
-        h(@feature_request.summary) -%>
-    </span>
+    <div class="label">Summary:</div>
+    <div class="value">
+      <%= (current_user != :false and current_user.member_of?(@feature_request.project)) ?
+        text_field('feature_request', 'summary', :size => '75', :maxlength => '255') :
+        @feature_request.summary -%>
+    </div>
   </div>
 
   <div class="entry">
     <div class="label">Detailed Description:</div>
-    <div class="entry"><pre><%= h(word_wrap(@feature_request.description, 80)) %></pre></div>
+    <div class="entry"><pre><%= word_wrap(@feature_request.description, 80) %></pre></div>
   </div>
 
   <%= hidden_field 'feature_request', 'id' -%>
@@ -74,10 +80,10 @@
 	</div>
     <div class="entry">
       <pre>
-Date: <%= h comment.created_at %>
+Date: <%= comment.created_at %>
 Posted By: <%= comment.user.name_and_link %>
 
-<%= h(word_wrap(comment.comment)) %>
+<%= word_wrap(comment.comment) %>
       </pre>
     </div>
   <% end -%>

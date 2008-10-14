@@ -32,7 +32,9 @@ class BugController < ApplicationController
     @project = @bug.project
     @bug.update_attributes(params[:bug])
     if @bug.valid?
-      @bug.save
+      if @bug.save
+        flash.now[:notice] = "Bug Succesfully Updated"
+      end
     end
 
     render :action => 'view' 

@@ -67,12 +67,12 @@ class ProjectController < ApplicationController
     if current_user.superuser and @project.pending?
       if params[:status] == 'true'
         @project.accept!
-        flash[:message] = 'Project Approved'
+        flash[:notice] = 'Project Approved'
       else
         @project.reject_reason = params[:reject_reason]
         @project.save
         @project.reject!
-        flash[:message] = 'Project Rejected'
+        flash[:notice] = 'Project Rejected'
       end
     end
     redirect_to current_user.home_url
@@ -106,7 +106,7 @@ class ProjectController < ApplicationController
       @project.tag_list = params[:tag_list]
       if @project.valid?
         @project.save
-        flash[:message] = 'Project Updated'
+        flash[:notice] = 'Project Updated'
       end
     end
   end
@@ -123,7 +123,7 @@ class ProjectController < ApplicationController
 
       assign.role = 'Member'
       assign.save
-      flash[:message] = 'User Demoted to Member'
+      flash[:notice] = 'User Demoted to Member'
 
       redirect_to :action => 'admin', :id => @project.id
     else
@@ -144,7 +144,7 @@ class ProjectController < ApplicationController
 
       assign.role = 'Administrator'
       assign.save
-      flash[:message] = 'User Promoted to Administrator'
+      flash[:notice] = 'User Promoted to Administrator'
 
       redirect_to :action => 'admin', :id => @project.id
     else
@@ -166,7 +166,7 @@ class ProjectController < ApplicationController
       assign.project_id = @project.id
       assign.role = 'Member'
       assign.save
-      flash[:message] = 'User Added to Project'
+      flash[:notice] = 'User Added to Project'
     else
       flash[:notice] = 'User could not be found'
     end
@@ -180,7 +180,7 @@ class ProjectController < ApplicationController
       redirect_to :action => 'view', :id => params[:id] and return
     end
 
-    flash[:message] = 'User Removed from Project'
+    flash[:notice] = 'User Removed from Project'
     redirect_to :action => 'admin', :id => params[:id]
 
   end
@@ -192,7 +192,7 @@ class ProjectController < ApplicationController
       unless package.nil?
         package.update_attributes(params[:package])
         if package.valid? and package.save
-          flash[:message] = 'Package Updated'
+          flash[:notice] = 'Package Updated'
         else
           flash[:warning] = 'There was an error updating the package'
         end

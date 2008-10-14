@@ -524,6 +524,15 @@ padding:1em;
 	font-weight: bold;
 }
 
+#warning {
+	width:auto;
+	background:#FF5C5C;
+	padding:1em;
+	height:1%;
+	border: 1px solid #E00000;
+	font-weight: bold;
+}
+
 .errorExplanation p{
 	/*font-weight: bold;*/
 

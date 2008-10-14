@@ -30,7 +30,7 @@ class AccountController < ApplicationController
       redirect_back_or_default(:controller => '/account', :action => 'view')
       flash[:notice] = "Logged in successfully"
     else
-      flash[:notice] = "Login Incorrect"
+      flash.now[:warning] = "Login Incorrect"
     end
   end
 
@@ -62,7 +62,7 @@ class AccountController < ApplicationController
       flash[:notice] = "Your account has been activated." 
     else
       redirect_back_or_default(:controller => 'home', :action => 'index')
-      flash[:notice] = "It looks like you're trying to activate an account.  Perhaps have already activated this account?" 
+      flash[:warning] = "It looks like you're trying to activate an account.  Perhaps have already activated this account?" 
     end
   end
 
