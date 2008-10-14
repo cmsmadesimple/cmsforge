@@ -92,6 +92,9 @@
 <div class="commentsbox">
   <div class="header strong">Comments</div>
   <% @bug.comments.each do |comment| -%>
+	<div style="float: left;">
+		<%= gravatar_for comment.user -%>
+	</div>
     <div class="entry">
       <pre>
 Date: <%= h comment.created_at %>

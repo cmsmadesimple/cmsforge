@@ -66,6 +66,9 @@
 <div class="commentsbox">
   <div class="header">Comments</div>
   <% @feature_request.comments.each do |comment| -%>
+	<div style="float: left;">
+		<%= gravatar_for comment.user -%>
+	</div>
     <div class="entry">
       <pre>
 Date: <%= h comment.created_at %>
