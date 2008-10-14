@@ -1,15 +1,15 @@
 <% paginated_section(@feature_requests, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
 
 	<table class="data_table">
-
+ <thead>
 		<tr>
-			<th><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
-			<th>Summary</th>
-			<th><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
-			<th>Assigned To</th>
-			<th>Submitted By</th>
+			<th><span>&nbsp;</span><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th><span>&nbsp;</span>Summary</th>
+			<th><span>&nbsp;</span><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th><span>&nbsp;</span>Assigned To</th>
+			<th><span>&nbsp;</span>Submitted By</th>
 		</tr>
-
+ </thead><tbody>
 		<% unless @feature_requests.nil? or @feature_requests.empty? -%>
 
 			<% @feature_requests.each do |feature_request| -%>
@@ -29,7 +29,7 @@
 			<tr><td colspan="5">No Feature Requests Found!</td></tr>
 
 		<% end -%>
-
+ </tbody>
 	</table>
 
 <% end -%>

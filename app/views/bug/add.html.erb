@@ -40,18 +40,17 @@
   </div>
 
   <div class="entry">
-    <div class="label">Detailed Description:</div>
-    <div class="entry">
-      <%= text_area 'bug', 'description', { :cols => 50, :rows => 10 } -%>
-    </div>
-  </div>
+    <div class="label strong">Detailed Description:</div>
+       <%= text_area 'bug', 'description', { :cols => 50, :rows => 10 } -%>
+      </div>
   
   <div class="entry">
-    <div class="label"></div>
-    <div class="entry">
+    <div class="bt-forms">
+    
       <%= hidden_field 'bug', 'project_id' -%>
       <%= submit_tag 'Submit New Bug' -%>
       <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
+	 
     </div>
   </div>
 

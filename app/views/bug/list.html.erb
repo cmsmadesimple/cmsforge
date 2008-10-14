@@ -11,7 +11,7 @@
 <div class="entry">
 <% form_tag({:action => 'view'}, {:method => 'get'}) do -%>
   
-  <span class="label">  Jump to Bug # </span>
+  <span class="label strong">  Jump to Bug # </span>
   <%= text_field_tag 'id', '', :size => 4 -%> 
   <span class="bt-forms">
   <%= submit_tag 'Submit' -%>

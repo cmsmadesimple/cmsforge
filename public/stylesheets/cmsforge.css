@@ -434,7 +434,7 @@ width: 100%;
 }
 
 table td {
-padding: 5px;
+padding: 3px;
 text-align: left;
 }
 
@@ -573,3 +573,84 @@ border: 1px dashed #CFF6FF;
 .size2 { font-size: 1.2em; }
 .size3 { font-size: 1.4em; }
 .size4 { font-size: 1.6em; }
+
+
+
+/*########## TABLES ################*/
+div.content  table  {
+	width:100%;
+	text-align: center;
+	border-collapse:collapse;
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: 0.8em;
+	}
+
+
+/*#column-cap-top{background: url(images/column-cap.gif) top left no-repeat;height: 1%;padding:0 0 0 1em}
+			#column-cap-top span{display:block;background: url(images/column-cap.gif) top right no-repeat;padding:2.25em 0 0 0}*/
+
+
+
+
+	
+div.content table thead th{
+	height: 1%;
+	padding:0 0 0 0.5em;
+	color: #1B2734;
+	background:   url(../images/column-cap2.gif) no-repeat left top;
+	margin:0 0px 0 0;
+	font-weight: bold;
+	
+}
+
+div.content table thead th span{
+	display:block;
+	padding:1em 0 0 0;
+	color: #1B2734;
+	background:   url(../images/column-cap2.gif) no-repeat right top;
+	margin:0 -1px 0 0;
+}
+
+div.content table thead th span.lastCol{
+	display:block;
+	color: #1B2734;
+	padding:1em 0 0 1em;
+	background:   url(../images/column-cap2.gif) no-repeat right top;	
+}
+
+
+
+
+div.content table thead tr {
+	/*TODO*/
+}
+
+div.content table thead td, 
+/*div.content table thead th, */
+div.content table td,
+div.content table tbody td
+ {
+	padding: 4px;
+	border: 1px solid #CCD8E6;
+ }
+div.content table tbody {
+	background-color: #fff;
+}
+div.content table tbody tr:hover {
+	background: #F7F9FB;
+}
+
+/*########## traker ################*/
+
+.Open{
+	
+	
+}
+
+.Major{
+
+}
+
+.Minor{
+	
+}

@@ -1,15 +1,18 @@
 <% paginated_section(@bugs, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
 
 	<table class="data_table">
+	 <thead>
 		<tr>
-			<th><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
-			<th>Summary</th>
-			<th><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
-			<th><%= link_to 'Severity', :sort_by=>(params[:sort_by]=='severity_id ASC'?'severity_id DESC':'severity_id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
-			<th>Version</th>
-			<th>Assigned To</th>
-			<th>Submitted By</th>
+			<th><span>&nbsp;</span><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th><span>&nbsp;</span>Summary</th>
+			<th><span>&nbsp;</span><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th><span>&nbsp;</span><%= link_to 'Severity', :sort_by=>(params[:sort_by]=='severity_id ASC'?'severity_id DESC':'severity_id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
+			<th><span>&nbsp;</span>Version</th>
+			<th><span>&nbsp;</span>Assigned To</th>
+			<th><span class="lastCol">&nbsp;</span>Submitted By</th>
 		</tr>
+		 </thead>
+		  <tbody>
 		<% unless @bugs.nil? or @bugs.empty? -%>
 			<% @bugs.each do |bug| -%>
 				<tr class="<%= h bug.state -%><% unless (bug.severity.nil?) -%> <%= h BugSeverity.find(bug.severity).name -%><% end -%>">
@@ -27,6 +30,7 @@
 				<td colspan="5">No bugs reported for this most excellent code!</td>
 			</tr>
 		<% end -%>
+		 </tbody>
 	</table>
 
 <% end -%>
