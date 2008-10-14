@@ -475,15 +475,14 @@ input, textarea, select {
 .bt-forms input {
 	margin-top:10px;
 	color: #333333;
-	background:  url(/images/column-cap.gif) no-repeat -10px -19px;
+	background:  url(/images/column-cap.gif) no-repeat -10px -50px;
 	padding:10px;
 	border-top: 1px solid #EAEFF4;
 	border-right: 1px solid #C5D3E2;
 	border-bottom: 1px solid #C5D3E2;
 	border-left: 1px solid #C5D3E2;
 	cursor:pointer;
-	font-size: 0.8px;
-	font-weight: bold;
+	font: bold 0.8em Arial, Helvetica, sans-serif;
 }
 
 .entry{
