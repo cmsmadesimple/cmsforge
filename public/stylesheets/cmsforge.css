@@ -144,7 +144,10 @@ for fourth level
 * {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-family: inherit;vertical-align: baseline;background: transparent;}
 :focus {outline: 0;}
 body {line-height:1;color:#000000;background:#ffffff;}
-ol, ul {list-style: none}
+ol, ul {
+	list-style: none;
+	
+}
 table {border-collapse:collapse;border-spacing:0;}
 caption, th, td {text-align:left;font-weight:normal;}
 .hidden {display:none;}
@@ -246,7 +249,7 @@ background-color:#FFFFFF;
 background-image: url(/images/contentarea-homepage-bg.gif) ;
 background-repeat:repeat-y;
 border-right:1px solid #88b3de;
-background-position:-566px 100%;
+background-position:-566px 100px;
 margin:0;
 padding:0;
 
@@ -292,15 +295,16 @@ color:#737373;
 }
 
 
-#wrap-column{
+div#wrap-column{
 /*line-height:-1.7em;*/
 background:transparent;
-float:right;
-width:300px;
+width:302px;
 position:relative;
 padding:0px;
+margin:0 0 0 635px;
+
 }
-#column{
+div#column{
 background:transparent;
 /*background:  url(/images/contentarea-homepage-bg.gif) repeat-y;
 background-position:-1201px 100%;
@@ -311,7 +315,7 @@ line-height:1.7em;
 color:#666666;
 font-size:0.8em;
 position:relative;
-margin:-2.3em -1px 0 0;
+margin:0 0px 0 0;
 padding-bottom:5px;
 min-height:400px;
 height:auto !important;
@@ -331,23 +335,32 @@ height:400px;
 				*html p.features-more { display:none; }
 		
 #column .block{
-padding:0 2em;
-margin:0 0 3em 0
+padding:0 1em;
+margin:0 0 5em 0;
 }
 #column .block a{}
 #column .block h2{
 	color:#30529c;
 	font-size:1.4em;
 	background: url(/images/divider-blue-bg.gif) bottom left repeat-x;
-	padding:1em 0 0.2em 0;
+	padding:1em 0 0.25em 0;
 	margin:0 0 0.5em 0;
 	font-weight: bold;
 	line-height: 1.6em;	
 }
 				#column .block h2 .more{float:right;font-size:.5em;color:#000000;}
 					#column .block h2 .more a{color:#000000;font-weight:bold;}
-					#column .block ul {margin:0 0 2em 0;}
-			#column .block ul li{margin:0 0 1em 0;}
+
+#column .block ul {
+	margin:0 0 2em 0;
+	display:block;
+	
+}
+
+#column .block ul li{
+	margin:0 0 2em 0;
+	display:inline;
+}
 		
 		#column .block blockquote{background: url(/images/quote-top.gif) top left no-repeat;padding:1em 0 0 0}
 			#column .block blockquote p{background: url(/images/quote-bottom.gif) bottom right no-repeat;padding:0 0 1em 0}
@@ -395,16 +408,7 @@ a.tooltip:hover span {
 	top: 10px;
 }
 
-.block ul {
-padding: 0;
-margin: 0;
-}
-.block ul li {
-padding: 0px;
-margin: 0px;
-display: block;
-clear: both;
-}
+
 
 .block ul li span.label {
 display: block;
