@@ -1,9 +1,11 @@
 <div class="content">
 <% @curloc = 'files' -%>
 <% for package in @project.packages -%>
+  <a name="package-<%= package.id -%>"></a>
   <h3><%= h package.name %></h3>
   <% releases = Release.find(:all, :conditions => ['package_id = ?', package.id], :order => 'created_at DESC') -%>
   <% for release in releases %>
+	  <a name="release-<%= release.id -%>"></a>
       <h4><%= h release.name -%></h4>
     <p>
     Released On: <%= h release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%><br />

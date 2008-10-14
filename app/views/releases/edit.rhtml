@@ -34,7 +34,7 @@
 			<div class="label"></div>
 			<div class="entry">
 			 <div class="bt-forms">
-               <%= hidden_field_tag 'release_id', @release.id -%>
+               <%= hidden_field 'release', 'id' -%>
 				<%= submit_tag 'Update Release' -%>
 				<%= submit_tag 'Cancel', { :name => 'cancel' } -%>
 			</div><!--bt-forms-->

@@ -1,5 +1,7 @@
 class ReleasesController < ApplicationController
   
+  before_filter :login_required, :only => [ :index, :new, :create, :edit, :update, :add_file, :delete_file ]
+  
   def index
     @releases = Release.find(:all, :conditions => ['package_id = ?', params[:package_id]], :order => 'id DESC')
     @package = Package.find_by_id(params[:package_id])
@@ -10,34 +12,44 @@ class ReleasesController < ApplicationController
     @release = Release.new
     @release.package_id = params[:package_id]
     @project = @release.package.project
+    if !current_user.member_of?(@release.package.project)
+      redirect_to :action => 'view', :id => @project, :controller => 'project'
+    end
   end
   
   def create 
     @release = Release.new(params[:release]) 
     @release.released_by = current_user.id
     @project = @release.package.project
-    if @release.save 
+    if !current_user.member_of?(@release.package.project)
+      redirect_to :action => 'view', :id => @project, :controller => 'project'
+    end
+    if @release.save
       flash[:notice] = 'Release was successfully created.' 
       redirect_to :action => 'edit', :id => @release.id
-    else 
+    else
       render :action => 'new' 
-    end 
+    end
   end
   
   def edit
     @release = Release.find_by_id(params[:id])
     @project = @release.package.project
+    if !current_user.member_of?(@release.package.project)
+      redirect_to :action => 'view', :id => @project, :controller => 'project'
+    end
   end
   
   def update 
     @release = Release.find(params[:release][:id])
     @project = @release.package.project
-    if @release.update_attributes(params[:release]) 
-      flash[:notice] = 'Release was successfully updated.' 
-      redirect_to :action => 'index', :package_id => @release.package
-    else 
-      render :action => 'edit' 
-    end 
+    if !current_user.member_of?(@release.package.project)
+      redirect_to :action => 'view', :id => @project, :controller => 'project'
+    end
+    if @release.update_attributes(params[:release])
+      flash[:notice] = 'Release was successfully updated.'
+    end
+    render :action => 'edit'
   end
   
   def add_file
@@ -47,7 +59,9 @@ class ReleasesController < ApplicationController
       file.release_id = @release.id
       file.uploaded_data = params[:uploaded_data]
       file.downloads = 0
-      file.save
+      if file.save
+        flash[:notice] = 'File was successfully added.'
+      end
     end
     redirect_to :action => 'edit', :id => @release.id
   end
@@ -56,6 +70,7 @@ class ReleasesController < ApplicationController
     @release_file = ReleasedFile.find(params[:id])
     unless @release_file.nil? or !current_user.member_of?(@release_file.release.package.project)
       ReleasedFile.destroy(@release_file.id)
+      flash[:notice] = 'File was successfully removed.'
     end
     redirect_to :action => 'edit', :id => @release_file.release.id
   end

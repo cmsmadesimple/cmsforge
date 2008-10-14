@@ -18,7 +18,7 @@
       <h3><%= h package.name %></h3>
       <%= h latest.name %><br />
       <%= h latest.created_at.strftime('%x')%>
-	  <%= link_to "Release History", :controller=>"releases", :package_id=> package.id -%>
+	  <%= link_to "Release History", '/project/files/' + @project.id.to_s + '#package-' + package.id.to_s -%>
     <% end %>
   <% end %>
 <% end %>
