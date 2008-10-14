@@ -144,10 +144,7 @@ for fourth level
 * {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-family: inherit;vertical-align: baseline;background: transparent;}
 :focus {outline: 0;}
 body {line-height:1;color:#000000;background:#ffffff;}
-ol, ul {
-	list-style: none;
-	
-}
+ol, ul {list-style: none}
 table {border-collapse:collapse;border-spacing:0;}
 caption, th, td {text-align:left;font-weight:normal;}
 .hidden {display:none;}
@@ -218,17 +215,7 @@ background:transparent;
 						
 		#footer{padding:2em 0 0 0;text-align:center;font-size:.85em;clear:both}
 		
-#column-cap-top{
-	background: url(/images/column-cap.gif) top left no-repeat;
-	height: 1%;
-	padding:0 0 0 1em;
-}
 
-#column-cap-top span{
-			display:block;
-			background: url(/images/column-cap.gif) top right no-repeat;
-			padding:2.25em 0 0 0;
-			}
 /* End of 'Global - Layout' */
 
 /* Start of CMSMS style sheet 'Layout - Home Page' */
@@ -243,17 +230,13 @@ background:transparent;
 			#focusarea #downloadbutton p #downloadbutton-details{display:block;font-size:.85em;color:#ffffff;font-weight:bold;}
 		
 			
-div#contentarea{
-clear:both;
-background-color:#FFFFFF;
-background-image: url(/images/contentarea-homepage-bg.gif) ;
-background-repeat:repeat-y;
-border-right:1px solid #88b3de;
-background-position:-566px 100px;
-margin:0;
-padding:0;
-
-
+#contentarea{
+	clear:both;
+	margin:0;
+	padding:0;
+	background: #FFFFFF url(../images/contentarea-homepage-bg.gif) repeat-y  635px 0px;
+	height: auto;
+	width: auto;
 }
 html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack to prevent resize bug */
 
@@ -295,16 +278,28 @@ color:#737373;
 }
 
 
-div#wrap-column{
+#column-cap-top{
+	background: #fff url(/images/column-cap.gif) no-repeat left -49px;
+	/*height: 50px;*/
+	padding:0.5em 0;
+	width:300px;
+	margin:0 0 0 -1px;
+	height:1%;
+}
+
+#column-cap-top span{
+			display:none;
+						}
+
+#wrap-column{
 /*line-height:-1.7em;*/
-background:transparent;
-width:302px;
+/*background:red;*/
+float:right;
+width:300px;
 position:relative;
 padding:0px;
-margin:0 0 0 635px;
-
 }
-div#column{
+#column{
 background:transparent;
 /*background:  url(/images/contentarea-homepage-bg.gif) repeat-y;
 background-position:-1201px 100%;
@@ -315,7 +310,7 @@ line-height:1.7em;
 color:#666666;
 font-size:0.8em;
 position:relative;
-margin:0 0px 0 0;
+margin:0;
 padding-bottom:5px;
 min-height:400px;
 height:auto !important;
@@ -335,32 +330,23 @@ height:400px;
 				*html p.features-more { display:none; }
 		
 #column .block{
-padding:0 1em;
-margin:0 0 5em 0;
+padding:0 2em;
+margin:0 0 3em 0
 }
 #column .block a{}
 #column .block h2{
 	color:#30529c;
 	font-size:1.4em;
 	background: url(/images/divider-blue-bg.gif) bottom left repeat-x;
-	padding:1em 0 0.25em 0;
+	padding:1em 0 0.2em 0;
 	margin:0 0 0.5em 0;
 	font-weight: bold;
 	line-height: 1.6em;	
 }
 				#column .block h2 .more{float:right;font-size:.5em;color:#000000;}
 					#column .block h2 .more a{color:#000000;font-weight:bold;}
-
-#column .block ul {
-	margin:0 0 2em 0;
-	display:block;
-	
-}
-
-#column .block ul li{
-	margin:0 0 2em 0;
-	display:inline;
-}
+					#column .block ul {margin:0 0 2em 0;}
+			#column .block ul li{margin:0 0 1em 0;}
 		
 		#column .block blockquote{background: url(/images/quote-top.gif) top left no-repeat;padding:1em 0 0 0}
 			#column .block blockquote p{background: url(/images/quote-bottom.gif) bottom right no-repeat;padding:0 0 1em 0}
@@ -408,7 +394,16 @@ a.tooltip:hover span {
 	top: 10px;
 }
 
-
+.block ul {
+padding: 0;
+margin: 0;
+}
+.block ul li {
+padding: 0px;
+margin: 0px;
+display: block;
+clear: both;
+}
 
 .block ul li span.label {
 display: block;
