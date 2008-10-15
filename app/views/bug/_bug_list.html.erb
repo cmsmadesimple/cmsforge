@@ -1,6 +1,6 @@
 <% paginated_section(@bugs, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
 
-	<table class="data_table">
+	<table class="data_table" summary="Bug Tracker">
 		<thead>
 		<tr>
 			<th><%= link_to 'ID', :sort_by=>(params[:sort_by]=='id ASC'?'id DESC':'id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
