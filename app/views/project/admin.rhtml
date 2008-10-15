@@ -1,7 +1,8 @@
+<div class="content">
 <% @curloc = 'admin' -%>
 <%= calendar_date_select_includes nil %>
 
-<h4>Project Admin</h4>
+<h2>Project Admin</h2>
 
 <%= error_messages_for 'project' -%>
 
@@ -11,10 +12,10 @@
   <legend>Public Info</legend>
 
   <div class="entry">
-    <span class="label">Group Name:</span>
-    <span class="value">
+    <div class="label">Group Name:</div>
+    <div class="value">
       <%= text_field 'project', 'name', :maxlenth => 255 -%>
-    </span>
+    </div>
   </div>
   
   <div class="entry">
@@ -32,17 +33,17 @@
   </div>
 
   <div class="entry">
-    <span class="label">Tags (comma separated):</span>
-    <span class="value">
+    <div class="label">Tags (comma separated):</div>
+    <div class="value">
       <%= text_field_tag('tag_list', @project.tags.join(", ")) -%>
-    </span>
+    </div>
   </div>
 
   <div class="entry">
-    <span class="label">Project Description (255 max chars):</span>
-    <span class="value">
+    <div class="label">Project Description (255 max chars):</div>
+    <div class="value">
       <%= text_area 'project', 'description', :cols => 80, :rows => 3 -%>
-    </span>
+    </div>
   </div>
 
   <div class="entry">
@@ -53,35 +54,35 @@
   </div>
   
   <div class="entry">
-    <span class="label">Changelog (optional -- no html):</span>
-    <span class="value">
+    <div class="label">Changelog (optional -- no html):</div>
+    <div class="value">
       <%= text_area 'project', 'changelog', :cols => 80, :rows => 10 -%>
-    </span>
+    </div>
   </div>
   
   <div class="entry">
-    <span class="label">Roadmap (optional -- html allowed):</span>
-    <span class="value">
+    <div class="label">Roadmap (optional -- html allowed):</div>
+    <div class="value">
       <%= text_area 'project', 'roadmap', :cols => 80, :rows => 10 -%>
-    </span>
+    </div>
   </div>
-  
-  <%= submit_tag 'Submit', :name => 'submit_public_info' -%>
-
+   <div class="entry bt-forms">
+     <%= submit_tag 'Submit', :name => 'submit_public_info' -%>
+</div>
 </fieldset>
 
 <% end -%>
-
+<div id="data">
 <fieldset>
   <legend>Project Members</legend>
-  
+
   <table>
     <thead>
       <tr>
         <th>Name</th>
         <th>Role</th>
-        <th></th>
-        <th></th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -89,16 +90,22 @@
         <tr>
           <td><%= h assignment.user.login -%></td>
           <td><%= h assignment.role -%></td>
-          <td><%= assignment.role == 'Administrator' ? button_to('Demote', {:action => 'demote', :id => assignment.id}, {:method => 'post'}) : button_to('Promote', {:action => 'promote', :id => assignment.id}, {:method => 'post'}) -%></td>
-          <td><%= button_to('Remove', {:action => 'remove_from_project', :id => @project.id, :assignment_id => assignment.id}, :confirm => 'Are you sure you want to remove this user from the project?') -%></td>
-        </tr>
+          <td class="bt-forms">
+		  <%= assignment.role == 'Administrator' ? button_to('Demote', {:action => 'demote', :id => assignment.id}, {:method => 'post'}) : button_to('Promote', {:action => 'promote', :id => assignment.id}, {:method => 'post'}) -%>
+		  </td>
+          <td class="bt-forms"><%= button_to('Remove', {:action => 'remove_from_project', :id => @project.id, :assignment_id => assignment.id}, :confirm => 'Are you sure you want to remove this user from the project?') -%></td>
+		 </tr>
       <% end -%>
     </tbody>
   </table>
   
   <% form_tag :action => 'add_to_project', :id => @project.id do -%>
-    <p>Add User: <%= text_field_tag 'login', '', {:maxlength => 15} -%><%= submit_tag 'Add User' -%></p>
-  <% end -%>
+    
+	 <span class="label">Add User:</span><span class="label"><%= text_field_tag 'login', '', {:maxlength => 15} -%></span><span class="bt-forms">
+	<%= submit_tag 'Add User' -%>
+	</span><!--bt-forms-->
+	<div class="clearb">&nbsp;</div>
+ <% end -%>
   
 </fieldset>
 
@@ -108,10 +115,10 @@
   <table>
     <thead>
       <tr>
-        <th></th>
+        <th>&nbsp;</th>
         <th>Name</th>
         <th>Active</th>
-        <th></th>
+        <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -119,7 +126,10 @@
         <% form_tag :action => 'update_package', :id => package.id do -%>
           <tr>
             <td>
+			 <%= link_to('<img title="ADD" alt="ADD" src="/images/icons/add.gif"  />', :controller => 'releases', :action => 'new', :package_id => package.id) -%>	
               <%= link_to('[Add Release]', :controller => 'releases', :action => 'new', :package_id => package.id) -%>
+			  <%= link_to(' <img src="/images/icons/edit.gif" title="Edit Releases" alt="Edit Releases"  />', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
+			  		  
               <%= link_to('[Edit Releases]', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
             </td>
             <td>
@@ -130,10 +140,12 @@
                 <%= options_for_select [ [ 'True', true ], [ 'False', false ] ], package.is_active -%>
               </select>
             </td>
-            <td><%= hidden_field_tag 'project_id', @project.id -%><%= submit_tag 'Update' -%></td>
+            <td class="bt-forms"><%= hidden_field_tag 'project_id', @project.id -%><%= submit_tag 'Update' -%></td>
           </tr>
         <% end -%>
       <% end -%>
     </tbody>
   </table>
 </fieldset>
+</div><!--data-->
+</div><!--content-->

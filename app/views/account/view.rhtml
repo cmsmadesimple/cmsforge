@@ -1,5 +1,5 @@
 <div id="content">
-<h3>Home Page for <%= h @user.login -%></h3>
+<h2>Home Page for <%= h @user.login -%></h2>
 
 <div style="float: right;">
 	<h4>Personal Information</h4>
@@ -14,7 +14,7 @@
 	</p>
 </div>	
 
-<div>
+<div class="gravatar_user">
 	<%= gravatar_for @user -%>
 </div>
 

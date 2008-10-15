@@ -1,8 +1,9 @@
-<h3><%= @project.name %></h3>
+<div class="content">
+<h2><%= @project.name %></h2>
 
 <%= render :partial => 'project/project_nav', :project => @project -%>
 
-<h4>Create New Release</h4>
+<h2>Create New Release</h2>
 
 <%= error_messages_for 'release' -%>
 
@@ -17,7 +18,7 @@
   
   <div class="entry">
     <div class="label"></div>
-    <div class="entry">
+    <div class="entry bt-forms">
       <%= hidden_field 'release', 'package_id' -%>
       <%= submit_tag 'Create New Release' -%>
       <%= submit_tag 'Cancel', { :name => 'cancel' } -%>
@@ -25,3 +26,4 @@
   </div>
 
 <% end -%>
+</div><!--content-->

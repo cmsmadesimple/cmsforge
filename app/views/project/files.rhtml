@@ -2,7 +2,7 @@
 <% @curloc = 'files' -%>
 <% for package in @project.packages -%>
   <a name="package-<%= package.id -%>"></a>
-  <h3><%= h package.name %></h3>
+  <h2><%= h package.name %></h2>
   <% releases = Release.find(:all, :conditions => ['package_id = ?', package.id], :order => 'created_at DESC') -%>
   <% for release in releases %>
 	  <a name="release-<%= release.id -%>"></a>

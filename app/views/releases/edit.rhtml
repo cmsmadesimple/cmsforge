@@ -1,5 +1,5 @@
 <div class="content">
-<h3><%= h @project.name %></h3>
+<h2><%= h @project.name %></h2>
 
 <%= error_messages_for 'release' -%>
 
@@ -30,16 +30,12 @@
 			</div>
 		</div>
 
-		<div class="entry">
-			<div class="label"></div>
-			<div class="entry">
-			 <div class="bt-forms">
+		<div class="entry bt-forms">			
                <%= hidden_field 'release', 'id' -%>
 				<%= submit_tag 'Update Release' -%>
 				<%= submit_tag 'Cancel', { :name => 'cancel' } -%>
-			</div><!--bt-forms-->
-			</div>
-		</div>
+	   </div>
+		
 
 	<% end -%>
 	
@@ -51,14 +47,14 @@
 	
 	<% form_tag(url_for(:action => 'add_file', :controller => 'releases'), :multipart => true ) do -%>
 	
-	<p>
-		<label for="mugshot">File:</label>
+	
+		<label for="uploaded_data">File:</label>
 		<%= file_field_tag :uploaded_data %>
-	</p>
-	<p>
+	
+	<div class="entry bt-forms">	
 		<%= hidden_field_tag 'release_id', @release.id -%>
 		<%= submit_tag 'Upload' %>
-	</p>
+	</div>
 	
 	<% end -%>
 	
@@ -68,12 +64,16 @@
 
 	<legend>Existing Files</legend>
 	
-	<table>
+	<div id="data">
+	<table summary="Existing Files">
+	<thead>
 		<tr>
 			<th>Filename</th>
 			<th>Release Date</th>
 			<th>&nbsp;</th>
 		</tr>
+		</thead>
+		<tbody>
 		<% @release.released_files.each do |file| -%>
 			<tr>
 				<td><%= h file.filename -%></td>
@@ -81,7 +81,9 @@
 				<td class="bt-forms"><%= button_to "Delete", { :action => "delete_file", :id => file.id }, :confirm => "Are you sure?" -%></td>
 			</tr>
 		<% end -%>
+		</tbody>
 	</table>
+	</div><!--data-->
 	
 </fieldset>
 </div><!-- content -->

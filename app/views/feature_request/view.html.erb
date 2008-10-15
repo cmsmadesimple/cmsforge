@@ -33,7 +33,7 @@
     <span class="value"><%= h @feature_request.created_at.strftime('%Y-%m-%d %H:%M') -%></span>
   </div>
 
-<br clear="both" />
+<br class="clearb" />
 
   <div class="entry">
     <span class="label">Assigned To:</span>
@@ -76,7 +76,7 @@
 
 <% end -%>
 
-<h3>History</h3>
+<h2>History</h2>
 
 <div class="commentsbox">
   <div class="header">Comments</div>
@@ -98,7 +98,7 @@ Posted By: <%= comment.user.name_and_link %>
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
     <div class="entry">
-	     <div class="label">Add Comment:</div>
+	     <div class="label strong">Add Comment:</div>
       <div class="value">
         <%= text_area_tag "add_comment", '', { :cols => 50, :rows => 10 } -%><br />
 		<div class="bt-forms">

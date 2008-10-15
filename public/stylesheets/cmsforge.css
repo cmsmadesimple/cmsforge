@@ -141,13 +141,51 @@ for fourth level
 
 /* Start of CMSMS style sheet 'Global - Layout' */
 /* Reset Styles */
-* {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-family: inherit;vertical-align: baseline;background: transparent;}
-:focus {outline: 0;}
-body {line-height:1;color:#000000;background:#ffffff;}
-ol, ul {list-style: none}
-table {border-collapse:collapse;border-spacing:0;}
-caption, th, td {text-align:left;font-weight:normal;}
-.hidden {display:none;}
+* {
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-weight: inherit;
+font-style: inherit;
+font-family: inherit;
+vertical-align: baseline;
+background: transparent;
+}
+
+legend{
+	font-weight: bold;
+	font-size: 1em;
+	color: #243135;
+	padding: 5px 5px 10px;
+}
+fieldset{
+	border: 1px solid #CCCCCC;
+	padding: 5px;
+}
+
+:focus {
+outline: 0;
+}
+body {
+line-height:1;
+color:#000000;
+background:#ffffff;
+}
+ol, ul {
+list-style: none;
+}
+table {
+border-collapse:collapse;
+border-spacing:0;
+}
+caption, th, td {
+text-align:left;
+font-weight:normal;
+}
+.hidden {
+display:none;
+}
 /* End Reset */
 
 
@@ -430,7 +468,7 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 	padding:1.5em 1em 1em 1em;
 	line-height:1.6em;
 	display:inline;
-}
+	}
 
 
 .content{
@@ -547,7 +585,7 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 }
 		
 #column .block{
-	padding:0 2em;
+	padding:0 0.8em;
 	margin:0 0 3em 0
 }
 #column .block a{}
@@ -665,17 +703,6 @@ div#spinner img{
     left: 50%;
 	}
 
-
-
-
-/*#spinner {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	background: url(../images/spinner.gif) no-repeat center center;
-}*/
-
-
 .block ul {
 	padding: 0;
 	margin: 0;
@@ -688,13 +715,15 @@ div#spinner img{
 }
 
 .block ul li span.label {
+
 	display: block;
 	float: left;
-	width: 35%;
+	width: 38%;
 	text-align: right;
 }
 
 .block ul li span.val {
+
 	font-weight: bold;
 	float: right;
 	display: block;
@@ -823,12 +852,18 @@ select, menu {
 
 .gravatar_user{
 	float:left;
-	border:1px solid #333;
+	/*border:1px solid #333;*/
 	padding:5px;
 	background: #FFFFFF;
-	margin:5px 10px 5px 0px;
+	margin:0 10px 5px 0px;
 }
-
+.gravatar_user img{
+	float:left;
+	border:1px solid #333;
+	padding:2px;
+	background: #FFFFFF;
+	margin:0 10px 5px 0px;
+}
 
 #content h2, .content h2 {
 	font-weight: bold;
@@ -935,3 +970,12 @@ div#data  table tbody tr:hover {
 .Trivial:hover{
 	background: #EAFFCC;
 }
+
+/*########## nuno debug ################*/
+.debug{
+	font-size: 5em;
+	color: #FF0000;
+	background: #009900;
+	padding: 5px;
+}
+/*########## end ################*/

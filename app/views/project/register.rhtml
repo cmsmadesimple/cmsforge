@@ -1,45 +1,56 @@
+<div class="content">
 <%= error_messages_for 'project' -%>
-
+<h2>New Project</h2>
 <% form_tag do -%>
 
-  <p>
-    Full Name:<br />
-    <%= text_field "project", "name", "size" => 40, "maxlength" => 40 -%>
-  </p>
+  <div class="entry">
+    <div class="label"> Full Name:</div>
+    <div class="value">
+      <%= text_field "project", "name", "size" => 40, "maxlength" => 40 -%>
+    </div></div>
+	
+	
   
-  <p>
-    "Unix" Name:<br />
+  <div class="entry">
+    <div class="label">"Unix" Name:</div>
+	 <div class="value">
     <%= text_field "project", "unix_name", "size" => 15, "maxlength" => 15 -%>
-  </p>
+  </div></div>
   
-  <p>
-    Project Purpose:<br />
+   <div class="entry">
+    <div class="label">Project Purpose:</div>
+	 <div class="value">
     <%= text_area "project", "registration_reason", "cols" => 70, "rows" => 10 -%>
-  </p>
+   </div></div>
   
-  <p>
-    Description:<br />
+  <div class="entry">
+    <div class="label">Description:</div>
+	 <div class="value">
     <%= text_area "project", "description", "cols" => 70, "rows" => 10 -%>
-  </p>
+   </div></div>
   
-  <p>
-    Project Type:<br />
+   <div class="entry">
+    <div class="label">Project Type:</div>
+	 <div class="value">
     <%= select "project", "project_type", [ ['Other', 'other'],   ['Module', 'module'], ['Translation', 'translation'], ['Plugin', 'plugin'], ['Core', 'core'] ] -%>
-  </p>
+  </div></div>
   
-  <p>
-    License:<br />
+   <div class="entry">
+    <div class="label">License:</div>
+	 <div class="value">
     <%= select("project", "license_id", License.find(:all, :order => 'id ASC').collect {|p| [ p.name, p.id ] }) -%>
-  </p>
+   </div></div>
 
-  <p>
-    Repository Type (can't be changed after project creation):<br />
+  <div class="entry">
+    <div class="label">Repository Type (can't be changed after project creation):</div>
+	 <div class="value">
     <%= select("project", "repository_type", [ 'svn', 'git' ]) -%>
-  </p>
+   </div></div>
   
-  <p>
+    <div class="entry bt-forms">
     <%= submit_tag "Register", :name => "submit" -%>
     <%= submit_tag "Cancel", :name => "cancel" -%>
-  </p>
+  </div>
   
 <% end -%>
+</div><!--content-->

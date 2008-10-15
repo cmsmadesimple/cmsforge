@@ -1,10 +1,11 @@
-<table class="data_table">
-
+<table class="data_table" summary="FR">
+<thead>
   <tr>
-    <th>ID</th>
+    <th>ID </th>
     <th>Name</th>
   </tr>
-
+</thead>
+<tbody>
   <% unless @releases.nil? or @releases.empty? -%>
 
     <% @releases.each do |release| -%>
@@ -21,5 +22,5 @@
     <tr><td colspan="5">No Files Released!</td></tr>
 
   <% end -%>
-
+</tbody>
 </table>
