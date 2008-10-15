@@ -1,12 +1,13 @@
 <div class="content">
 <% @curloc = 'bug' -%>
 
-<div class="small_nav"><img alt="Submit New Bug" src="/images/icons/newobject.gif">
+<div class="small_nav">
+<img alt="Submit New Bug" src="/images/icons/newobject.gif "/>
   <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
 </div>
 
 <div class="filter">
-  <p>Show Closed: <%= check_box_tag('show_closed', '1', @show_closed == '1', {:onchange => remote_function(:url => { :id => @project.id }, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner')", :with => "'show_closed='+this.checked+'&amp;page=" + params[:page].to_s + "'")}) -%></p>
+  <p><label for="show_closed">Show Closed:</label> <%= check_box_tag('show_closed', '1', @show_closed == '1', {:onchange => remote_function(:url => { :id => @project.id }, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner')", :with => "'show_closed='+this.checked+'&amp;page=" + params[:page].to_s + "'")}) -%></p>
 
 <div class="entry">
 <% form_tag({:action => 'view'}, {:method => 'get'}) do -%>
