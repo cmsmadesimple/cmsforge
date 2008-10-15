@@ -1,6 +1,12 @@
 <div class="content">
 <% @curloc = 'feature_request' -%>
 
+<% if @feature_request.nil? -%>
+
+<h2>Feature Request cannot be found</h2>
+
+<% else -%>
+
 <div class="small_nav">
   <%= link_to "Back to List", :action => :list, :id => @feature_request.project_id -%>
 </div>
@@ -104,3 +110,5 @@ Posted By: <%= comment.user.name_and_link %>
   <% end -%>
 <% end -%>
 </div><!--content-->
+
+<% end -%>

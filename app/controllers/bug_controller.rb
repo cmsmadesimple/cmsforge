@@ -20,7 +20,9 @@ class BugController < ApplicationController
   
   def view
     @bug = Bug.find_by_id(params[:id])
-    @project = @bug.project
+    unless @bug.nil?
+      @project = @bug.project
+    end
     respond_to do |format|
       format.html { render }
       format.xml { render :xml => @bug.to_xml }

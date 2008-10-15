@@ -20,7 +20,9 @@ class FeatureRequestController < ApplicationController
   
   def view
     @feature_request = FeatureRequest.find_by_id(params[:id])
-    @project = @feature_request.project
+    unless @feature_request.nil?
+      @project = @feature_request.project
+    end
     respond_to do |format|
       format.html { render }
       format.xml { render :xml => @feature_request.to_xml }

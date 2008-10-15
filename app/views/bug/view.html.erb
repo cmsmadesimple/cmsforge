@@ -1,9 +1,16 @@
 <div class="content">
 <% @curloc = 'bug' -%>
 
+<% if @bug.nil? -%>
+
+<h2>Bug cannot be found</h2>
+
+<% else -%>
+
 <div class="small_nav">
   <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
 </div>
+
 
 <%= error_messages_for 'bug' -%>
 
@@ -132,3 +139,5 @@ Posted By: <%= comment.user.name_and_link %>
   <% end -%>
 <% end -%>
 </div><!--content-->
+
+<% end -%>
