@@ -12,6 +12,12 @@ body div#contentarea
 {
 	background: #FFFFFF url(../images/contentarea-homepage-bg.gif) repeat-y scroll 633px 0px;
 }
+
+ div#spinner {
+   filter: alpha(opacity=80);
+}
+
+
 </style>
 	<script type="text/javascript" src="http://www.cmsmadesimple.org/modules/MenuManager/CSSMenu.js"></script>
 <![endif]-->
@@ -177,24 +183,11 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
 
 		</div>
 		<div id="focusarea" class="clear">
-			<% session[:return_to] = request.request_uri unless @current_controller == 'account' -%>
-			 <!--nav_main-->
-			  <div id="nav_main">    
-            <ul id="tab-main" class="clear">
-            <% if !logged_in? -%>
-            <li><%= link_to 'Login', :controller => 'account', :action => 'login' -%></li>
-            <% else -%>
-            <li>Logged in as: <%= h current_user.login -%> - <a href="/account/logout">Logout</a></li>
-            <% end -%>
-              <li class="tab"><a class="tablink" href="/">Forge Home</a></li>
-            <% if logged_in? -%>
-              <li class="tab"><a class="tablink" href="/users/<%= current_user.login -%>">My&nbsp;Page</a></li>
-            <% end -%>
-            </ul>
-             </div><!--end nav_main-->
-			 <div class="clearb">&nbsp;</div> 
-          
-           <!--project_nav-->
+		<div class="clearb">&nbsp;</div> 
+		<% if !logged_in? -%>
+		 <h2>CMS MADE SIMPLE FORGE</h2> 
+		 <% end -%>
+          <!--project_nav-->
 		  <% unless @project.nil? -%>
              <h1><%= h @project.name -%></h1> 
 			  <div class="clearb">&nbsp;</div>              
@@ -202,10 +195,34 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
             <% end -%>
 			<!--End project_nav-->
  		</div>
-		 
-			
-			
-		<div id="contentarea" class="clear shell">
+		 <div id="contentarea" class="clear shell">
+		<div id="nav_main_main" class="clear">
+		<!--nav_main-->
+			<div id="nav_main">
+			<ul class="tab-main clear" >
+              <li class="tab"><a class="tablink" href="/">Forge Home</a></li>
+            <% if logged_in? -%>
+              <li class="tab"><a class="tablink" href="/users/<%= current_user.login -%>">My&nbsp;Page</a></li>
+            <% end -%>
+            </ul>
+             </div><!--end nav_main-->
+			 
+		<!--nav_login-->
+		<div id="nav_login">
+			<% session[:return_to] = request.request_uri unless @current_controller == 'account' -%>
+			 <ul class="tab-login clear">
+            <% if !logged_in? -%>
+            <li>
+			<%= link_to '<img src="/images/icons/users.gif" title="Login" alt="Login" />', :controller => 'account', :action => 'login' -%>
+			<%= link_to 'Login', :controller => 'account', :action => 'login' -%></li>
+            <% else -%>
+            <li><a href="/account/logout"><img src="/images/icons/exit.gif" title="Logout" alt="Logout" /></a>Logged in as: <%= h current_user.login -%> - <a href="/account/logout">Logout</a></li>
+            <% end -%>
+			</ul>
+			</div><!--nav_login-->
+			<!--end nav_login-->
+			</div><!--nav_main_main-->
+			 
 
             <div id="flash">
               <% for name in [:notice, :warning, :message] %>
