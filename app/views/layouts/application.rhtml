@@ -178,24 +178,33 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
 		</div>
 		<div id="focusarea" class="clear">
 			<% session[:return_to] = request.request_uri unless @current_controller == 'account' -%>
-            <ul>
+			 <!--nav_main-->
+			  <div id="nav_main">    
+            <ul id="tab-main" class="clear">
             <% if !logged_in? -%>
             <li><%= link_to 'Login', :controller => 'account', :action => 'login' -%></li>
             <% else -%>
-            <li>Logged in as: <%= h current_user.login -%> -- <a href="/account/logout">Logout</a></li>
+            <li>Logged in as: <%= h current_user.login -%> - <a href="/account/logout">Logout</a></li>
             <% end -%>
-              <li ><a class="tablink" href="/">Forge Home</a></li>
+              <li class="tab"><a class="tablink" href="/">Forge Home</a></li>
             <% if logged_in? -%>
-              <li ><a class="tablink" href="/users/<%= current_user.login -%>">My&nbsp;Page</a></li>
+              <li class="tab"><a class="tablink" href="/users/<%= current_user.login -%>">My&nbsp;Page</a></li>
             <% end -%>
             </ul>
-
-            <% unless @project.nil? -%>
-              <h1><%= h @project.name -%></h1>               
+             </div><!--end nav_main-->
+			 <div class="clearb">&nbsp;</div> 
+          
+           <!--project_nav-->
+		  <% unless @project.nil? -%>
+             <h1><%= h @project.name -%></h1> 
+			  <div class="clearb">&nbsp;</div>              
                 <%= render :partial => '/project/project_nav', :project => @project -%>
             <% end -%>
-
+			<!--End project_nav-->
  		</div>
+		 
+			
+			
 		<div id="contentarea" class="clear shell">
 
             <div id="flash">

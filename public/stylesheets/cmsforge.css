@@ -406,57 +406,14 @@ display:none;
 }
 /* End of 'Global - Layout' */
 
-/* Start of CMSMS style sheet 'Layout - Home Page' */
-#focusarea{
-	background: #c0d546 url(/images/focusarea-bg.jpg) top left no-repeat;
-	padding:2.25em 2.5em 3.5em 2.5em;
-	border-top:1px solid #ffffff;
-}
-#focusarea h2{
-	color:#000000;
-	font-size:1.7em;
-	line-height:1.3em;
-	width:30em;
-}
-#focusarea #downloadbutton{
-	background: url(/images/button-download-bg.gif) top left no-repeat;
-	width:192px;
-	color:#ffffff;
-	float:right;
-	padding:0.75em 0 0 0;
-	text-align:right;
-}
-#focusarea #downloadbutton p{
-	background: url(/images/button-download-bg.gif) bottom left no-repeat;
-	padding:0 1.25em 1em 1.25em;
-	margin:0;
-}
-#focusarea #downloadbutton p a{
-	color:#ffffff;
-	text-decoration:none;
-}
-#focusarea #downloadbutton p b{
-	color:#ecbb3a;
-}					
-#focusarea #downloadbutton p #downloadbutton-text{
-	display:block;
-	font-size:1.75em;
-	color:#ffffff;
-	margin:0 0 0.5em 0;
-}
-#focusarea #downloadbutton p #downloadbutton-details{
-	display:block;
-	font-size:0.85em;
-	color:#ffffff;
-	font-weight:bold;
-}
+
 	
 			
 #contentarea{
 	clear:both;
 	margin:0;
 	padding:0;
-	background: #FFFFFF url(../images/contentarea-homepage-bg.gif) repeat-y  635px 0px;
+	background:  url(../images/contentarea-homepage-bg.gif) repeat-y  635px 0px;
 	height: auto;
 	width: auto;
 }
@@ -509,7 +466,7 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 #wrap-column{
 	float:right;
 	width:300px;
-	position:relative;
+	/*position:relative;*/
 	padding:0px;
 }
 #column{
@@ -518,7 +475,7 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 	line-height:1.7em;
 	color:#666666;
 	font-size:0.8em;
-	position:relative;
+	/*position:relative;*/
 	margin:0;
 	padding-bottom:5px;
 	min-height:400px;
@@ -526,37 +483,8 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 	height:400px;
 }
 				
-#featuresarea{
-	position:relative;
-	z-index:100;
-	margin:-4.25em 0 0em 0;
-}
-#featuresarea ul#featuresarea-tabs{}
-#featuresarea ul#featuresarea-tabs li{
-	background: url(/images/featuresarea-tab-bg.gif) 100% -200px no-repeat;
-	float:left;
-	line-height:1em;
-	margin:0 .25em 0 0;
-	padding:0 1em 0 0;
-	font-weight:bold;
-	font-size:0.9em;
-}
-#featuresarea ul#featuresarea-tabs li.selected{
-	background: url(/images/featuresarea-tab-bg.gif) 100% 0 no-repeat;
-}
-#featuresarea ul#featuresarea-tabs li a{
-	background: url(/images/featuresarea-tab-bg.gif) 0 -200px no-repeat;
-	display:block;
-	color:#30529c;
-	text-decoration:none;
-	text-align:center;
-	padding:1.25em .35em 1.25em 1.35em;
-}
-#featuresarea ul#featuresarea-tabs li.selected a{
-	background-position: 0 0;
-	color:#000000;
-}
-.featuresarea-content{
+
+/*.featuresarea-content{
 	display:none;
 	background: url(/images/featuresarea-bg.jpg) bottom left no-repeat;
 	clear:both;position:
@@ -583,7 +511,7 @@ html:not([lang*=""]):not(:only-child) #contentarea{width:100%;} /* FireFox hack 
 *html p.features-more {
 	display:none;
 }
-		
+	*/	
 #column .block{
 	padding:0 0.8em;
 	margin:0 0 3em 0
@@ -749,31 +677,172 @@ table td {
 	text-align: left;
 }
 
-#focusarea ul {
-	border: 1px solid black;
+.tablink{
+
+
 }
-#focusarea ul li {
+/*ul#tab-main {
+	background-color:red;
+	float:left;
+	margin:0 0 0 0;
+	padding:0 0 2.5em 0;
+
+	width: auto;
+	display:block;
+	
+}*/
+#featuresarea{
+	/*position:relative;
+	z-index:100;*/
+	/*margin:-4.25em 0 0em 0;*/
+	margin:0;
+}
+#featuresarea ul#featuresarea-tabs{
+	clear: left;
+	float: right;
+}
+#featuresarea ul#featuresarea-tabs li
+{
+	background: url(/images/featuresarea-tab-bg.gif) 100% -200px no-repeat;
+	float:left;
+	line-height:1em;
+	margin:0 0.25em 0 0;
+	padding:0 1em 0 0;
+	font-weight:bold;
+	font-size:0.9em;
+}
+#featuresarea ul#featuresarea-tabs li.active{
+	background: url(/images/featuresarea-tab-bg.gif) 100% 0 no-repeat;
+}
+#featuresarea ul#featuresarea-tabs li a
+{
+	background: url(/images/featuresarea-tab-bg.gif) 0 -200px no-repeat;
+	display:block;
+	color:#30529c;
+	text-decoration:none;
+	text-align:center;
+	padding:1.25em 0.35em 1.25em 1.35em;
+}
+#featuresarea ul#featuresarea-tabs li.active a{
+	color:#000000;
+	background: left top;
+}
+#nav_main  {
+  /*background-color:green;*/
+	margin:30px 0 0 0;
+	padding: 0 0 0 20px;
+	clear:both;
+	width: auto;
+	height:30px;
+	/*border-bottom: 1px solid #FFFFFF;*/
+}
+
+#nav_main ul#tab-main {
+	margin:0;
+	padding:0;
+	display: block;
+	height:1%;
+	background: #FFFFFF;	
+}
+#nav_main ul#tab-main li {
 	list-style: none;
+	display: block;
+	float: left;
+	padding: 8px;
+	margin: 0 0px 0 0px;
+	background: #EAEFF4 url(../images/column-cap2.gif) no-repeat -10px -19px;
+	border-left: 1px solid #A2B7CE;
+	border-right: 1px solid #FFFFFF;
+}
+/*#nav_main ul#tab-main li a {
 	display: block;
 	float: left;
 	background-color: #DEE8A1;
 	padding: 8px;
-	border: 1px solid black;
+	
 	margin: 0 2px 0 0;
+	display:block;
+}*/
+
+
+ #project_nav  {
+	/*background-color:red;*/
+	margin:0 0 0 0;
+	padding: 0 0 0 0;
+	width: auto;
+	height:39px;
+	/*border-bottom: 1px solid #FFFFFF;*/
 }
 
-#focusarea h1 {
-	clear: both;
-	text-align: center;
-	font-size: 16px;
-	font-weight: bold;
-}
 
 #project_nav ul {
-	border-collapse: collapse;
+	/*border-collapse: collapse;*/
 }
 #project_nav li {
 }
+
+#focusarea h1 {
+    /*background-color:blue;*/
+	text-align: right;
+	font-size: 1.6em;
+	font-weight: bold;
+	padding:0 20px 0 0;
+	margin: 0 0 0 1em;
+	height:20px;
+	}
+
+#focusarea{
+	background: #93A626 url(/images/focusarea-bg.jpg) no-repeat left top;
+	padding:0;
+	border-top:1px solid #ffffff;
+	/*border-bottom: 1px solid #c0d546;*/
+	height:140px;
+}
+#focusarea h2{
+	color:#000000;
+	font-size:1.7em;
+	line-height:1.3em;
+	width:30em;
+}
+/*
+#focusarea #downloadbutton{
+	background: url(/images/button-download-bg.gif) top left no-repeat;
+	width:192px;
+	color:#ffffff;
+	float:right;
+	padding:0.75em 0 0 0;
+	text-align:right;
+}
+#focusarea #downloadbutton p{
+	background: url(/images/button-download-bg.gif) bottom left no-repeat;
+	padding:0 1.25em 1em 1.25em;
+	margin:0;
+}
+#focusarea #downloadbutton p a{
+	color:#ffffff;
+	text-decoration:none;
+}
+#focusarea #downloadbutton p b{
+	color:#ecbb3a;
+}					
+#focusarea #downloadbutton p #downloadbutton-text{
+	display:block;
+	font-size:1.75em;
+	color:#ffffff;
+	margin:0 0 0.5em 0;
+}
+#focusarea #downloadbutton p #downloadbutton-details{
+	display:block;
+	font-size:0.85em;
+	color:#ffffff;
+	font-weight:bold;
+}
+*/
+
+
+
+
+
 input, textarea {
 	color: #000;
 	background: #FFFFFF;

@@ -1,34 +1,38 @@
-<div id="project_nav">
-  <ul>
-    <li<%= ' class="active"' if @curloc == 'summary' -%>>
-      <a<%= ' class="tabsellink"' if @curloc == 'summary' -%> href="<%= @project.home_page -%>">Summary</a>
+<div id="project_nav" class="clear">
+<div id="featuresarea">
+<ul id="featuresarea-tabs" class="clear">
+ <li<%= ' class="tab active"' if @curloc == 'summary' -%>>
+      <a<%= ' class="tab tabsellink"' if @curloc == 'summary' -%> href="<%= @project.home_page -%>">Summary</a>
     </li>
-    <li<%= ' class="active"' if @curloc == 'files' -%>>
+    <li<%= ' class="tab active"' if @curloc == 'files' -%>>
       <%= link_to 'Files', :controller => 'project', :id => @project.id, :action => 'files' -%>
     </li>
-    <li<%= ' class="active"' if @curloc == 'bug' -%>>
+    <li<%= ' class="tab active"' if @curloc == 'bug' -%>>
       <%= link_to 'Bug Tracker', :controller => 'bug', :id => @project.id, :action => 'list' -%>
     </li>
-    <li<%= ' class="active"' if @curloc == 'feature_request' -%>>
+    <li<%= ' class="tab active"' if @curloc == 'feature_request' -%>>
       <%= link_to 'Feature Requests', :controller => 'feature_request', :id => @project.id, :action => 'list' -%>
     </li>
     <!--% unless @project.changelog.blank? -%-->
-      <li<%= ' class="active"' if @curloc == 'changelog' -%>>
+      <li<%= ' class="tab active"' if @curloc == 'changelog' -%>>
         <%= link_to 'Changelog', :controller => 'project', :id => @project.id, :action => 'changelog' -%>
       </li>
     <!--% end -%-->
     <% unless @project.roadmap.blank? -%>
-      <li<%= ' class="active"' if @curloc == 'roadmap' -%>>
+      <li<%= ' class="tab active"' if @curloc == 'roadmap' -%>>
         <%= link_to 'Roadmap', :controller => 'project', :id => @project.id, :action => 'roadmap' -%>
       </li>
     <% end -%>
-    <li<%= ' class="active"' if @curloc == 'code' -%>>
+    <li<%= ' class="tab active"' if @curloc == 'code' -%>>
       <%= link_to 'Code', :controller => 'project', :id => @project.id, :action => 'code' -%>
     </li>
     <% if current_user != :false and (current_user.admin_of?(@project) or current_user.superuser) -%>
-      <li<%= ' class="active"' if @curloc == 'admin' -%>>
+      <li<%= ' class="tab active"' if @curloc == 'admin' -%>>
         <%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%>
       </li>
     <% end -%>
-  </ul>
+ </ul>
+	
+</div><!--featuresarea-->
+
 </div>
