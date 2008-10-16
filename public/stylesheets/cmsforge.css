@@ -868,12 +868,11 @@ table td {
 	/*background-color:blue;*/
 	float:left;
 	text-align: left;
-	font-size: 2em;
-	font-weight: bold;
 	padding:0;
 	margin: 0.5em 0 0 1em;
 	height:20px;
 	color: #EBF1C9;
+	font: italic bold 2em "Trebuchet MS", Arial, Verdana, Tahoma;
 	}
 /*
 #focusarea #downloadbutton{
@@ -1117,6 +1116,78 @@ margin:20px 0 0 200px;
 }
 .Trivial:hover{
 	background: #EAFFCC;
+}
+
+/*########## Files ################*/
+.files{
+	background: #F7F9FB;
+	border: 1px solid #C7D5E2;
+}
+.files h2{
+	background: #D8E6F4;
+	margin: 1px 1px -8px 1px;
+	padding: 5px;
+	width: auto;
+	border-bottom: 1px solid #A4BBD2;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #333;
+	display: block;
+}
+
+.files .rName{
+	display:block;
+	background: #EDFDCE;
+	margin: 10px 1px;
+	padding: 5px;
+	width: auto;
+	font-size: 0.9em;
+	color: #000;
+	border-bottom: 1px solid #ABDC18;
+	border-top: 1px solid #DFF49D;
+	}
+
+.files .rNamePacket{
+	font-size: 1.1em;
+	color: #000;
+	font-weight: bold;
+}
+
+.files .rVersions{
+	color: #000;
+	font-weight: bold;
+	padding-left: 50px;
+	background: url(/images/lastnode.gif) no-repeat 25px center;
+	display: block;
+	float: left;
+	width: 50%;
+	/*background:red;*/
+}
+
+.rLabel{
+	float:left;
+	display:block;
+	font-weight: bold;
+	width: 10%;
+	/*background:red;*/
+	text-align: right;
+}
+
+.rValue{
+display:block;
+float:left;
+	font-weight: normal;
+	width: 10%;
+	padding-left: 10px;
+	/*background:green;*/
+	text-align: left;
+}
+
+.files a{
+	font-weight: normal;
+	color: #406080;
+	text-decoration: underline;
+	
 }
 
 /*########## nuno debug ################*/
