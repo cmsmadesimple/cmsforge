@@ -866,11 +866,12 @@ table td {
 }
 #focusarea h2 {
 	/*background-color:blue;*/
+	float:left;
 	text-align: left;
 	font-size: 2em;
 	font-weight: bold;
-	padding:0 20px 0 200px;
-	margin: 60px 0 0 1em;
+	padding:0;
+	margin: 0.5em 0 0 1em;
 	height:20px;
 	color: #EBF1C9;
 	}
