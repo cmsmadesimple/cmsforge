@@ -1,0 +1,86 @@
+<%= error_messages_for 'user' -%>
+
+<div id="content">
+	
+<h2>Edit Profile for <%= h @user.login -%></h2>
+
+<div>
+	<fieldset>
+		<legend>User Details</legend>
+		<p>
+			Details about your user account that cannot be changed.
+		</p>
+		User Id: <%= h @user.id -%><br />
+		Login Name: <%= h @user.login -%><br />
+		Member Since: <%= h @user.created_at.strftime('%Y-%m-%d %H:%M') -%>
+	</fieldset>
+	
+	<% form_for :user, @user, :url => { :action => 'update' } do |f| -%>
+	
+	<fieldset>
+		<legend>Modify Profile</legend>
+		<p>
+			Modify your user profile here.
+		</p>
+		Real Name: <%= f.text_field 'full_name' -%><br />
+		Email Address: <%= f.text_field 'email' -%><br />
+		<%= f.hidden_field 'id' -%>
+		<%= f.submit -%>
+	</fieldset>
+
+	<% end %>
+	
+	<% if current_user and current_user.id == @user.id -%>
+	<fieldset>
+		<legend>SSH Keys</legend>
+		<p>
+			SSH Keys are only needed if you're going to commit code to a project that uses a git repository.  If you don't know
+			what git is or work on a project that uses it, you can safely ignore this section.
+		</p>
+		<p>
+			For information on creating ssh keys, check out this great readme on <a href="http://github.com/guides/providing-your-ssh-key">GitHub</a>.
+		</p>
+		<% unless @user.ssh_keys.empty? %>
+			<ul>
+			<% @user.ssh_keys.each do |key| -%>
+				<li><%= key.name %>&nbsp;-&nbsp;<%= truncate(key.key, 20, '...')%> (<%= link_to 'edit', { :action => 'edit_key', :id => key.id } -%>) (<%= link_to 'delete', { :action => 'delete_key', :id => key.id }, :confirm => 'Are you sure you want to delete?' -%>)</li>
+			<% end -%>
+			</ul>
+		<% end -%>
+		<%= link_to 'Add Key', :action => 'add_key' -%>
+	</fieldset>
+	<% end -%>
+</div>	
+
+</div>
+
+<div id="wrap-column">
+<div id="column-cap-top"><span>&nbsp;</span></div>
+<div id="column">
+  	<div class="block"> 
+		<% if current_user and current_user.id == @user.id -%>
+		<h2>Participate</h2>
+		<p>
+  			<a href="/project/register">Register New Project</a>
+		</p>
+		<% end -%>
+
+      <h2>Assigned Projects</h2>
+		<p>
+		<% @user.assignments.each do |assignment| -%>
+  			<a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a><br />
+		<% end -%>
+		</p>
+
+		<% if @user.superuser -%>
+  			<% projects = find_projects_not_approved(@user) -%>
+  			<% unless projects.empty? -%>
+    			<h2>Pending Projects</h2>
+    			<% projects.each do |project| -%>
+      				<%= link_to project.name, { :action => 'show_pending', :id => project.id, :controller => 'project' } -%> - <%= project.created_at.strftime('%m/%d/%Y %H:%M') -%><br />
+    			<% end -%>
+  			<% end -%>
+		<% end -%>
+	</div>
+  </div>
+</div><!--wrap-column-->

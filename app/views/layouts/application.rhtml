@@ -203,6 +203,7 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
               <li class="tab"><a class="tablink" href="/">Forge Home</a></li>
             <% if logged_in? -%>
               <li class="tab"><a class="tablink" href="/users/<%= current_user.login -%>">My&nbsp;Page</a></li>
+              <li class="tab"><a class="tablink" href="/users/<%= current_user.login -%>/edit">Edit&nbsp;Profile</a></li>
             <% end -%>
             </ul>
              </div><!--end nav_main-->

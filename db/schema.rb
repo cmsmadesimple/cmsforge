@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081012201502) do
+ActiveRecord::Schema.define(:version => 20081018145055) do
 
   create_table "articles", :force => true do |t|
     t.integer  "project_id"
@@ -107,6 +107,14 @@ ActiveRecord::Schema.define(:version => 20081012201502) do
     t.text     "changelog"
     t.integer  "released_by"
     t.boolean  "is_active",     :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ssh_keys", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "key"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

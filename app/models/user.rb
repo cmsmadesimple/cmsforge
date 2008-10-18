@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   
   has_many :assignments
   has_many :projects, :through => :assignments
+  has_many :ssh_keys
   
   def member_of?(project)
     if self.superuser
