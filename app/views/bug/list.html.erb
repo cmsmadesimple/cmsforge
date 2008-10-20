@@ -1,3 +1,10 @@
+<% if @project.nil? -%>
+<div id="content">
+	<h3>Project Not Found!</h3>
+</div>
+
+<% else -%>
+
 <div class="content">
 <% @curloc = 'bug' -%>
 
@@ -30,3 +37,4 @@
 </div>
 </div><!--content-->
 
+<% end -%>

@@ -413,7 +413,7 @@ display:none;
 	clear:both;
 	margin:0;
 	padding:0;
-	background:  url(../images/contentarea-homepage-bg.gif) repeat-y  635px 0px;
+	background:  url(/images/contentarea-homepage-bg.gif) repeat-y  635px 0px;
 	height: auto;
 	width: auto;
 }

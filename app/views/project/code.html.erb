@@ -1,4 +1,11 @@
 <% @curloc = 'code' -%>
+
+<% if @project.nil? -%>
+<div id="content">
+	<h3>Project Not Found!</h3>
+</div>
+
+<% else -%>
 <div id="content">
 
 	<% if @project.repository_type == 'svn' -%>
@@ -56,3 +63,5 @@
 	</div>
 </div>
 </div><!--wrap-column-->
+
+<% end -%>

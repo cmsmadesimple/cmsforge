@@ -93,7 +93,7 @@
           <td class="bt-forms">
 		  <%= assignment.role == 'Administrator' ? button_to('Demote', {:action => 'demote', :id => assignment.id}, {:method => 'post'}) : button_to('Promote', {:action => 'promote', :id => assignment.id}, {:method => 'post'}) -%>
 		  </td>
-          <td class="bt-forms"><%= button_to('Remove', {:action => 'remove_from_project', :id => @project.id, :assignment_id => assignment.id}, :confirm => 'Are you sure you want to remove this user from the project?') -%></td>
+          <td class="bt-forms"><%= button_to('Remove', {:action => 'remove_from_project', :id => assignment.id}, :confirm => 'Are you sure you want to remove this user from the project?') -%></td>
 		 </tr>
       <% end -%>
     </tbody>

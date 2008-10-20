@@ -1,3 +1,10 @@
+<% if @project.nil? -%>
+<div id="content">
+	<h3>Project Not Found!</h3>
+</div>
+
+<% else -%>
+
 <div class="content">
 <h2>Download Section</h2>
 <div class="files">
@@ -33,3 +40,5 @@
 <% end -%>
 </div><!--files-->
 </div><!--content-->
+
+<% end -%>

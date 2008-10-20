@@ -9,12 +9,12 @@ class ProjectController < ApplicationController
   
   def list
     respond_to do |format|
-      format.xml { render :xml => Project.find(:all, :order => 'id ASC').to_xml }
+      format.xml { render :xml => Project.find(:all, :order => 'id ASC', :conditions => ['is_active = ?', '1']).to_xml }
     end
   end
 
   def view
-    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
+    @project = Project.find_by_unix_name(params[:unix_name], :conditions => ['is_active = ?', '1']) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml(:include => {:packages => {:include => [:releases]}}) }
@@ -22,7 +22,7 @@ class ProjectController < ApplicationController
   end
   
   def code
-    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
+    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml }
@@ -30,21 +30,21 @@ class ProjectController < ApplicationController
   end
 
   def changelog
-    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
+    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
     respond_to do |format|
       format.html
     end
   end
 
   def roadmap
-    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id])
+    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
     respond_to do |format|
       format.html
     end
   end
 
   def files
-    @project = Project.find_by_id(params[:id])
+    @project = Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml }
@@ -83,12 +83,17 @@ class ProjectController < ApplicationController
       redirect_to :action => 'view', :controller => 'account'
       return
     end
-    unless params[:project].nil?
+    unless params[:project].nil? or current_user.nil?
       @project = Project.new(params[:project])
       unless @project.valid?
         render :action => 'register'
       else
-        @project.tag_list = (params[:tag_list])
+        @project.tag_list = (params[:tag_list]);
+        assign = Assignment.new
+        assign.user_id = current_user.id
+        assign.project_id = @project.id
+        assign.role = 'Administrator'
+        assign.save
         @project.save
         redirect_to :action => 'complete'
       end
@@ -115,7 +120,7 @@ class ProjectController < ApplicationController
     assign = Assignment.find_by_id(params[:id])
     unless assign.nil?
 
-      @project = assign.project
+      @project = Project.find_by_id(assign.project_id, :conditions => 'is_active = (1 or 0)')
 
       unless logged_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => @project.id and return
@@ -125,7 +130,7 @@ class ProjectController < ApplicationController
       assign.save
       flash[:notice] = 'User Demoted to Member'
 
-      redirect_to :action => 'admin', :id => @project.id
+      redirect_to :action => 'admin', :id => assign.project_id
     else
       flash[:notice] = 'There was an error demoting the user'
     end
@@ -136,7 +141,7 @@ class ProjectController < ApplicationController
     assign = Assignment.find_by_id(params[:id])
     unless assign.nil?
 
-      @project = assign.project
+      @project = Project.find_by_id(assign.project_id, :conditions => 'is_active = (1 or 0)')
 
       unless logged_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => @project.id and return
@@ -146,7 +151,7 @@ class ProjectController < ApplicationController
       assign.save
       flash[:notice] = 'User Promoted to Administrator'
 
-      redirect_to :action => 'admin', :id => @project.id
+      redirect_to :action => 'admin', :id => assign.project_id
     else
       flash[:notice] = 'There was an error promoting the user'
     end
@@ -154,7 +159,7 @@ class ProjectController < ApplicationController
   end
 
   def add_to_project
-    @project = Project.find_by_id(params[:id])
+    @project = Project.find_by_id(params[:id], :conditions => 'is_active = (1 or 0)')
     unless logged_in? and current_user.admin_of?(@project)
       redirect_to :action => 'view', :id => params[:id] and return
     end
@@ -163,7 +168,7 @@ class ProjectController < ApplicationController
     unless user.nil?
       assign = Assignment.new
       assign.user_id = user.id
-      assign.project_id = @project.id
+      assign.project_id = params[:id]
       assign.role = 'Member'
       assign.save
       flash[:notice] = 'User Added to Project'
@@ -175,14 +180,20 @@ class ProjectController < ApplicationController
   end
 
   def remove_from_project
-    @project = Project.find_by_id(params[:id])
-    unless logged_in? and current_user.admin_of?(@project)
-      redirect_to :action => 'view', :id => params[:id] and return
+    @project = nil
+    assignment = Assignment.find_by_id(params[:id])
+    unless assignment.nil?
+      @project = Project.find_by_id(assignment.project_id, :conditions => 'is_active = (1 or 0)')
+      unless logged_in? and current_user.admin_of?(@project)
+        redirect_to :action => 'view', :id => params[:id] and return
+      end
+      Assignment.delete(assignment)
+      flash[:notice] = 'User Removed from Project'
+    else
+      redirect_to '/'
     end
 
-    flash[:notice] = 'User Removed from Project'
-    redirect_to :action => 'admin', :id => params[:id]
-
+    redirect_to :action => 'admin', :id => assignment.project_id
   end
 
   def update_package
