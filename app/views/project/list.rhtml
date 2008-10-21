@@ -11,7 +11,7 @@
     <% @projects.each do |project| -%>
 
       <tr>
-        <td><%= link_to(h(project.name), :action=>:view, :id=>project.id) -%></td>
+        <td><%= link_to(h(project.name), project.home_page) -%></td>
         <td><%= h project.description -%></td>
       </tr>
 
