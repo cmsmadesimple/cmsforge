@@ -89,12 +89,12 @@ class ProjectController < ApplicationController
         render :action => 'register'
       else
         @project.tag_list = (params[:tag_list]);
+        @project.save
         assign = Assignment.new
         assign.user_id = current_user.id
         assign.project_id = @project.id
         assign.role = 'Administrator'
         assign.save
-        @project.save
         redirect_to :action => 'complete'
       end
     end
