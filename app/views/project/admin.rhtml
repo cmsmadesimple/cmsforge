@@ -122,7 +122,7 @@
       </tr>
     </thead>
     <tbody>
-      <% Package.find_with_inactive(:all, :conditions => ['project_id = ?', @project.id]).each do |package| -%>
+      <% Package.find(:all, :conditions => ['project_id = ?', @project.id]).each do |package| -%>
         <% form_tag :action => 'update_package', :id => package.id do -%>
           <tr>
             <td>
@@ -146,6 +146,14 @@
       <% end -%>
     </tbody>
   </table>
+
+  <% form_tag :action => 'add_package_to_project', :id => @project.id do -%>
+	 <span class="label">Add File Package:</span><span class="label"><%= text_field_tag 'name', '', {:maxlength => 255} -%></span><span class="bt-forms">
+	<%= submit_tag 'Add Package' -%>
+	</span><!--bt-forms-->
+	<div class="clearb">&nbsp;</div>
+ <% end -%>
+
 </fieldset>
 </div><!--data-->
 </div><!--content-->

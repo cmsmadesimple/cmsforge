@@ -9,12 +9,12 @@ class ProjectController < ApplicationController
   
   def list
     respond_to do |format|
-      format.xml { render :xml => Project.find(:all, :order => 'id ASC', :conditions => ['is_active = ?', '1']).to_xml }
+      format.xml { render :xml => Project.find_in_state('accepted', :all, :order => 'id ASC').to_xml }
     end
   end
 
   def view
-    @project = Project.find_by_unix_name(params[:unix_name], :conditions => ['is_active = ?', '1']) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
+    @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml(:include => {:packages => {:include => [:releases]}}) }
@@ -22,7 +22,7 @@ class ProjectController < ApplicationController
   end
   
   def code
-    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
+    @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml }
@@ -30,21 +30,21 @@ class ProjectController < ApplicationController
   end
 
   def changelog
-    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
+    @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
     respond_to do |format|
       format.html
     end
   end
 
   def roadmap
-    @project = Project.find_by_unix_name(params[:unix_name]) || Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
+    @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
     respond_to do |format|
       format.html
     end
   end
 
   def files
-    @project = Project.find_by_id(params[:id], :conditions => ['is_active = ?', '1'])
+    @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml }
@@ -52,7 +52,7 @@ class ProjectController < ApplicationController
   end
 
   def show_pending
-    @project = Project.find_by_id(params[:id])
+    @project = Project.find_by_id_and_state(params[:id], 'pending')
     if current_user.superuser and @project.pending?
       respond_to do |format|
         format.html
@@ -120,7 +120,7 @@ class ProjectController < ApplicationController
     assign = Assignment.find_by_id(params[:id])
     unless assign.nil?
 
-      @project = Project.find_by_id(assign.project_id, :conditions => 'is_active = (1 or 0)')
+      @project = Project.find_by_id(assign.project_id)
 
       unless logged_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => @project.id and return
@@ -141,7 +141,7 @@ class ProjectController < ApplicationController
     assign = Assignment.find_by_id(params[:id])
     unless assign.nil?
 
-      @project = Project.find_by_id(assign.project_id, :conditions => 'is_active = (1 or 0)')
+      @project = Project.find_by_id(assign.project_id)
 
       unless logged_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => @project.id and return
@@ -159,7 +159,7 @@ class ProjectController < ApplicationController
   end
 
   def add_to_project
-    @project = Project.find_by_id(params[:id], :conditions => 'is_active = (1 or 0)')
+    @project = Project.find_by_id(params[:id])
     unless logged_in? and current_user.admin_of?(@project)
       redirect_to :action => 'view', :id => params[:id] and return
     end
@@ -183,7 +183,7 @@ class ProjectController < ApplicationController
     @project = nil
     assignment = Assignment.find_by_id(params[:id])
     unless assignment.nil?
-      @project = Project.find_by_id(assignment.project_id, :conditions => 'is_active = (1 or 0)')
+      @project = Project.find_by_id(assignment.project_id)
       unless logged_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => params[:id] and return
       end
@@ -214,14 +214,36 @@ class ProjectController < ApplicationController
 
     redirect_to :action => 'admin', :id => params[:project_id]
   end
+  
+  def add_package_to_project
+    @project = Project.find_by_id(params[:id])
+    unless logged_in? and current_user.admin_of?(@project)
+      redirect_to :action => 'view', :id => params[:id] and return
+    end
+
+    package = Package.new
+    package.project_id = params[:id]
+    package.is_active = true
+    package.name = params[:name]
+    if package.save
+      flash[:notice] = 'Package Added to Project'
+    else
+      flash[:warning] = 'There was an error adding the Package'
+    end
+
+    redirect_to :action => 'admin', :id => params[:id]
+
+  end
 
   def add_comment
     @project = Project.find_by_id(params[:project_id])
 
-    comment = Comment.new
-    comment.comment = params[:add_comment]
-    comment.user = current_user
-    @project.comments << comment
+    unless current_user.nil?
+      comment = Comment.new
+      comment.comment = params[:add_comment]
+      comment.user = current_user
+      @project.comments << comment
+    end
 
     redirect_to :action => 'view', :id => @project.id
   end

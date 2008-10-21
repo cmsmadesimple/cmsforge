@@ -15,14 +15,14 @@
 	while (!$rs->EOF)
 	{
 		$time = $rs->fields['register_time'];
-		$query = "INSERT INTO projects (id, name, unix_name, description, registration_reason, project_type, project_category, created_at, updated_at, is_active, state, reject_reason, license_id) values (?, ?, ?, ?, ?, '', '', ".$mysql->DBTimeStamp($time).", ".$mysql->DBTimeStamp($time).", 1, ?, ?, ?)";
+		$query = "INSERT INTO projects (id, name, unix_name, description, registration_reason, project_type, project_category, created_at, updated_at, state, reject_reason, license_id) values (?, ?, ?, ?, ?, '', '', ".$mysql->DBTimeStamp($time).", ".$mysql->DBTimeStamp($time).", ?, ?, ?)";
 		$mysql->Execute($query, array(
 			$rs->fields['group_id'], 
 			$rs->fields['group_name'], 
 			$rs->fields['unix_group_name'], 
-			html_entity_decode($rs->fields['short_description']), 
-			$rs->fields['register_purpose'], 
-			($rs->fields['status'] == 'A' ? 'approved' : 'rejected'), 
+			html_entity_decode($rs->fields['short_description']),
+			html_entity_decode($rs->fields['register_purpose']),
+			($rs->fields['status'] == 'A' ? 'accepted' : 'rejected'), 
 			'', 
 			$rs->fields['license']
 		));

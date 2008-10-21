@@ -11,14 +11,13 @@ class Project < ActiveRecord::Base
   
   belongs_to :license
   
-  acts_as_activated
   acts_as_commentable
   acts_as_taggable
   
   acts_as_state_machine :initial => :pending
   state :pending
   state :accepted, :after => :after_accepted
-  state :rejected, :after => :after_rejected
+  state :rejected
   
   event :accept do
     transitions :to => :accepted, :from => :pending
@@ -88,17 +87,11 @@ class Project < ActiveRecord::Base
   end
   
   def after_accepted
-    self.is_active = true
     self.approved_on = Time.now
     #unless current_user.nil?
     #  self.approved_by = current_user.id
     #end
     self.save
   end
-  
-  def after_rejected
-    self.is_active = false
-    self.save
-  end  
   
 end

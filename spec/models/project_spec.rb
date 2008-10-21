@@ -8,7 +8,6 @@ module ProjectSpecHelper
       :registration_reason => 'This is why?',
       :project_type => 'module',
       :project_category => 'somecategory',
-      :is_active => true,
       :state => 'pending',
       :license_id => 100 }
   end

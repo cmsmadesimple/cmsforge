@@ -68,7 +68,7 @@
       <h2>Assigned Projects</h2>
 		<p>
 		<% @user.assignments.each do |assignment| -%>
-			<% unless assignment.project.nil? -%>
+			<% unless assignment.project.nil? or assignment.project.state != 'accepted' -%>
   				<a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a><br />
 			<% end -%>
 		<% end -%>
