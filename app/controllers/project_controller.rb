@@ -136,6 +136,13 @@ class ProjectController < ApplicationController
     end
 
   end
+  
+  def search
+    @projects = Project.find_with_ferret(params['id'])
+    if @projects.size == 1
+      redirect_to @projects[0].home_page
+    end
+  end
 
   def promote
     assign = Assignment.find_by_id(params[:id])

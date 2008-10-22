@@ -14,6 +14,8 @@ class Project < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable
   
+  acts_as_ferret :fields => { :name  => {:store => :true}, :unix_name => {:store => :true}, :description => {} }
+  
   acts_as_state_machine :initial => :pending
   state :pending
   state :accepted, :after => :after_accepted

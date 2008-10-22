@@ -1,0 +1,27 @@
+<div class="content">
+<table class="data_table">
+
+  <tr>
+    <th><h4>Name</h4></th>
+    <th><h4>Description</h4></th>
+  </tr>
+
+  <% unless @projects.nil? or @projects.empty? -%>
+
+    <% @projects.each do |project| -%>
+
+      <tr>
+        <td><%= link_to(h(project.name), project.home_page) -%></td>
+        <td><%= h project.description -%></td>
+      </tr>
+
+    <% end -%>
+
+  <% else -%>
+
+    <tr><td colspan="5">No projects found!</td></tr>
+
+  <% end -%>
+
+</table>
+</div>

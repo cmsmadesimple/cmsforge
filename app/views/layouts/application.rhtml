@@ -44,11 +44,7 @@ body div#contentarea
 		<a href="http://www.cmsmadesimple.fr" onclick="javascript:urchinTracker('/outgoing/French_site');" title="Site francophone" target="_blank"><img src="/images/flags/fr.gif" alt="Site francophone" title="Site francophone" border="0" height="12" width="18" /></a>		
 	</p>
 	<div id="search_wrap">
-<form id="cntnt01moduleform_1" method="get" action="index.php"><div class="hidden"><input type="hidden" name="mact" value="Search,cntnt01,dosearch,0" /><input type="hidden" name="cntnt01returnid" value="58" /></div>
-<p id="search"><input type="text" name="cntnt01searchinput" id="cntnt01searchinput" value="" size="20" maxlength="50" onfocus="if(this.value==this.defaultValue) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" />
-<input class="bt-search" type="image" src="/images/button-search.gif"/></p><input type="hidden" name="cntnt01origreturnid" value="81" />
-
-</form>
+		<% form_tag(url_for(:controller => :project, :action => :search ), :id => 'cntnt01moduleform_1') do -%><p id="search"><%= text_field_tag(:id, '', :size => '20') %><%= image_submit_tag('/images/button-search.gif', { :class => 'bt-search' }) %></p><% end -%>
 </div>
 	<h1 id="cmsmslogo"><a href="http://www.cmsmadesimple.org/">CMSMS | CMS Made Simple</a></h1>
 </div>
