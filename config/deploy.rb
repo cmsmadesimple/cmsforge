@@ -45,3 +45,47 @@ namespace :deploy do
   end
 
 end
+
+# =============================================================================
+# FERRET
+# =============================================================================
+set :ferret_script_name, "ferret_#{application}_ctl"
+set :ferret_ctl, "/etc/init.d/#{ferret_script_name}"
+
+namespace :ferret do
+  desc "Uploads the ferret startup script"
+  task :install, :roles => :app, :only => {:primary => true} do 
+    require 'erb'
+    upload_path = "#{shared_path}/ferret" 
+    template = File.read("config/templates/ferret_ctl.erb")
+    file = ERB.new(template).result(binding) 
+    put file, upload_path, :mode => 0755
+    sudo "cp #{upload_path} #{ferret_ctl}"
+    sudo "chmod +x #{ferret_ctl}"
+    sudo "/sbin/chkconfig #{ferret_script_name} on"
+  end 
+
+  desc "Starts the ferret server"
+  task :start, :roles => :app, :only => {:primary => true} do
+    sudo "#{ferret_ctl} start"
+  end
+
+  desc "Stops the ferret server"
+  task :stop, :roles => :app, :only => {:primary => true} do
+    sudo "#{ferret_ctl} stop"
+  end
+
+  desc "Restarts the ferret server"
+  task :restart, :roles => :app, :only => {:primary => true} do
+    ferret.stop
+    ferret.start
+  end
+  
+  desc "Deletes the ferret startup script"
+  task :uninstall, :roles => :app, :only => {:primary => true} do 
+    sudo "/sbin/chkconfig #{ferret_script_name} off"
+    sudo "rm -rf #{ferret_ctl}"
+  end 
+  
+end
+after "deploy:symlink", "ferret:restart"
