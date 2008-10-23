@@ -1,6 +1,8 @@
 set :application, "cmsforge"
 set :repository, "http://svn.cmsmadesimple.org/svn/cmsforge/trunk"
 
+set :rails_env, "production"
+
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
 # via the :deploy_to variable:
@@ -15,9 +17,10 @@ set :deploy_via, :remote_cache
 set :user, "rails"
 set :ssh_options, { :forward_agent => true }
 set :use_sudo, false
+set :sudo_password, nil
 
 role :web, "web2.cmsmadesimple.org"
-role :app, "web2.cmsmadesimple.org"
+role :app, "web2.cmsmadesimple.org", :primary => true
 role :db,  "web2.cmsmadesimple.org", :primary => true
 set :keep_releases, 3
 
@@ -62,7 +65,7 @@ namespace :ferret do
     put file, upload_path, :mode => 0755
     sudo "cp #{upload_path} #{ferret_ctl}"
     sudo "chmod +x #{ferret_ctl}"
-    sudo "/sbin/chkconfig #{ferret_script_name} on"
+    sudo "/usr/sbin/update-rc.d #{ferret_script_name} defaults"
   end 
 
   desc "Starts the ferret server"
@@ -83,7 +86,7 @@ namespace :ferret do
   
   desc "Deletes the ferret startup script"
   task :uninstall, :roles => :app, :only => {:primary => true} do 
-    sudo "/sbin/chkconfig #{ferret_script_name} off"
+    sudo "/usr/sbin/update-rc.d -f #{ferret_script_name} remove"
     sudo "rm -rf #{ferret_ctl}"
   end 
   
