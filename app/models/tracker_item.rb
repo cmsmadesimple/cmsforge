@@ -13,6 +13,8 @@ class TrackerItem < ActiveRecord::Base
   acts_as_cached
   acts_as_commentable
   
+  acts_as_historizable
+  
   def self.per_page
     25
   end

@@ -16,8 +16,6 @@
 
 <h2>[#<%= @bug.id -%>] <%= @bug.summary -%></h2>
 
-<h3>Details</h3>
-
 <% form_tag :action => 'update' do -%>
 
 <div class="gravatar_user">
@@ -104,8 +102,12 @@
 
 <% end -%>
 
+<br />
+<br />
+
 <h2>History</h2>
 
+<% unless @bug.comments.empty? -%>
 <div class="commentsbox">
   <div class="header strong">Comments</div>
   <% @bug.comments.each do |comment| -%>
@@ -122,6 +124,7 @@ Posted By: <%= comment.user.name_and_link %>
     </div>
   <% end -%>
 </div>
+<% end -%>
 
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
@@ -137,6 +140,20 @@ Posted By: <%= comment.user.name_and_link %>
         <%= hidden_field_tag 'bug_id', @bug.id -%>
     </div>
   <% end -%>
+<% end -%>
+
+<% unless @bug.histories.empty? -%>
+<div class="historybox">
+	<div class="header strong">Updates</div>
+	<% @bug.histories.each do |h| -%>
+		<p>
+			Updated: <%= h.created_at.strftime("%Y-%m-%d %H:%M") -%><br />
+			<% h.history_lines.each do |h1| -%>
+				<%= "#{h1.field_name}: #{h1.field_value_was} => #{h1.field_value_actual}" -%><br />
+			<% end -%>
+		</p>
+	<% end -%>
+</div>
 <% end -%>
 
 <% end -%>

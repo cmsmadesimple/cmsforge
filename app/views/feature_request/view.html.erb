@@ -13,9 +13,7 @@
 
 <%= error_messages_for 'feature_request' -%>
 
-<h3>[#<%= @feature_request.id -%>] <%= @feature_request.summary -%></h3>
-
-<h4>Feature Request Details</h4>
+<h2>[#<%= @feature_request.id -%>] <%= @feature_request.summary -%></h2>
 
 <% form_tag :action => 'update' do -%>
 
@@ -78,6 +76,7 @@
 
 <h2>History</h2>
 
+<% unless @feature_request.comments.empty? -%>
 <div class="commentsbox">
   <div class="header">Comments</div>
   <% @feature_request.comments.each do |comment| -%>
@@ -94,6 +93,7 @@ Posted By: <%= comment.user.name_and_link %>
     </div>
   <% end -%>
 </div>
+<% end -%>
 
 <% unless current_user == :false -%>
   <% form_tag :action => 'add_comment' do -%>
@@ -109,5 +109,20 @@ Posted By: <%= comment.user.name_and_link %>
     </div>
   <% end -%>
 <% end -%>
+
+<% unless @feature_request.histories.empty? -%>
+<div class="historybox">
+	<div class="header strong">Updates</div>
+	<% @feature_request.histories.each do |h| -%>
+		<p>
+			Updated: <%= h.created_at.strftime("%Y-%m-%d %H:%M") -%><br />
+			<% h.history_lines.each do |h1| -%>
+				<%= "#{h1.field_name}: #{h1.field_value_was} => #{h1.field_value_actual}" -%><br />
+			<% end -%>
+		</p>
+	<% end -%>
+</div>
+<% end -%>
+
 <% end -%>
 </div><!--content-->
