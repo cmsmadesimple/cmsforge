@@ -8,6 +8,8 @@ class Package < ActiveRecord::Base
   
   acts_as_activated
   
+  acts_as_followable
+  
   def latest_release
     self.releases.find :first, :order => 'created_at DESC'
   end

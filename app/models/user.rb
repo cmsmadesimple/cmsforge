@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :projects, :through => :assignments
   has_many :ssh_keys
   
+  acts_as_follower
+  
   def member_of?(project)
     if self.superuser
       return true
