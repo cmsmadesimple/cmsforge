@@ -16,7 +16,7 @@ set :deploy_via, :remote_cache
 
 set :user, "rails"
 set :ssh_options, { :forward_agent => true }
-set :use_sudo, false
+#set :use_sudo, false
 set :sudo_password, nil
 
 role :web, "web2.cmsmadesimple.org"
@@ -48,6 +48,26 @@ namespace :deploy do
   end
 
 end
+
+namespace :delayed_job do
+  desc "Starts the delayed_job worker"
+  task :start, :roles => :app, :only => {:primary => true} do
+    run "RAILS_ENV=production #{current_path}/script/delayed_job > /dev/null 2>&1 &"
+  end
+  
+  desc "Stops the delayed_job worker"
+  task :stop, :roles => :app, :only => {:primary => true} do
+    sudo "kill `ps -ef | grep \"delayed_job\" | grep -v grep | awk '{print $2}'`"
+  end
+  
+  desc "Restarts the delayed_job worker"
+  task :restart, :roles => :app, :only => {:primary => true} do
+    delayed_job.stop
+    delayed_job.start
+  end
+end
+
+after "deploy:symlink", "delayed_job:restart"
 
 # =============================================================================
 # FERRET
