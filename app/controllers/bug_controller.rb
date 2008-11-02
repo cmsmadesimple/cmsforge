@@ -32,11 +32,8 @@ class BugController < ApplicationController
   def update
     @bug = Bug.find_by_id(params[:bug][:id])
     @project = @bug.project
-    @bug.update_attributes(params[:bug])
-    if @bug.valid?
-      if @bug.save
-        flash.now[:notice] = "Bug Succesfully Updated"
-      end
+    if @bug.update_attributes(params[:bug])
+      flash.now[:notice] = "Bug Succesfully Updated"
     end
 
     render :action => 'view' 
@@ -49,6 +46,9 @@ class BugController < ApplicationController
     comment.comment = params[:add_comment]
     comment.user = current_user
     bug.comments << comment
+    
+    #Kick off an update email
+    bug.save
     
     redirect_to :action => 'view', :id => bug.id
   end

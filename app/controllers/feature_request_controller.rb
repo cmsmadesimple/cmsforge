@@ -32,9 +32,8 @@ class FeatureRequestController < ApplicationController
   def update
     @feature_request = FeatureRequest.find_by_id(params[:feature_request][:id])
     @project = @feature_request.project
-    @feature_request.update_attributes(params[:feature_request])
-    if @feature_request.valid?
-      @feature_request.save
+    if @feature_request.update_attributes(params[:feature_request])
+      flash.now[:notice] = "Feature Request Succesfully Updated"
     end
 
     render :action => 'view' 
@@ -47,6 +46,9 @@ class FeatureRequestController < ApplicationController
     comment.comment = params[:add_comment]
     comment.user = current_user
     feature_request.comments << comment
+    
+    #Kick off update email
+    feature_request.save
     
     redirect_to :action => 'view', :id => feature_request.id
   end

@@ -1,0 +1,25 @@
+feature_requests item #<%= @feature_request.id -%>, was opened at <%= @feature_request.created_at.strftime('%Y-%m-%d %H:%M:%S') -%>
+You can respond by visiting:
+<%= @url -%>feature_request/view/<%= @feature_request.id -%>
+
+Submitted by: <%= @feature_request.created_by.full_name -%> (<%= @feature_request.created_by.login -%>)
+Assigned to: <%= @feature_request.assigned_to.full_name -%> (<%= @feature_request.assigned_to.login -%>)
+Summary: <%= @feature_request.summary -%>
+
+State: <%= @feature_request.state -%>
+
+Description:
+<%= word_wrap(@feature_request.description) -%>
+
+<% unless @feature_request.comments.empty? -%>
+----------------------------------------------------------------------
+<% @feature_request.comments.reverse.each do |comment| -%>
+Comment By: <%= comment.user.full_name -%> (<%= comment.user.login -%>)
+Date: <%= comment.created_at -%>
+
+Message:
+<%= word_wrap(comment.comment) -%>
+
+----------------------------------------------------------------------
+<% end -%>
+<% end -%>
