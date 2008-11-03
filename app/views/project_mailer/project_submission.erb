@@ -1,0 +1,14 @@
+New Forge Project Submitted
+
+Project Full Name:  <%= @project.name -%>
+Unix Name: <%= @project.unix_name -%>
+
+Submitted Description:
+<%= word_wrap(@project.description) -%>
+
+Registration Reason:
+<%= word_wrap(@project.registration_reason) -%>
+
+License: <%= @project.license.name -%>
+
+Please visit your forge homepage to accept or reject this project.

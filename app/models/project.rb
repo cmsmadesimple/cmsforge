@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
   acts_as_ferret :fields => { :name  => {:store => :true}, :unix_name => {:store => :true}, :description => {} }
   
   acts_as_state_machine :initial => :pending
-  state :pending
+  state :pending, :after => :after_pending
   state :accepted, :after => :after_accepted
   state :rejected
   
@@ -88,12 +88,20 @@ class Project < ActiveRecord::Base
     return self.created_at
   end
   
+  def after_pending
+    send_later(:send_submission_email)
+  end
+  
   def after_accepted
     self.approved_on = Time.now
     #unless current_user.nil?
     #  self.approved_by = current_user.id
     #end
     self.save
+  end
+  
+  def send_submission_email
+    ProjectMailer.deliver_project_submission(self)
   end
   
 end
