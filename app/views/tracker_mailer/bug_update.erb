@@ -6,9 +6,9 @@ You can respond by visiting:
 <% unless @bug.assigned_to.nil? -%>Assigned to: <%= @bug.assigned_to.full_name -%> (<%= @bug.assigned_to.login -%>)<% end -%>
 Summary: <%= @bug.summary -%>
 
-Version: <%= @bug.version.name -%>
-Resolution: <%= @bug.resolution.name -%>
-Severity: <%= @bug.severity.name -%>
+Version: <%= @bug.version.name unless @bug.version.nil? -%>
+Resolution: <%= @bug.resolution.name unless @bug.resolution.nil? -%>
+Severity: <%= @bug.severity.name unless @bug.severity.nil? -%>
 
 State: <%= @bug.state -%>
 
