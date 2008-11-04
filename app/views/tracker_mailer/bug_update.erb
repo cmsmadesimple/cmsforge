@@ -2,8 +2,8 @@ Bugs item #<%= @bug.id -%>, was opened at <%= @bug.created_at.strftime('%Y-%m-%d
 You can respond by visiting:
 <%= @url -%>bug/view/<%= @bug.id -%>
 
-Submitted by: <%= @bug.created_by.full_name -%> (<%= @bug.created_by.login -%>)
-Assigned to: <%= @bug.assigned_to.full_name -%> (<%= @bug.assigned_to.login -%>)
+<% unless @bug.created_by.nil? -%>Submitted by: <%= @bug.created_by.full_name -%> (<%= @bug.created_by.login -%>)<% end -%>
+<% unless @bug.assigned_to.nil? -%>Assigned to: <%= @bug.assigned_to.full_name -%> (<%= @bug.assigned_to.login -%>)<% end -%>
 Summary: <%= @bug.summary -%>
 
 Version: <%= @bug.version.name -%>

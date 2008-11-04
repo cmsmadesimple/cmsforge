@@ -2,8 +2,8 @@ feature_requests item #<%= @feature_request.id -%>, was opened at <%= @feature_r
 You can respond by visiting:
 <%= @url -%>feature_request/view/<%= @feature_request.id -%>
 
-Submitted by: <%= @feature_request.created_by.full_name -%> (<%= @feature_request.created_by.login -%>)
-Assigned to: <%= @feature_request.assigned_to.full_name -%> (<%= @feature_request.assigned_to.login -%>)
+<% unless @feature_request.created_by.nil? -%>Submitted by: <%= @feature_request.created_by.full_name -%> (<%= @feature_request.created_by.login -%>)<% end -%>
+<% unless @feature_request.assigned_to.nil? -%>Assigned to: <%= @feature_request.assigned_to.full_name -%> (<%= @feature_request.assigned_to.login -%>)<% end -%>
 Summary: <%= @feature_request.summary -%>
 
 State: <%= @feature_request.state -%>
