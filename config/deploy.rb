@@ -19,9 +19,9 @@ set :ssh_options, { :forward_agent => true }
 #set :use_sudo, false
 set :sudo_password, nil
 
-role :web, "web2.cmsmadesimple.org"
-role :app, "web2.cmsmadesimple.org", :primary => true
-role :db,  "web2.cmsmadesimple.org", :primary => true
+role :web, "web3.cmsmadesimple.org"
+role :app, "web3.cmsmadesimple.org", :primary => true
+role :db,  "web3.cmsmadesimple.org", :primary => true
 set :keep_releases, 3
 
 namespace :deploy do

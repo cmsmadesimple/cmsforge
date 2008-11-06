@@ -98,10 +98,20 @@ class Project < ActiveRecord::Base
     #  self.approved_by = current_user.id
     #end
     self.save
+    send_later(:create_repository)
   end
   
   def send_submission_email
     ProjectMailer.deliver_project_submission(self)
+  end
+  
+  def create_repository
+    config = SimpleConfig.for(:application)
+    if self.repository_type == 'git'
+      system(config.create_git_repos + "#{self.unix_name}")
+    else
+      system(config.create_svn_repos + "#{self.unix_name}")
+    end
   end
   
 end
