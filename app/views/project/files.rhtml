@@ -25,7 +25,8 @@
  
     <% for released_file in release.released_files %> 
 	<span class="rVersions">
-      <%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.download_path : released_file.public_filename ) %>  
+      <!-- <%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.download_path : released_file.public_filename ) %> -->
+		<%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.s3_url : released_file.public_filename ) %>
      </span>
 	 
 	 <span class="rLabel"> Size: </span>

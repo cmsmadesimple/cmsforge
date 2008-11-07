@@ -4,8 +4,9 @@ class ReleasedFile < ActiveRecord::Base
   
   validates_presence_of :filename, :release_id
   
-  has_attachment :storage => :file_system, 
-                 :max_size => 10.megabytes
+  has_attachment  :storage => :s3,
+                  :path_prefix => "downloads",
+                  :max_size => 25.megabytes
 
   validates_as_attachment
   
