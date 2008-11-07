@@ -65,6 +65,7 @@ class FeatureRequestController < ApplicationController
   
     unless params[:feature_request].nil?
       if @feature_request.valid?
+        @feature_request.state = 'Open'
         @feature_request.save
         redirect_to :action => 'list', :id => @feature_request.project_id
         return

@@ -37,7 +37,7 @@
   <div class="entry">
     <span class="label">Assigned To:</span>
     <span class="value">
-      <%= (current_user != :false and current_user.member_of?(@bug.project)) ? 
+      <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ? 
         select('bug', 'assigned_to_id', [['None' , '100']] + @bug.project.users.collect{ |a| ["#{a.full_name} (#{a.login})", a.id] }) : 
         (@bug.assigned_to.nil? ? 'None' : @bug.assigned_to.name_and_link) -%>
     </span>
@@ -46,7 +46,7 @@
   <div class="entry">
     <span class="label">Version:</span>
     <span class="value">
-      <%= (current_user != :false and current_user.member_of?(@bug.project)) ? 
+      <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ? 
         select('bug', 'version_id', [['None' , '-1']] + @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) :
         (@bug.version.nil? ? 'None' : @bug.version.name) -%>
     </span>
@@ -55,7 +55,7 @@
   <div class="entry">
     <span class="label">Severity:</span>
     <span class="value">
-      <%= (current_user != :false and current_user.member_of?(@bug.project)) ? 
+      <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ? 
         select('bug', 'severity_id', BugSeverity.all.collect { |c| [c.name, c.id] }) :
         (@bug.severity.nil? ? 'None' : @bug.severity.name) -%>
     </span>
@@ -64,7 +64,7 @@
   <div class="entry">
     <span class="label">Resolution:</span>
     <span class="value">
-      <%= (current_user != :false and current_user.member_of?(@bug.project)) ? 
+      <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ? 
         select('bug', 'resolution_id', BugResolution.all.collect { |c| [c.name, c.id] }) :
         (@bug.resolution.nil? ? 'None' : @bug.resolution.name) -%>
     </span>
@@ -73,7 +73,7 @@
   <div class="entry">
     <span class="label">State:</span>
     <span class="value">
-      <%= (current_user != :false and current_user.member_of?(@bug.project)) ? 
+      <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ? 
         select('bug', 'state', [['Open'], ['Closed']]) : 
         @bug.state -%>
     </span>
@@ -82,7 +82,7 @@
   <div class="entry">
     <div class="label">Summary:</div>
     <div class="value">
-      <%= (current_user != :false and current_user.member_of?(@bug.project)) ?
+      <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ?
         text_field('bug', 'summary', :size => '100', :maxlength => '255') :
         @bug.summary -%>
     </div>
