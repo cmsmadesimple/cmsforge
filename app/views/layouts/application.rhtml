@@ -40,9 +40,12 @@ body div#contentarea
 	<a name="top" id="top"></a>
 	<p id="languageselect">
 		Language:
-		<a href="http://www.cmsmadesimple.de" onclick="javascript:urchinTracker('/outgoing/German_site');" title="Zur deutschsprachigen Supportseite" target="_blank"><img src="/images/flags/de.gif" alt="Zur deutschsprachigen Supportseite" title="Zur deutschsprachigen Supportseite" /></a>
-		<a href="http://www.cmsmadesimple.fr" onclick="javascript:urchinTracker('/outgoing/French_site');" title="Site francophone" target="_blank"><img src="/images/flags/fr.gif" alt="Site francophone" title="Site francophone" border="0" height="12" width="18" /></a>		
-	</p>
+		<a href="http://www.cmsmadesimple.cz" onclick="javascript:urchinTracker('/outgoing/Czech_site');" title="CMS Made Simple Czech Site" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/cz.gif" alt="CMS made Simple Czech Site" title="CMS made Simple Czech Site" border="0" height="12" width="18" /></a>
+		<a href="http://www.cmsmadesimple.de" onclick="javascript:urchinTracker('/outgoing/German_site');" title="Zur deutschsprachigen Supportseite" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/de.gif" alt="Zur deutschsprachigen Supportseite" title="Zur deutschsprachigen Supportseite" border="0" height="12" width="18" /></a>
+		<a href="http://www.cmsmadesimple.fr" onclick="javascript:urchinTracker('/outgoing/French_site');" title="Site francophone" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/fr.gif" alt="Site francophone" title="Site francophone" border="0" height="12" width="18" /></a>		
+		<a href="http://www.cmsmadesimple.es" onclick="javascript:urchinTracker('/outgoing/Spanish_site');" title="Sitio en Castellano" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/es.gif" alt="Sitio en Castellano" title="Sitio en Castellano" border="0" height="12" width="18" /></a>		
+		<a href="http://www.cmsmadesimple.hu" onclick="javascript:urchinTracker('/outgoing/Hungarian_site');" title="CMSMS - Magyarország" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/hu.gif" alt="CMSMS - Magyarország" title="CMSMS - Magyarország" border="0" height="10" width="16" /></a>	
+		<a href="http://www.cmsmadesimple.ru" onclick="javascript:urchinTracker('/outgoing/Russian_site');" title="CMSMS - русский" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/ru.gif" alt="CMSMS -  русский" title="CMSMS - русский" border="0" height="10" width="16" /></a>
 	<div id="search_wrap">
 		<% form_tag(url_for(:controller => :project, :action => :search ), :id => 'cntnt01moduleform_1') do -%><p id="search"><%= text_field_tag(:id, '', :size => '20') %><%= image_submit_tag('/images/button-search.gif', { :class => 'bt-search' }) %></p><% end -%>
 </div>
@@ -51,129 +54,150 @@ body div#contentarea
 	<div id="wrapper-contentarea">
 		<div id="nav-header" class="clear">
 			<div class="menuwrapper">
-<ul id="primary-nav">
-	<li><a 
-href="http://www.cmsmadesimple.org/" accesskey="1" title="Home Page, shortcut key=1"><dfn>1: </dfn>Home</a>
+				<ul id="primary-nav">
+					<li class="menuactive"><a class="menuactive" 
+				href="http://www.cmsmadesimple.org/" accesskey="1" title="Home Page, shortcut key=1"><dfn>1: </dfn>Home</a>
 
-</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://www.cmsmadesimple.org/download.html" ><dfn>2: </dfn>Download</a>
-
-
-	<ul>
-	<li><a 
-href="http://dev.cmsmadesimple.org/frs/?group_id=6" ><dfn>2.1: </dfn>File Releases</a>
-
-</li>
-	<li><a 
-href="http://opensourcecms.com/index.php?option=content&amp;task=view&amp;id=452"  target="_blank"><dfn>2.2: </dfn>Demo</a>
+				</li>
+					<li class="menuparent"><a class="menuparent" 
+				href="http://www.cmsmadesimple.org/about-link" ><dfn>2: </dfn>About</a>
 
 
-	</li></ul>
-	</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://www.cmsmadesimple.org/support.html" ><dfn>4: </dfn>Support</a>
+					<ul>
+					<li><a 
+				href="http://www.cmsmadesimple.org/about-link/about-us" ><dfn>2.1: </dfn>About Us</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/about-link/testimonials" ><dfn>2.3: </dfn>Testimonials</a>
+
+				</li>
+					<li><a 
+				href="http://www.cafepress.com/cmsmadesimple" ><dfn>2.4: </dfn>Merchandise</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/about-link/donations" ><dfn>2.5: </dfn>Donations</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/about-link/about-this-website" ><dfn>2.7: </dfn>About This Website</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/about-link/sitemap" ><dfn>2.8: </dfn>Sitemap</a>
 
 
-	<ul>
-	<li><a 
-href="http://wiki.cmsmadesimple.org/" ><dfn>4.1: </dfn>Documentation</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/support/faq.html" ><dfn>4.2: </dfn>FAQ</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/support/irc.html" ><dfn>4.3: </dfn>IRC</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/support/participate.html" ><dfn>4.4: </dfn>Participate</a>
-
-</li>
-	<li><a 
-href="http://dev.cmsmadesimple.org/" ><dfn>4.5: </dfn>Report Bug or Feature Request</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/support/mailing-lists.html" ><dfn>4.6: </dfn>Mailing Lists</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/support/cms-made-simple-hosting.html" ><dfn>4.7: </dfn>CMS Made Simple Hosting</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/support/services.html" ><dfn>4.8: </dfn>Services</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/support/commercial-license.html" ><dfn>4.9: </dfn>Commercial License</a>
+					</li></ul>
+					</li>
+					<li class="menuparent"><a class="menuparent" 
+				href="http://www.cmsmadesimple.org/downloads" ><dfn>3: </dfn>Downloads</a>
 
 
-	</li></ul>
-	</li>
+					<ul>
+					<li><a 
+				href="http://dev.cmsmadesimple.org/frs/?group_id=6" ><dfn>3.1: </dfn>File Releases</a>
 
-	<li class="menuparent"><a class="menuparent" 
-href="http://forum.cmsmadesimple.org/" ><dfn>5: </dfn>Forum</a>
+				</li>
+					<li><a 
+				href="http://opensourcecms.com/index.php?option=content&amp;task=view&amp;id=452"  target="_blank"><dfn>3.2: </dfn>Demo</a>
 
+				</li>
+					<li><a 
+				href="http://themes.cmsmadesimple.org/" title="CMSms Themes Site" target="_blank"><dfn>3.3: </dfn>CMSms Themes Site</a>
 
-	<ul>
-	<li><a 
-href="http://forum.cmsmadesimple.org/index.php/board,1.0.html" ><dfn>5.1: </dfn>Announcements</a>
+				</li>
+					<li><a 
+				href="http://dev.cmsmadesimple.org/softwaremap/trove_list.php?form_cat=311" title="Get add-on modules to expand functionality here"><dfn>3.4: </dfn>Modules</a>
 
-</li>
-	<li><a 
-href="http://forum.cmsmadesimple.org/index.php/board,2.0.html" ><dfn>5.2: </dfn>General Discussion</a>
-
-
-	</li></ul>
-	</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://dev.cmsmadesimple.org/" ><dfn>6: </dfn>Development</a>
-
-
-	<ul>
-	<li><a 
-href="http://www.cmsmadesimple.org/development/roadmap.html" ><dfn>6.1: </dfn>Roadmap</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/development/changelog.html" ><dfn>6.2: </dfn>Changelog</a>
-
-</li>
-	<li><a 
-href="http://dev.cmsmadesimple.org/" ><dfn>6.3: </dfn>CMSMS Forge</a>
+				</li>
+					<li><a 
+				href="http://dev.cmsmadesimple.org/softwaremap/trove_list.php?form_cat=312" title="Get Plugins/tags here"><dfn>3.5: </dfn>Tags</a>
 
 
-	</li></ul>
-	</li>
-
-	<li class="menuparent"><a class="menuparent" 
-href="http://www.cmsmadesimple.org/about-us.html" ><dfn>7: </dfn>About Us</a>
-
-
-	<ul>
-	<li><a 
-href="http://www.cmsmadesimple.org/about-us/testimonials.html" ><dfn>7.2: </dfn>Testimonials</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/about-us/donations.html" ><dfn>7.3: </dfn>Donations</a>
-
-</li>
-	<li><a 
-href="http://www.cafepress.com/cmsmadesimple" ><dfn>7.4: </dfn>Merchandise</a>
-
-</li>
-	<li><a 
-href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitemap</a>
+					</li></ul>
+					</li>
+					<li class="menuparent"><a class="menuparent" 
+				href="http://www.cmsmadesimple.org/support" ><dfn>5: </dfn>Support</a>
 
 
-	</li></ul>		</li>
+					<ul>
+					<li><a 
+				href="http://wiki.cmsmadesimple.org/" ><dfn>5.1: </dfn>Documentation</a>
 
-	</ul>
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/support/faq" ><dfn>5.2: </dfn>FAQ</a>
+
+				</li>
+					<li><a 
+				href="http://blog.cmsmadesimple.org" ><dfn>5.3: </dfn>Blog</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/support/irc" ><dfn>5.4: </dfn>IRC</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/support/participate" ><dfn>5.5: </dfn>Participate</a>
+
+				</li>
+					<li><a 
+				href="http://dev.cmsmadesimple.org/" ><dfn>5.6: </dfn>Report Bug or Feature Request</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/support/mailing-lists" ><dfn>5.7: </dfn>Mailing Lists</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/support/cms-made-simple-hosting" ><dfn>5.9: </dfn>CMS Made Simple Hosting</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/support/services" ><dfn>5.10: </dfn>Professional Services</a>
+
+				</li>
+					<li><a 
+				href="http://www.cmsmadesimple.org/support/commercial-license" ><dfn>5.11: </dfn>Commercial License</a>
+
+
+					</li></ul>
+					</li>
+					<li class="menuparent"><a class="menuparent" 
+				href="http://forum.cmsmadesimple.org/" ><dfn>6: </dfn>Forum</a>
+
+
+					<ul>
+					<li><a 
+				href="http://forum.cmsmadesimple.org/index.php/board,40.0.html" ><dfn>6.1: </dfn>Rules</a>
+
+				</li>
+					<li><a 
+				href="http://forum.cmsmadesimple.org/index.php/board,1.0.html" ><dfn>6.2: </dfn>Announcements</a>
+
+
+					</li></ul>
+					</li>
+					<li class="menuparent"><a class="menuparent" 
+				href="http://dev.cmsmadesimple.org/" ><dfn>7: </dfn>Development</a>
+
+
+					<ul>
+					<li><a 
+				href="http://www.cmsmadesimple.org/development/roadmap" ><dfn>7.1: </dfn>Roadmap</a>
+
+				</li>
+					<li><a 
+				href="http://dev.cmsmadesimple.org/" ><dfn>7.3: </dfn>CMSMS Forge</a>
+
+				</li>
+					<li><a 
+				href="http://translations.cmsmadesimple.org/" title="Link to TranslationCenter site" target="_blank"><dfn>7.5: </dfn>Translationcenter</a>
+
+
+					</li></ul>		</li>
+					</ul>
 <div class="clearb"></div>
 </div>
 
@@ -251,33 +275,33 @@ href="http://www.cmsmadesimple.org/about-us/sitemap.html" ><dfn>7.5: </dfn>Sitem
 	<!--script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script-->
 </div>
 <div id="nav-footer" class="clear">
-	<ul>
-	<li><a 
-href="http://www.cmsmadesimple.org/" accesskey="1" title="Home Page, shortcut key=1"><dfn>1: </dfn>Home</a>
+		<ul>
+		<li class="menuactive"><a class="menuactive" 
+	href="http://www.cmsmadesimple.org/" accesskey="1" title="Home Page, shortcut key=1"><dfn>1: </dfn>Home</a>
 
-</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://www.cmsmadesimple.org/download.html" ><dfn>2: </dfn>Download</a>
+	</li>
+		<li class="menuparent"><a class="menuparent" 
+	href="http://www.cmsmadesimple.org/about-link" ><dfn>2: </dfn>About</a>
 
-</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://www.cmsmadesimple.org/support.html" ><dfn>4: </dfn>Support</a>
+	</li>
+		<li class="menuparent"><a class="menuparent" 
+	href="http://www.cmsmadesimple.org/downloads" ><dfn>3: </dfn>Downloads</a>
 
-</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://forum.cmsmadesimple.org/" ><dfn>5: </dfn>Forum</a>
+	</li>
+		<li class="menuparent"><a class="menuparent" 
+	href="http://www.cmsmadesimple.org/support" ><dfn>5: </dfn>Support</a>
 
-</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://dev.cmsmadesimple.org/" ><dfn>6: </dfn>Development</a>
+	</li>
+		<li class="menuparent"><a class="menuparent" 
+	href="http://forum.cmsmadesimple.org/" ><dfn>6: </dfn>Forum</a>
 
-</li>
-	<li class="menuparent"><a class="menuparent" 
-href="http://www.cmsmadesimple.org/about-us.html" ><dfn>7: </dfn>About Us</a>
+	</li>
+		<li class="menuparent"><a class="menuparent" 
+	href="http://dev.cmsmadesimple.org/" ><dfn>7: </dfn>Development</a>
 
 
-			</li>
-	</ul>
+				</li>
+		</ul>
 <div class="clearb"></div>
 
 </div>
