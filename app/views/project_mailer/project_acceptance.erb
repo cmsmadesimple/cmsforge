@@ -1,0 +1,23 @@
+Your project submission has been accepted!
+
+Visit your new project's home at: <%= @url.chomp('/') + @project.home_page -%>
+In addition, your project's code repository should be created.
+
+Thanks for your submission and happy developing!
+The CMSMS dev team
+
+
+------------------------
+
+Given Details:
+
+Project Full Name:  <%= @project.name -%>
+Unix Name: <%= @project.unix_name -%>
+
+Submitted Description:
+<%= word_wrap(@project.description) -%>
+
+Registration Reason:
+<%= word_wrap(@project.registration_reason) -%>
+
+License: <%= @project.license.name -%>

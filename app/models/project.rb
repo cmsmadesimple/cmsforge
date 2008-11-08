@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
   acts_as_state_machine :initial => :pending
   state :pending, :after => :after_pending
   state :accepted, :after => :after_accepted
-  state :rejected
+  state :rejected, :after => :after_rejected
   
   event :accept do
     transitions :to => :accepted, :from => :pending
@@ -99,10 +99,23 @@ class Project < ActiveRecord::Base
     #end
     self.save
     send_later(:create_repository)
+    send_later(:send_acceptance_email)
+  end
+  
+  def after_rejected
+    send_later(:send_rejection_email)
   end
   
   def send_submission_email
     ProjectMailer.deliver_project_submission(self)
+  end
+  
+  def send_acceptance_email
+    ProjectMailer.deliver_project_acceptance(self)
+  end
+  
+  def send_rejection_email
+    ProjectMailer.deliver_project_rejection(self)
   end
   
   def create_repository

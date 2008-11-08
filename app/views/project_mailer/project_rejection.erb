@@ -1,0 +1,23 @@
+We're sorry.  Your project submission was rejected.  The reason given was:
+<%= word_wrap(@project.reject_reason) -%>
+
+If you feel this was in err, please let a member of the dev team know.
+
+Thanks!
+The CMSMS dev team
+
+
+------------------------
+
+Given Details:
+
+Project Full Name:  <%= @project.name -%>
+Unix Name: <%= @project.unix_name -%>
+
+Submitted Description:
+<%= word_wrap(@project.description) -%>
+
+Registration Reason:
+<%= word_wrap(@project.registration_reason) -%>
+
+License: <%= @project.license.name -%>
