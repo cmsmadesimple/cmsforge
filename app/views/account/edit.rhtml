@@ -30,6 +30,21 @@
 
 	<% end %>
 	
+	<% form_for :user, @user, :url => { :action => 'update' } do |f| -%>
+
+    <fieldset>
+      <legend>Update Password</legend>
+      <p>
+        Modify your password here.
+      </p>
+      Password: <%= f.password_field 'password' -%><br />
+      Password Again: <%= f.password_field 'password_confirmation' -%><br />
+      <%= f.hidden_field 'id' -%>
+      <%= submit_tag -%>
+    </fieldset>
+
+  <% end -%>
+	
 	<% if current_user and current_user.id == @user.id -%>
 	<fieldset>
 		<legend>SSH Keys</legend>
