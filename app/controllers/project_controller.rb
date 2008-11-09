@@ -241,6 +241,25 @@ class ProjectController < ApplicationController
     redirect_to :action => 'admin', :id => params[:id]
 
   end
+  
+  def add_bug_version_to_project
+    @project = Project.find_by_id(params[:id])
+    unless logged_in? and current_user.admin_of?(@project)
+      redirect_to :action => 'view', :id => params[:id] and return
+    end
+
+    version = BugVersion.new
+    version.project_id = params[:id]
+    version.name = params[:name]
+    if version.save
+      flash[:notice] = 'Bug Version Added to Project'
+    else
+      flash[:warning] = 'There was an error adding the Bug Version'
+    end
+
+    redirect_to :action => 'admin', :id => params[:id]
+
+  end
 
   def add_comment
     @project = Project.find_by_id(params[:project_id])

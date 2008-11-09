@@ -155,5 +155,39 @@
  <% end -%>
 
 </fieldset>
+
+<fieldset>
+  <legend>Bug Versions</legend>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+		<th>Created</th>
+      </tr>
+    </thead>
+    <tbody>
+		<% BugVersion.find(:all, :conditions => ['project_id = ?', @project.id], :order => 'name DESC').each do |version| -%>
+			<tr>
+				<td>
+					<%= version.name -%>
+				</td>
+				<td>
+					<%= version.created_at.strftime("%Y-%m-%d") -%>
+				</td>
+			</tr>
+		<% end -%>
+    </tbody>
+  </table>
+
+  <% form_tag :action => 'add_bug_version_to_project', :id => @project.id do -%>
+	 <span class="label">Add Bug Version:</span><span class="label"><%= text_field_tag 'name', '', {:maxlength => 255} -%></span><span class="bt-forms">
+	<%= submit_tag 'Add Version' -%>
+	</span>
+	<div class="clearb">&nbsp;</div>
+ <% end -%>
+
+</fieldset>
+
 </div><!--data-->
 </div><!--content-->
