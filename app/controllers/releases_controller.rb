@@ -25,7 +25,13 @@ class ReleasesController < ApplicationController
       redirect_to :action => 'view', :id => @project, :controller => 'project'
     end
     if @release.save
-      flash[:notice] = 'Release was successfully created.' 
+      flash[:notice] = 'Release was successfully created.'
+      if params[:add_to_tracker] == '1'
+        version = BugVersion.new
+        version.project_id = @project.id
+        version.name = params[:release][:name]
+        version.save
+      end
       redirect_to :action => 'edit', :id => @release.id
     else
       render :action => 'new' 

@@ -17,6 +17,13 @@
   </div>
   
   <div class="entry">
+    <span class="label">Add Version to Bug Tracker:</span>
+    <span class="value">
+      <%= check_box_tag 'add_to_tracker' %>
+    </span>
+  </div>
+  
+  <div class="entry">
     <div class="label"></div>
     <div class="entry bt-forms">
       <%= hidden_field 'release', 'package_id' -%>
