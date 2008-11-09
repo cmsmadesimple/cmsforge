@@ -56,14 +56,14 @@
   <div class="entry">
     <div class="label">Changelog (optional -- no html):</div>
     <div class="value">
-      <%= text_area 'project', 'changelog', :cols => 80, :rows => 10 -%>
+      <%= text_area 'project', 'changelog', :cols => 120, :rows => 15 -%>
     </div>
   </div>
   
   <div class="entry">
     <div class="label">Roadmap (optional -- html allowed):</div>
     <div class="value">
-      <%= text_area 'project', 'roadmap', :cols => 80, :rows => 10 -%>
+      <%= text_area 'project', 'roadmap', :cols => 120, :rows => 15 -%>
     </div>
   </div>
    <div class="entry bt-forms">
@@ -122,14 +122,13 @@
       </tr>
     </thead>
     <tbody>
-      <% Package.find(:all, :conditions => ['project_id = ?', @project.id]).each do |package| -%>
+      <% Package.find_with_inactive(:all, :conditions => ['project_id = ?', @project.id]).each do |package| -%>
         <% form_tag :action => 'update_package', :id => package.id do -%>
           <tr>
             <td>
-			 <%= link_to('<img title="ADD" alt="ADD" src="/images/icons/add.gif"  />', :controller => 'releases', :action => 'new', :package_id => package.id) -%>	
+              <%= link_to('<img title="ADD" alt="ADD" src="/images/icons/add.gif"  />', :controller => 'releases', :action => 'new', :package_id => package.id) -%>	
               <%= link_to('[Add Release]', :controller => 'releases', :action => 'new', :package_id => package.id) -%>
-			  <%= link_to(' <img src="/images/icons/edit.gif" title="Edit Releases" alt="Edit Releases"  />', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
-			  		  
+              <%= link_to(' <img src="/images/icons/edit.gif" title="Edit Releases" alt="Edit Releases"  />', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
               <%= link_to('[Edit Releases]', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
             </td>
             <td>
@@ -163,29 +162,40 @@
     <thead>
       <tr>
         <th>Name</th>
-		<th>Created</th>
+        <th>Created</th>
+        <th>Active</th>
+        <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
-		<% BugVersion.find(:all, :conditions => ['project_id = ?', @project.id], :order => 'name DESC').each do |version| -%>
-			<tr>
-				<td>
-					<%= version.name -%>
-				</td>
-				<td>
-					<%= version.created_at.strftime("%Y-%m-%d") -%>
-				</td>
-			</tr>
-		<% end -%>
+    <% BugVersion.find(:all, :conditions => ['project_id = ?', @project.id], :order => 'name DESC').each do |version| -%>
+      <% form_tag :action => 'update_bug_version', :id => version.id do -%>
+      <tr>
+        <td>
+          <%= version.name -%>
+        </td>
+        <td>
+          <%= version.created_at.strftime("%Y-%m-%d") -%>
+        </td>
+        <td>
+          <select name='version[is_active]'>
+            <%= options_for_select [ [ 'True', true ], [ 'False', false ] ], version.is_active -%>
+          </select>
+        </td>
+        <td class="bt-forms"><%= hidden_field_tag 'project_id', @project.id -%><%= submit_tag 'Update' -%></td>
+      </tr>
+      <% end -%>
+    <% end -%>
     </tbody>
   </table>
 
   <% form_tag :action => 'add_bug_version_to_project', :id => @project.id do -%>
-	 <span class="label">Add Bug Version:</span><span class="label"><%= text_field_tag 'name', '', {:maxlength => 255} -%></span><span class="bt-forms">
-	<%= submit_tag 'Add Version' -%>
-	</span>
-	<div class="clearb">&nbsp;</div>
- <% end -%>
+    <span class="label">Add Bug Version:</span><span class="label"><%= text_field_tag 'name', '', {:maxlength => 255} -%></span><span class="bt-forms">
+      <%= submit_tag 'Add Version' -%>
+    </span>
+  <% end -%>
+
+ <div class="clearb">&nbsp;</div>
 
 </fieldset>
 

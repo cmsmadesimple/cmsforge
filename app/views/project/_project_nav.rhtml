@@ -13,11 +13,11 @@
     <li<%= ' class="tab active"' if @curloc == 'feature_request' -%>>
       <%= link_to 'Feature Requests', :controller => 'feature_request', :id => @project.id, :action => 'list' -%>
     </li>
-    <!--% unless @project.changelog.blank? -%-->
+    <% unless @project.changelog.blank? %>
       <li<%= ' class="tab active"' if @curloc == 'changelog' -%>>
         <%= link_to 'Changelog', :controller => 'project', :id => @project.id, :action => 'changelog' -%>
       </li>
-    <!--% end -%-->
+    <% end %>
     <% unless @project.roadmap.blank? -%>
       <li<%= ' class="tab active"' if @curloc == 'roadmap' -%>>
         <%= link_to 'Roadmap', :controller => 'project', :id => @project.id, :action => 'roadmap' -%>

@@ -23,7 +23,7 @@
   <div class="entry">
     <span class="label">Version:</span>
     <span class="value">
-      <%= select('bug', 'version_id', [['None' , '-1']] + @bug.project.bug_versions.collect{ |a| [a.name, a.id] }) -%>
+      <%= select('bug', 'version_id', [['None' , '-1']] + @bug.project.bug_versions.find_all_by_is_active(true).collect{ |a| [a.name, a.id] }) -%>
     </span>
   </div>
 

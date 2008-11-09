@@ -9,20 +9,20 @@
 <p class="project_description"><%= @project.description -%></p>
 <% @curloc = 'summary' -%>
 
-<div class="leftbox">
-<h2>Latest Release</h2>
 <% if @project.releases.count > 0 -%>
-  <% @project.packages.each do |package| %>
-    <% latest = package.latest_release -%>
-    <% unless latest.nil? %>
-      <h3><%= h package.name %></h3>
-      <%= h latest.name %><br />
-      <%= h latest.created_at.strftime('%x')%>
-	  <%= link_to "Release History", '/project/files/' + @project.id.to_s + '#package-' + package.id.to_s -%>
+  <div class="leftbox">
+  <h2>Latest Release</h2>
+    <% @project.packages.each do |package| %>
+      <% latest = package.latest_release -%>
+      <% unless latest.nil? %>
+        <h3><%= h package.name %></h3>
+        <%= h latest.name %><br />
+        <%= h latest.created_at.strftime('%x')%>
+  	  <%= link_to "Release History", '/project/files/' + @project.id.to_s + '#package-' + package.id.to_s -%>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>
-</div>
 
 <% if @project.articles.size > 0 -%>
 <div class="leftbox">

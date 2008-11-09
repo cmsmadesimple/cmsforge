@@ -9,35 +9,40 @@
 <h2>Download Section</h2>
 <div class="files">
 <% @curloc = 'files' -%>
-<% for package in @project.packages -%>
-  <a name="package-<%= package.id -%>"></a>
-  <h2><%= h package.name %></h2>
+<% if @project.releases.count > 0 -%>
+  <% for package in @project.packages -%>
+    <a name="package-<%= package.id -%>"></a>
+    <h2><%= h package.name %></h2>
 
-  <% releases = Release.find(:all, :conditions => ['package_id = ?', package.id], :order => 'created_at DESC') -%>
-  <% for release in releases %>
-	  <a name="release-<%= release.id -%>"></a>
-      <div class="rName">
-	  
-	  <span class="rNamePacket"><%= h release.name -%></span>
-	  <span> Released On: <%= h release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%></span>
-	  
-	  </div><!--rName-->
- 
-    <% for released_file in release.released_files %> 
-	<span class="rVersions">
-      <!-- <%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.download_path : released_file.public_filename ) %> -->
-		<%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.s3_url : released_file.public_filename ) %>
-     </span>
-	 
-	 <span class="rLabel"> Size: </span>
-	 <span class="rValue"><%= h released_file.size -%>  </span>
-	 
-	 <span class="rLabel"> Downloads: </span>
-	 <span class="rValue"><%= h released_file.downloads -%>  </span>
-	 <br />
-	 <% end %>
-   
-  <% end %>
+    <% releases = Release.find(:all, :conditions => ['package_id = ?', package.id], :order => 'created_at DESC') -%>
+    <% unless releases.empty? -%>
+      <% for release in releases %>
+        <a name="release-<%= release.id -%>"></a>
+        <div class="rName">
+          <span class="rNamePacket"><%= h release.name -%></span>
+          <span> Released On: <%= h release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%></span>
+        </div><!--rName-->
+
+        <% for released_file in release.released_files %> 
+          <span class="rVersions">
+            <!-- <%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.download_path : released_file.public_filename ) %> -->
+            <%= link_to (h(released_file.filename), released_file.content_type.nil? ? released_file.s3_url : released_file.public_filename ) %>
+          </span>
+
+          <span class="rLabel"> Size: </span>
+          <span class="rValue"><%= h released_file.size -%>  </span>
+
+          <span class="rLabel"> Downloads: </span>
+          <span class="rValue"><%= h released_file.downloads -%>  </span>
+          <br />
+        <% end %>
+      <% end %>
+    <% else -%>
+      <div class="rName">No File Releases Yet!</div>
+    <% end -%>
+  <% end -%>
+<% else -%>
+  <h3>No File Releases Yet!</h3>
 <% end -%>
 </div><!--files-->
 </div><!--content-->

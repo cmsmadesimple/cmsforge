@@ -242,6 +242,24 @@ class ProjectController < ApplicationController
 
   end
   
+  def update_bug_version
+    @project = Project.find_by_id(params[:project_id])
+    unless @project.nil? or !current_user.admin_of?(@project)
+      version = BugVersion.find_by_id(params[:id])
+      unless version.nil?
+        if version.update_attributes(params[:version])
+          flash[:notice] = 'Bug Version Updated'
+        else
+          flash[:warning] = 'There was an error updating the bug version'
+        end
+      else
+        flash[:warning] = 'There was an error updating the bug version'
+      end
+    end
+
+    redirect_to :action => 'admin', :id => params[:project_id]
+  end
+  
   def add_bug_version_to_project
     @project = Project.find_by_id(params[:id])
     unless logged_in? and current_user.admin_of?(@project)
