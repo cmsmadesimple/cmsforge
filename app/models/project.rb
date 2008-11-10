@@ -14,12 +14,13 @@ class Project < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable
   
-  acts_as_ferret :fields => { :name  => {:store => :true}, :unix_name => {:store => :true}, :description => {} }
+  acts_as_ferret :if => Proc.new { |project| project.state == 'accepted' }, :fields => { :name  => {:store => :true}, :unix_name => {:store => :true}, :description => {} }
   
   acts_as_state_machine :initial => :pending
   state :pending, :after => :after_pending
   state :accepted, :after => :after_accepted
   state :rejected, :after => :after_rejected
+  state :hidden
   
   event :accept do
     transitions :to => :accepted, :from => :pending
@@ -27,6 +28,14 @@ class Project < ActiveRecord::Base
   
   event :reject do
     transitions :to => :rejected, :from => :pending
+  end
+  
+  event :hide do
+    transitions :to => :hidden, :from => [:accepted, :pending, :rejected]
+  end
+  
+  event :show do
+    transitions :to => :accepted, :from => :hidden
   end
   
   #validates_presence_of     :name, :unix_name, :description, :registration_reason, :project_type
@@ -46,6 +55,10 @@ class Project < ActiveRecord::Base
     end
     self.downloads = count
     self.save
+  end
+  
+  def should_index?
+    self.state == 'accepted'
   end
   
   def home_page
