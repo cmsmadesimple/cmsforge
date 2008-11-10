@@ -78,9 +78,9 @@
       <h2>Project Summary</h2>
         <ul>
           <li><span class="label">Type:</span><span class="val"><%= h @project.project_type.humanize -%></span></li>
-          <li><span class="label">Created:</span><span class="val"><%= h @project.created_at.strftime('%c') unless @project.created_at.nil? -%></span></li>
+          <li><span class="label">Created:</span><span class="val"><%= h @project.created_at.strftime('%Y-%m-%d') unless @project.created_at.nil? -%></span></li>
 <% unless @project.next_planned_release.nil? %>
-          <li><span class="label">Next Planned Release:</span><span class="val"><%= h @project.next_planned_release -%> (as of <%= @project.updated_at -%>)</span></li>
+          <li><span class="label">Next Est. Release:</span><span class="val"><%= h @project.next_planned_release.strftime('%Y-%m-%d') -%></span></li>
 <% end -%>
         </ul>
     </div>
