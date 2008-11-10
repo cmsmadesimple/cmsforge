@@ -1,7 +1,7 @@
 <div id="content">
 <h2>Home Page for <%= h @user.login -%></h2>
 
-<div style="float: right;">
+<div style="float: right; width: 450px;">
 	<h4>Personal Information</h4>
 	<p>
 		User Id: <%= h @user.id -%><br />
@@ -17,6 +17,22 @@
 <div class="gravatar_user">
 	<%= gravatar_for @user -%>
 </div>
+
+<br style="clear: both;" />
+
+<% if @user == current_user -%>
+<h4>How do I change my avatar image?</h4>
+<p>
+  Avatar images are served via the <a href="http://gravatar.com" target="_blank">Gravatar</a> service.  Create an account on there with the same email
+  address as you used on this site, and upload any avatar you'd like.  This avatar will not only work
+  on this site, but hundreds of other sites as well.
+</p>
+
+<h4>How do I change my profile details?</h4>
+<p>
+  Click the <a href="/users/<%= current_user.login -%>/edit">Edit Profile</a> link above to edit your profile details.
+</p>
+<% end -%>
 
 </div>
 
