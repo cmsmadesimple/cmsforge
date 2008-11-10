@@ -22,19 +22,19 @@
 </div>
 
   <div class="entry">
-    <span class="label">Created By:</span>
+    <span class="label strong">Created By:</span>
     <span class="value"><%= @feature_request.created_by.name_and_link -%></span>
   </div>
 
   <div class="entry">
-    <span class="label">Date Submitted:</span>
+    <span class="label strong">Date Submitted:</span>
     <span class="value"><%= h @feature_request.created_at.strftime('%Y-%m-%d %H:%M') -%></span>
   </div>
 
 <br class="clearb" />
 
   <div class="entry">
-    <span class="label">Assigned To:</span>
+    <span class="label strong">Assigned To:</span>
     <span class="value">
       <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ? 
         select('feature_request', 'assigned_to_id', [['None' , '100']] + @feature_request.project.users.collect{ |a| ["#{a.full_name} (#{a.login})", a.id] }) : 
@@ -43,7 +43,7 @@
   </div>
   
   <div class="entry">
-    <span class="label">State:</span>
+    <span class="label strong">State:</span>
     <span class="value">
       <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ? 
         select('feature_request', 'state', [['Open'], ['Closed']]) : 
@@ -52,17 +52,21 @@
   </div>
 
   <div class="entry">
-    <div class="label">Summary:</div>
+    <div class="label strong">Summary:</div>
     <div class="value">
       <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ?
-        text_field('feature_request', 'summary', :size => '75', :maxlength => '255') :
+        text_field('feature_request', 'summary', :size => '100', :maxlength => '255') :
         @feature_request.summary -%>
     </div>
   </div>
 
   <div class="entry">
-    <div class="label">Detailed Description:</div>
-    <div class="entry"><pre><%= word_wrap(@feature_request.description, 80) %></pre></div>
+    <div class="label strong">Detailed Description:</div>
+    <div class="value">
+      <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ? 
+        text_area('feature_request', 'description', :cols => '100', :rows => '15') : 
+        '<pre>' + word_wrap(@feature_request.description, 80) + '</pre>' -%>
+    </div>
   </div>
 
   <%= hidden_field 'feature_request', 'id' -%>
@@ -78,7 +82,7 @@
 
 <% unless @feature_request.comments.empty? -%>
 <div class="commentsbox">
-  <div class="header">Comments</div>
+  <div class="header strong">Comments</div>
   <% @feature_request.comments.each do |comment| -%>
 	<div class="gravatar_user">
 		<%= gravatar_for comment.user -%>
