@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
   validates_length_of       :unix_name, :within => 3..15, :allow_nil => true
   validates_uniqueness_of   :name, :case_sensitive => false, :allow_nil => true
   validates_uniqueness_of   :unix_name, :case_sensitive => false, :allow_nil => true
-  validates_format_of       :unix_name, :with => /^[a-z][a-z_]+$/, :allow_nil => true
+  validates_format_of       :unix_name, :with => /^[a-z][a-z_\-]+$/, :allow_nil => true
   
   def calculate_total_downloads
     count = 0
