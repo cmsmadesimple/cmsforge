@@ -1,6 +1,7 @@
 set :application, "cmsforge"
 set :repository, "git://git.cmsmadesimple.org:cmsforge.git"
 
+
 set :rails_env, "production"
 
 # If you aren't deploying to /u/apps/#{application} on the target
