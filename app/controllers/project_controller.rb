@@ -138,7 +138,8 @@ class ProjectController < ApplicationController
   end
   
   def search
-    @projects = Project.find_with_ferret(params['id'])
+    term = !params['id'].nil? ? params['id'] : ''
+    @projects = Project.find_with_ferret(term)
     if @projects.size == 1
       redirect_to @projects[0].home_page
     end
