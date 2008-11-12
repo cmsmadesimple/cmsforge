@@ -16,5 +16,13 @@ class ApplicationController < ActionController::Base
     @current_action = action_name
     @current_controller = controller_name
   end
+  
+  EXCEPTIONS_NOT_LOGGED = ['ActionController::UnknownAction',
+                           'ActionController::RoutingError']
+
+  protected
+    def log_error(exc)
+      super unless EXCEPTIONS_NOT_LOGGED.include?(exc.class.name)
+    end
 
 end
