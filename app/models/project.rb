@@ -87,7 +87,7 @@ class Project < ActiveRecord::Base
   
   def repository_browser_url
     if self.repository_type == 'git'
-      "http://git.cmsmadesimple.org/?a=summary&p=#{self.unix_name}"
+      "http://git.cmsmadesimple.org/?p=#{self.unix_name}.git;a=summary"
     else
       "http://viewsvn.cmsmadesimple.org/listing.php?repname=#{self.unix_name}&path=%2F&sc=0"
     end
