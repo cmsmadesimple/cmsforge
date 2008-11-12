@@ -1,5 +1,5 @@
 set :application, "cmsforge"
-set :repository, "git://git.cmsmadesimple.org:cmsforge.git"
+set :repository, "git://git.cmsmadesimple.org/cmsforge.git"
 
 
 set :rails_env, "production"
@@ -13,7 +13,7 @@ set :deploy_to, "/var/www/cmsmadesimple.org/dev"
 # your SCM below:
 # set :scm, :subversion
 set :scm, :git
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 
 set :user, "rails"
 set :ssh_options, { :forward_agent => true }
