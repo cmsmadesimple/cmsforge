@@ -17,7 +17,7 @@
       <% unless latest.nil? %>
         <h3><%= h package.name %></h3>
         <%= h latest.name %><br />
-        <%= h latest.created_at.strftime('%x')%>
+        <%= h latest.created_at.strftime('%Y-%m-%d')%>
   	  <%= link_to "Release History", '/project/files/' + @project.id.to_s + '#package-' + package.id.to_s -%>
       <% end %>
     <% end %>
@@ -29,7 +29,7 @@
 <h2>News</h2>
 <% @project.articles.each do |article| %>
   <h3 class="project_news_header"><%= h article.title -%></h3>
-  <%= h article.author.login + ' - ' unless article.author.nil? %><%= h article.created_at.strftime('%c') -%>
+  <%= h article.author.login + ' - ' unless article.author.nil? %><%= h article.created_at.strftime('%Y-%m-%d %H:%M') -%>
 <% end %>
 </div>
 <% end %>
@@ -45,7 +45,7 @@
 	</div>
       <div class="entry">
         <pre>
-  Date: <%= h comment.created_at %>
+  Date: <%= h comment.created_at.strftime("%Y-%m-%d %H:%M") %>
   Posted By: <%= comment.user.name_and_link %>
 
   <%= h(word_wrap(comment.comment)) %>

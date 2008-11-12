@@ -89,7 +89,7 @@
 	</div>
     <div class="entry">
       <pre>
-Date: <%= comment.created_at %>
+Date: <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %>
 Posted By: <%= comment.user.name_and_link %>
 
 <%= word_wrap(comment.comment) %>
