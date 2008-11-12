@@ -7,7 +7,7 @@ module ApplicationHelper
   		if !active then return end
   		max, min = 0, 0
   		unless tags.empty?
-  			tags.sort! {|x,y| y.count <=> x.count}
+  			#tags.sort! {|x,y| y.count <=> x.count}
   			max = tags.first.count
   			min = tags.last.count			
   		end
