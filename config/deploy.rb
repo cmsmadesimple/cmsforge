@@ -1,5 +1,5 @@
 set :application, "cmsforge"
-set :repository, "http://svn.cmsmadesimple.org/svn/cmsforge/trunk"
+set :repository, "git://git.cmsmadesimple.org:cmsforge.git"
 
 set :rails_env, "production"
 
@@ -11,7 +11,7 @@ set :deploy_to, "/var/www/cmsmadesimple.org/dev"
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
 # set :scm, :subversion
-set :scm, :subversion
+set :scm, :git
 set :deploy_via, :remote_cache
 
 set :user, "rails"
