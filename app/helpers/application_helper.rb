@@ -9,10 +9,12 @@ module ApplicationHelper
   		unless tags.empty?
   			#tags.sort! {|x,y| y.count <=> x.count}
   			max = tags.first.count
-  			min = tags.last.count			
+  			min = tags.last.count
   		end
 
   		divisor = ((max - min) / classes.size) + 1
+  		if divisor == 0
+  		  divisor = 1
 
   		tags.each { |t|
   			  yield t.name, t.id, classes[(t.count.to_i - min) / divisor]
