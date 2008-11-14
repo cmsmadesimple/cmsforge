@@ -1,0 +1,42 @@
+<div class="content">
+
+<div id="data">
+
+<%= will_paginate @projects -%>
+
+<% form_tag '/admin/project_mass_update' do -%>
+  <%= submit_tag -%>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Tags</th>
+        <th>State</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <% @projects.each do |project| -%>
+      <tr class="Open <%= 'Minor' if project.project_type == '' and !['hidden', 'rejected'].include?(project.state) -%> <%= 'Major' if ['hidden', 'rejected'].include?(project.state) -%>">
+        <td><%= link_to(h(project.name), project.home_page, :target => '_blank') -%></td>
+        <td><%= select_tag 'project[' + project.id.to_s + '][project_type]', options_for_select([['(Select One)', ''], ['Module', 'module'], ['Plugin', 'plugin'], ['Documentation', 'documentation'], ['Translation', 'translation'], ['Core', 'core'], ['Other', 'other']], project.project_type) -%></td>
+        <td><%= text_field_tag('project[' + project.id.to_s + '][tag_list]', project.tags.join(", "), :size => 50) -%></td>
+        <td><%= h project.state.humanize -%></td>
+        <td>
+          <%= link_to('Hide', :action => 'change_state', :id => project.id, :state => 'hide', :page => params[:page]) if project.state == 'accepted' -%>
+          <%= link_to('Show', :action => 'change_state', :id => project.id, :state => 'show', :page => params[:page]) if project.state == 'hidden' -%>
+          <%= link_to('Accept', :action => 'change_state', :id => project.id, :state => 'accept', :page => params[:page]) if project.state == 'pending' -%> 
+          <%= link_to('Reject', :action => 'change_state', :id => project.id, :state => 'reject', :page => params[:page]) if project.state == 'pending' -%>
+          </td>
+      </tr>
+    <% end -%>
+  </table>  
+  <%= submit_tag -%>
+  <%= hidden_field_tag 'page', params[:page] -%>
+<% end -%>
+
+<%= will_paginate @projects -%>
+
+</div>
+
+</div>
