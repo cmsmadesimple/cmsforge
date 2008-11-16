@@ -49,7 +49,7 @@
 
       <h2>Assigned Projects</h2>
 		<p>
-		<% @user.assignments.each do |assignment| -%>
+		<% Assignment.find_all_by_user_id(@user.id, :order => 'projects.name ASC', :include => 'project').each do |assignment| -%>
 			<% unless assignment.project.nil? or assignment.project.state != 'accepted' -%>
   				<a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a><br />
 			<% end -%>
