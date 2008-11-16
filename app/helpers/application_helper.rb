@@ -7,9 +7,9 @@ module ApplicationHelper
   		if !active then return end
   		max, min = 0, 0
   		unless tags.empty?
-  			tags.sort! {|x,y| y.count <=> x.count}
-  			max = tags.first.count
-  			min = tags.last.count
+  			sorted_tags = tags.sort {|x,y| y.count <=> x.count}
+  			max = sorted_tags.first.count
+  			min = sorted_tags.last.count
   		end
 
   		divisor = ((max - min) / classes.size) + 1
