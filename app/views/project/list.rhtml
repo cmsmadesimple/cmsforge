@@ -1,35 +1,43 @@
 <div class="content">
+
+<div id="data">
   
 <%= will_paginate @projects -%>
   
 <table class="data_table">
 
+  <thead>
   <tr>
-    <th><h4>Name</h4></th>
-    <th><h4>Type</h4></th>
-    <th><h4>Description</h4></th>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Description</th>
   </tr>
+  </thead>
 
   <% unless @projects.nil? or @projects.empty? -%>
 
+  <tbody>
     <% @projects.each do |project| -%>
 
-      <tr>
-        <td><%= link_to(project.name, project.home_page) -%></td>
+      <tr class="Open">
+        <td class="strong"><%= link_to(project.name, project.home_page) -%></td>
         <td><%= project.project_type.humanize -%></td>
         <td><%= h project.description -%></td>
       </tr>
 
     <% end -%>
+    </tbody>
 
   <% else -%>
 
-    <tr><td colspan="3">No Projects with that tag!</td></tr>
+    <tr><td colspan="3">No Projects Found!</td></tr>
 
   <% end -%>
 
 </table>
 
 <%= will_paginate @projects -%>
+
+</div>
 
 </div>
