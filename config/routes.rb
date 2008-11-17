@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/frs?group_id=:id', :controller => 'project', :action => 'files'
   map.connect 'projects/:unix_name.:format', :controller => 'project', :action => 'view'
   map.connect 'projects/:unix_name', :controller => 'project', :action => 'view'
+  map.connect 'project/list/:project_type', :controller => 'project', :action => 'list'
   map.connect 'home', :controller => 'account', :action => 'view'
   map.connect '', :controller => "project", :action => 'home'
 

@@ -1,8 +1,12 @@
 <div class="content">
+  
+<%= will_paginate @projects -%>
+  
 <table class="data_table">
 
   <tr>
     <th><h4>Name</h4></th>
+    <th><h4>Type</h4></th>
     <th><h4>Description</h4></th>
   </tr>
 
@@ -11,7 +15,8 @@
     <% @projects.each do |project| -%>
 
       <tr>
-        <td><%= link_to(h(project.name), project.home_page) -%></td>
+        <td><%= link_to(project.name, project.home_page) -%></td>
+        <td><%= project.project_type.humanize -%></td>
         <td><%= h project.description -%></td>
       </tr>
 
@@ -19,9 +24,12 @@
 
   <% else -%>
 
-    <tr><td colspan="5">No Projects with that tag!</td></tr>
+    <tr><td colspan="3">No Projects with that tag!</td></tr>
 
   <% end -%>
 
 </table>
+
+<%= will_paginate @projects -%>
+
 </div>

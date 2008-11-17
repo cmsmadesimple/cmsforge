@@ -8,8 +8,14 @@ class ProjectController < ApplicationController
   end
   
   def list
+    conditions = ['state = ?', 'accepted']
+    if params[:project_type]
+      conditions[0] = conditions[0] + " and project_type = ?"
+      conditions << params[:project_type]
+    end
     respond_to do |format|
-      format.xml { render :xml => Project.find_in_state('accepted', :all, :order => 'id ASC').to_xml }
+      format.html { @projects = Project.paginate(:page => params[:page], :order => 'name ASC', :conditions => conditions) }
+      format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
     end
   end
 
