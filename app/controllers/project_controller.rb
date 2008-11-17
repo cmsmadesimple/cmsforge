@@ -4,7 +4,6 @@ class ProjectController < ApplicationController
 
   def list_tagged
     @projects = Project.find_tagged_with(params[:id])
-    render :template => "project/list" 
   end
   
   def list

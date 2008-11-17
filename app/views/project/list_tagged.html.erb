@@ -1,0 +1,39 @@
+<div class="content">
+
+<div id="data">
+  
+<table class="data_table">
+
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+
+  <% unless @projects.nil? or @projects.empty? -%>
+
+  <tbody>
+    <% @projects.each do |project| -%>
+
+      <tr class="Open">
+        <td class="strong"><%= link_to(project.name, project.home_page) -%></td>
+        <td><%= project.project_type.humanize -%></td>
+        <td><%= h project.description -%></td>
+      </tr>
+
+    <% end -%>
+    </tbody>
+
+  <% else -%>
+
+    <tr><td colspan="3">No projects with given tag found!</td></tr>
+
+  <% end -%>
+
+</table>
+
+</div>
+
+</div>
