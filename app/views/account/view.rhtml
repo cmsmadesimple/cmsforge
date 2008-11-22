@@ -47,7 +47,19 @@
 		</p>
 		<% end -%>
 
-      <h2>Assigned Projects</h2>
+		<% if @user.superuser -%>
+  			<% projects = find_projects_not_approved(@user) -%>
+  			<% unless projects.empty? -%>
+    			<h2>Pending Projects</h2>
+    			<p>
+    			<% projects.each do |project| -%>
+      				<%= link_to project.name, { :action => 'show_pending', :id => project.id, :controller => 'project' } -%> - <%= project.created_at.strftime('%m/%d/%Y %H:%M') -%><br />
+    			<% end -%>
+    			</p>
+  			<% end -%>
+		<% end -%>
+
+    <h2>Assigned Projects</h2>
 		<p>
 		<% Assignment.find_all_by_user_id(@user.id, :order => 'projects.name ASC', :include => 'project').each do |assignment| -%>
 			<% unless assignment.project.nil? or assignment.project.state != 'accepted' -%>
@@ -55,16 +67,6 @@
 			<% end -%>
 		<% end -%>
 		</p>
-
-		<% if @user.superuser -%>
-  			<% projects = find_projects_not_approved(@user) -%>
-  			<% unless projects.empty? -%>
-    			<h2>Pending Projects</h2>
-    			<% projects.each do |project| -%>
-      				<%= link_to project.name, { :action => 'show_pending', :id => project.id, :controller => 'project' } -%> - <%= project.created_at.strftime('%m/%d/%Y %H:%M') -%><br />
-    			<% end -%>
-  			<% end -%>
-		<% end -%>
 	</div>
   </div>
 </div><!--wrap-column-->
