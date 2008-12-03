@@ -17,6 +17,13 @@ class ProjectController < ApplicationController
       format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
     end
   end
+  
+  def list_xml_files
+    @files = ReleasedFile.find(:all, :conditions => "filename LIKE '%xml'", :order => 'filename ASC')
+    respond_to do |format|
+      format.xml { render :xml => @files.to_xml(:methods => [:public_filename]) }
+    end
+  end
 
   def view
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
