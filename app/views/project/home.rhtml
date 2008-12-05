@@ -59,6 +59,7 @@
 		<h2>Latest File Releases</h2>
 		<table>
 			<% Release.find(:all, :limit => 5, :order => 'created_at DESC').each do |this_release| -%>
+			<% if !this_release.package.nil? and !this_release.package.project.nil? -%>
 			<tr>
 				<td><strong><%= this_release.created_at.strftime('%d %b') -%></strong></td>
 				<td><%= this_release.package.project.name_and_home_page -%>
@@ -66,6 +67,7 @@
 					<br />Version: <a href="/project/files/<%= this_release.package.project.id -%>"><%= h this_release.name -%></a>
 				</td>
 			</tr>
+			<% end -%>
 			<% end -%>
 		</table>
 	</div>
