@@ -27,6 +27,10 @@ class TrackerItem < ActiveRecord::Base
     self.created_by_id > 0 ? User.get_cache(self.created_by_id).full_name : 'None'
   end
   
+  def resolution_string
+    !self.resolution.nil? ? self.resolution.name : 'None'
+  end
+  
   def after_save
     send_later(:send_email)
   end

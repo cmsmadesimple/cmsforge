@@ -8,6 +8,7 @@
 			<th><%= link_to 'Open Date', :sort_by=>(params[:sort_by]=='created_at ASC'?'created_at DESC':'created_at ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
 			<th><%= link_to 'Severity', :sort_by=>(params[:sort_by]=='severity_id ASC'?'severity_id DESC':'severity_id ASC'), :page => params[:page], :show_closed => @show_closed ? 'true' : 'false' -%></th>
 			<th>Version</th>
+			<th>Resolution</th>
 			<th>Assigned To</th>
 			<th>Submitted By</th>
 		</tr>
@@ -21,6 +22,7 @@
 					<td><%= bug.created_at.getgm.strftime('%Y-%m-%d') -%></td>
 					<td><% unless (bug.severity.nil?) -%><%= BugSeverity.find(bug.severity).name -%><% end -%></td>
 					<td><% unless (bug.version.nil?) -%><%= BugVersion.find(bug.version).name -%><% end -%></td>
+					<td><%= bug.resolution_string -%></td>
 					<td><%= bug.assigned_to_string -%></td>
 					<td><%= bug.created_by_string -%></td>
 				</tr>

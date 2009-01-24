@@ -43,6 +43,15 @@
   </div>
   
   <div class="entry">
+    <span class="label strong">Resolution:</span>
+    <span class="value">
+      <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ? 
+        select('feature_request', 'resolution_id', BugResolution.all.collect { |c| [c.name, c.id] }) :
+        (@feature_request.resolution.nil? ? 'None' : @feature_request.resolution.name) -%>
+    </span>
+  </div>
+  
+  <div class="entry">
     <span class="label strong">State:</span>
     <span class="value">
       <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ? 
