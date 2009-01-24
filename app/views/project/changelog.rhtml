@@ -1,25 +1,10 @@
-<% if @project.nil? -%>
+<% if @release.nil? -%>
 <div id="content">
-	<h3>Project Not Found!</h3>
+	<h3>Release Not Found!</h3>
 </div>
 
 <% else -%>
 
-<div class="content">
-<% @curloc = 'changelog' -%>
-
-
-<h4>Changelog</h4>
-
-<div><pre>&nbsp;<%= h @project.changelog -%></pre></div>
-
-<h3>Previous Releases</h3>
-<% for release in @project.releases %>
-<dl>
-  <dt><%= h release.name -%></dt>
-  <dd><pre><%= h release.changelog -%>&nbsp;</pre></dd>
-  </dl>
-<% end %>
-</div>
+<%= nl2br(@release.changelog) -%>
 
 <% end -%>

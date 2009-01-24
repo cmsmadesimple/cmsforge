@@ -1,6 +1,7 @@
 class ProjectController < ApplicationController
 
   before_filter :login_required, :only => [ :register, :admin, :demote, :promote, :remove_from_project, :update_package, :show_pending, :add_to_project, :add_comment ]
+  layout 'application', :except => [:changelog, :release_notes]
 
   def list_tagged
     @projects = Project.find_tagged_with(params[:id])
@@ -60,6 +61,20 @@ class ProjectController < ApplicationController
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml }
+    end
+  end
+  
+  def changelog
+    @release = Release.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def release_notes
+    @release = Release.find_by_id(params[:id])
+    respond_to do |format|
+      format.html
     end
   end
 

@@ -21,6 +21,12 @@
         <div class="rName">
           <span class="rNamePacket"><%= h release.name -%></span>
           <span> Released On: <%= h release.created_at.gmtime.strftime('%Y-%m-%d %H:%M') -%></span>
+          <% unless release.release_notes.blank? -%>
+            <span> | <a href="/project/release_notes/<%= release.id %>" title="Release Notes for <%= release.name -%> -- <%= @project.name %>" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;">Release Notes</a><span>
+          <% end -%>
+          <% unless release.changelog.blank? -%>
+            <span> | <a href="/project/changelog/<%= release.id %>" title="Changelog for <%= release.name -%> -- <%= @project.name %>" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;">Changelog</a><span>
+          <% end -%>
         </div><!--rName-->
 
         <% for released_file in release.released_files %> 
