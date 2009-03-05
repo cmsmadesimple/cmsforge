@@ -17,7 +17,7 @@
 
 				<tr class="<%= h feature_request.state -%>">
 				<td class="strong"><%= feature_request.id -%></td>
-				<td><%= link_to feature_request.summary, :controller => :feature_request, :action => :view, :id => feature_request.id -%></td>
+				<td><%= link_to h(feature_request.summary), :controller => :feature_request, :action => :view, :id => feature_request.id -%></td>
 				<td><%= feature_request.created_at.getgm.strftime('%Y-%m-%d %H:%M') -%></td>
 				<td><%= feature_request.resolution_string -%></td>
 				<td><%= feature_request.assigned_to_string -%></td>

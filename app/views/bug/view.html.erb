@@ -93,7 +93,7 @@
     <div class="value">
       <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ? 
         text_area('bug', 'description', :cols => '100', :rows => '15') : 
-        '<pre>' + word_wrap(@bug.description, 80) + "</pre>" -%>
+        '<pre>' + h(word_wrap(@bug.description, 80)) + "</pre>" -%>
     </div>
   </div>
 
@@ -123,7 +123,7 @@
 Date: <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %>
 Posted By: <%= comment.user.name_and_link %>
 
-<%= word_wrap(comment.comment) %>
+<%= h(word_wrap(comment.comment)) %>
       </pre>
     </div>
   <% end -%>

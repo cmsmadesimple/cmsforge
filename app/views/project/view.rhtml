@@ -6,7 +6,7 @@
 <% else -%>
 
 <div id="content">
-<p class="project_description"><%= @project.description -%></p>
+<p class="project_description"><%= h @project.description -%></p>
 <% @curloc = 'summary' -%>
 
 <% if @project.releases.count > 0 -%>

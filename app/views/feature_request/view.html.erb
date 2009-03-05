@@ -13,7 +13,7 @@
 
 <%= error_messages_for 'feature_request' -%>
 
-<h2>[#<%= @feature_request.id -%>] <%= @feature_request.summary -%></h2>
+<h2>[#<%= @feature_request.id -%>] <%= h @feature_request.summary -%></h2>
 
 <% form_tag :action => 'update' do -%>
 
@@ -65,7 +65,7 @@
     <div class="value">
       <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ?
         text_field('feature_request', 'summary', :size => '100', :maxlength => '255') :
-        @feature_request.summary -%>
+        h(@feature_request.summary) -%>
     </div>
   </div>
 
@@ -74,7 +74,7 @@
     <div class="value">
       <%= (current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by) ? 
         text_area('feature_request', 'description', :cols => '100', :rows => '15') : 
-        '<pre>' + word_wrap(@feature_request.description, 80) + '</pre>' -%>
+        '<pre>' + h(word_wrap(@feature_request.description, 80)) + '</pre>' -%>
     </div>
   </div>
 
@@ -101,7 +101,7 @@
 Date: <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %>
 Posted By: <%= comment.user.name_and_link %>
 
-<%= word_wrap(comment.comment) %>
+<%= h(word_wrap(comment.comment)) %>
       </pre>
     </div>
   <% end -%>
