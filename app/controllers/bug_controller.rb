@@ -8,6 +8,9 @@ class BugController < ApplicationController
     @so = 'id ASC'
     @so = params[:sort_by] unless (params[:sort_by].nil?)
     params[:page] ||= 1
+    if params[:page].to_i < 1
+      params[:page] = 1
+    end
     @bugs = Bug.paginate_by_project_id(params[:id], :order => @so, :conditions => conditions, :page => params[:page])
     @project = Project.find_by_id_and_state(params[:id], 'accepted')
     @project_id = params[:id]
