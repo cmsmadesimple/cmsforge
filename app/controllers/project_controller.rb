@@ -323,7 +323,7 @@ class ProjectController < ApplicationController
   def add_comment
     @project = Project.find_by_id(params[:project_id])
 
-    unless current_user.nil?
+    unless current_user.nil? or params[:add_comment].blank?
       comment = Comment.new
       comment.comment = params[:add_comment]
       comment.user = current_user

@@ -44,14 +44,15 @@ class BugController < ApplicationController
   
   def add_comment
     bug = Bug.find_by_id(params[:bug_id])
+    unless params[:add_comment].blank?
+      comment = Comment.new
+      comment.comment = params[:add_comment]
+      comment.user = current_user
+      bug.comments << comment
   
-    comment = Comment.new
-    comment.comment = params[:add_comment]
-    comment.user = current_user
-    bug.comments << comment
-    
-    #Kick off an update email
-    bug.save
+      #Kick off an update email
+      bug.save
+    end
     
     redirect_to :action => 'view', :id => bug.id
   end

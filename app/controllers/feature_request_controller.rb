@@ -44,14 +44,15 @@ class FeatureRequestController < ApplicationController
   
   def add_comment
     feature_request = FeatureRequest.find_by_id(params[:feature_request_id])
-  
-    comment = Comment.new
-    comment.comment = params[:add_comment]
-    comment.user = current_user
-    feature_request.comments << comment
+    unless params[:add_comment].blank?
+      comment = Comment.new
+      comment.comment = params[:add_comment]
+      comment.user = current_user
+      feature_request.comments << comment
     
-    #Kick off update email
-    feature_request.save
+      #Kick off update email
+      feature_request.save
+    end
     
     redirect_to :action => 'view', :id => feature_request.id
   end
