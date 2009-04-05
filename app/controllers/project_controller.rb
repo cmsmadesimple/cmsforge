@@ -1,9 +1,19 @@
 class ProjectController < ApplicationController
 
   before_filter :login_required, :only => [ :register, :admin, :demote, :promote, :remove_from_project, :update_package, :show_pending, :add_to_project, :add_comment ]
+  before_filter :check_format
   layout 'application', :except => [:changelog, :release_notes]
+  
+  def check_format
+    unless ['js', 'javascript', 'html', 'rss', 'xml'].include? params[:format]
+      params[:format] = 'html'
+    end
+  end
 
   def list_tagged
+    if params[:id].nil?
+      params[:id] = ''
+    end
     @projects = Project.find_tagged_with(params[:id])
   end
   
@@ -12,6 +22,9 @@ class ProjectController < ApplicationController
     if params[:project_type]
       conditions[0] = conditions[0] + " and project_type = ?"
       conditions << params[:project_type]
+    end
+    if params[:page].to_i < 1
+      params[:page] = 1
     end
     respond_to do |format|
       format.html { @projects = Project.paginate(:page => params[:page], :order => 'name ASC', :conditions => conditions) }
