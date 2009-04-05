@@ -145,6 +145,13 @@ class ProjectController < ApplicationController
     unless logged_in? and current_user.admin_of?(@project)
       redirect_to :action => 'view', :id => params[:id]
     end
+    
+    @admin_count = 0
+    @project.assignments.each do |assignment|
+      if assignment.role == 'Administrator'
+        @admin_count = @admin_count + 1
+      end
+    end
 
     unless params[:project].nil?
       @project.update_attributes(params[:project])
