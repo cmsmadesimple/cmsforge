@@ -16,6 +16,8 @@ class TrackerMailer < ActionMailer::Base
     #  bcc_list << user.email
     #end
     
+    bcc_list.uniq!
+    
     if config.send_bcc
       bcc bcc_list
     else
@@ -45,6 +47,8 @@ class TrackerMailer < ActionMailer::Base
     #feature_request.project.followers.each do |user|
     #  bcc_list << user.email
     #end
+    
+    bcc_list.uniq!
     
     if config.send_bcc
       bcc bcc_list

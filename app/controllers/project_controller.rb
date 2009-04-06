@@ -339,5 +339,51 @@ class ProjectController < ApplicationController
 
     redirect_to :action => 'view', :id => @project.id
   end
+  
+  def join_request
+    unless params[:id].nil?
+      project = Project.find(params[:id])
+      unless current_user == :false or project.users.include?(current_user) or project.has_join_request(current_user)
+        request = ProjectJoinRequest.new
+        request.user_id = current_user.id
+        request.project_id = project.id
+        request.state = 'pending'
+        if request.save
+          flash[:notice] = 'The project administrators have been notified of your request.  You will be contacted soon.'
+        else
+          flash[:warning] = 'There was an error sending your request.  Please contact a project\'s administrator to join.'
+        end
+      end
+    end
+    redirect_to :action => 'view', :id => project.id
+  end
+  
+  def accept_request
+    if params[:id].nil?
+      redirect_to '/'
+    end
+    req = ProjectJoinRequest.find(params[:id])
+    if req.nil?
+      redirect_to '/'
+    end
+    unless current_user == :false or !current_user.admin_of?(req.project)
+      req.accept!
+    end
+    redirect_to :action => 'view', :id => req.project.id
+  end
+  
+  def reject_request
+    if params[:id].nil?
+      redirect_to '/'
+    end
+    req = ProjectJoinRequest.find(params[:id])
+    if req.nil?
+      redirect_to '/'
+    end
+    unless current_user == :false or !current_user.admin_of?(req.project)
+      req.reject!
+    end
+    redirect_to :action => 'view', :id => req.project.id
+  end
 
 end

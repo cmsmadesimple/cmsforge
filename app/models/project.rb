@@ -140,4 +140,12 @@ class Project < ActiveRecord::Base
     end
   end
   
+  def pending_join_requests
+    ProjectJoinRequest.find(:all, :conditions => ['project_id = ? AND state = ?', self.id, 'pending'])
+  end
+  
+  def has_join_request(user)
+    ProjectJoinRequest.count(:conditions => ['user_id = ? AND project_id = ? AND state = ?', user.id, self.id, 'pending']) > 0
+  end
+  
 end

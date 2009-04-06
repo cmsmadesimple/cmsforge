@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081109124859) do
+ActiveRecord::Schema.define(:version => 20090406044725) do
 
   create_table "articles", :force => true do |t|
     t.integer  "project_id"
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(:version => 20081109124859) do
     t.string   "name"
     t.boolean  "is_public",  :default => true
     t.boolean  "is_active",  :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_join_requests", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.text     "message"
+    t.string   "state",      :default => "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

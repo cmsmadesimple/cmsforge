@@ -103,6 +103,20 @@
           <h2>Developers</h2>
           <ul><%= devtxt -%></ul>
       <% end -%>
+      <% unless current_user == :false or @project.users.include?(current_user) or @project.has_join_request(current_user) -%>
+        <h2>Request To Join</h2>
+        <ul><li><span class="vallight"><%= link_to("Request To Join Project", :controller => 'project', :action => 'join_request', :id => @project.id) -%></span></li></ul>
+      <% end -%>
+      <% jointxt = '' -%>
+      <% unless current_user == :false or !current_user.admin_of?(@project) -%>
+        <% @project.pending_join_requests.each do |req| -%>
+          <% jointxt << '<li><span class="vallight">' + req.user.name_and_link_with_nick + ' [' + link_to('accept', :controller => 'project', :action => 'accept_request', :id => req.id) + ' ' + link_to('x', :controller => 'project', :action => 'reject_request', :id => req.id) + ']</span></li>' -%>
+        <% end -%>
+      <% end -%>
+      <% unless jointxt.blank? -%>
+        <h2>Join Requests</h2>
+        <ul><%= jointxt -%></ul>
+      <% end -%>
       <% unless @project.tags.empty? -%>
 		<h2>Tags</h2>
 		<ul>
