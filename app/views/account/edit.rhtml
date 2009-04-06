@@ -25,7 +25,9 @@
 		Real Name: <%= f.text_field 'full_name' -%><br />
 		Email Address: <%= f.text_field 'email' -%><br />
 		<%= f.hidden_field 'id' -%>
-		<%= f.submit -%>
+		<div class="bt-forms">
+		  <%= f.submit -%>
+		</div>
 	</fieldset>
 
 	<% end %>
@@ -40,7 +42,9 @@
       Password: <%= f.password_field 'password' -%><br />
       Password Again: <%= f.password_field 'password_confirmation' -%><br />
       <%= f.hidden_field 'id' -%>
-      <%= submit_tag -%>
+      <div class="bt-forms">
+        <%= submit_tag -%>
+      </div>
     </fieldset>
 
   <% end -%>

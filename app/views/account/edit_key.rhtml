@@ -5,7 +5,9 @@
 <p>
 	Name: <%= f.text_field :name -%><br />
 	Key: <%= f.text_area :key -%><br />
-	<%= f.submit -%>
+	<div class="bt-forms">
+	  <%= f.submit -%>
+	</div>
 	<%= hidden_field_tag :id, @key.id -%>
 </p>
 
