@@ -77,6 +77,15 @@
         '<pre>' + h(word_wrap(@feature_request.description, 80)) + '</pre>' -%>
     </div>
   </div>
+  
+  <% if current_user != :false and current_user.member_of?(@feature_request.project) or current_user == @feature_request.created_by -%>
+  <div class="entry">
+    <div class="label strong">Add Comment:</div>
+    <div class="value">
+      <%= text_area_tag "add_comment", '', { :cols => 100, :rows => 15 } -%>
+    </div>
+  </div>
+  <% end -%>
 
   <%= hidden_field 'feature_request', 'id' -%>
   <% if current_user != :false -%>

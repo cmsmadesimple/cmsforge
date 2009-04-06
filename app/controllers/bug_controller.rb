@@ -35,7 +35,15 @@ class BugController < ApplicationController
   def update
     @bug = Bug.find_by_id(params[:bug][:id])
     @project = @bug.project
-    if @bug.update_attributes(params[:bug])
+    @bug.attributes = params[:bug]
+    if @bug.valid?
+      unless params[:add_comment].blank?
+        comment = Comment.new
+        comment.comment = params[:add_comment]
+        comment.user = current_user
+        @bug.comments << comment
+      end
+      @bug.save
       flash.now[:notice] = "Bug Succesfully Updated"
     end
 

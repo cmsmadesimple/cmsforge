@@ -96,6 +96,15 @@
         '<pre>' + h(word_wrap(@bug.description, 80)) + "</pre>" -%>
     </div>
   </div>
+  
+  <% if current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by -%>
+  <div class="entry">
+    <div class="label strong">Add Comment:</div>
+    <div class="value">
+      <%= text_area_tag "add_comment", '', { :cols => 100, :rows => 15 } -%>
+    </div>
+  </div>
+  <% end -%>
 
   <%= hidden_field 'bug', 'id' -%>
   <% if current_user != :false -%>

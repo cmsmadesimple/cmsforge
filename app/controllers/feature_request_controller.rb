@@ -35,11 +35,19 @@ class FeatureRequestController < ApplicationController
   def update
     @feature_request = FeatureRequest.find_by_id(params[:feature_request][:id])
     @project = @feature_request.project
-    if @feature_request.update_attributes(params[:feature_request])
+    @feature_request.attributes = params[:feature_request]
+    if @feature_request.valid?
+      unless params[:add_comment].blank?
+        comment = Comment.new
+        comment.comment = params[:add_comment]
+        comment.user = current_user
+        @feature_request.comments << comment
+      end
+      @feature_request.save
       flash.now[:notice] = "Feature Request Succesfully Updated"
     end
-
-    render :action => 'view' 
+    
+    render :action => 'view'
   end
   
   def add_comment
