@@ -90,9 +90,9 @@
       <% devtxt = '' -%>
       <% @project.assignments.each do |assignment| -%>
           <% if assignment.role == 'Administrator' -%>
-            <% admintxt << '<li><span class="vallight">'+assignment.user.name_and_link_no_nick+'</span></li>' -%>
+            <% admintxt << '<li><span class="vallight">'+assignment.user.name_and_link_with_nick+'</span></li>' -%>
               <% else -%>
-            <% devtxt << '<li><span class="vallight">'+assignment.user.name_and_link_no_nick + '</span></li>' -%>
+            <% devtxt << '<li><span class="vallight">'+assignment.user.name_and_link_with_nick + '</span></li>' -%>
           <% end -%>
       <% end -%>
       <% unless admintxt.blank? -%>

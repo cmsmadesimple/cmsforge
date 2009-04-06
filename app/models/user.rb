@@ -74,6 +74,13 @@ class User < ActiveRecord::Base
       str = "<a href=\"#{self.home_url}\">#{self.full_name}</a>"
     end
   end
+  
+  def name_and_link_with_nick
+    str = self.full_name
+    if self.login != 'None'
+      str = "<a href=\"#{self.home_url}\">#{self.full_name} (#{self.login})</a>"
+    end
+  end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
