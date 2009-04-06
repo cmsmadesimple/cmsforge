@@ -227,8 +227,9 @@ body div#contentarea
             <% if logged_in? -%>
               <li class="tab"><a class="tablink" href="/users/<%= current_user.login -%>">My&nbsp;Page</a></li>
               <li class="tab"><a class="tablink" href="/users/<%= current_user.login -%>/edit">Edit&nbsp;Profile</a></li>
-              <li class="tab"><a class="tablink" href="/beta.html" title="We're in Beta" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;"><span style="color: red; font-weight: bold;">We're in beta.  Read more.</span></a></li>
             <% end -%>
+            <li class="tab"><a class="tablink" href="/recent_changes.html" title="Recent Changes" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;"><span style="color: red; font-weight: bold;">Recent Changes</span></a></li>
+            <!-- <li class="tab"><a class="tablink" href="/beta.html" title="We're in Beta" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;"><span style="color: red; font-weight: bold;">We're in beta.  Read more.</span></a></li> -->
             </ul>
              </div><!--end nav_main-->
 			 
