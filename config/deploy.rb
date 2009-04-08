@@ -45,9 +45,13 @@ namespace :deploy do
       cp #{releases_path}/../database.yml #{release_path}/config/database.yml &&
       cp #{releases_path}/../amazon_s3.yml #{release_path}/config/amazon_s3.yml &&
       cp #{releases_path}/../hoptoad.rb #{release_path}/config/initializers/hoptoad.rb &&
-      rm -fr #{release_path}/db/sphinx &&
-      ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx
+      ln -s #{shared_path}/db/sphinx #{release_path}/db/
     CMD
+  end
+  
+  desc "Configure the sphinx server"
+  task :configure_sphinx, :roles => :app do
+    run "cd #{current_path} && rake ultrasphinx:configure RAILS_ENV=production && rake ultrasphinx:index RAILS_ENV=production"
   end
   
   desc "Stop the sphinx server"
@@ -57,12 +61,13 @@ namespace :deploy do
 
   desc "Start the sphinx server" 
   task :start_sphinx, :roles => :app do
-    run "cd #{current_path} && rake ultrasphinx:configure RAILS_ENV=production && rake ultrasphinx:index RAILS_ENV=production && rake ultrasphinx:daemon:start RAILS_ENV=production"
+    run "cd #{current_path} && rake ultrasphinx:daemon:start RAILS_ENV=production"
   end
 
   desc "Restart the sphinx server"
   task :restart_sphinx, :roles => :app do
     stop_sphinx
+    configure_sphinx
     start_sphinx
   end
 end
