@@ -14,7 +14,23 @@ class Project < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable
   
-  acts_as_ferret :if => Proc.new { |project| project.state == 'accepted' }, :fields => { :name  => {:store => :true}, :unix_name => {:store => :true}, :description => {} }
+  #acts_as_ferret :if => Proc.new { |project| project.state == 'accepted' }, :fields => { :name  => {:store => :true}, :unix_name => {:store => :true}, :description => {} }
+  is_indexed :fields => ['name', 'unix_name', 'description'],
+    :concatenate => [
+      {:association_name => "tags",
+        :field => "name",
+        :as => "tag_name",
+        :association_sql => "LEFT JOIN taggings ON (taggings.taggable_id=projects.id AND taggings.taggable_type='Project') LEFT JOIN tags ON taggings.tag_id=tags.id"}
+    ],
+    #:include => [{:association_name => "member", :field =>
+    #  "rating",
+    #  :as => "member_rating",
+    #  :association_sql => "LEFT JOIN members ON
+    #    members.id=products.member_id LEFT JOIN ratings ON
+    #    (ratings.rateable_id=members.id AND
+    #    ratings.rateable_type='Member')"}],
+    :conditions => "state = 'accepted'"#,
+    #:delta => {:field => "updated_at"}
   
   acts_as_state_machine :initial => :pending
   state :pending, :after => :after_pending

@@ -186,7 +186,10 @@ class ProjectController < ApplicationController
   
   def search
     term = !params['id'].nil? ? params['id'] : ''
-    @projects = Project.find_with_ferret(term)
+    #@projects = Project.find_with_ferret(term)
+    @search = Ultrasphinx::Search.new(:query => term, :class_names => ['Project'])
+    @search.excerpt
+    @projects = @search.results
     if @projects.size == 1
       redirect_to @projects[0].home_page
     end

@@ -44,11 +44,30 @@ namespace :deploy do
       mkdir -p -m 775 #{release_path}/config/initializers &&
       cp #{releases_path}/../database.yml #{release_path}/config/database.yml &&
       cp #{releases_path}/../amazon_s3.yml #{release_path}/config/amazon_s3.yml &&
-      cp #{releases_path}/../hoptoad.rb #{release_path}/config/initializers/hoptoad.rb
+      cp #{releases_path}/../hoptoad.rb #{release_path}/config/initializers/hoptoad.rb &&
+      rm -fr #{release_path}/db/sphinx &&
+      ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx
     CMD
   end
+  
+  desc "Stop the sphinx server"
+  task :stop_sphinx , :roles => :app do
+    run "cd #{current_path} && rake ultrasphinx:daemon:stop RAILS_ENV=production"
+  end
 
+  desc "Start the sphinx server" 
+  task :start_sphinx, :roles => :app do
+    run "cd #{current_path} && rake ultrasphinx:configure RAILS_ENV=production && rake ultrasphinx:index RAILS_ENV=production && rake ultrasphinx:daemon:start RAILS_ENV=production"
+  end
+
+  desc "Restart the sphinx server"
+  task :restart_sphinx, :roles => :app do
+    stop_sphinx
+    start_sphinx
+  end
 end
+
+after "deploy:symlink", "deploy:restart_sphinx"
 
 namespace :delayed_job do
   desc "Starts the delayed_job worker"
@@ -69,47 +88,3 @@ namespace :delayed_job do
 end
 
 after "deploy:symlink", "delayed_job:restart"
-
-# =============================================================================
-# FERRET
-# =============================================================================
-set :ferret_script_name, "ferret_#{application}_ctl"
-set :ferret_ctl, "/etc/init.d/#{ferret_script_name}"
-
-namespace :ferret do
-  desc "Uploads the ferret startup script"
-  task :install, :roles => :app, :only => {:primary => true} do 
-    require 'erb'
-    upload_path = "#{shared_path}/ferret" 
-    template = File.read("config/templates/ferret_ctl.erb")
-    file = ERB.new(template).result(binding) 
-    put file, upload_path, :mode => 0755
-    sudo "cp #{upload_path} #{ferret_ctl}"
-    sudo "chmod +x #{ferret_ctl}"
-    sudo "/usr/sbin/update-rc.d #{ferret_script_name} defaults"
-  end 
-
-  desc "Starts the ferret server"
-  task :start, :roles => :app, :only => {:primary => true} do
-    sudo "#{ferret_ctl} start"
-  end
-
-  desc "Stops the ferret server"
-  task :stop, :roles => :app, :only => {:primary => true} do
-    sudo "#{ferret_ctl} stop"
-  end
-
-  desc "Restarts the ferret server"
-  task :restart, :roles => :app, :only => {:primary => true} do
-    ferret.stop
-    ferret.start
-  end
-  
-  desc "Deletes the ferret startup script"
-  task :uninstall, :roles => :app, :only => {:primary => true} do 
-    sudo "/usr/sbin/update-rc.d -f #{ferret_script_name} remove"
-    sudo "rm -rf #{ferret_ctl}"
-  end 
-  
-end
-after "deploy:symlink", "ferret:restart"

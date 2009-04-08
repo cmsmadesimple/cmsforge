@@ -1,0 +1,13 @@
+<h1>Addresses controller, new action</h1>
+
+<p>Edit this file in <tt>app/views/addresses/new.html.erb</tt></p>
+
+<%= error_messages_for :address %>
+
+<% form_for(@address, :action => url(:addresses) ) do |f| %>
+  <p>
+    <%= submit_button "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', url(:addresses) %>

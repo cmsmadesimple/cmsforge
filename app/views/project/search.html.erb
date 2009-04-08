@@ -11,8 +11,8 @@
     <% @projects.each do |project| -%>
 
       <tr>
-        <td><%= link_to(h(project.name), project.home_page) -%></td>
-        <td><%= h project.description -%></td>
+        <td><%= link_to(project.name, project.home_page) -%></td>
+        <td><%= project.description -%></td>
       </tr>
 
     <% end -%>
