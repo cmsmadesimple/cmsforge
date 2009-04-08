@@ -129,6 +129,30 @@ class User < ActiveRecord::Base
   def recently_activated?
     @activated
   end
+  
+  def forgot_password
+    @forgotten_password = true
+    self.make_password_reset_code
+  end
+
+  def reset_password
+    # First update the password_reset_code before setting the 
+    # reset_password flag to avoid duplicate email notifications.
+    update_attributes(:password_reset_code => nil)
+    @reset_password = true
+  end
+
+  def recently_reset_password?
+    @reset_password
+  end
+
+  def recently_forgot_password?
+    @forgotten_password
+  end
+  
+  def self.find_for_forgot(email)
+    find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email]
+  end
 
   protected
     # before filter 
@@ -145,4 +169,9 @@ class User < ActiveRecord::Base
     def make_activation_code
       self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
     end
+    
+    def make_password_reset_code
+      self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
+
 end

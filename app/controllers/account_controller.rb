@@ -4,7 +4,7 @@ class AccountController < ApplicationController
   # If you want "remember me" functionality, add this before_filter to Application Controller
   #before_filter :login_from_cookie
   
-  #before_filter :login_required, :only => [ :view ]
+  #before_filter :login_required, :except => [ :view, :forgot_password, :reset_password ]
 
   # say something nice, you goof!  something sweet.
   def index
@@ -137,6 +137,40 @@ class AccountController < ApplicationController
       flash[:notice] = 'Key Successfully Deleted'
     end
     redirect_to('/users/' + @user.login + "/edit") and return
+  end
+  
+  def forgot_password
+    return unless request.post?
+    if @user = User.find_for_forgot(params[:email])
+      @user.forgot_password
+      @user.save
+      redirect_back_or_default(:controller => '/account', :action => 'index')
+      flash[:notice] = "A password reset link has been sent to your email address" 
+    else
+      flash[:notice] = "Could not find a user with that email address" 
+    end
+  end
+
+  def reset_password
+    @user = User.find_by_password_reset_code(params[:id])
+    raise if @user.nil? or params[:id].blank?
+    return if @user unless params[:password]
+      if (params[:password] == '')
+        flash[:notice] = "Password cannot be empty. Please try again."
+      elsif (params[:password] == params[:password_confirmation])
+        self.current_user = @user #for the next two lines to work
+        current_user.password_confirmation = params[:password_confirmation]
+        current_user.password = params[:password]
+        @user.reset_password
+        flash[:notice] = current_user.save ? "Password reset" : "Password not reset"
+      else
+        flash[:notice] = "Password mismatch. Please try again."
+      end  
+      redirect_back_or_default(:controller => '/account', :action => 'index') 
+    rescue
+      logger.error "Invalid Reset Code entered" 
+      flash[:notice] = "Sorry - That is an invalid password reset code. Please check your code and try again. (Perhaps your email client inserted a carriage return?" 
+      redirect_back_or_default(:controller => '/account', :action => 'index')
   end
 
 end

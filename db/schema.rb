@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090406044725) do
+ActiveRecord::Schema.define(:version => 20090408200309) do
 
   create_table "articles", :force => true do |t|
     t.integer  "project_id"
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20090406044725) do
     t.datetime "remember_token_expires_at"
     t.boolean  "superuser",                               :default => false
     t.string   "full_name"
+    t.string   "password_reset_code",       :limit => 40
   end
 
 end

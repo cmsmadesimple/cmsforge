@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
+  map.connect '/users/reset_password/:id', :controller => 'account', :action => 'reset_password'
+  map.connect '/users/forgot_password', :controller => 'account', :action => 'forgot_password'
   map.connect '/users/:login', :controller => 'account', :action => 'view', :requirements => { :login => /.*/}
   map.connect '/users/:login/edit', :controller => 'account', :action => 'edit', :requirements => { :login => /.*/}
   map.connect '/users', :controller => 'account', :action => 'login'
