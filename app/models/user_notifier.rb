@@ -13,7 +13,7 @@ class UserNotifier < ActionMailer::Base
   
   def forgot_password(user)
     setup_email(user)
-    @subject    += 'Request to change your password'
+    @subject     = '[CMS Made Simple Forge] Request to change your password'
     @body[:url]  = "http://dev.cmsmadesimple.org/account/reset_password/#{user.password_reset_code}" 
   end
 
