@@ -4,6 +4,11 @@ body #nav-footer ul li a.menuparent {
 
 }
 
+strong
+{
+	font-weight: bold;
+}
+
 /* Fix for Opera 8 */
 .clearb { clear: both; }
 .menuwrapper { 
