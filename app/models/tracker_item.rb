@@ -31,6 +31,10 @@ class TrackerItem < ActiveRecord::Base
     !self.resolution.nil? ? self.resolution.name : 'None'
   end
   
+  def state_string
+    !self.state.nil? ? self.state : 'None'
+  end
+  
   def after_save
     send_later(:send_email)
   end
