@@ -35,6 +35,7 @@ class ProjectController < ApplicationController
   def list_xml_files
     @files = ReleasedFile.find(:all, :conditions => "filename LIKE '%xml'", :order => 'filename ASC')
     respond_to do |format|
+      format.html { render :xml => @files.to_xml(:methods => [:public_filename]) }
       format.xml { render :xml => @files.to_xml(:methods => [:public_filename]) }
     end
   end
