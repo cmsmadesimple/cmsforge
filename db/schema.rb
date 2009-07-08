@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090408200309) do
+ActiveRecord::Schema.define(:version => 20090708214308) do
 
   create_table "articles", :force => true do |t|
     t.integer  "project_id"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20090408200309) do
     t.integer  "downloads"
     t.datetime "next_planned_release"
     t.string   "repository_type",      :default => "svn"
+    t.boolean  "show_join_request",    :default => false
   end
 
   create_table "released_files", :force => true do |t|

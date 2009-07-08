@@ -56,6 +56,13 @@
   </div>
   
   <div class="entry">
+    <span class="label">Show Request to Join:</span>
+    <span class="value">
+      <%= check_box 'project', 'show_join_request' -%>
+    </span>
+  </div>
+  
+  <div class="entry">
     <div class="label">Changelog (optional -- no html):</div>
     <div class="value">
       <%= text_area 'project', 'changelog', :cols => 120, :rows => 15 -%>
@@ -68,6 +75,7 @@
       <%= text_area 'project', 'roadmap', :cols => 120, :rows => 15 -%>
     </div>
   </div>
+  
    <div class="entry bt-forms">
      <%= submit_tag 'Submit', :name => 'submit_public_info' -%>
 </div>
