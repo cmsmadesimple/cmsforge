@@ -17,7 +17,7 @@
 
   <tbody>
     <% @releases.each do |release| -%>
-
+      <% if !this_release.package.nil? and !this_release.package.project.nil? -%>
       <tr class="Open">
 				<td><strong><%= release.created_at.strftime('%d %b %Y') -%></strong></td>
 				<td><%= release.package.project.name_and_home_page -%>
@@ -25,6 +25,7 @@
 					<br />Version: <a href="/project/files/<%= release.package.project.id -%>"><%= h release.name -%></a>
 				</td>
       </tr>
+      <% end -%>
 
     <% end -%>
     </tbody>
