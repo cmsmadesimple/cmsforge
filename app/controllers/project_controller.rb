@@ -389,5 +389,26 @@ class ProjectController < ApplicationController
     end
     redirect_to :action => 'view', :id => req.project.id
   end
+  
+  def latest_files
+    if params[:page].to_i < 1
+      params[:page] = 1
+    end
+    respond_to do |format|
+      format.html { @releases = Release.paginate(:page => params[:page], :order => 'created_at DESC') }
+      #format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
+    end
+  end
+  
+  def latest_registrations
+    conditions = ['state = ?', 'accepted']
+    if params[:page].to_i < 1
+      params[:page] = 1
+    end
+    respond_to do |format|
+      format.html { @projects = Project.paginate(:page => params[:page], :order => 'created_at DESC', :conditions => conditions) }
+      #format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
+    end
+  end
 
 end

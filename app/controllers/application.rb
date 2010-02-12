@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
 
-  include HoptoadNotifier::Catcher
+  #include HoptoadNotifier::Catcher
 
   include AuthenticatedSystem
   before_filter :login_from_cookie

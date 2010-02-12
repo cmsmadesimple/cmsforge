@@ -45,6 +45,8 @@ Rails::Initializer.run do |config|
   
   # See Rails::Configuration for more options
   config.active_record.observers = :user_observer
+  
+  config.gem 'hoptoad_notifier'
 end
 
 # Add new inflection rules using the following format 

@@ -57,6 +57,7 @@
 	</div>
 	<div class="block">
 		<h2>Latest File Releases</h2>
+		<div style="float: right;"><a href="/project/latest_files">See More</a></div>
 		<table>
 			<% Release.find(:all, :limit => 5, :order => 'created_at DESC').each do |this_release| -%>
 			<% if !this_release.package.nil? and !this_release.package.project.nil? -%>
@@ -73,6 +74,7 @@
 	</div>
 	<div class="block">
 		<h2>Recently Registered Projects</h2>
+		<div style="float: right;"><a href="/project/latest_registrations">See More</a></div>
 		<table>
 			<% Project.find_all_by_state('accepted', :limit => 5, :order => 'created_at DESC').each do |this_project| -%>
 			<tr>

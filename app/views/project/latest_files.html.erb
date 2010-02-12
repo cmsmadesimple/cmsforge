@@ -1,0 +1,44 @@
+<div class="content">
+
+<div id="data">
+  
+<%= will_paginate @releases -%>
+  
+<table class="data_table">
+
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+
+  <% unless @releases.nil? or @releases.empty? -%>
+
+  <tbody>
+    <% @releases.each do |release| -%>
+
+      <tr class="Open">
+				<td><strong><%= release.created_at.strftime('%d %b %Y') -%></strong></td>
+				<td><%= release.package.project.name_and_home_page -%>
+					<br />Package: <a href="/project/files/<%= release.package.project.id -%>"><%= h release.package.name -%></a>
+					<br />Version: <a href="/project/files/<%= release.package.project.id -%>"><%= h release.name -%></a>
+				</td>
+      </tr>
+
+    <% end -%>
+    </tbody>
+
+  <% else -%>
+
+    <tr><td colspan="3">No Releases Found!</td></tr>
+
+  <% end -%>
+
+</table>
+
+<%= will_paginate @releases -%>
+
+</div>
+
+</div>

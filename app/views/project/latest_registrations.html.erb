@@ -1,0 +1,41 @@
+<div class="content">
+
+<div id="data">
+  
+<%= will_paginate @projects -%>
+  
+<table class="data_table">
+
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+
+  <% unless @projects.nil? or @projects.empty? -%>
+
+  <tbody>
+    <% @projects.each do |project| -%>
+
+      <tr class="Open">
+        <td><strong><%= h project.approved_date.strftime('%d %b %Y') -%></strong></td>
+        <td><%= project.name_and_home_page -%></td>
+      </tr>
+
+    <% end -%>
+    </tbody>
+
+  <% else -%>
+
+    <tr><td colspan="3">No Projects Found!</td></tr>
+
+  <% end -%>
+
+</table>
+
+<%= will_paginate @projects -%>
+
+</div>
+
+</div>
