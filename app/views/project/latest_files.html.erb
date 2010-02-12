@@ -17,7 +17,7 @@
 
   <tbody>
     <% @releases.each do |release| -%>
-      <% if !release.package.nil? and !release.package.project.nil? -%>
+      <% if !release.nil? and !release.package.nil? and !release.package.project.nil? -%>
       <tr class="Open">
 				<td><strong><%= release.created_at.strftime('%d %b %Y') -%></strong></td>
 				<td><%= release.package.project.name_and_home_page -%>

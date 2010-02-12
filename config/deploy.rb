@@ -72,7 +72,7 @@ namespace :deploy do
   end
 end
 
-after "deploy:symlink", "deploy:restart_sphinx"
+#after "deploy:symlink", "deploy:restart_sphinx"
 
 namespace :delayed_job do
   desc "Starts the delayed_job worker"
