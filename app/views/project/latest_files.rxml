@@ -6,12 +6,14 @@ xml.rss(:version=>"2.0") {
     xml.description("Latest Project Registrations on the CMSMS Forge")
     xml.language("eng-us")
     for release in @releases
-      xml.item do
-        xml.title(release.package.project.name + " " + release.name)
-        xml.description(release.release_notes || release.changelog)
-        xml.pubDate(release.created_at.rfc2822)
-        xml.link("http://dev.cmsmadesimple.org" + release.package.project.home_page)
-        xml.guid("http://dev.cmsmadesimple.org" + release.package.project.home_page)
+      if !release.nil? and !release.package.nil? and !release.package.project.nil?
+        xml.item do
+          xml.title(release.package.project.name + " " + release.name)
+          xml.description(release.release_notes || release.changelog)
+          xml.pubDate(release.created_at.rfc2822)
+          xml.link("http://dev.cmsmadesimple.org" + release.package.project.home_page)
+          xml.guid("http://dev.cmsmadesimple.org" + release.package.project.home_page)
+        end
       end
     end
   }
