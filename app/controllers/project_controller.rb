@@ -391,22 +391,32 @@ class ProjectController < ApplicationController
   end
   
   def latest_files
+    @feed_url = url_for(:action => 'latest_files.rss', :controller => 'project', :only_path => false)
     if params[:page].to_i < 1
       params[:page] = 1
     end
     respond_to do |format|
       format.html { @releases = Release.paginate(:page => params[:page], :order => 'created_at DESC') }
+      format.rss {
+        @releases = Release.find(:all, :order => 'created_at DESC', :limit => 25)
+        render :layout => false
+      }
       #format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
     end
   end
   
   def latest_registrations
+    @feed_url = url_for(:action => 'latest_registrations.rss', :controller => 'project', :only_path => false)
     conditions = ['state = ?', 'accepted']
     if params[:page].to_i < 1
       params[:page] = 1
     end
     respond_to do |format|
       format.html { @projects = Project.paginate(:page => params[:page], :order => 'created_at DESC', :conditions => conditions) }
+      format.rss {
+        @projects = Project.find(:all, :order => 'created_at DESC', :conditions => conditions, :limit => 25)
+        render :layout => false
+      }
       #format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
     end
   end

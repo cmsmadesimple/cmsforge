@@ -2,7 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<% if @feed_url -%>
+<link rel="alternate" type="application/rss+xml" title="CMS Made Simple Dev Forge Feed" href="<%= @feed_url -%>" />
+<% else -%>
 <link rel="alternate" type="application/rss+xml" title="CMS Made Simple RSS Feed" href="http://blog.cmsmadesimple.org/feed/" />
+<% end -%>
 <title>CMS Made Simple - Forge<% unless @project.nil? -%>
 : <%= h @project.name -%>
 <% end -%></title>

@@ -1,0 +1,18 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.rss(:version=>"2.0") {
+  xml.channel {
+    xml.title("CMSMS Forge Latest Project Registrations")
+    xml.link("http://dev.cmsmadesimple.org/project/latest_registrations")
+    xml.description("Latest Project Registrations on the CMSMS Forge")
+    xml.language("eng-us")
+    for project in @projects
+      xml.item do
+        xml.title(project.name)
+        xml.description(project.description)
+        xml.pubDate(project.created_at.rfc2822)
+        xml.link("http://dev.cmsmadesimple.org" + project.home_page)
+        xml.guid("http://dev.cmsmadesimple.org" + project.home_page)
+      end
+    end
+  }
+}
