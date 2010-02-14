@@ -1,5 +1,7 @@
 <div class="content">
 
+<div style="float: right; margin-bottom: 5px;"><a href="<%= url_for(:action => 'latest_files.rss', :controller => 'project', :only_path => false) -%>"><img src="/images/feed-icon-28x28.png" border="0" alt="Subscribe to the Latest Files RSS" /></a></div>
+
 <div id="data">
   
 <%= will_paginate @projects -%>
