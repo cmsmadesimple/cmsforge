@@ -168,4 +168,20 @@ class Project < ActiveRecord::Base
     ProjectJoinRequest.count(:conditions => ['user_id = ? AND project_id = ? AND state = ?', user.id, self.id, 'pending']) > 0
   end
   
+  def latest_release
+    newest = nil
+    self.packages.each do |package|
+      release = package.latest_release
+      unless release.nil?
+        if newest.nil?
+          newest = release
+        elsif newest.created_at <= release.created_at
+          newest = release
+        end
+      end
+    end
+    
+    newest
+  end
+  
 end

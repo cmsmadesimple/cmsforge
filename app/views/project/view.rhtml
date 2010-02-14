@@ -78,10 +78,45 @@
       <div style="float: right; margin-bottom: 5px;"><a href="<%= url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false) -%>"><img src="/images/feed-icon-28x28.png" border="0" alt="Subscribe to the Latest Files RSS" /></a></div>
       <h2>Project Summary</h2>
         <ul>
-          <li><span class="label">Type:</span><span class="val"><%= h @project.project_type.humanize -%></span></li>
-          <li><span class="label">Created:</span><span class="val"><%= h @project.created_at.strftime('%Y-%m-%d') unless @project.created_at.nil? -%></span></li>
+          <li>
+            <span class="label">Type:</span>
+            <span class="val"><%= h @project.project_type.humanize -%></span>
+          </li>
+          <li>
+            <span class="label">Created:</span>
+            <span class="val">
+              <% unless @project.created_at.nil? -%>
+                <%= @project.created_at.strftime('%Y-%m-%d') -%> (<%= timeago(@project.created_at) -%>)
+              <% else -%>
+                None
+              <% end -%>
+            </span>
+          </li>
+          <li>
+            <span class="label">Last Release Date:</span>
+            <span class="val">
+              <% unless @project.latest_release.nil? -%>
+                <%= @project.latest_release.created_at.strftime("%Y-%m-%d") -%> (<%= timeago(@project.latest_release.created_at) -%>)
+              <% else -%>
+                None
+              <% end -%>
+            </span>
+          </li>
+          <li>
+            <span class="label">Last Commit Date:</span>
+            <span class="val">
+              <% unless @project.last_repository_date.nil? -%>
+                <%= @project.last_repository_date.strftime("%Y-%m-%d") -%> (<%= timeago(@project.last_repository_date) -%>)
+              <% else -%>
+                None
+              <% end -%>
+            </span>
+          </li>
 <% unless @project.next_planned_release.nil? %>
-          <li><span class="label">Next Est. Release:</span><span class="val"><%= h @project.next_planned_release.strftime('%Y-%m-%d') -%></span></li>
+          <li>
+            <span class="label">Next Est. Release:</span>
+            <span class="val"><%= h @project.next_planned_release.strftime('%Y-%m-%d') -%></span>
+          </li>
 <% end -%>
         </ul>
     </div>
