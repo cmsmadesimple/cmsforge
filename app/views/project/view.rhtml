@@ -95,8 +95,8 @@
           <li>
             <span class="label">Last Release Date:</span>
             <span class="val">
-              <% unless @project.latest_release.nil? -%>
-                <%= @project.latest_release.created_at.strftime("%Y-%m-%d") -%> (<%= timeago(@project.latest_release.created_at) -%>)
+              <% unless @project.last_file_date.nil? -%>
+                <%= @project.last_file_date.strftime("%Y-%m-%d") -%> (<%= timeago(@project.last_file_date) -%>)
               <% else -%>
                 None
               <% end -%>
