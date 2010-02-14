@@ -42,7 +42,9 @@ class ProjectController < ApplicationController
 
   def view
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
-    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    unless @project.nil?
+      @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    end
     respond_to do |format|
       format.html {
         render :template => 'project/view.rhtml'
@@ -57,7 +59,9 @@ class ProjectController < ApplicationController
   
   def code
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
-    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    unless @project.nil?
+      @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    end
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml }
@@ -66,7 +70,9 @@ class ProjectController < ApplicationController
 
   def changelog
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
-    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    unless @project.nil?
+      @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    end
     respond_to do |format|
       format.html
     end
@@ -74,7 +80,9 @@ class ProjectController < ApplicationController
 
   def roadmap
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
-    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    unless @project.nil?
+      @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    end
     respond_to do |format|
       format.html
     end
@@ -82,7 +90,9 @@ class ProjectController < ApplicationController
 
   def files
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
-    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    unless @project.nil?
+      @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    end
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml }
@@ -91,7 +101,9 @@ class ProjectController < ApplicationController
   
   def changelog
     @release = Release.find_by_id(params[:id])
-    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    unless @project.nil?
+      @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    end
     respond_to do |format|
       format.html
     end
@@ -99,7 +111,9 @@ class ProjectController < ApplicationController
   
   def release_notes
     @release = Release.find_by_id(params[:id])
-    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    unless @project.nil?
+      @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
+    end
     respond_to do |format|
       format.html
     end
