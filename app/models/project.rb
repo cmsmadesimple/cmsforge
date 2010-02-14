@@ -14,6 +14,10 @@ class Project < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable
   
+  named_scope :accepted, {:conditions => ['state = ?', 'accepted'], :order => 'name'}
+  named_scope :non_alphabetical, {:conditions => ["name REGEXP ?", "^[^a-z]"], :order => 'name'}
+  named_scope :starting_with, lambda{|letter|{:conditions => ["name LIKE ?", "#{letter}%"], :order => 'name'}}
+  
   #acts_as_ferret :if => Proc.new { |project| project.state == 'accepted' }, :fields => { :name  => {:store => :true}, :unix_name => {:store => :true}, :description => {} }
   is_indexed :fields => ['name', 'unix_name', 'description'],
     :concatenate => [

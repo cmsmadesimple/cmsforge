@@ -27,7 +27,15 @@ class ProjectController < ApplicationController
       params[:page] = 1
     end
     respond_to do |format|
-      format.html { @projects = Project.paginate(:page => params[:page], :order => 'name ASC', :conditions => conditions) }
+      format.html {
+        if params[:letter].nil?
+          @projects = Project.paginate(:page => params[:page], :order => 'name ASC', :conditions => conditions)
+        elsif params[:letter] == '0-9'
+          @projects = Project.non_alphabetical.paginate(:page => params[:page], :order => 'name ASC', :conditions => conditions)
+        else
+          @projects = Project.starting_with(params[:letter]).paginate(:page => params[:page], :order => 'name ASC', :conditions => conditions)
+        end
+      }
       format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
     end
   end

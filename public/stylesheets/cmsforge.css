@@ -1196,6 +1196,13 @@ float:left;
 	
 }
 
+#letter_list
+{
+	text-align: center;
+	font-size: 1.1em;
+	margin-bottom: 10px;
+}
+
 /*########## nuno debug ################*/
 .debug{
 	font-size: 5em;

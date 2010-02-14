@@ -2,6 +2,19 @@
 
 <div id="data">
   
+  <div id="letter_list">
+  <%= link_to 'All', url_for(:action => 'list', :controller => 'project')%>
+  <% letter_options.each do |letter| %>
+    <% if params[:letter] == letter %>
+      <span class="current"><%= letter %></span>
+    <% else %>
+      <%= link_to letter, url_for(:action => 'list', :controller => 'project', :letter => letter)%>
+    <% end %>
+  <% end %>
+  </div>
+  
+  <hr />
+  
 <%= will_paginate @projects -%>
   
 <table class="data_table">
