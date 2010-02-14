@@ -1,0 +1,20 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.rss(:version=>"2.0") {
+  xml.channel {
+    xml.title(@project.name + " File Releases")
+    xml.link("http://dev.cmsmadesimple.org" + @project.home_page)
+    xml.description("Latest File Releases for " + @project.name)
+    xml.language("eng-us")
+    for release in @releases
+      if !release.nil? and !release.package.nil? and !release.package.project.nil?
+        xml.item do
+          xml.title(@project.name + " " + release.name)
+          xml.description(release.release_notes || release.changelog)
+          xml.pubDate(release.created_at.rfc2822)
+          xml.link("http://dev.cmsmadesimple.org" + @project.home_page)
+          xml.guid("http://dev.cmsmadesimple.org" + @project.home_page)
+        end
+      end
+    end
+  }
+}

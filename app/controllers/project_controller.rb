@@ -42,9 +42,14 @@ class ProjectController < ApplicationController
 
   def view
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
+    @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
     respond_to do |format|
       format.html
       format.xml { render :xml => @project.to_xml(:include => {:packages => {:include => [:releases]}}) }
+      format.rss {
+        @releases = Release.find_by_sql("select releases.* from releases inner join packages on packages.id = releases.package_id where packages.project_id = " + @project.id.to_s + " order by created_at desc limit 25")
+        render :template => 'project/view.rxml', :layout => false
+      }
     end
   end
   
