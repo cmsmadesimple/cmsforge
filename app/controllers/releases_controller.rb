@@ -8,6 +8,13 @@ class ReleasesController < ApplicationController
     @project = @package.project
   end
   
+  def info
+    @release = Release.find_by_id(params[:id])
+    respond_to do |format|
+      format.xml { render :xml => @release.to_xml(:include => [:released_files])}
+    end
+  end
+  
   def new
     @release = Release.new
     @release.package_id = params[:package_id]
