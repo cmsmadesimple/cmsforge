@@ -427,14 +427,15 @@ class ProjectController < ApplicationController
   
   def delete_project
     if params[:id].nil?
-      redirect_to '/'
+      redirect_to '/' and return
     end
     project = Project.find(params[:id])
     if project.nil?
-      redirect_to '/'
+      redirect_to '/' and return
     end
     unless current_user == :false or !current_user.admin_of?(project)
       project.destroy
+      flash[:notice] = 'Project Deleted'
       redirect_to current_user.home_url and return
     end
     redirect_to :action => 'view', :id => project.id

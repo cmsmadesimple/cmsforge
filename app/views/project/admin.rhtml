@@ -76,6 +76,15 @@
     </div>
   </div>
   
+  <% if @project.repository_type == 'github' -%>
+  <div class="entry">
+    <div class="label">Github Repository in &quot;username/project&quot; format:</div>
+    <div class="value">
+      <%= text_field 'project', 'github_repo', :maxlenth => 255 -%>
+    </div>
+  </div>
+  <% end -%>
+  
    <div class="entry bt-forms">
      <%= submit_tag 'Submit', :name => 'submit_public_info' -%>
 </div>
