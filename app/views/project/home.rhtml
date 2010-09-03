@@ -84,9 +84,9 @@
 		</table>
 	</div>
 	<div class="block">
-		<h2>Project Tags</h2>
+		<h2>Popular Project Tags</h2>
 		<div id="cloud">
-			<%= render(:partial => "layouts/tag_cloud", :locals => {:tags => Project.tag_counts(:order => 'tags.name asc')}) %>
+			<%= render(:partial => "layouts/tag_cloud", :locals => {:tags => Project.tag_counts(:at_least => 2, :order => 'tags.name asc')}) %>
 		</div>
 	</div>
 </div>
