@@ -33,6 +33,8 @@ class AdminController < ApplicationController
         project.accept!
       elsif params[:state] == 'reject'
         project.reject!
+      elsif params[:state] == 'delete'
+        project.destroy
       end
     end
     

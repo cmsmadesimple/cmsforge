@@ -141,7 +141,9 @@ class Project < ActiveRecord::Base
   end
   
   def before_destroy
-    send_later(:drop_repository)
+    unless self.state == "rejected"
+      send_later(:drop_repository)
+    end
   end
   
   def send_submission_email

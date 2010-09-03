@@ -23,11 +23,12 @@
         <td><%= text_field_tag('project[' + project.id.to_s + '][tag_list]', project.tags.join(", "), :size => 50) -%></td>
         <td><%= h project.state.humanize -%></td>
         <td>
-          <%= link_to('Hide', :action => 'change_state', :id => project.id, :state => 'hide', :page => params[:page]) if project.state == 'accepted' -%>
-          <%= link_to('Show', :action => 'change_state', :id => project.id, :state => 'show', :page => params[:page]) if project.state == 'hidden' -%>
+          <%= link_to('Hide', :action => 'change_state', :id => project.id, :state => 'hide', :page => params[:page]) if project.state == 'accepted' -%> 
+          <%= link_to('Show', :action => 'change_state', :id => project.id, :state => 'show', :page => params[:page]) if project.state == 'hidden' -%> 
           <%= link_to('Accept', :action => 'change_state', :id => project.id, :state => 'accept', :page => params[:page]) if project.state == 'pending' -%> 
-          <%= link_to('Reject', :action => 'change_state', :id => project.id, :state => 'reject', :page => params[:page]) if project.state == 'pending' -%>
-          </td>
+          <%= link_to('Reject', :action => 'change_state', :id => project.id, :state => 'reject', :page => params[:page]) if project.state == 'pending' -%> 
+          <%= link_to('Delete', {:action => 'change_state', :id => project.id, :state => 'delete', :page => params[:page]}, :confirm => "Are you sure you want to delete this project?") unless project.state == 'pending' -%>
+        </td>
       </tr>
     <% end -%>
   </table>  
