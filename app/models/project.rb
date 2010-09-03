@@ -148,7 +148,12 @@ class Project < ActiveRecord::Base
   
   def before_destroy
     unless self.state == "rejected"
-      send_later(:drop_repository)
+      config = SimpleConfig.for(:application)
+      if self.repository_type == 'git'
+        system(config.drop_git_repos + "#{self.unix_name}")
+      elsif self.repository_type == 'svn'
+        system(config.drop_svn_repos + "#{self.unix_name}")
+      end
     end
   end
   
@@ -173,15 +178,6 @@ class Project < ActiveRecord::Base
       system(config.create_git_repos + "#{self.unix_name}")
     elsif self.repository_type == 'svn'
       system(config.create_svn_repos + "#{self.unix_name}")
-    end
-  end
-  
-  def drop_repository
-    config = SimpleConfig.for(:application)
-    if self.repository_type == 'git'
-      system(config.drop_git_repos + "#{self.unix_name}")
-    elsif self.repository_type == 'svn'
-      system(config.drop_svn_repos + "#{self.unix_name}")
     end
   end
   
