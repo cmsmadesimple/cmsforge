@@ -94,12 +94,16 @@ class Project < ActiveRecord::Base
     if public
       if self.repository_type == 'git'
         "git clone git://git.cmsmadesimple.org/#{self.unix_name}.git"
+      elsif self.repository_type == 'github'
+        "git clone git://github.com/#{self.github_repo}.git"
       else
         "svn checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
       end
     else
       if self.repository_type == 'git'
         "git clone git@git.cmsmadesimple.org:#{self.unix_name}.git"
+      elsif self.repository_type == 'github'
+        "git clone git@github.com:#{self.github_repo}.git"
       else
         "svn --username developername checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
       end
@@ -109,6 +113,8 @@ class Project < ActiveRecord::Base
   def repository_browser_url
     if self.repository_type == 'git'
       "http://git.cmsmadesimple.org/?p=#{self.unix_name}.git;a=summary"
+    elsif self.repository_type == 'github'
+      "http://github.com/#{self.github_repo}"
     else
       "http://viewsvn.cmsmadesimple.org/listing.php?repname=#{self.unix_name}&path=%2F&sc=0"
     end
@@ -162,7 +168,7 @@ class Project < ActiveRecord::Base
     config = SimpleConfig.for(:application)
     if self.repository_type == 'git'
       system(config.create_git_repos + "#{self.unix_name}")
-    else
+    elsif self.repository_type == 'svn'
       system(config.create_svn_repos + "#{self.unix_name}")
     end
   end
@@ -171,7 +177,7 @@ class Project < ActiveRecord::Base
     config = SimpleConfig.for(:application)
     if self.repository_type == 'git'
       system(config.drop_git_repos + "#{self.unix_name}")
-    else
+    elsif self.repository_type == 'svn'
       system(config.drop_svn_repos + "#{self.unix_name}")
     end
   end

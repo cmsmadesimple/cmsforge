@@ -9,10 +9,8 @@
       <%= text_field "project", "name", "size" => 40, "maxlength" => 40 -%>
     </div></div>
 	
-	
-  
   <div class="entry">
-    <div class="label">"Unix" Name:</div>
+    <div class="label">"Unix" Name (choose carefully -- this is the name of your code repository and used in urls to your project):</div>
 	 <div class="value">
     <%= text_field "project", "unix_name", "size" => 15, "maxlength" => 15 -%>
   </div></div>
@@ -44,7 +42,13 @@
   <div class="entry">
     <div class="label">Repository Type (can't be changed after project creation):</div>
 	 <div class="value">
-    <%= select("project", "repository_type", [ 'svn', 'git' ]) -%>
+    <%= select("project", "repository_type", [ 'svn', 'git', 'github' ]) -%>
+   </div></div>
+   
+   <div class="entry">
+    <div class="label"><em>Github Only:</em> Github Repository in &quot;username/project&quot; format (can be changed after project creation):</div>
+	 <div class="value">
+    <%= text_field "project", "github_repo", "size" => 40, "maxlength" => 100 -%>
    </div></div>
   
     <div class="entry bt-forms">
