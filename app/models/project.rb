@@ -1,13 +1,14 @@
 class Project < ActiveRecord::Base
   
-  has_many :assignments
+  has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
-  has_many :packages
-  has_many :releases, :through => :packages, :order => 'id DESC'
-  has_many :articles
-  has_many :bugs
-  has_many :feature_requests
-  has_many :bug_versions
+  has_many :packages, :dependent => :destroy
+  has_many :releases, :through => :packages, :order => 'id DESC', :dependent => :destroy
+  has_many :articles, :dependent => :destroy
+  has_many :bugs, :dependent => :destroy
+  has_many :feature_requests, :dependent => :destroy
+  has_many :bug_versions, :dependent => :destroy
+  has_many :project_join_requests, :dependent => :destroy
   
   belongs_to :license
   
@@ -139,6 +140,10 @@ class Project < ActiveRecord::Base
     send_later(:send_rejection_email)
   end
   
+  def before_destroy
+    send_later(:drop_repository)
+  end
+  
   def send_submission_email
     ProjectMailer.deliver_project_submission(self)
   end
@@ -157,6 +162,15 @@ class Project < ActiveRecord::Base
       system(config.create_git_repos + "#{self.unix_name}")
     else
       system(config.create_svn_repos + "#{self.unix_name}")
+    end
+  end
+  
+  def drop_repository
+    config = SimpleConfig.for(:application)
+    if self.repository_type == 'git'
+      system(config.drop_git_repos + "#{self.unix_name}")
+    else
+      system(config.drop_svn_repos + "#{self.unix_name}")
     end
   end
   

@@ -223,5 +223,20 @@
 
 </fieldset>
 
+<fieldset>
+  <legend>Delete Project</legend>
+  <p>
+    Deleting a project removes all traces of it from the system, including uploaded files and source code repositories. <span style="color: red;">Use 
+    with extreme caution!!!</span>
+  </p>
+  
+  <% form_tag :action => 'delete_project', :id => @project.id do -%>
+    <span class="bt-forms">
+      <%= submit_tag 'Delete Project', :confirm => "Are you sure you want to delete this project? All code repositories, files, etc. will be deleted. May God have mercy on your soul!" -%>
+    </span>
+  <% end -%>
+  
+</fieldset>
+
 </div><!--data-->
 </div><!--content-->

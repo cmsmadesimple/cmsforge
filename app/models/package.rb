@@ -1,8 +1,8 @@
 class Package < ActiveRecord::Base
   
   belongs_to :project
-  has_many :releases
-  has_many :articles
+  has_many :releases, :dependent => :destroy
+  #has_many :articles, :dependent => :destroy
   
   validates_presence_of :name, :project_id
   

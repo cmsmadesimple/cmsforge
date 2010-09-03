@@ -425,6 +425,21 @@ class ProjectController < ApplicationController
     redirect_to :action => 'view', :id => req.project.id
   end
   
+  def delete_project
+    if params[:id].nil?
+      redirect_to '/'
+    end
+    project = Project.find(params[:id])
+    if project.nil?
+      redirect_to '/'
+    end
+    unless current_user == :false or !current_user.admin_of?(project)
+      project.destroy
+      redirect_to current_user.home_url and return
+    end
+    redirect_to :action => 'view', :id => project.id
+  end
+  
   def latest_files
     @feed_url = url_for(:action => 'latest_files.rss', :controller => 'project', :only_path => false)
     if params[:page].to_i < 1
