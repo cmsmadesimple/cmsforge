@@ -5,6 +5,11 @@
 	<h3>Project Not Found!</h3>
 </div>
 
+<% elsif @project.repository_type == 'none' -%>
+<div id="content">
+	<h3>Project Has No Repository!</h3>
+</div>
+
 <% else -%>
 <div id="content">
 
@@ -14,10 +19,16 @@
 		This project uses subversion for it's source code management.
 	</p>
 
-	<% elsif @project.repository_type == 'git -'%>
+	<% elsif @project.repository_type == 'git' -%>
 	
 	<p>
 		This project uses git for it's source code management.
+	</p>
+	
+	<% elsif @project.repository_type == 'github' -%>
+	
+	<p>
+		This project uses github for it's source code management.
 	</p>
 	
 	<% end -%>

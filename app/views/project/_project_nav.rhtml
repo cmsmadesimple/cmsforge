@@ -23,9 +23,11 @@
         <%= link_to 'Roadmap', :controller => 'project', :id => @project.id, :action => 'roadmap' -%>
       </li>
     <% end -%>
+    <% unless @project.repository_type == 'none' -%>
     <li<%= ' class="tab active"' if @curloc == 'code' -%>>
       <%= link_to 'Code', :controller => 'project', :id => @project.id, :action => 'code' -%>
     </li>
+    <% end -%>
     <% if current_user != :false and (current_user.admin_of?(@project) or current_user.superuser) -%>
       <li<%= ' class="tab active"' if @curloc == 'admin' -%>>
         <%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%>
