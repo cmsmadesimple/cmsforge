@@ -1,5 +1,5 @@
 set :application, "cmsforge"
-set :repository, "git://git.cmsmadesimple.org/cmsforge.git"
+set :repository, "git://github.com/cmsmadesimple/cmsforge.git"
 
 
 set :rails_env, "production"
@@ -20,9 +20,9 @@ set :ssh_options, { :forward_agent => true }
 #set :use_sudo, false
 set :sudo_password, nil
 
-role :web, "web3.cmsmadesimple.org"
-role :app, "web3.cmsmadesimple.org", :primary => true
-role :db,  "web3.cmsmadesimple.org", :primary => true
+role :web, "web2.cmsmadesimple.org"
+role :app, "web2.cmsmadesimple.org", :primary => true
+role :db,  "web2.cmsmadesimple.org", :primary => true
 set :keep_releases, 3
 
 namespace :deploy do
