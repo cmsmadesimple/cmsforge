@@ -162,6 +162,9 @@ class Project < ActiveRecord::Base
   
   def send_rejection_email
     ProjectMailer.deliver_project_rejection(self)
+    
+    #Delete the project after the email is sent out
+    self.destroy and return
   end
   
   def create_repository
