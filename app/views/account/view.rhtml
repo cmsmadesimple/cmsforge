@@ -63,7 +63,11 @@
 		<p>
 		<% Assignment.find_all_by_user_id(@user.id, :order => 'projects.name ASC', :include => 'project').each do |assignment| -%>
 			<% unless assignment.project.nil? or assignment.project.state != 'accepted' -%>
-  				<a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a><br />
+  				<a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a>
+  				  <% if assignment.project.stale? -%>
+  				    <span style="color: red;">*Stale*</span>
+  				  <% end -%>
+  				<br />
 			<% end -%>
 		<% end -%>
 		</p>

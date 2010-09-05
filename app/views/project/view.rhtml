@@ -6,7 +6,19 @@
 <% else -%>
 
 <div id="content">
-<p class="project_description"><%= h @project.description -%></p>
+  <% if @project.stale? -%>
+  <div id="project_callout">
+    <strong>Notice:</strong> This project is marked as stale.  This means that it may work fine, but it 
+    has no file releases or repository commits in over a year.  Use your own 
+    discretion when using this project.
+    <% if current_user != :false and current_user.admin_of?(@project) -%>
+      <% form_tag :action => 'mark_not_stale', :id => @project.id do -%>
+      <br /><strong>As a project admin, if you know that this project is still compatible with current releases of CMS Made Simple, you can mark it as 'not stale' for another year by clicking here:</strong> <span class="bt-forms"><%= submit_tag 'Mark Not Stale', :name => 'mark_project_fresh' -%></span>
+      <% end -%>
+    <% end -%>
+  </div>
+  <% end -%>
+  <p class="project_description"><%= h @project.description -%></p>
 <% @curloc = 'summary' -%>
 
 <% if @project.releases.count > 0 -%>

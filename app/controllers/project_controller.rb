@@ -47,6 +47,14 @@ class ProjectController < ApplicationController
       format.xml { render :xml => @files.to_xml(:methods => [:public_filename]) }
     end
   end
+  
+  def list_xml_files_with_project
+    @projects = Project.find(:all, :distinct, :joins => "inner join packages on packages.project_id = projects.id inner join releases on releases.package_id = packages.id inner join released_files on released_files.release_id = releases.id", :conditions => "filename LIKE '%xml'", :order => 'filename ASC', :group => 'projects.id')
+    respond_to do |format|
+      format.html { render :xml => @projects.to_xml(:include => {:valid_xml_files => {:methods => [:public_filename]}}, :methods => [:stale?, :home_page], :except => [:registration_reason, :description, :roadmap, :changelog, 'reject-reason', 'show-join_request']) }
+      format.xml { render :xml => @projects.to_xml(:include => {:valid_xml_files => {:methods => [:public_filename]}}, :methods => [:stale?, :home_page], :except => [:registration_reason, :description]) }
+    end
+  end
 
   def view
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
@@ -470,6 +478,22 @@ class ProjectController < ApplicationController
       }
       #format.xml { render :xml => Project.find_in_state(:all, :accepted, :order => 'id ASC').to_xml }
     end
+  end
+
+	def mark_not_stale
+    if params[:id].nil?
+      redirect_to '/' and return
+    end
+    project = Project.find(params[:id])
+    if project.nil?
+      redirect_to '/' and return
+    else
+      unless current_user == :false or !current_user.admin_of?(project)
+        project.mark_not_stale!
+        flash[:notice] = 'Project Marked as Not Stale'
+      end
+    end
+    redirect_to project.home_page
   end
 
 end

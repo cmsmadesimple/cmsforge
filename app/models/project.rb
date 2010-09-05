@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_many :users, :through => :assignments
   has_many :packages, :dependent => :destroy
   has_many :releases, :through => :packages, :order => 'id DESC', :dependent => :destroy
+  has_many :valid_xml_files, :class_name => 'ReleasedFile', :finder_sql => 'SELECT released_files.* FROM released_files inner join releases on releases.id = released_files.release_id inner join packages on packages.id = releases.package_id WHERE released_files.filename LIKE \'%xml\' and packages.project_id = #{self.id} ORDER BY released_files.filename ASC', :counter_sql => 'SELECT count(released_files.*) FROM released_files inner join releases on releases.id = released_files.release_id inner join packages on packages.id = releases.package_id WHERE released_files.filename LIKE \'%xml\' and packages.project_id = #{self.id}', :readonly => true
   has_many :articles, :dependent => :destroy
   has_many :bugs, :dependent => :destroy
   has_many :feature_requests, :dependent => :destroy
@@ -77,6 +78,32 @@ class Project < ActiveRecord::Base
     self.downloads = count
     self.save
   end
+
+	def stale?
+		#if project is older than 6 mos, if project hasn't been committed to in 6 mos (or ever),
+		#if project hasn't had a file release in 6 mos (or ever), if it's a module or a plugin
+		#and if the freshness date is older than 6 mos
+		amount_of_time = 12.months.ago
+		
+		if self.project_type == 'module' or self.project_type == 'plugin'
+			if self.created_at < amount_of_time
+				if self.last_repository_date.nil? or self.last_repository_date < amount_of_time
+					if self.last_file_date.nil? or self.last_file_date < amount_of_time
+						if self.freshness_date.nil? or self.freshness_date < amount_of_time
+							return true
+						end
+					end
+				end
+			end
+		end
+		
+		return false
+	end
+	
+	def mark_not_stale!
+    self.freshness_date = Time.now
+    self.save
+	end
   
   def should_index?
     self.state == 'accepted'

@@ -991,6 +991,15 @@ select, menu {
 	/*font-weight: bold;*/
 
 }
+#project_callout {
+	width: auto;
+	background: #FFF1C1;
+	padding: 1em;
+	height: 1%;
+	border: 1px solid #E00000;
+	font-weight: normal;
+	margin-bottom: 1em;
+}
 .errorExplanation ul li{
 
 }
