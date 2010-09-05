@@ -58,7 +58,9 @@ class ProjectController < ApplicationController
 
   def view
     @project = Project.find_by_unix_name_and_state(params[:unix_name], 'accepted') || Project.find_by_id_and_state(params[:id], 'accepted')
-    unless @project.nil?
+    if @project.nil?
+      render_404 and return
+    else
       @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
     end
     respond_to do |format|
