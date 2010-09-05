@@ -232,6 +232,7 @@
 
 </fieldset>
 
+<% if @project.project_type == 'module' or @project.project_type == 'plguin' -%>
 <fieldset>
   <legend>Delete Project</legend>
   <p>
@@ -244,8 +245,8 @@
       <%= submit_tag 'Delete Project', :confirm => "Are you sure you want to delete this project? All code repositories, files, etc. will be deleted. May God have mercy on your soul!" -%>
     </span>
   <% end -%>
-  
 </fieldset>
+<% end -%>
 
 </div><!--data-->
 </div><!--content-->
