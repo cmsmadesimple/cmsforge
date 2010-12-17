@@ -12,7 +12,7 @@ xml.rss(:version=>"2.0") {
           xml.description(release.release_notes || release.changelog)
           xml.pubDate(release.created_at.rfc2822)
           xml.link("http://dev.cmsmadesimple.org" + @project.home_page)
-          xml.guid("http://dev.cmsmadesimple.org" + @project.home_page)
+          xml.guid('http://dev.cmsmadesimple.org/project/files/' + release.package.project.id.to_s + '#release-' + release.id.to_s)
         end
       end
     end
