@@ -1,0 +1,11 @@
+source 'http://rubygems.org'
+
+gem 'rake', '0.8.7'
+gem 'rails', '2.1.1'
+gem 'acts_as_ferret', '0.4.3'
+gem 'aws-s3', '0.6.2'
+gem 'capistrano'
+gem 'ferret', '0.11.6'
+gem 'mime-types', '1.16'
+gem 'mysql', '2.8.1'
+gem 'chronic', '0.2.3'
