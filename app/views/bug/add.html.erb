@@ -28,6 +28,13 @@
   </div>
 
   <div class="entry">
+    <span class="label">CMSMS Version:</span>
+    <span class="value">
+      <%= select('bug', 'cmsms_version_id', [['None' , '-1']] + BugVersion.find_all_by_project_id_and_is_active(6, true).collect{ |a| [a.name, a.id] }) -%>
+    </span>
+  </div>
+
+  <div class="entry">
     <span class="label">Severity:</span>
     <span class="value">
       <%= select 'bug', 'severity_id', BugSeverity.all.collect { |c| [c.name, c.id] } -%>

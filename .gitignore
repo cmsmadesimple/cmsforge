@@ -6,3 +6,4 @@ db/*.sql
 dump.sql
 log/*
 vendor/gems/hoptoad_notifier-2.1.3/.specification
+.rvmrc

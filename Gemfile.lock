@@ -46,6 +46,7 @@ GEM
       activesupport (= 2.1.1)
       rake (>= 0.8.1)
     rake (0.8.7)
+    rspec (1.2.9)
     xml-simple (1.0.16)
 
 PLATFORMS
@@ -61,3 +62,4 @@ DEPENDENCIES
   mysql (= 2.8.1)
   rails (= 2.1.1)
   rake (= 0.8.7)
+  rspec (= 1.2.9)
