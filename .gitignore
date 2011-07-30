@@ -1,9 +1,13 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+.sass-cache/
 config/amazon_s3.yml
 config/database.yml
 config/initializers/hoptoad.rb
 config/ultrasphinx/development.conf
 db/*.sql
 dump.sql
-log/*
 vendor/gems/hoptoad_notifier-2.1.3/.specification
 .rvmrc
