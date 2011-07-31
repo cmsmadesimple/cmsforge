@@ -1,8 +1,12 @@
 class ProjectController < ApplicationController
 
-  before_filter :login_required, :only => [ :register, :admin, :demote, :promote, :remove_from_project, :update_package, :show_pending, :add_to_project, :add_comment ]
+  before_filter :authenticate_user!, :only => [ :register, :admin, :demote, :promote, :remove_from_project, :update_package, :show_pending, :add_to_project, :add_comment ]
   before_filter :check_format
   layout 'application', :except => [:changelog, :release_notes]
+
+  def home
+
+  end
   
   def check_format
     unless ['js', 'javascript', 'html', 'rss', 'xml'].include? params[:format]
@@ -63,16 +67,23 @@ class ProjectController < ApplicationController
     else
       @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
     end
+
     respond_to do |format|
-      format.html {
-        render :template => 'project/view.rhtml'
-      }
-      format.xml { render :xml => @project.to_xml(:include => {:packages => {:include => [:releases]}}) }
-      format.rss {
-        @releases = Release.find_by_sql("select releases.* from releases inner join packages on packages.id = releases.package_id where packages.project_id = " + @project.id.to_s + " order by created_at desc limit 25")
-        render :template => 'project/view.rxml', :layout => false
-      }
+      format.html # index.html.erb
+      format.xml  { render :xml => @project, :include => {:packages => {:include => [:releases]}}}
+      format.json { render :json => @employees }
     end
+
+    #respond_to do |format|
+      #format.html {
+        #render :template => 'project/view.html.erb'
+      #}
+      #format.xml { render :xml => @project.to_xml(:include => {:packages => {:include => [:releases]}}) }
+      #format.rss {
+        #@releases = Release.find_by_sql("select releases.* from releases inner join packages on packages.id = releases.package_id where packages.project_id = " + @project.id.to_s + " order by created_at desc limit 25")
+        #render :template => 'project/view.rxml', :layout => false
+      #}
+    #end
   end
   
   def code
@@ -188,7 +199,7 @@ class ProjectController < ApplicationController
 
   def admin
     @project = Project.find_by_id(params[:id])
-    unless logged_in? and current_user.admin_of?(@project)
+    unless current_user and current_user.admin_of?(@project)
       redirect_to :action => 'view', :id => params[:id]
     end
     

@@ -1,10 +1,16 @@
 <div class="content">
 <% @curloc = 'admin' -%>
-<%= calendar_date_select_includes nil %>
+<%# calendar_date_select_includes nil %>
 
 <h2>Project Admin</h2>
 
-<%= error_messages_for 'project' -%>
+<% if @project.errors.any? %>
+  <ul>
+    <% @project.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_tag do -%>
 
@@ -51,7 +57,7 @@
   <div class="entry">
     <span class="label">Next planned release:</span>
     <span class="value">
-      <%= calendar_date_select :project, :next_planned_release, :time=>false -%>
+      <%# calendar_date_select :project, :next_planned_release, :time=>false -%>
     </span>
   </div>
   
@@ -107,8 +113,8 @@
     <tbody>
       <% @project.assignments.each do |assignment| -%>
         <tr>
-          <td><%= h assignment.user.login -%></td>
-          <td><%= h assignment.role -%></td>
+          <td><%= assignment.user.login -%></td>
+          <td><%= assignment.role -%></td>
           <td class="bt-forms">
             <% if assignment.role == 'Administrator' -%>
               <% if @admin_count > 1 -%>
@@ -156,9 +162,9 @@
         <%= form_tag :action => 'update_package', :id => package.id do -%>
           <tr>
             <td>
-              <%= link_to('<img title="ADD" alt="ADD" src="/images/icons/add.gif"  />', :controller => 'releases', :action => 'new', :package_id => package.id) -%>	
+              <%= link_to('<img title="ADD" alt="ADD" src="/images/icons/add.gif"  />'.html_safe, :controller => 'releases', :action => 'new', :package_id => package.id) -%>	
               <%= link_to('[Add Release]', :controller => 'releases', :action => 'new', :package_id => package.id) -%>
-              <%= link_to(' <img src="/images/icons/edit.gif" title="Edit Releases" alt="Edit Releases"  />', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
+              <%= link_to(' <img src="/images/icons/edit.gif" title="Edit Releases" alt="Edit Releases"  />'.html_safe, :controller => 'releases', :action => 'index', :package_id => package.id) -%>
               <%= link_to('[Edit Releases]', :controller => 'releases', :action => 'index', :package_id => package.id) -%>
             </td>
             <td>
