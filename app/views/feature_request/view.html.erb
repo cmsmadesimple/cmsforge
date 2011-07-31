@@ -15,7 +15,7 @@
 
 <h2>[#<%= @feature_request.id -%>] <%= h @feature_request.summary -%></h2>
 
-<% form_tag :action => 'update' do -%>
+<%= form_tag :action => 'update' do -%>
 
 <div class="gravatar_user">
 	<%= gravatar_for @feature_request.created_by -%>
@@ -118,7 +118,7 @@ Posted By: <%= comment.user.name_and_link %>
 <% end -%>
 
 <% unless current_user == :false -%>
-  <% form_tag :action => 'add_comment' do -%>
+  <%= form_tag :action => 'add_comment' do -%>
     <div class="entry">
 	     <div class="label strong">Add Comment:</div>
       <div class="value">

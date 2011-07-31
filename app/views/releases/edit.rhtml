@@ -7,7 +7,7 @@
 
 	<legend>Edit Release Information</legend>
 
-	<% form_tag :action => 'update', :controller => 'releases' do -%>
+	<%= form_tag :action => 'update', :controller => 'releases' do -%>
 
 		<div class="entry">
 			<span class="label">Release Name:</span>
@@ -45,7 +45,7 @@
 
 	<legend>Add Files to Release</legend>
 	
-	<% form_tag(url_for(:action => 'add_file', :controller => 'releases'), :multipart => true ) do -%>
+	<%= form_tag(url_for(:action => 'add_file', :controller => 'releases'), :multipart => true ) do -%>
 	
 	
 		<label for="uploaded_data">File:</label>

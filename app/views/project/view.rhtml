@@ -12,7 +12,7 @@
     has no file releases or repository commits in over a year.  Use your own 
     discretion when using this project.
     <% if current_user != :false and current_user.admin_of?(@project) -%>
-      <% form_tag :action => 'mark_not_stale', :id => @project.id do -%>
+      <%= form_tag :action => 'mark_not_stale', :id => @project.id do -%>
       <br /><strong>As a project admin, if you know that this project is still compatible with current releases of CMS Made Simple, you can mark it as 'not stale' for another year by clicking here:</strong> <span class="bt-forms"><%= submit_tag 'Mark Not Stale', :name => 'mark_project_fresh' -%></span>
       <% end -%>
     <% end -%>
@@ -68,7 +68,7 @@
     <% end -%>
   <% end %>
 <% unless current_user == :false -%>
-  <% form_tag :action => 'add_comment' do -%>
+  <%= form_tag :action => 'add_comment' do -%>
     <div class="entry">
       <div class="label strong">Add Comment:</div>
       <div class="value">

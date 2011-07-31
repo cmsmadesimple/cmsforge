@@ -1,5 +1,0 @@
-pkg
-test/integration/app/log/*.log
-test/integration_merb_dm/app/log/*.log
-development.conf
-test/integration/app/vendor/plugins/ultrasphinx*

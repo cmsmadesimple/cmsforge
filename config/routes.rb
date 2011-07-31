@@ -46,31 +46,32 @@ Cmsforge::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
-  #map.connect '/users/reset_password/:id', :controller => 'account', :action => 'reset_password'
-  #map.connect '/users/forgot_password', :controller => 'account', :action => 'forgot_password'
-  #map.connect '/users/:login', :controller => 'account', :action => 'view', :requirements => { :login => /.*/}
-  #map.connect '/users/:login/edit', :controller => 'account', :action => 'edit', :requirements => { :login => /.*/}
-  #map.connect '/users', :controller => 'account', :action => 'login'
-  #map.connect '/signup', :controller => 'account', :action => 'signup'
-  #map.connect '/frs?group_id=:id', :controller => 'project', :action => 'files'
-  #map.connect 'projects/:unix_name.:format', :controller => 'project', :action => 'view'
-  #map.connect 'projects/:unix_name', :controller => 'project', :action => 'view'
-  #map.connect 'project/list/:project_type', :controller => 'project', :action => 'list'
+  match '/users/reset_password/:id' => 'account#reset_password'
+  match '/users/forgot_password' => 'account#forgot_password'
+  match '/users/:login' => 'account#view'#, :requirements => { :login => /.*/}
+  match '/users/:login/edit' => 'account#edit'#, :requirements => { :login => /.*/}
+  match '/users'  => 'account#login'
+  match '/signup' => 'account#signup'
+  match '/frs?group_id=:id' => 'project#files'
+  match 'projects/:unix_name.:format' => 'project#view'
+  match 'projects/:unix_name' => 'project#view'
+  match 'project/list/:project_type' => 'project#list'
   #map.connect 'home', :controller => 'account', :action => 'view'
   #map.connect '', :controller => "project", :action => 'home'
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
-  #map.connect ':controller/service.wsdl', :action => 'wsdl'
+  #match ':controller/service.wsdl' => 'wsdl'
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => 'account#view'
+
+  # See how all your routes lay out with "rake routes"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  match ':controller(/:action(/:id(.:format)))'
 
   # Install the default route as the lowest priority.
   #map.connect ':controller/:action/:id.:format'

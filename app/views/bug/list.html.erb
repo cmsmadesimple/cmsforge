@@ -18,7 +18,7 @@
   <label for="show_closed"><img alt="Show Closed" src="/images/icons/view.gif "/>&nbsp;&nbsp;Show Closed:&nbsp;<%= check_box_tag('show_closed', '1', @show_closed == '1', {:onchange => remote_function(:url => { :id => @project.id }, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner')", :with => "'show_closed='+this.checked+'&amp;page=" + params[:page].to_s + "'")}) -%></label>
 
 <div class="entry">
-<% form_tag({:action => 'view'}, {:method => 'get'}) do -%>
+<%= form_tag({:action => 'view'}, {:method => 'get'}) do -%>
   
   <span class="label strong">  Jump to Bug # </span>
   <%= text_field_tag 'id', '', :size => 4 -%> 

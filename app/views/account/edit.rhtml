@@ -15,7 +15,7 @@
 		Member Since: <%= h @user.created_at.strftime('%Y-%m-%d %H:%M') -%>
 	</fieldset>
 	
-	<% form_for :user, @user, :url => { :action => 'update' } do |f| -%>
+	<%= form_for :user, @user, :url => { :action => 'update' } do |f| -%>
 	
 	<fieldset>
 		<legend>Modify Profile</legend>
@@ -32,7 +32,7 @@
 
 	<% end %>
 	
-	<% form_for :user, @user, :url => { :action => 'update' } do |f| -%>
+	<%= form_for :user, @user, :url => { :action => 'update' } do |f| -%>
 
     <fieldset>
       <legend>Update Password</legend>

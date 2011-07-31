@@ -10,7 +10,7 @@ class TrackerItem < ActiveRecord::Base
   has_enumerated :severity, :class_name => 'BugSeverity', :foreign_key => 'severity_id'
   has_enumerated :resolution, :class_name => 'BugResolution', :foreign_key => 'resolution_id'
   
-  acts_as_cached
+  #acts_as_cached
   acts_as_commentable
   
   acts_as_historizable

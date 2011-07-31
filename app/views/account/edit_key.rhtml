@@ -1,6 +1,6 @@
 <%= error_messages_for 'key' -%>
 
-<% form_for :key, @key, { :action => @action } do |f| -%>
+<%= form_for :key, @key, { :action => @action } do |f| -%>
 
 <p>
 	Name: <%= f.text_field :name -%><br />

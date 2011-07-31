@@ -57,7 +57,7 @@ body div#contentarea
 		<a href="http://www.cmsmadesimple.hu" onclick="javascript:urchinTracker('/outgoing/Hungarian_site');" title="CMSMS - Magyarország" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/hu.gif" alt="CMSMS - Magyarország" title="CMSMS - Magyarország" border="0" height="10" width="16" /></a>	
 		<a href="http://www.cmsmadesimple.ru" onclick="javascript:urchinTracker('/outgoing/Russian_site');" title="CMSMS - русский" target="_blank"><img src="http://www.cmsmadesimple.org/images/flags/ru.gif" alt="CMSMS -  русский" title="CMSMS - русский" border="0" height="10" width="16" /></a>
 	<div id="search_wrap">
-		<% form_tag(url_for(:controller => :project, :action => :search ), :id => 'cntnt01moduleform_1') do -%><p id="search"><%= text_field_tag(:id, '', :size => '20') %><%= image_submit_tag('/images/button-search.gif', { :class => 'bt-search' }) %></p><% end -%>
+		<%= form_tag(url_for(:controller => :project, :action => :search ), :id => 'cntnt01moduleform_1') do -%><p id="search"><%= text_field_tag(:id, '', :size => '20') %><%= image_submit_tag('/images/button-search.gif', { :class => 'bt-search' }) %></p><% end -%>
 </div>
 	<h1 id="cmsmslogo"><a href="http://www.cmsmadesimple.org/">CMSMS | CMS Made Simple</a></h1>
 </div>
