@@ -10,6 +10,7 @@ gem 'mysql'
 #gem "cache_fu", "~> 0.1.3"
 #gem 'calendar_date_select', :git => 'git://github.com/paneq/calendar_date_select.git'
 gem 'chronic'
+gem 'devise'
 
 # Gems used only for assets and not required
 # in production environments by default.

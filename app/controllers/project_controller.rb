@@ -3,6 +3,10 @@ class ProjectController < ApplicationController
   before_filter :login_required, :only => [ :register, :admin, :demote, :promote, :remove_from_project, :update_package, :show_pending, :add_to_project, :add_comment ]
   before_filter :check_format
   layout 'application', :except => [:changelog, :release_notes]
+
+  def home
+
+  end
   
   def check_format
     unless ['js', 'javascript', 'html', 'rss', 'xml'].include? params[:format]

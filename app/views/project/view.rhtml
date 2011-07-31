@@ -11,7 +11,7 @@
     <strong>Notice:</strong> This project is marked as stale.  This means that it may work fine, but it 
     has no file releases or repository commits in over a year.  Use your own 
     discretion when using this project.
-    <% if current_user != :false and current_user.admin_of?(@project) -%>
+    <% if current_user and current_user.admin_of?(@project) -%>
       <%= form_tag :action => 'mark_not_stale', :id => @project.id do -%>
       <br /><strong>As a project admin, if you know that this project is still compatible with current releases of CMS Made Simple, you can mark it as 'not stale' for another year by clicking here:</strong> <span class="bt-forms"><%= submit_tag 'Mark Not Stale', :name => 'mark_project_fresh' -%></span>
       <% end -%>
@@ -149,20 +149,20 @@
       <% end -%>
       <% unless admintxt.blank? -%>
         <h2>Project Admins</h2>
-        <ul><%= admintxt -%></ul>
+        <ul><%= admintxt.html_safe -%></ul>
       <% end -%>
       <% unless devtxt.blank? -%>
           <h2>Developers</h2>
-          <ul><%= devtxt -%></ul>
+          <ul><%= devtxt.html_safe -%></ul>
       <% end -%>
       <% if @project.show_join_request -%>
-        <% unless current_user == :false or @project.users.include?(current_user) or @project.has_join_request(current_user) -%>
+        <% unless !current_user or @project.users.include?(current_user) or @project.has_join_request(current_user) -%>
           <h2>Request To Join</h2>
           <ul><li><span class="vallight"><%= link_to("Request To Join Project", :controller => 'project', :action => 'join_request', :id => @project.id) -%></span></li></ul>
         <% end -%>
       <% end -%>
       <% jointxt = '' -%>
-      <% unless current_user == :false or !current_user.admin_of?(@project) -%>
+      <% unless !current_user or !current_user.admin_of?(@project) -%>
         <% @project.pending_join_requests.each do |req| -%>
           <% jointxt << '<li><span class="vallight">' + req.user.name_and_link_with_nick + ' [' + link_to('accept', :controller => 'project', :action => 'accept_request', :id => req.id) + ' ' + link_to('x', :controller => 'project', :action => 'reject_request', :id => req.id) + ']</span></li>' -%>
         <% end -%>

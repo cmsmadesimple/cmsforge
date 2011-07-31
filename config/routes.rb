@@ -46,15 +46,11 @@ Cmsforge::Application.routes.draw do
   #     resources :products
   #   end
 
-  match '/users/reset_password/:id' => 'account#reset_password'
-  match '/users/forgot_password' => 'account#forgot_password'
-  match '/users/:login' => 'account#view'#, :requirements => { :login => /.*/}
-  match '/users/:login/edit' => 'account#edit'#, :requirements => { :login => /.*/}
-  match '/users'  => 'account#login'
-  match '/signup' => 'account#signup'
+  devise_for :users
+
   match '/frs?group_id=:id' => 'project#files'
   match 'projects/:unix_name.:format' => 'project#view'
-  match 'projects/:unix_name' => 'project#view'
+  match 'projects/:unix_name' => 'project#view', :as => :project
   match 'project/list/:project_type' => 'project#list'
   #map.connect 'home', :controller => 'account', :action => 'view'
   #map.connect '', :controller => "project", :action => 'home'
@@ -65,7 +61,7 @@ Cmsforge::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'account#view'
+  root :to => 'project#home'
 
   # See how all your routes lay out with "rake routes"
 

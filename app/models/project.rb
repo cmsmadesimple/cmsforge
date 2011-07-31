@@ -102,40 +102,40 @@ class Project < ActiveRecord::Base
   end
   
   def home_page
-    "/projects/#{self.unix_name}"
+    "/projects/#{self.unix_name}".html_safe
   end
   
   def name_and_home_page
-    "<a href=\"#{self.home_page}\">#{self.name}</a>"
+    "<a href=\"#{self.home_page}\">#{self.name}</a>".html_safe
   end
   
   def repository_checkout_url(public = true)
     if public
       if self.repository_type == 'git'
-        "git clone git://git.cmsmadesimple.org/#{self.unix_name}.git"
+        "git clone git://git.cmsmadesimple.org/#{self.unix_name}.git".html_safe
       elsif self.repository_type == 'github'
-        "git clone git://github.com/#{self.github_repo}.git"
+        "git clone git://github.com/#{self.github_repo}.git".html_safe
       else
-        "svn checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
+        "svn checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}".html_safe
       end
     else
       if self.repository_type == 'git'
-        "git clone git@git.cmsmadesimple.org:#{self.unix_name}.git"
+        "git clone git@git.cmsmadesimple.org:#{self.unix_name}.git".html_safe
       elsif self.repository_type == 'github'
-        "git clone git@github.com:#{self.github_repo}.git"
+        "git clone git@github.com:#{self.github_repo}.git".html_safe
       else
-        "svn --username developername checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}"
+        "svn --username developername checkout http://svn.cmsmadesimple.org/svn/#{self.unix_name}".html_safe
       end
     end
   end
   
   def repository_browser_url
     if self.repository_type == 'git'
-      "http://git.cmsmadesimple.org/?p=#{self.unix_name}.git;a=summary"
+      "http://git.cmsmadesimple.org/?p=#{self.unix_name}.git;a=summary".html_safe
     elsif self.repository_type == 'github'
-      "http://github.com/#{self.github_repo}"
+      "http://github.com/#{self.github_repo}".html_safe
     else
-      "http://viewsvn.cmsmadesimple.org/listing.php?repname=#{self.unix_name}&path=%2F&sc=0"
+      "http://viewsvn.cmsmadesimple.org/listing.php?repname=#{self.unix_name}&path=%2F&sc=0".html_safe
     end
   end
   
