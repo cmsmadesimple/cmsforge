@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   
   acts_as_follower
 
+  include Gravtastic
+  gravtastic :email
+
   def valid_password?(password)
     return false if encrypted_password.blank?
     Devise.secure_compare(Devise::Encryptors::Md5.digest(password, nil, nil, nil), self.encrypted_password)

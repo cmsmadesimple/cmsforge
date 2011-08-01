@@ -55,7 +55,7 @@
   <% else -%>
     <% @project.comments.each do |comment| -%>
 	<div class="gravatar_user">
-		<%= gravatar_for comment.user -%>
+		<%= image_tag comment.user.gravatar_url -%>
 	</div>
       <div class="entry">
         <pre>
@@ -169,7 +169,7 @@
       <% end -%>
       <% unless jointxt.blank? -%>
         <h2>Join Requests</h2>
-        <ul><%= jointxt -%></ul>
+        <ul><%= jointxt.html_safe -%></ul>
       <% end -%>
       <% unless @project.tags.empty? -%>
 		<h2>Tags</h2>

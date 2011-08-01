@@ -10,6 +10,7 @@ gem 'mysql'
 #gem "cache_fu", "~> 0.1.3"
 gem 'chronic'
 gem 'devise'
+gem 'gravtastic'
 
 # Gems used only for assets and not required
 # in production environments by default.

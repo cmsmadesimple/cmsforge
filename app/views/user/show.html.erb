@@ -1,0 +1,76 @@
+<div id="content">
+<h2>Home Page for <%= @user.login -%></h2>
+
+<div style="float: right; width: 450px;">
+	<h4>Personal Information</h4>
+	<p>
+		User Id: <%= @user.id -%><br />
+		Login Name: <%= @user.login -%><br />
+		Real Name: <%= @user.full_name -%><br />
+		<% if user_signed_in? -%>
+			Email Address: <%= @user.email_replaced -%><br />
+		<% end -%>
+		Member Since: <%= @user.created_at.strftime('%Y-%m-%d %H:%M') -%>
+	</p>
+</div>	
+
+<div class="gravatar_user">
+	<%= image_tag @user.gravatar_url -%>
+</div>
+
+<br style="clear: both;" />
+
+<% if @user == current_user -%>
+<h4>How do I change my avatar image?</h4>
+<p>
+  Avatar images are served via the <a href="http://gravatar.com" target="_blank">Gravatar</a> service.  Create an account on there with the same email
+  address as you used on this site, and upload any avatar you'd like.  This avatar will not only work
+  on this site, but hundreds of other sites as well.
+</p>
+
+<h4>How do I change my profile details?</h4>
+<p>
+  Click the <a href="/users/<%= current_user.login -%>/edit">Edit Profile</a> link above to edit your profile details.
+</p>
+<% end -%>
+
+</div>
+
+<div id="wrap-column">
+<div id="column-cap-top"><span>&nbsp;</span></div>
+<div id="column">
+  	<div class="block"> 
+		<% if current_user and current_user == @user -%>
+		<h2>Participate</h2>
+		<p>
+  			<a href="/project/register">Register New Project</a>
+		</p>
+		<% end -%>
+
+		<% if @user.superuser -%>
+  			<% projects = find_projects_not_approved(@user) -%>
+  			<% unless projects.empty? -%>
+    			<h2>Pending Projects</h2>
+    			<p>
+    			<% projects.each do |project| -%>
+      				<%= link_to project.name, { :action => 'show_pending', :id => project.id, :controller => 'project' } -%> - <%= project.created_at.strftime('%m/%d/%Y %H:%M') -%><br />
+    			<% end -%>
+    			</p>
+  			<% end -%>
+		<% end -%>
+
+    <h2>Assigned Projects</h2>
+		<p>
+		<% Assignment.find_all_by_user_id(@user.id, :order => 'projects.name ASC', :include => 'project').each do |assignment| -%>
+			<% unless assignment.project.nil? or assignment.project.state != 'accepted' -%>
+  				<a href="<%= assignment.project.home_page -%>"><%= assignment.project.name -%></a>
+  				  <% if assignment.project.stale? -%>
+  				    <span style="color: red;">*Stale*</span>
+  				  <% end -%>
+  				<br />
+			<% end -%>
+		<% end -%>
+		</p>
+	</div>
+  </div>
+</div><!--wrap-column-->

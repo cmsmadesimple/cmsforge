@@ -47,6 +47,11 @@ Cmsforge::Application.routes.draw do
   #   end
 
   devise_for :users
+  devise_scope :user do
+    get '/login' => 'devise/sessions#new'
+    get '/logout' => 'devise/sessions#destroy'
+  end
+  resources :users, :controller => "user"
 
   match '/frs?group_id=:id' => 'project#files'
   match 'projects/:unix_name.:format' => 'project#view'

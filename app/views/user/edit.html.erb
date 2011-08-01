@@ -1,8 +1,14 @@
-<%= error_messages_for 'user' -%>
+<% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div id="content">
 	
-<h2>Edit Profile for <%= h @user.login -%></h2>
+<h2>Edit Profile for <%= @user.login -%></h2>
 
 <div>
 	<fieldset>
@@ -10,9 +16,9 @@
 		<p>
 			Details about your user account that cannot be changed.
 		</p>
-		User Id: <%= h @user.id -%><br />
-		Login Name: <%= h @user.login -%><br />
-		Member Since: <%= h @user.created_at.strftime('%Y-%m-%d %H:%M') -%>
+		User Id: <%= @user.id -%><br />
+		Login Name: <%= @user.login -%><br />
+		Member Since: <%= @user.created_at.strftime('%Y-%m-%d %H:%M') -%>
 	</fieldset>
 	
   <%= form_for @user, :url => user_path(@user), :html => { :class => :form } do |f| -%>
@@ -62,7 +68,7 @@
 		<% unless @user.ssh_keys.empty? %>
 			<ul>
 			<% @user.ssh_keys.each do |key| -%>
-				<li><%= key.name %>&nbsp;-&nbsp;<%= truncate(key.key, 20, '...')%> (<%= link_to 'edit', { :action => 'edit_key', :id => key.id } -%>) (<%= link_to 'delete', { :action => 'delete_key', :id => key.id }, :confirm => 'Are you sure you want to delete?' -%>)</li>
+        <li><%= key.name %>&nbsp;-&nbsp;<%= truncate(key.key, :length => 20, :omission => '...')%> (<%= link_to 'edit', { :action => 'edit_key', :id => key.id } -%>) (<%= link_to 'delete', { :action => 'delete_key', :id => key.id }, :confirm => 'Are you sure you want to delete?' -%>)</li>
 			<% end -%>
 			</ul>
 		<% end -%>
