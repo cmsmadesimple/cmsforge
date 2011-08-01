@@ -4,6 +4,11 @@ class ReleasedFile < ActiveRecord::Base
   
   validates_presence_of :filename, :release_id
   
+  has_attached_file :file,
+    :storage => :s3,
+    :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
+    :path => "downloads/:id/:filename"
+
   #has_attachment  :storage => :s3,
                   #:path_prefix => "downloads",
                   #:max_size => 25.megabytes

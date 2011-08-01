@@ -33,14 +33,14 @@
           <span class="rVersions">
             <%# Hack for core downloads tracking -%>
             <% if @project.id == 6 -%>
-              <%= link_to(h(released_file.filename), released_file.content_type.nil? ? released_file.s3_url : released_file.public_filename, :onclick => "_gaq.push(['_trackPageview', '/core-file-downloaded.html'], ['_trackEvent', 'Downloads', 'Core File Downloaded', '" + released_file.filename + "']);") %>
+              <%= link_to(h(released_file.file_file_name), released_file.file_content_type.nil? ? released_file.s3_url : released_file.file.url, :onclick => "_gaq.push(['_trackPageview', '/core-file-downloaded.html'], ['_trackEvent', 'Downloads', 'Core File Downloaded', '" + released_file.filename + "']);") %>
             <% else -%>
-              <%= link_to(h(released_file.filename), released_file.content_type.nil? ? released_file.s3_url : released_file.public_filename ) %>
+              <%= link_to(h(released_file.file_file_name), released_file.file_content_type.nil? ? released_file.s3_url : released_file.file.url ) %>
             <% end -%>
           </span>
 
           <span class="rLabel"> Size: </span>
-          <span class="rValue"><%= h released_file.size -%>  </span>
+          <span class="rValue"><%= h released_file.file.size -%>  </span>
 
           <span class="rLabel"> Downloads: </span>
           <span class="rValue"><%= h released_file.downloads -%>  </span>
