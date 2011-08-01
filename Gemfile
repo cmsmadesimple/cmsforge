@@ -6,7 +6,7 @@ gem 'rails', '3.1.0.rc5'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
-gem 'mysql'
+gem 'mysql2', '0.3.6'
 #gem "cache_fu", "~> 0.1.3"
 gem 'chronic'
 gem 'devise'
@@ -23,7 +23,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'thinking-sphinx'
+#gem 'thinking-sphinx'
 gem 'will_paginate', '~> 3.0.pre4'
 # gem 'hoptoad_notifier'
 

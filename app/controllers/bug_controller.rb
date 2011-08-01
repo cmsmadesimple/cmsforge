@@ -1,6 +1,6 @@
 class BugController < ApplicationController
   
-  before_filter :login_required, :only => [ :add_comment, :add, :update ]
+  before_filter :authenticate_user!, :only => [ :add_comment, :add, :update ]
   
   def list
     @show_closed = (params[:show_closed] == 'true' || params[:show_closed] == '1')
@@ -11,9 +11,11 @@ class BugController < ApplicationController
     if params[:page].to_i < 1
       params[:page] = 1
     end
-    @bugs = Bug.paginate_by_project_id(params[:id], :order => @so, :conditions => conditions, :page => params[:page])
-    @project = Project.find_by_id_and_state(params[:id], 'accepted')
+
     @project_id = params[:id]
+    @project = Project.find_by_id_and_state(@project_id, 'accepted')
+    @bugs = @project.bugs.paginate :page => params[:page], :order => @so, :conditions => conditions
+
     respond_to do |format|
       format.html { render }
       format.js { render :template => "bug/list.js.rjs" }

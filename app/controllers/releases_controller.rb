@@ -1,6 +1,6 @@
 class ReleasesController < ApplicationController
   
-  before_filter :login_required, :only => [ :index, :new, :create, :edit, :update, :add_file, :delete_file ]
+  before_filter :authenticate_user!, :only => [ :index, :new, :create, :edit, :update, :add_file, :delete_file ]
   
   def index
     @releases = Release.find(:all, :conditions => ['package_id = ?', params[:package_id]], :order => 'id DESC')

@@ -14,17 +14,16 @@ class TrackerItem < ActiveRecord::Base
   acts_as_commentable
   
   acts_as_historizable
-  
-  def self.per_page
-    25
-  end
+
+  cattr_reader :per_page
+  @@per_page = 10
   
   def assigned_to_string
-    self.assigned_to_id > 0 ? User.get_cache(self.assigned_to_id).full_name : 'None'
+    self.assigned_to_id > 0 ? User.find(self.assigned_to_id).full_name : 'None'
   end
   
   def created_by_string
-    self.created_by_id > 0 ? User.get_cache(self.created_by_id).full_name : 'None'
+    self.created_by_id > 0 ? User.find(self.created_by_id).full_name : 'None'
   end
   
   def resolution_string
