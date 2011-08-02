@@ -1,0 +1,2 @@
+class BugResolution < Enumrecord
+end

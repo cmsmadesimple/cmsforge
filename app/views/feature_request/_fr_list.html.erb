@@ -1,4 +1,4 @@
-<% paginated_section(@feature_requests, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
+<%# paginated_section(@feature_requests, :params => { :show_closed => @show_closed ? 'true' : 'false', :sort_by => params[:sort_by] }) do -%>
 
 	<table class="data_table" summary="Feature Requests">
  <thead>
@@ -37,4 +37,6 @@
  </tbody>
 	</table>
 
-<% end -%>
+  <%= will_paginate @feature_requests %>
+
+<%# end -%>

@@ -4,17 +4,12 @@ class BugController < ApplicationController
   
   def list
     @show_closed = (params[:show_closed] == 'true' || params[:show_closed] == '1')
-    conditions = @show_closed ? ['1 = 1'] : ['state = ?', 'Open']
-    @so = 'id ASC'
-    @so = params[:sort_by] unless (params[:sort_by].nil?)
-    params[:page] ||= 1
-    if params[:page].to_i < 1
-      params[:page] = 1
-    end
+    @conditions = @show_closed ? {} : {:state => 'Open'}
+    params[:sort_by] ||= 'id ASC'
 
     @project_id = params[:id]
     @project = Project.find_by_id_and_state(@project_id, 'accepted')
-    @bugs = @project.bugs.paginate :page => params[:page], :order => @so, :conditions => conditions
+    @bugs = @project.bugs.where(@conditions).paginate(:page => params[:page]).order(params[:sort_by])
 
     respond_to do |format|
       format.html { render }
