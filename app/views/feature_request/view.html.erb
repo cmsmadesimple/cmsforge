@@ -11,14 +11,14 @@
   <%= link_to "Back to List", :action => :list, :id => @feature_request.project_id -%>
 </div>
 
-<%= error_messages_for 'feature_request' -%>
+<%= render "shared/form_errors", :target => @feature_request %>
 
 <h2>[#<%= @feature_request.id -%>] <%= h @feature_request.summary -%></h2>
 
 <%= form_tag :action => 'update' do -%>
 
 <div class="gravatar_user">
-	<%= gravatar_for @feature_request.created_by -%>
+	<%= image_tag @feature_request.created_by.gravatar_url(:size => 50) -%>
 </div>
 
   <div class="entry">
@@ -103,7 +103,7 @@
   <div class="header strong">Comments</div>
   <% @feature_request.comments.each do |comment| -%>
 	<div class="gravatar_user">
-		<%= gravatar_for comment.user -%>
+		<%= image_tag comment.user.gravatar_url(:size => 50) -%>
 	</div>
     <div class="entry">
       <pre>

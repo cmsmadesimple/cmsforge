@@ -12,14 +12,14 @@
 </div>
 
 
-<%= error_messages_for 'bug' -%>
+<%= render "shared/form_errors", :target => @bug %>
 
-<h2>[#<%= @bug.id -%>] <%= h @bug.summary -%></h2>
+<h2>[#<%= @bug.id -%>] <%= @bug.summary -%></h2>
 
 <%= form_tag :action => 'update' do -%>
 
 <div class="gravatar_user">
-	<%= gravatar_for @bug.created_by -%>
+  <%= image_tag @bug.created_by.gravatar_url(:size => 50) -%>
 </div>
 
   <div class="entry">
@@ -134,7 +134,7 @@
   <div class="header strong">Comments</div>
   <% @bug.comments.each do |comment| -%>
 	<div class="gravatar_user">
-		<%= gravatar_for comment.user -%>
+		<%= image_tag comment.user.gravatar_url(:size => 50) -%>
 	</div>
     <div class="entry">
       <pre>

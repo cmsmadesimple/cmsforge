@@ -7,7 +7,7 @@
 
 <h4>Add Feature Request</h4>
 
-<%= error_messages_for 'feature_request' -%>
+<%= render "shared/form_errors", :target => @feature_request %>
 
 <%= form_tag :action => 'add', :controller => 'feature_request' do -%>
 

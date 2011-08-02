@@ -3,18 +3,32 @@ class BugController < ApplicationController
   before_filter :authenticate_user!, :only => [ :add_comment, :add, :update ]
   
   def list
-    @show_closed = (params[:show_closed] == 'true' || params[:show_closed] == '1')
+    @show_closed ||= false
+    @show_closed = (params[:show_closed] == 'true' || params[:show_closed] == '1') if params[:show_closed]
     @conditions = @show_closed ? {} : {:state => 'Open'}
     params[:sort_by] ||= 'id ASC'
+    params[:page] ||= 1
 
     @project_id = params[:id]
     @project = Project.find_by_id_and_state(@project_id, 'accepted')
-    @bugs = @project.bugs.where(@conditions).paginate(:page => params[:page]).order(params[:sort_by])
 
     respond_to do |format|
-      format.html { render }
-      format.js { render :template => "bug/list.js.rjs" }
-      format.xml { render :xml => @bugs.to_xml }
+      format.html do
+        @bugs = @project.bugs.where(@conditions).paginate(:page => params[:page]).order(params[:sort_by])
+        if request.xhr?
+          render :partial => 'bug_list', :layout => false
+        else
+          render
+        end
+      end
+      format.xml do
+        @bugs = @project.bugs.where(@conditions).order(params[:sort_by])
+        render :xml => @bugs
+      end
+      format.json do
+        @bugs = @project.bugs.where(@conditions).order(params[:sort_by])
+        render :json => @bugs
+      end
     end
   end
   

@@ -9,7 +9,7 @@
 
 <h4>Add Bug Report</h4>
 
-<%= error_messages_for 'bug' -%>
+<%= render "shared/form_errors", :target => @bug %>
 
 <%= form_tag :action => 'add', :controller => 'bug' do -%>
 

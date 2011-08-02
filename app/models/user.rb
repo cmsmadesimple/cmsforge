@@ -51,29 +51,29 @@ class User < ActiveRecord::Base
   end
   
   def email_replaced
-    self.email.gsub(/\./, [' (dot) ', ' (period) ', ' (daht) '].randomly_pick[0]).gsub(/@/, [' @no.spam@ ', ' @spam.sucks@ ', ' @spam.me.not@ ', ' (aht) '].randomly_pick[0]);
+    self.email.gsub(/\./, [' (dot) ', ' (period) ', ' (daht) '].randomly_pick[0]).gsub(/@/, [' @no.spam@ ', ' @spam.sucks@ ', ' @spam.me.not@ ', ' (aht) '].randomly_pick[0]).html_safe
   end
   
   def home_url
-    "/users/#{self.login}"
+    "/users/#{self.login}".html_safe
   end
   
   def name_and_link
-    str = self.full_name
+    str = self.full_name.html_safe
     if self.login != 'None'
       str = str + " (<a href=\"#{self.home_url}\">#{self.login}</a>)".html_safe
     end
   end
   
   def name_and_link_no_nick
-    str = self.full_name
+    str = self.full_name.html_safe
     if self.login != 'None'
       str = "<a href=\"#{self.home_url}\">#{self.full_name}</a>".html_safe
     end
   end
   
   def name_and_link_with_nick
-    str = self.full_name
+    str = self.full_name.html_safe
     if self.login != 'None'
       str = "<a href=\"#{self.home_url}\">#{self.full_name} (#{self.login})</a>".html_safe
     end

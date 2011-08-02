@@ -10,14 +10,18 @@
 
 <div class="small_nav">
 
-  <%= link_to '<img alt="Submit New Bug" src="/images/icons/newobject.gif "/>', :action => :add, :id => @project_id -%>
+  <%= link_to '<img alt="Submit New Bug" src="/images/icons/newobject.gif "/>'.html_safe, :action => :add, :id => @project_id -%>
   <%= link_to "Submit New Bug", :action => :add, :id => @project_id -%>
 </div>
 
 <div class="filter">&nbsp;&nbsp;&nbsp;
   <label for="show_closed">
     <img alt="Show Closed" src="/images/icons/view.gif "/>&nbsp;&nbsp;
-    Show Closed:&nbsp;<%# check_box_tag('show_closed', '1', @show_closed == '1', {:onchange => remote_function(:url => { :id => @project.id }, :loading => "Element.show('spinner')", :complete => "Element.hide('spinner')", :with => "'show_closed='+this.checked+'&amp;page=" + params[:page].to_s + "'")}) -%>
+    Show Closed:&nbsp;
+    <%= form_tag "/bug/list/#{@project_id}", :remote => true, 'data-type' => "html", :id => 'show_closed_form', :style => 'display: inline;' do |f| %>
+      <%= check_box_tag 'show_closed', '1', @show_closed, :id => 'show_closed_check_box', :page => params[:page] %>
+      <%= hidden_field_tag 'page', params[:page] %>
+    <% end %>
   </label>
 
 <div class="entry">

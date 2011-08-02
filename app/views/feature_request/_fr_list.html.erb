@@ -37,6 +37,6 @@
  </tbody>
 	</table>
 
-  <%= will_paginate @feature_requests %>
+  <%= will_paginate @feature_requests, :params => { :show_closed => @show_closed } %>
 
 <%# end -%>
