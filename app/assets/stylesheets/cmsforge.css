@@ -1048,10 +1048,10 @@ select, menu {
 		font-weight: bold;
 }
 .size1 { font-size: 1.0em; }
-.size2 { font-size: 1.2em; }
-.size3 { font-size: 1.4em; }
-.size4 { font-size: 1.6em; }
-.size5 { font-size: 1.8em; }
+.size2 { font-size: 1.3em; }
+.size3 { font-size: 1.6em; }
+.size4 { font-size: 1.9em; }
+.size5 { font-size: 2.2em; }
 
 
 /*########## TABLES ################*/

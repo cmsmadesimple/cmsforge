@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
   belongs_to :license
   
   acts_as_commentable
-  acts_as_taggable
+  acts_as_taggable_on :tags
   
   scope :accepted, {:conditions => ['state = ?', 'accepted'], :order => 'name'}
   scope :non_alphabetical, {:conditions => ["name REGEXP ?", "^[^a-z]"], :order => 'name'}

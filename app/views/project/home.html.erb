@@ -86,7 +86,9 @@
 	<div class="block">
 		<h2>Popular Project Tags</h2>
 		<div id="cloud">
-			<%= render(:partial => "layouts/tag_cloud", :locals => {:tags => Project.tag_counts(:at_least => 2, :order => 'tags.name asc')}) %>
+      <% tag_cloud Project.tag_counts(:at_least => 2, :order => 'tags.name asc'), %w(size1 size2 size3 size4 size5) do |tag, css_class| %>
+        <%= link_to tag.name, { :action => :list_tagged, :id => tag.name }, :class => css_class %>
+      <% end %>
 		</div>
 	</div>
 </div>

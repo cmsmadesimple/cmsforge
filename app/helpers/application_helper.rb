@@ -1,23 +1,4 @@
 module ApplicationHelper
-  def tag_cloud(active, tags, classes)
-    if !active then return end
-    max, min = 0, 0
-    unless tags.empty?
-      sorted_tags = tags.sort {|x,y| y.count <=> x.count}
-      max = sorted_tags.first.count
-      min = sorted_tags.last.count
-    end
-
-    divisor = ((max - min) / classes.size) + 1
-    if divisor == 0
-      divisor = 1
-    end
-
-    tags.each { |t|
-      yield t.name, t.id, classes[(t.count.to_i - min) / divisor]
-    }
-  end
-
   def nl2br(string)
     string.gsub("\n\r","<br>").gsub("\r", "").gsub("\n", "<br />")
   end

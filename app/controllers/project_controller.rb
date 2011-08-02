@@ -18,7 +18,7 @@ class ProjectController < ApplicationController
     if params[:id].nil?
       params[:id] = ''
     end
-    @projects = Project.find_tagged_with(params[:id], :conditions => ['state = ?', 'accepted'])
+    @projects = Project.tagged_with(params[:id], :conditions => ['state = ?', 'accepted'])
   end
   
   def list

@@ -176,7 +176,7 @@
 		<ul>
 		<% @project.tags.each do |tag| -%>
 			<li>
-				<span class="vallight"><%= link_to tag.name, {:action=>'list_tagged',:id=>tag.name, :controller=>'project'} -%></span>
+				<span class="vallight"><%= link_to tag.name, {:action=>'list_tagged', :id=>tag.name, :controller=>'project'} -%></span>
 			</li>
 		<% end -%>
 		</ul>
