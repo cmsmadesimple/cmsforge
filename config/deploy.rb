@@ -28,6 +28,8 @@ set :keep_releases, 3
 namespace :deploy do
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
+    run "rm #{current_path}/Gemfile"
+    run "rm #{current_path}/Gemfile.lock"
     run "touch #{current_path}/tmp/restart.txt"
   end
 
