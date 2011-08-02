@@ -51,17 +51,17 @@ namespace :deploy do
   
   desc "Configure the sphinx server"
   task :configure_sphinx, :roles => :app do
-    run "cd #{current_path} && rake ultrasphinx:configure RAILS_ENV=production && rake ultrasphinx:index RAILS_ENV=production"
+    run "cd #{current_path} && rake ts:rebuild RAILS_ENV=production"
   end
   
   desc "Stop the sphinx server"
   task :stop_sphinx , :roles => :app do
-    run "cd #{current_path} && rake ultrasphinx:daemon:stop RAILS_ENV=production"
+    run "cd #{current_path} && rake ts:stop RAILS_ENV=production"
   end
 
   desc "Start the sphinx server" 
   task :start_sphinx, :roles => :app do
-    run "cd #{current_path} && rake ultrasphinx:daemon:start RAILS_ENV=production"
+    run "cd #{current_path} && rake ts:start RAILS_ENV=production"
   end
 
   desc "Restart the sphinx server"

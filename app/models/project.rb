@@ -10,6 +10,8 @@ class Project < ActiveRecord::Base
   has_many :feature_requests, :dependent => :destroy
   has_many :bug_versions, :dependent => :destroy
   has_many :project_join_requests, :dependent => :destroy
+
+  has_many :taggings, :as => :taggable, :dependent => :destroy, :include => :tag, :class_name => "ActsAsTaggableOn::Tagging", :conditions => "taggings.taggable_type = 'Project'"
   
   belongs_to :license
   
@@ -29,6 +31,16 @@ class Project < ActiveRecord::Base
         #:association_sql => "LEFT JOIN taggings ON (taggings.taggable_id=projects.id AND taggings.taggable_type='Project') LEFT JOIN tags ON taggings.tag_id=tags.id"}
     #],
     #:conditions => "state = 'accepted'"#,
+
+  define_index do
+    indexes :name
+    indexes :unix_name
+    indexes :description
+    indexes tags(:name), :as => :tags
+    has tags(:name), :as => :tag_ids, :facet => true
+
+    where "state = 'accepted'"
+  end
   
   acts_as_state_machine :initial => :pending
   state :pending, :after => :after_pending

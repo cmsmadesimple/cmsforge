@@ -23,7 +23,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-#gem 'thinking-sphinx'
+gem 'thinking-sphinx', '2.0.5'
 gem 'will_paginate', '~> 3.0.pre4'
 # gem 'hoptoad_notifier'
 
