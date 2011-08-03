@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/kreetitech/cache_fu.git
+  revision: e363d01df7a8a4c8dfff77721c92b2eb85477f3f
+  specs:
+    cache_fu (0.1.4)
+      rails (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -58,6 +65,7 @@ GEM
       execjs
     coffee-script-source (1.1.1)
     columnize (0.3.4)
+    dalli (1.0.5)
     devise (1.4.2)
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
@@ -167,9 +175,11 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on
   aws-s3
+  cache_fu!
   capistrano
   chronic
   coffee-rails (~> 3.1.0.rc)
+  dalli
   devise
   gravtastic
   jquery-rails

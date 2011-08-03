@@ -17,11 +17,11 @@
 		  <tbody>
 		<% unless @bugs.nil? or @bugs.empty? -%>
 			<% @bugs.each do |bug| -%>
-				<tr class="<%= bug.state -%><% unless (bug.severity.nil?) -%> <%= BugSeverity.find(bug.severity).name -%><% end -%>">
+				<tr class="<%= bug.state -%><% unless (bug.severity.nil?) -%> <%= BugSeverity.get_cache(bug.severity_id).name -%><% end -%>">
 					<td class="strong"><%= bug.id -%></td>
 					<td><%= link_to h(bug.summary), :controller => :bug, :action => :view, :id => bug.id -%></td>
 					<td><%= bug.created_at.getgm.strftime('%Y-%m-%d') -%></td>
-					<td><% unless (bug.severity.nil?) -%><%= BugSeverity.find(bug.severity).name -%><% end -%></td>
+					<td><% unless (bug.severity.nil?) -%><%= BugSeverity.get_cache(bug.severity_id).name -%><% end -%></td>
 					<td><% unless (bug.version.nil?) -%><%= BugVersion.find(bug.version).name -%><% end -%></td>
 					<td><%= bug.resolution_string -%></td>
 					<td><%= bug.state_string -%></td>

@@ -26,4 +26,7 @@ Cmsforge::Application.configure do
   config.assets.compress = false
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.cache_store = :dalli_store
+  config.action_controller.perform_caching = true
 end

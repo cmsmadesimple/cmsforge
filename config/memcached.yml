@@ -1,13 +1,13 @@
 defaults:
+  client: Dalli::Client
   ttl: 1800
   readonly: false
   urlencode: false
   c_threshold: 10000
-  compression: false
-  debug: true
-  namespace: cmsforge
-  sessions: true
-  fragments: true
+  compression: true
+  debug: false
+  namespace: app
+  sessions: false
   memory: 64
   servers: localhost:11211
   benchmarking: true
@@ -18,19 +18,12 @@ defaults:
 development:
   sessions: false
   fragments: false
-  disabled: true
-  #servers: localhost:11211
+  servers: localhost:11211
 
 # turn off caching
-test: 
+test:
   disabled: true
 
 production:
-  memory: 128
+  memory: 256
   benchmarking: false
-  sessions: false
-  fragments: false
-  #servers:
-  #  - 192.185.254.121:11211
-  #  - 192.185.254.138:11211
-  #  - 192.185.254.160:11211

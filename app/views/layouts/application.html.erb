@@ -132,7 +132,7 @@
         <div id="flash">
           <% for name in [:notice, :warning, :message] %>
             <% if flash[name] %>
-              <%= "<div id=\"#{name}\">#{flash[name]}</div>" %>
+              <%= "<div id=\"#{name}\">#{flash[name]}</div>".html_safe %>
             <% end %>
           <% end %>
         </div>

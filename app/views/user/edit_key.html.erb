@@ -1,0 +1,18 @@
+<%= render "shared/form_errors", :target => @key %>
+
+<%= form_for @key, :as => :key, :url => url_for( :action => @action ), :html => { :class => "form" } do |f| %>
+
+  <p>
+    <%= f.label :name, 'Name' %>:<br />
+    <%= f.text_field :name -%><br />
+  </p>
+  <p>
+    <%= f.label :key, 'Key' %>:<br />
+    <%= f.text_area :key, :rows => 10, :cols => 100 -%><br />
+  </p>
+  <div class="bt-forms">
+    <%= f.submit -%>
+  </div>
+  <%= hidden_field_tag :id, @key.id -%>
+
+<% end -%>

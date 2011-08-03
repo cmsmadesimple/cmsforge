@@ -20,7 +20,7 @@
 
 <br style="clear: both;" />
 
-<% if @user == current_user -%>
+<% if user_signed_in? and @user == current_user -%>
 <h4>How do I change my avatar image?</h4>
 <p>
   Avatar images are served via the <a href="http://gravatar.com" target="_blank">Gravatar</a> service.  Create an account on there with the same email

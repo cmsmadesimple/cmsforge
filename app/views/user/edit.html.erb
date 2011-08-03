@@ -1,10 +1,4 @@
-<% if @user.errors.any? %>
-  <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render "shared/form_errors", :target => @user %>
 
 <div id="content">
 	
@@ -23,18 +17,18 @@
 	
   <%= form_for @user, :url => user_path(@user), :html => { :class => :form } do |f| -%>
 	
-	<fieldset>
-		<legend>Modify Profile</legend>
-		<p>
-			Modify your user profile here.
-		</p>
-		Real Name: <%= f.text_field 'full_name' -%><br />
-		Email Address: <%= f.text_field 'email' -%><br />
-		<%= f.hidden_field 'id' -%>
-		<div class="bt-forms">
-		  <%= f.submit -%>
-		</div>
-	</fieldset>
+    <fieldset>
+      <legend>Modify Profile</legend>
+      <p>
+        Modify your user profile here.
+      </p>
+      Real Name: <%= f.text_field 'full_name' -%><br />
+      Email Address: <%= f.text_field 'email' -%><br />
+      <%= f.hidden_field 'id' -%>
+      <div class="bt-forms">
+        <%= f.submit -%>
+      </div>
+    </fieldset>
 
 	<% end %>
 	
@@ -63,7 +57,7 @@
 			what git is or work on a project that uses it, you can safely ignore this section.
 		</p>
 		<p>
-			For information on creating ssh keys, check out this great readme on <a href="http://github.com/guides/providing-your-ssh-key">GitHub</a>.
+			For information on creating ssh keys, check out this great README on <a href="http://help.github.com/mac-set-up-git/">GitHub</a>.
 		</p>
 		<% unless @user.ssh_keys.empty? %>
 			<ul>

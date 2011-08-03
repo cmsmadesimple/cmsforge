@@ -9,7 +9,7 @@ class TrackerItem < ActiveRecord::Base
   
   validates_presence_of :summary, :description, :created_by, :project_id
   
-  #acts_as_cached
+  acts_as_cached
   acts_as_commentable
   
   acts_as_historizable

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :confirmable, :validatable, 
          :encryptable, :encryptor => :restful_authentication_sha1
-  #acts_as_cached :version => 1
+  acts_as_cached
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :login, :email, :password, :password_confirmation, :remember_me, :full_name, :superuser
