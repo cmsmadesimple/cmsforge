@@ -1,0 +1,10 @@
+<% if @release.nil? -%>
+<div id="content">
+	<h3>Release Not Found!</h3>
+</div>
+
+<% else -%>
+
+<%= nl2br(@release.changelog).html_safe -%>
+
+<% end -%>

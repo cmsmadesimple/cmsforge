@@ -70,8 +70,8 @@ class ProjectController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @project, :include => {:packages => {:include => [:releases]}}}
-      format.json { render :json => @employees }
+      format.xml  { render :xml => @project, :include => { :packages => { :include => [:releases] } } }
+      format.json { render :json => @project, :include => { :packages => { :include => [:releases] } } }
     end
 
     #respond_to do |format|
@@ -93,7 +93,6 @@ class ProjectController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.xml { render :xml => @project.to_xml }
     end
   end
 
@@ -128,7 +127,7 @@ class ProjectController < ApplicationController
     end
   end
   
-  def changelog
+  def release_changelog
     @release = Release.find_by_id(params[:id])
     unless @project.nil?
       @feed_url = url_for(:action => @project.unix_name + '.rss', :controller => 'projects', :only_path => false)
@@ -226,7 +225,7 @@ class ProjectController < ApplicationController
 
       @project = Project.find_by_id(assign.project_id)
 
-      unless logged_in? and current_user.admin_of?(@project)
+      unless user_signed_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => @project.id and return
       end
 
@@ -255,7 +254,7 @@ class ProjectController < ApplicationController
 
       @project = Project.find_by_id(assign.project_id)
 
-      unless logged_in? and current_user.admin_of?(@project)
+      unless user_signed_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => @project.id and return
       end
 
@@ -272,7 +271,7 @@ class ProjectController < ApplicationController
 
   def add_to_project
     @project = Project.find_by_id(params[:id])
-    unless logged_in? and current_user.admin_of?(@project)
+    unless user_signed_in? and current_user.admin_of?(@project)
       redirect_to :action => 'view', :id => params[:id] and return
     end
 
@@ -296,7 +295,7 @@ class ProjectController < ApplicationController
     assignment = Assignment.find_by_id(params[:id])
     unless assignment.nil?
       @project = Project.find_by_id(assignment.project_id)
-      unless logged_in? and current_user.admin_of?(@project)
+      unless user_signed_in? and current_user.admin_of?(@project)
         redirect_to :action => 'view', :id => params[:id] and return
       end
       Assignment.delete(assignment)
@@ -329,7 +328,7 @@ class ProjectController < ApplicationController
   
   def add_package_to_project
     @project = Project.find_by_id(params[:id])
-    unless logged_in? and current_user.admin_of?(@project)
+    unless user_signed_in? and current_user.admin_of?(@project)
       redirect_to :action => 'view', :id => params[:id] and return
     end
 
@@ -367,7 +366,7 @@ class ProjectController < ApplicationController
   
   def add_bug_version_to_project
     @project = Project.find_by_id(params[:id])
-    unless logged_in? and current_user.admin_of?(@project)
+    unless user_signed_in? and current_user.admin_of?(@project)
       redirect_to :action => 'view', :id => params[:id] and return
     end
 

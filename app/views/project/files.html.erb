@@ -25,7 +25,7 @@
             <span> | <a href="/project/release_notes/<%= release.id %>" title="Release Notes for <%= release.name -%> -- <%= @project.name %>" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;">Release Notes</a><span>
           <% end -%>
           <% unless release.changelog.blank? -%>
-            <span> | <a href="/project/changelog/<%= release.id %>" title="Changelog for <%= release.name -%> -- <%= @project.name %>" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;">Changelog</a><span>
+            <span> | <a href="/project/release_changelog/<%= release.id %>" title="Changelog for <%= release.name -%> -- <%= @project.name %>" onclick="Modalbox.show(this.href, {title: this.title, width: 600}); return false;">Changelog</a><span>
           <% end -%>
         </div><!--rName-->
 
@@ -33,9 +33,9 @@
           <span class="rVersions">
             <%# Hack for core downloads tracking -%>
             <% if @project.id == 6 -%>
-              <%= link_to(h(released_file.file_file_name), released_file.file_content_type.nil? ? released_file.s3_url : released_file.file.url, :onclick => "_gaq.push(['_trackPageview', '/core-file-downloaded.html'], ['_trackEvent', 'Downloads', 'Core File Downloaded', '" + released_file.filename + "']);") %>
+              <%= link_to(h(released_file.file_file_name), released_file.file.url, :onclick => "_gaq.push(['_trackPageview', '/core-file-downloaded.html'], ['_trackEvent', 'Downloads', 'Core File Downloaded', '" + released_file.file_file_name + "']);") %>
             <% else -%>
-              <%= link_to(h(released_file.file_file_name), released_file.file_content_type.nil? ? released_file.s3_url : released_file.file.url ) %>
+              <%= link_to(h(released_file.file_file_name), released_file.file.url ) %>
             <% end -%>
           </span>
 

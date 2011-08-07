@@ -1,7 +1,7 @@
 <table class="data_table" summary="FR">
 <thead>
   <tr>
-    <th>ID </th>
+    <th>ID</th>
     <th>Name</th>
   </tr>
 </thead>
@@ -11,7 +11,7 @@
     <% @releases.each do |release| -%>
 
       <tr>
-        <td><%= h release.id -%></td>
+        <td><%= release.id -%></td>
         <td><%= link_to release.name, :controller => :releases, :action => :edit, :id => release.id -%></td>
       </tr>
 

@@ -15,6 +15,8 @@ gem 'thinking-sphinx', '2.0.5'
 gem 'will_paginate', '~> 3.0.pre4'
 # gem 'hoptoad_notifier'
 gem 'capistrano'
+gem 'capistrano-ext'
+gem 'capistrano_colors'
 gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Gems used only for assets and not required

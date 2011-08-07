@@ -47,6 +47,8 @@ class ReleasesController < ApplicationController
   
   def edit
     @release = Release.find_by_id(params[:id])
+    @released_file = ReleasedFile.new
+    @released_file.release_id = params[:id]
     @project = @release.package.project
     if !current_user.member_of?(@release.package.project)
       redirect_to :action => 'view', :id => @project, :controller => 'project'
@@ -68,10 +70,10 @@ class ReleasesController < ApplicationController
   def add_file
     @release = Release.find(params[:release_id])
     unless @release.nil? or !current_user.member_of?(@release.package.project)
-      file = ReleasedFile.new
-      file.release_id = @release.id
-      file.uploaded_data = params[:uploaded_data]
+      file = ReleasedFile.new(params[:released_file])
+      file.release_id = params[:release_id]
       file.downloads = 0
+      logger.info pp file.inspect
       if file.save
         flash[:notice] = 'File was successfully added.'
       end

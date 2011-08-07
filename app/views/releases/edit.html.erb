@@ -1,7 +1,7 @@
 <div class="content">
 <h2>Edit Release</h2>
 
-<%= error_messages_for 'release' -%>
+<%= render "shared/form_errors", :target => @release %>
 
 <fieldset>
 
@@ -45,18 +45,18 @@
 
 	<legend>Add Files to Release</legend>
 	
-	<%= form_tag(url_for(:action => 'add_file', :controller => 'releases'), :multipart => true ) do -%>
-	
-	
-		<label for="uploaded_data">File:</label>
-		<%= file_field_tag :uploaded_data %>
-	
-	<div class="entry bt-forms">	
-		<%= hidden_field_tag 'release_id', @release.id -%>
-		<%= submit_tag 'Upload' %>
-	</div>
-	
-	<% end -%>
+  <%# form_tag(url_for(:action => 'add_file', :controller => 'releases'), :multipart => true ) do |f| -%>
+  <%= form_for @released_file, :url => {:action => 'add_file'}, :multipart => true do |f| %>
+
+    <label for="uploaded_data">File:</label>
+    <%= f.file_field :file %>
+
+    <div class="entry bt-forms">	
+      <%= hidden_field_tag 'release_id', @release.id -%>
+      <%= f.submit 'Upload' %>
+    </div>
+
+  <% end -%>
 	
 </fieldset>
 
@@ -65,24 +65,24 @@
 	<legend>Existing Files</legend>
 	
 	<div id="data">
-	<table summary="Existing Files">
-	<thead>
-		<tr>
-			<th>Filename</th>
-			<th>Release Date</th>
-			<th>&nbsp;</th>
-		</tr>
-		</thead>
-		<tbody>
-		<% @release.released_files.each do |file| -%>
-			<tr>
-				<td><%= h file.filename -%></td>
-				<td><%= h file.created_at.strftime('%Y-%m-%d') -%></td>
-				<td class="bt-forms"><%= button_to "Delete", { :action => "delete_file", :id => file.id }, :confirm => "Are you sure?" -%></td>
-			</tr>
-		<% end -%>
-		</tbody>
-	</table>
+    <table summary="Existing Files">
+      <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Release Date</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @release.released_files.each do |file| -%>
+          <tr>
+            <td><%= h file.file_file_name -%></td>
+            <td><%= h file.created_at.strftime('%Y-%m-%d') unless file.created_at.blank? -%></td>
+            <td class="bt-forms"><%= button_to "Delete", { :action => "delete_file", :id => file.id }, :confirm => "Are you sure?" -%></td>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
 	</div><!--data-->
 	
 </fieldset>

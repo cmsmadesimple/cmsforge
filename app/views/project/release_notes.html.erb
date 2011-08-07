@@ -6,7 +6,7 @@
 <% else -%>
 
 <pre>
-<%= nl2br(@release.release_notes) -%>
+<%= nl2br(@release.release_notes).html_safe -%>
 </pre>
 
 <% end -%>

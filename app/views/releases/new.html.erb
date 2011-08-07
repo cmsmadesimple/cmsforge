@@ -1,7 +1,7 @@
 <div class="content">
 <h2>Create New Release</h2>
 
-<%= error_messages_for 'release' -%>
+<%= render "shared/form_errors", :target => @release %>
 
 <%= form_tag :action => 'create', :controller => 'releases' do -%>
 

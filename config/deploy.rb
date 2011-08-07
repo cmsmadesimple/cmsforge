@@ -1,8 +1,21 @@
+# Add RVM's lib directory to the load path
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
+# Load RVM's capistrano plugin
+require "rvm/capistrano"
+
+require 'bundler/capistrano'
+# require 'capistrano/ext/multistage'
+
+# Colours!!!!
+require 'capistrano_colors'
+
 set :application, "cmsforge"
 set :repository, "git://github.com/cmsmadesimple/cmsforge.git"
-
+set :branch, 'rails-31-upgrade'
 
 set :rails_env, "production"
+set :git_enable_submodules, 1
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -16,14 +29,15 @@ set :scm, :git
 #set :deploy_via, :remote_cache
 
 set :user, "rails"
-set :ssh_options, { :forward_agent => true }
-#set :use_sudo, false
-set :sudo_password, nil
+#set :ssh_options, { :forward_agent => true }
+set :use_sudo, false
+#set :sudo_password, nil
+set :rvm_bin_path, "/usr/local/rvm/bin"
 
-role :web, "web2.cmsmadesimple.org"
-role :app, "web2.cmsmadesimple.org", :primary => true
-role :db,  "web2.cmsmadesimple.org", :primary => true
-set :keep_releases, 3
+role :web, "web20.cmsmadesimple.org"
+role :app, "web20.cmsmadesimple.org", :primary => true
+role :db,  "web20.cmsmadesimple.org", :primary => true
+set :keep_releases, 5
 
 namespace :deploy do
   desc "Restarting mod_rails with restart.txt"
@@ -37,7 +51,7 @@ namespace :deploy do
   end
   
   desc "Preserve files" 
-  task :after_update_code, :roles => [:web] do
+  task :preserve_files, :roles => [:web] do
     run <<-CMD
       mkdir -p -m 775 #{releases_path} #{shared_path}/system &&
       mkdir -p -m 777 #{shared_path}/log &&
@@ -72,6 +86,7 @@ namespace :deploy do
   end
 end
 
+after "deploy:update_files", "deploy:preserve_files"
 after "deploy:symlink", "deploy:restart_sphinx"
 
 namespace :delayed_job do
@@ -92,8 +107,8 @@ namespace :delayed_job do
   end
 end
 
-Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
-  $: << File.join(vendored_notifier, 'lib')
-end
+#Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
+#  $: << File.join(vendored_notifier, 'lib')
+#end
 
-require 'hoptoad_notifier/capistrano'
+#require 'hoptoad_notifier/capistrano'
