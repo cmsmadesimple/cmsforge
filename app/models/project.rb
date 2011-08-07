@@ -149,7 +149,7 @@ class Project < ActiveRecord::Base
   end
   
   def after_pending
-    send_later(:send_submission_email)
+    delay.send_submission_email
   end
   
   def after_accepted
@@ -158,12 +158,12 @@ class Project < ActiveRecord::Base
     #  self.approved_by = current_user.id
     #end
     self.save
-    send_later(:create_repository)
-    send_later(:send_acceptance_email)
+    delay.create_repository
+    delay.send_acceptance_email
   end
   
   def after_rejected
-    send_later(:send_rejection_email)
+    delay.send_rejection_email
   end
   
   def before_destroy

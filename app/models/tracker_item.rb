@@ -34,7 +34,7 @@ class TrackerItem < ActiveRecord::Base
   end
   
   def after_save
-    send_later(:send_email)
+    delay.send_email
   end
 
 end

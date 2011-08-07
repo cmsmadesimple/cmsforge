@@ -1,5 +1,5 @@
 <div class="content">
-<%= error_messages_for 'project' -%>
+<%= render "shared/form_errors", :target => @project %>
 <h2>New Project</h2>
 <%= form_tag do -%>
 

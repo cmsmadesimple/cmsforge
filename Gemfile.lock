@@ -1,4 +1,20 @@
 GIT
+  remote: git://github.com/collectiveidea/delayed_job.git
+  revision: 03d3ff300dddd43d4b150d3c5110df1558de1e26
+  specs:
+    delayed_job (3.0.0.pre)
+      activesupport
+      daemons
+
+GIT
+  remote: git://github.com/collectiveidea/delayed_job_active_record.git
+  revision: a091820c5e4b430901eacebe7e11996cd8e24fed
+  specs:
+    delayed_job_active_record (0.2.0)
+      activerecord (> 2.1.0)
+      delayed_job (= 3.0.0.pre)
+
+GIT
   remote: https://github.com/kreetitech/cache_fu.git
   revision: e363d01df7a8a4c8dfff77721c92b2eb85477f3f
   specs:
@@ -68,6 +84,7 @@ GEM
       execjs
     coffee-script-source (1.1.1)
     columnize (0.3.4)
+    daemons (1.1.4)
     dalli (1.0.5)
     devise (1.4.2)
       bcrypt-ruby (~> 2.1.2)
@@ -185,6 +202,8 @@ DEPENDENCIES
   chronic
   coffee-rails (~> 3.1.0.rc)
   dalli
+  delayed_job!
+  delayed_job_active_record!
   devise
   gravtastic
   jquery-rails

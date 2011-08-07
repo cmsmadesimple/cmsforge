@@ -17,7 +17,7 @@ class ProjectJoinRequest < ActiveRecord::Base
   end
   
   def after_pending
-    send_later(:send_project_join_request)
+    delay.send_project_join_request
   end
   
   def after_accepted
