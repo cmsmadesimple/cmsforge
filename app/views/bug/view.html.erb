@@ -8,7 +8,7 @@
 <% else -%>
 
 <div class="small_nav">
-  <%= link_to "Back to List", :action => :list, :id => @bug.project_id -%>
+  <%= link_to '<img src="/images/icons/back.gif" alt="Back" title="Back" /> Back to List', :action => :list, :id => @bug.project_id -%>
 </div>
 
 
@@ -32,7 +32,7 @@
     <span class="value"><%= @bug.created_at -%></span>
   </div>
 
-<br clear="both" />
+<br class="clearb" />
 
   <div class="entry">
     <span class="label strong">Assigned To:</span>
