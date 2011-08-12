@@ -41,10 +41,16 @@ class ProjectController < ApplicationController
   end
   
   def list_xml_files
-    @files = ReleasedFile.find(:all, :conditions => "filename LIKE '%xml'", :order => 'filename ASC')
-    respond_to do |format|
-      format.html { render :xml => @files.to_xml(:methods => [:public_filename]) }
-      format.xml { render :xml => @files.to_xml(:methods => [:public_filename]) }
+    config = SimpleConfig.for(:application)
+    xml_key = config.get(:xml_key)
+    if !xml_key.blank? and params[:key] and params[:key] == xml_key
+      @files = ReleasedFile.find(:all, :conditions => "filename LIKE '%xml'", :order => 'filename ASC')
+      respond_to do |format|
+        format.html { render :xml => @files.to_xml(:methods => [:public_filename]) }
+        format.xml { render :xml => @files.to_xml(:methods => [:public_filename]) }
+      end
+    else
+      render_404 and return
     end
   end
   
