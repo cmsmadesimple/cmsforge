@@ -47,6 +47,7 @@ namespace :deploy do
       cp #{releases_path}/../database.yml #{release_path}/config/database.yml &&
       cp #{releases_path}/../amazon_s3.yml #{release_path}/config/amazon_s3.yml &&
       cp #{releases_path}/../hoptoad.rb #{release_path}/config/initializers/hoptoad.rb &&
+      cp #{releases_path}/../xml_key.rb #{release_path}/config/initializers/xml_key.rb &&
       ln -s #{shared_path}/db/sphinx #{release_path}/db/
     CMD
   end
