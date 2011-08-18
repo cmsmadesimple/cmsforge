@@ -132,19 +132,34 @@ Posted By: <%= comment.user.name_and_link %>
   <% end -%>
 <% end -%>
 
-<% unless @feature_request.histories.empty? -%>
-<div class="historybox">
-	<div class="header strong">Updates</div>
-	<% @feature_request.histories.each do |h| -%>
-		<p>
-			Updated: <%= h.created_at.strftime("%Y-%m-%d %H:%M") -%><br />
-			<% h.history_lines.each do |h1| -%>
-				<%= "#{h1.field_name}: #{h1.field_value_was} => #{h1.field_value_actual}" -%><br />
-			<% end -%>
-		</p>
-	<% end -%>
-</div>
-<% end -%>
+<% unless @feature_request.versions.empty? -%>
+  <h3>Changes</h3>
+  <div class="historybox">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Changed By</th>
+          <th>Field Name</th>
+          <th>Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @feature_request.changes.each do |version,key_vals| %>
+          <% name = version.respond_to?(:whodunnit) ? User.find(version.whodunnit).name_and_link_with_nick : '' %>
+          <% key_vals.each do |k, v| %>
+            <tr>
+              <td><%= version.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+              <td><%= name %></td>
+              <td><%= k %></td>
+              <td width="50%"><%= v %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 
 <% end -%>
 </div><!--content-->

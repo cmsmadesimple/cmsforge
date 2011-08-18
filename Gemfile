@@ -20,6 +20,7 @@ gem 'capistrano_colors'
 gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'delayed_job', :git => 'git://github.com/collectiveidea/delayed_job.git'
 gem 'delayed_job_active_record', :git => 'git://github.com/collectiveidea/delayed_job_active_record.git'
+gem 'paper_trail', '~> 2'
 
 # Gems used only for assets and not required
 # in production environments by default.
