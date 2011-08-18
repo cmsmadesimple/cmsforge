@@ -130,8 +130,8 @@
 <h2>History</h2>
 
 <% unless @bug.comments.empty? -%>
+<h3>Comments</h3>
 <div class="commentsbox">
-  <div class="header strong">Comments</div>
   <% @bug.comments.each do |comment| -%>
 	<div class="gravatar_user">
 		<%= image_tag comment.user.gravatar_url(:size => 50) -%>
@@ -164,19 +164,34 @@ Posted By: <%= comment.user.name_and_link %>
   <% end -%>
 <% end -%>
 
-<% unless @bug.histories.empty? -%>
-<div class="historybox">
-	<div class="header strong">Updates</div>
-	<% @bug.histories.each do |h| -%>
-		<p>
-			Updated: <%= h.created_at.strftime("%Y-%m-%d %H:%M") -%><br />
-			<% h.history_lines.each do |h1| -%>
-				<%= "#{h1.field_name}: #{h1.field_value_was} => #{h1.field_value_actual}" -%><br />
-			<% end -%>
-		</p>
-	<% end -%>
-</div>
-<% end -%>
+<% unless @bug.versions.empty? -%>
+  <h3>Changes</h3>
+  <div class="historybox">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Changed By</th>
+          <th>Field Name</th>
+          <th>Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bug.changes.each do |version,key_vals| %>
+          <% name = version.respond_to?(:whodunnit) ? User.find(version.whodunnit).name_and_link_with_nick : '' %>
+          <% key_vals.each do |k, v| %>
+            <tr>
+              <td><%= version.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+              <td><%= name %></td>
+              <td><%= k %></td>
+              <td width="50%"><%= v %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 
 <% end -%>
 </div><!--content-->
