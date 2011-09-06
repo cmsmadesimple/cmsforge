@@ -57,7 +57,7 @@
     <span class="value">
       <%= (current_user != :false and current_user.member_of?(@bug.project) or current_user == @bug.created_by) ? 
         select('bug', 'cmsms_version_id', [['None' , '-1']] + BugVersion.find_all_by_project_id_and_is_active(6, true).collect{ |a| [a.name, a.id] }) :
-        (@bug.cmsms_version_id.nil? ? 'None' : @bug.cmsms_version_id.name) -%>
+        (@bug.cmsms_version.nil? ? 'None' : @bug.cmsms_version.name) -%>
     </span>
   </div>
 
