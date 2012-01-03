@@ -4,6 +4,7 @@ class TrackerItem < ActiveRecord::Base
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   belongs_to :created_by, :class_name => "User", :foreign_key => "created_by_id"
   belongs_to :version, :class_name => "BugVersion", :foreign_key => "version_id"
+  belongs_to :cmsms_version, :class_name => "BugVersion", :foreign_key => "cmsms_version_id"
   
   validates_presence_of :summary, :description, :created_by, :project_id
   

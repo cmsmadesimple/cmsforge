@@ -69,6 +69,7 @@ class FeatureRequestController < ApplicationController
     @feature_request = FeatureRequest.new(params[:feature_request])
     @feature_request.created_by = current_user
     @feature_request.project_id = params[:id] unless params[:id].nil?
+    @project = Project.find_by_id_and_state(params[:id], 'accepted')
   
     unless params[:cancel].nil?
       redirect_to :action => 'list', :id => @feature_request.project_id

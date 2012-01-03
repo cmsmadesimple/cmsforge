@@ -69,6 +69,7 @@ class BugController < ApplicationController
     @bug = Bug.new(params[:bug])
     @bug.created_by = current_user
     @bug.project_id = params[:id] unless params[:id].nil?
+    @project = Project.find_by_id_and_state(params[:id], 'accepted')
   
     unless params[:cancel].nil?
       redirect_to :action => 'list', :id => @bug.project_id
