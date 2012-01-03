@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   validates_length_of       :login,    :within => 3..40
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
+  validates_acceptance_of   :agree_to_forge_rules
+
   before_save :encrypt_password
   before_create :make_activation_code
   

@@ -1,36 +1,45 @@
 <div class="content clear">
-<%= error_messages_for :user %>
-<% form_for :user do |f| -%>
 
+  <%= error_messages_for :user %>
 
-<div class="entry">
-<label for="user_login">Login</label><br/>
-<%= f.text_field :login %>
- </div >
+  <% form_for :user do |f| -%>
 
-<div class="entry">
-<label for="user_full_name">Full Name</label><br/>
-<%= f.text_field :full_name %>
-</div>
+    <div class="entry">
+      <label for="user_login">Login</label><br/>
+      <%= f.text_field :login %>
+     </div >
 
-<div class="entry">
-<label for="user_email">Email</label><br/>
-<%= f.text_field :email %>
-</div>
+    <div class="entry">
+      <label for="user_full_name">Full Name</label><br/>
+      <%= f.text_field :full_name %>
+    </div>
 
-<div class="entry">
-<label for="user_password">Password</label><br/>
-<%= f.password_field :password %>
-</div>
+    <div class="entry">
+      <label for="user_email">Email</label><br/>
+      <%= f.text_field :email %>
+    </div>
 
-<div class="entry">
-<label for="user_password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %>
-</div>
-<div class="entry">
-<div class="bt-forms">
-<p><%= submit_tag 'Sign up' %></p>
-</div><!--bt-forms-->
-</div>
-<% end -%>
+    <div class="entry">
+      <label for="user_password">Password</label><br/>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="entry">
+      <label for="user_password_confirmation">Confirm Password</label><br/>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div class="entry">
+      <label for="user_agree_to_forge_rules">I have read and agree to the <a href="http://www.cmsmadesimple.org/2011/12/Forge-Project-Rules/" target="_blank">forge rules</a></label><br/>
+      <%= f.check_box :agree_to_forge_rules %>
+    </div>
+
+    <div class="entry">
+      <div class="bt-forms">
+        <p><%= submit_tag 'Sign up' %></p>
+      </div><!--bt-forms-->
+    </div>
+
+  <% end -%>
+
 </div><!--content-->
