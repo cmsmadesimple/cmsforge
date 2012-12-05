@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc5'
-gem 'mysql2', '0.3.6'
+gem 'rails', '~> 3.1.0'
+gem 'mysql2', '~> 0.3.11'
 gem 'chronic'
 gem 'devise'
 gem 'gravtastic'
@@ -12,7 +12,7 @@ gem 'dalli'
 gem 'cache_fu', :git => 'https://github.com/kreetitech/cache_fu.git'
 gem 'jquery-rails'
 gem 'thinking-sphinx', '2.0.5'
-gem 'will_paginate', '~> 3.0.pre4'
+gem 'will_paginate', '~> 3.0'
 # gem 'hoptoad_notifier'
 gem 'capistrano'
 gem 'capistrano-ext'
@@ -25,8 +25,8 @@ gem 'paper_trail', '~> 2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "~> 3.1.0.rc"
-  gem 'coffee-rails', "~> 3.1.0.rc"
+  gem 'sass-rails', "~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
 end
 
