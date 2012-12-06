@@ -1,3 +1,8 @@
+if RUBY_VERSION =~ /1.9/
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
+
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.1.0'
@@ -17,7 +22,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'capistrano'
 gem 'capistrano-ext'
 gem 'capistrano_colors'
-gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'delayed_job', :git => 'git://github.com/collectiveidea/delayed_job.git'
 gem 'delayed_job_active_record', :git => 'git://github.com/collectiveidea/delayed_job_active_record.git'
 gem 'paper_trail', '~> 2'
