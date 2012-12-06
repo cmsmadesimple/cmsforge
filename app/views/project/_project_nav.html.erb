@@ -28,12 +28,12 @@
       <%= link_to 'Code', :controller => 'project', :id => @project.id, :action => 'code' -%>
     </li>
     <% end -%>
-    <% if current_user != :false and (current_user.admin_of?(@project) or current_user.superuser) -%>
+    <% if current_user and (current_user.admin_of?(@project) or current_user.superuser) -%>
       <li<%= ' class="tab active"' if @curloc == 'admin' -%>>
         <%= link_to 'Admin', :controller => 'project', :id => @project.id, :action => 'admin' -%>
       </li>
     <% end -%>
-    <% if current_user != :false and (current_user.superuser) and @project.state == 'pending' -%>
+    <% if current_user and current_user.superuser and @project.state == 'pending' -%>
       <li<%= ' class="tab active"' if @curloc == 'show_pending' -%>>
         <%= link_to 'Pending', :controller => 'project', :id => @project.id, :action => 'show_pending' -%>
       </li>

@@ -399,7 +399,7 @@ class ProjectController < ApplicationController
   def join_request
     unless params[:id].nil?
       project = Project.find(params[:id])
-      unless current_user == :false or project.users.include?(current_user) or project.has_join_request(current_user)
+      unless !current_user or project.users.include?(current_user) or project.has_join_request(current_user)
         request = ProjectJoinRequest.new
         request.user_id = current_user.id
         request.project_id = project.id
@@ -422,7 +422,7 @@ class ProjectController < ApplicationController
     if req.nil?
       redirect_to '/'
     end
-    unless current_user == :false or !current_user.admin_of?(req.project)
+    unless !current_user or !current_user.admin_of?(req.project)
       req.accept!
     end
     redirect_to :action => 'view', :id => req.project.id
@@ -436,7 +436,7 @@ class ProjectController < ApplicationController
     if req.nil?
       redirect_to '/'
     end
-    unless current_user == :false or !current_user.admin_of?(req.project)
+    unless !current_user or !current_user.admin_of?(req.project)
       req.reject!
     end
     redirect_to :action => 'view', :id => req.project.id
@@ -450,7 +450,7 @@ class ProjectController < ApplicationController
     if project.nil?
       redirect_to '/' and return
     end
-    unless current_user == :false or !current_user.admin_of?(project)
+    unless !current_user or !current_user.admin_of?(project)
       project.destroy
       flash[:notice] = 'Project Deleted'
       redirect_to current_user.home_url and return
@@ -497,7 +497,7 @@ class ProjectController < ApplicationController
     if project.nil?
       redirect_to '/' and return
     else
-      unless current_user == :false or !current_user.admin_of?(project)
+      unless !current_user or !current_user.admin_of?(project)
         project.mark_not_stale!
         flash[:notice] = 'Project Marked as Not Stale'
       end
