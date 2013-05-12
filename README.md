@@ -12,9 +12,7 @@ Installing the Vagrant dev environment
 This will take awhile for it to download the VM image,
 and instal all the stuff required for the app. Get a drink!
 
-If it fails the first time, run it again before thinking it's
-broken. There's a weird ruby path issue w/ Passenger that 
-I haven't figured out yet.
+* `vagrant provision` (There's a bug with passenger using the wrong ruby -- this reruns chef to fix it)
 
 If it starts up with no errors
 ------------------------------
@@ -25,4 +23,5 @@ If it starts up with no errors
 * `rake db:create`
 * `mysql -u root cmsforge_development < dump.sql`
 * `rake db:migrate`
+* `sudo /etc/init.d/apache2 reload` (Need to automate this -- but it works for now)
 * Point your local browser to `http://localhost:8082`. Magic!
