@@ -5,7 +5,7 @@
 <% if @feed_url -%>
 <link rel="alternate" type="application/rss+xml" title="CMS Made Simple Dev Forge Feed" href="<%= @feed_url -%>" />
 <% else -%>
-<link rel="alternate" type="application/rss+xml" title="CMS Made Simple RSS Feed" href="http://blog.cmsmadesimple.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="CMS Made Simple RSS Feed" href="http://feeds.feedburner.com/cmsmadesimple/blog" />
 <% end -%>
 <title>CMS Made Simple - Forge<% unless @project.nil? -%>
 : <%= h @project.name -%>
@@ -142,7 +142,7 @@ body div#contentarea
 
 				</li>
 					<li><a 
-				href="http://blog.cmsmadesimple.org" ><dfn>5.3: </dfn>Blog</a>
+				href="http://www.cmsmadesimple.org/about-link/blog/" ><dfn>5.3: </dfn>Blog</a>
 
 				</li>
 					<li><a 
