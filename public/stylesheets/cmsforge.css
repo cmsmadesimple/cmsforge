@@ -250,6 +250,7 @@ div#search_wrap{
 	left:50%;
 }
 p#search{
+	display: none;
 	float:right;
 	margin:1.5em 0 0 0;
 	clear:both
