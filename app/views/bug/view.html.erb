@@ -171,7 +171,7 @@ Posted By: <%= comment.user.name_and_link %>
 		<p>
 			Updated: <%= h.created_at.strftime("%Y-%m-%d %H:%M") -%><br />
 			<% h.history_lines.each do |h1| -%>
-				<%= "#{h1.field_name}: #{h1.field_value_was} => #{h1.field_value_actual}" -%><br />
+				<%= "#{h1.field_name}: #{h(h1.field_value_was)} => #{h(h1.field_value_actual)}" -%><br />
 			<% end -%>
 		</p>
 	<% end -%>
