@@ -42,19 +42,19 @@
 			<li><span class="label">Registered Users:</span><span class="val"><%= number_with_delimiter(User.count) -%></span></li>
 		</ul>
 	</div>
-	<div class="block">
+	<!--<div class="block">
 		<h2>Top Project Downloads</h2>
 		<ul>
-			<% Project.find_all_by_state('accepted', :limit => 10, :order => 'downloads DESC').each do |loop_project| -%>
-			<% unless loop_project.nil? %>
+			<%# Project.find_all_by_state('accepted', :limit => 10, :order => 'downloads DESC').each do |loop_project| -%>
+			<%# unless loop_project.nil? %>
 			<li>
-				<span class="label"><%= number_with_delimiter(loop_project.downloads) -%></span>
-				<span class="val"><%= loop_project.name_and_home_page -%></span>
+				<span class="label"><%#= number_with_delimiter(loop_project.downloads) -%></span>
+				<span class="val"><%#= loop_project.name_and_home_page -%></span>
 			</li>
-			<% end -%>
-			<% end -%>
+			<%# end -%>
+			<%# end -%>
 		</ul>
-	</div>
+	</div>-->
 	<div class="block">
 		<h2>Latest File Releases</h2>
 		<div style="float: right;"><a href="/project/latest_files">See More</a></div>

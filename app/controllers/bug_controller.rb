@@ -5,7 +5,7 @@ class BugController < ApplicationController
   def list
     @show_closed = (params[:show_closed] == 'true' || params[:show_closed] == '1')
     conditions = @show_closed ? ['1 = 1'] : ['state = ?', 'Open']
-    @so = 'id ASC'
+    @so = 'id DESC'
     @so = params[:sort_by] unless (params[:sort_by].nil?)
     params[:page] ||= 1
     if params[:page].to_i < 1
